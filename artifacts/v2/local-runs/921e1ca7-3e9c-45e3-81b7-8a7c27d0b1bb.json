@@ -1,0 +1,338 @@
+{
+  "simulation": true,
+  "realTelephoneCall": false,
+  "aiProvider": "OpenAI",
+  "hardwareVerification": [
+    {
+      "audibleKorean": true,
+      "deviceLabel": "Laptop Chrome; human confirmed in chat: Korean audio worked; assistant stopped after greeting; intentional disconnect.",
+      "source": "human_operator_self_report",
+      "at": "2026-09-29T05:17:31.067Z"
+    }
+  ],
+  "id": "921e1ca7-3e9c-45e3-81b7-8a7c27d0b1bb",
+  "language": "en",
+  "version": 26,
+  "revision": 26,
+  "createdAt": "2026-09-29T05:10:03.698Z",
+  "updatedAt": "2026-09-29T05:14:40.822Z",
+  "messages": [
+    {
+      "id": "ac1f4135-4938-40e8-9e69-f8e701ec159b",
+      "role": "user",
+      "text": "I want to go to a hospital.",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:10:03.704Z"
+    },
+    {
+      "id": "3d7ba139-c0b2-4e67-b0c9-d96725a7178c",
+      "role": "assistant",
+      "text": "I can help you find a suitable hospital. Could you please tell me what kind of medical issue or symptoms you are experiencing? This will help me suggest the right type of hospital or clinic for you.",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:10:05.122Z"
+    },
+    {
+      "id": "755d5a39-bbf4-43ac-b555-b0ae8ebc9545",
+      "role": "user",
+      "text": "This is a fictional example. I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment.",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:10:05.140Z"
+    },
+    {
+      "id": "cff74eac-9bc4-4359-816b-2c8f83b70316",
+      "role": "assistant",
+      "text": "Thank you for the information. To summarize: you are 28 years old, with a mild itchy rash on your arm lasting two days, located in Mapo, Seoul, preferring to visit this afternoon around 3:30 pm, and would like to see a female doctor. You do not have Korean health insurance and want to know the likely self-pay consultation cost and appointment requirements. I will prepare to contact suitable dermatology clinics that meet your preferences. Shall I proceed with the call simulation to inquire about available appointment times, costs, and female doctor availability for you?",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:10:07.452Z"
+    },
+    {
+      "id": "e98dd388-113e-495a-bcc3-a6da407889ee",
+      "role": "user",
+      "text": "Yes, please prepare the fictional call simulation plan using those preferences.",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:10:56.430Z"
+    },
+    {
+      "id": "1abe0763-4f5c-43f5-b6e0-1c04163c50b6",
+      "role": "assistant",
+      "text": "This is a fictional simulation of preparing to contact dermatology clinics in Mapo, Seoul, based on your preferences: a consultation this afternoon around 3:30 pm for a mild itchy rash, with a female doctor, without Korean health insurance, and needing information on self-pay consultation costs and appointment requirements. I have identified two fictional institutions labeled as 'Mapo Fictional Sunset Dermatology Clinic' and 'Green Leaf Fictional Dermatology Center' for this purpose. The simulation will ask about doctor availability, appointment necessity, and costs without assuming any answers beforehand. Shall I proceed with this fictional call simulation plan?",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:11:04.056Z"
+    },
+    {
+      "id": "c9dbf640-20ef-4ea4-8d44-8bc382078644",
+      "role": "assistant",
+      "text": "This simulated business call with Mapo Fictional Sunset Dermatology Clinic ended prematurely due to disconnection by the business operator. No information was provided by the clinic beyond a basic greeting.\n\nFacts supported by business evidence:\n- The Mapo Fictional Sunset Dermatology Clinic was contacted to inquire about the availability of a female dermatologist at 3:30 pm today.\n- The simulated call ended incompletely when the clinic disconnected immediately after greeting.\n\nCustomer-supplied information:\n- The customer is a 28-year-old located in Mapo, Seoul.\n- Reports a mild itchy rash on the arm lasting two days.\n- Prefers a female doctor for consultation.\n- Requests consultation at 3:30 pm this afternoon.\n- Has no Korean health insurance and seeks information on self-pay consultation costs.\n- Wants to know if an appointment is necessary.\n\nUnresolved information:\n- Availability of a female dermatologist at the specified time.\n- Whether an appointment is required for the consultation.\n- The expected self-pay consultation cost for the described condition without insurance.\n\nRecommendation:\nSince the call was disconnected without receiving any answers, I recommend the customer try alternative contact methods with the clinic, such as email or visiting their website, if available. Additionally, the customer might consider contacting other nearby dermatology clinics that can provide the needed information and book an appointment promptly. This is especially important given the customer’s recent rash and preference for a female dermatologist. Prompt consultation could help address the symptoms effectively.\n\nAttempt to reach the clinic again via alternative contact methods or approach other nearby dermatologists to secure needed consultations and information about appointment and costs.\n\nThe business call ended abruptly without answering any key questions. Without confirmed details on doctor availability, appointment requirements, or costs, pursuing other communication channels or clinics is necessary to ensure timely and appropriate medical care.",
+      "kind": "summary",
+      "createdAt": "2026-09-29T05:14:40.822Z"
+    }
+  ],
+  "transcripts": [
+    {
+      "id": "item_ETKS0I0siNBpxUFJxk9cX",
+      "role": "assistant",
+      "text": "안녕하세요, 이 통화는 가상 시뮬레이션입니다. 지금부터 고객님께 필요한 정보를 확인해보겠습니다. 먼저 중요한 세 가지 질문을 드릴게요. 첫 번째, 오늘 오후",
+      "callId": "8505c78a-1005-4a3a-9e23-2b4b8310c2ab",
+      "createdAt": "2026-09-29T05:13:54.516Z"
+    },
+    {
+      "id": "item_ETKS2N0cybz9sKAOtIvAA",
+      "role": "business",
+      "text": "안녕하세요.",
+      "callId": "8505c78a-1005-4a3a-9e23-2b4b8310c2ab",
+      "createdAt": "2026-09-29T05:14:03.593Z"
+    },
+    {
+      "id": "item_ETKSDuaPYZ0dcC8gCjhUv",
+      "role": "assistant",
+      "text": "안녕하세요!",
+      "callId": "8505c78a-1005-4a3a-9e23-2b4b8310c2ab",
+      "createdAt": "2026-09-29T05:14:06.377Z"
+    }
+  ],
+  "customerInfo": [
+    {
+      "key": "age",
+      "value": "28",
+      "sourceMessageId": "755d5a39-bbf4-43ac-b555-b0ae8ebc9545"
+    },
+    {
+      "key": "symptoms",
+      "value": "mild itchy rash on arm for two days",
+      "sourceMessageId": "755d5a39-bbf4-43ac-b555-b0ae8ebc9545"
+    },
+    {
+      "key": "location",
+      "value": "Mapo, Seoul",
+      "sourceMessageId": "755d5a39-bbf4-43ac-b555-b0ae8ebc9545"
+    },
+    {
+      "key": "preferred_time",
+      "value": "3:30 pm this afternoon",
+      "sourceMessageId": "755d5a39-bbf4-43ac-b555-b0ae8ebc9545"
+    },
+    {
+      "key": "gender_preference_doctor",
+      "value": "female",
+      "sourceMessageId": "755d5a39-bbf4-43ac-b555-b0ae8ebc9545"
+    },
+    {
+      "key": "insurance_status",
+      "value": "no Korean health insurance",
+      "sourceMessageId": "755d5a39-bbf4-43ac-b555-b0ae8ebc9545"
+    },
+    {
+      "key": "visit_reason",
+      "value": "consultation for rash",
+      "sourceMessageId": "755d5a39-bbf4-43ac-b555-b0ae8ebc9545"
+    },
+    {
+      "key": "cost_info_needed",
+      "value": "yes, self-pay consultation cost",
+      "sourceMessageId": "755d5a39-bbf4-43ac-b555-b0ae8ebc9545"
+    },
+    {
+      "key": "appointment_needed",
+      "value": "yes, want to know if appointment needed",
+      "sourceMessageId": "755d5a39-bbf4-43ac-b555-b0ae8ebc9545"
+    }
+  ],
+  "institutions": [
+    {
+      "id": "clinic_mapo_derma_001",
+      "name": "Mapo Fictional Sunset Dermatology Clinic",
+      "nameKo": "",
+      "description": "to inquire about female doctor availability and appointment requirements for a mild rash consultation",
+      "reason": "to inquire about female doctor availability and appointment requirements for a mild rash consultation",
+      "fictional": true
+    },
+    {
+      "id": "clinic_mapo_derma_002",
+      "name": "Green Leaf Fictional Dermatology Center",
+      "nameKo": "",
+      "description": "to verify self-pay consultation costs and booking needs with a female dermatologist in Mapo",
+      "reason": "to verify self-pay consultation costs and booking needs with a female dermatologist in Mapo",
+      "fictional": true
+    },
+    {
+      "id": "clinic_mapo_derma_003",
+      "name": "Mapo Fictional Central Dermatology Hospital",
+      "nameKo": "",
+      "description": "to confirm availability of a female doctor at the requested time and expected consultation cost",
+      "reason": "to confirm availability of a female doctor at the requested time and expected consultation cost",
+      "fictional": true
+    }
+  ],
+  "requiredQuestions": [
+    {
+      "id": "q_doctor_availability",
+      "text": "Is there a female dermatologist available for consultation this afternoon around 3:30 pm?",
+      "korean": "오늘 오후 3시 30분경에 여성 피부과 의사가 진료 가능한가요?",
+      "status": "unresolved",
+      "resolutionReason": "The business only greeted with '안녕하세요.' and gave no information about doctor availability.",
+      "answer": null,
+      "evidence": []
+    },
+    {
+      "id": "q_appointment_requirement",
+      "text": "Do I need to make an appointment for a consultation at that time?",
+      "korean": "그 시간에 진료 예약이 필요한가요?",
+      "status": "unresolved",
+      "resolutionReason": "The business did not provide any information about appointment requirements.",
+      "answer": null,
+      "evidence": []
+    },
+    {
+      "id": "q_self_pay_cost",
+      "text": "What is the expected cost for a self-pay consultation for a mild itchy rash without Korean health insurance?",
+      "korean": "한국 건강 보험 없이 가벼운 가려운 발진 상담 시 예상 비용은 얼마인가요?",
+      "status": "unresolved",
+      "resolutionReason": "The business did not mention any cost information for self-pay consultation.",
+      "answer": null,
+      "evidence": []
+    }
+  ],
+  "planReady": true,
+  "pendingRelay": null,
+  "decisionPrompt": null,
+  "summary": {
+    "text": "This simulated business call with Mapo Fictional Sunset Dermatology Clinic ended prematurely due to disconnection by the business operator. No information was provided by the clinic beyond a basic greeting.\n\nFacts supported by business evidence:\n- The Mapo Fictional Sunset Dermatology Clinic was contacted to inquire about the availability of a female dermatologist at 3:30 pm today.\n- The simulated call ended incompletely when the clinic disconnected immediately after greeting.\n\nCustomer-supplied information:\n- The customer is a 28-year-old located in Mapo, Seoul.\n- Reports a mild itchy rash on the arm lasting two days.\n- Prefers a female doctor for consultation.\n- Requests consultation at 3:30 pm this afternoon.\n- Has no Korean health insurance and seeks information on self-pay consultation costs.\n- Wants to know if an appointment is necessary.\n\nUnresolved information:\n- Availability of a female dermatologist at the specified time.\n- Whether an appointment is required for the consultation.\n- The expected self-pay consultation cost for the described condition without insurance.\n\nRecommendation:\nSince the call was disconnected without receiving any answers, I recommend the customer try alternative contact methods with the clinic, such as email or visiting their website, if available. Additionally, the customer might consider contacting other nearby dermatology clinics that can provide the needed information and book an appointment promptly. This is especially important given the customer’s recent rash and preference for a female dermatologist. Prompt consultation could help address the symptoms effectively.",
+    "recommendation": "Attempt to reach the clinic again via alternative contact methods or approach other nearby dermatologists to secure needed consultations and information about appointment and costs.",
+    "reasoning": "The business call ended abruptly without answering any key questions. Without confirmed details on doctor availability, appointment requirements, or costs, pursuing other communication channels or clinics is necessary to ensure timely and appropriate medical care."
+  },
+  "busy": false,
+  "error": null,
+  "voiceMessage": null,
+  "call": {
+    "id": "8505c78a-1005-4a3a-9e23-2b4b8310c2ab",
+    "status": "interrupted",
+    "institutionId": "clinic_mapo_derma_001",
+    "authorized": true,
+    "accepted": true,
+    "authorizedAt": "2026-09-29T05:11:58.088Z",
+    "acceptedAt": "2026-09-29T05:13:42.251Z",
+    "connected": false,
+    "confirmedKeyDetails": false,
+    "confirmationEvidence": [],
+    "endedAt": "2026-09-29T05:14:37.606Z",
+    "reason": "The business operator disconnected the simulated call.",
+    "success": false
+  },
+  "apiEvidence": [
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_0423e162fab48ef6016abb482c419087d092dcbdd5bc5f2fdf",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 519,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 62,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 581
+      },
+      "at": "2026-09-29T05:10:05.122Z"
+    },
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_04f3c0cc7220098a016abb482d593887d091c1761302ca8c35",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 658,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 256,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 914
+      },
+      "at": "2026-09-29T05:10:07.452Z"
+    },
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_05cd7ca562a13a0b016abb4860ae0887d09542655fb048c8b1",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1152,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 436,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1588
+      },
+      "at": "2026-09-29T05:10:59.998Z"
+    },
+    {
+      "purpose": "call_plan_review",
+      "responseId": "resp_02ece5c54200dd10016abb486460d087d0bbfa281209de9cf3",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1102,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 401,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1503
+      },
+      "at": "2026-09-29T05:11:04.056Z"
+    },
+    {
+      "purpose": "realtime_connect",
+      "status": 201,
+      "model": "gpt-realtime",
+      "at": "2026-09-29T05:13:51.767Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "resp_078d5526f279a5b9016abb491c14d887d09958157b2cb4c920",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 777,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 159,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 936
+      },
+      "at": "2026-09-29T05:14:05.782Z"
+    },
+    {
+      "purpose": "grounded_summary",
+      "responseId": "resp_0a4197391bcd06cf016abb493ddf4887d0b048462576b6fc6d",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1281,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 389,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1670
+      },
+      "at": "2026-09-29T05:14:40.822Z"
+    }
+  ],
+  "savedAt": "2026-09-29T05:17:31.077Z"
+}

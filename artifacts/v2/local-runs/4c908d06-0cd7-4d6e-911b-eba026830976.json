@@ -1,0 +1,544 @@
+{
+  "simulation": true,
+  "realTelephoneCall": false,
+  "aiProvider": "OpenAI",
+  "hardwareVerification": [],
+  "id": "4c908d06-0cd7-4d6e-911b-eba026830976",
+  "language": "en",
+  "version": 20,
+  "revision": 20,
+  "createdAt": "2026-09-29T07:34:47.625Z",
+  "updatedAt": "2026-09-29T07:37:46.391Z",
+  "messages": [
+    {
+      "id": "9395d20e-7776-42a6-a8ff-58806f41a3a1",
+      "role": "user",
+      "text": "i want to go to a hospital",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:34:47.640Z"
+    },
+    {
+      "id": "ce074a55-2c35-4ca8-8228-f40d791d5b1d",
+      "role": "assistant",
+      "text": "What do you need medical care for, and which city or neighborhood in Korea should I look in?",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:34:52.766Z"
+    },
+    {
+      "id": "45910b68-fb13-4aed-91ba-752a78872496",
+      "role": "user",
+      "text": "knee injury, I study at GIST",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:35:12.532Z"
+    },
+    {
+      "id": "b58630b3-3050-4024-88bf-7778ec039610",
+      "role": "assistant",
+      "text": "Here are two orthopedic options in the Cheomdan area near GIST. Please select a place. Appointment availability and English-language support have not been confirmed.",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:35:37.504Z"
+    },
+    {
+      "id": "d511cf8f-030d-4e94-8fe9-03cd5ce6ab95",
+      "role": "user",
+      "text": "Prepare my inquiry for Cheomdan General Hospital (첨단종합병원)",
+      "kind": "selection",
+      "createdAt": "2026-09-29T07:35:41.936Z"
+    },
+    {
+      "id": "fc3dd638-caa5-4ead-a10b-115c389dab95",
+      "role": "assistant",
+      "text": "Your inquiry for Cheomdan General Hospital is ready. I will ask about knee injury assessment, booking, and whether your study status at GIST affects the process. May I proceed with the call?",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:36:00.232Z"
+    },
+    {
+      "id": "42493ff9-9315-4e81-a035-426c31851315",
+      "role": "assistant",
+      "text": "Fictional simulation only — no real call or booking.\n\nCall outcome: Simulation ended incompletely.\n\nValidated business answers in this simulation:\nNo validated business answers were retained.\n\nCustomer-provided information:\n- Medical need: Seeking hospital care for a knee injury\n- Study location: Studies at GIST\n- Selected hospital: Requests an inquiry to Cheomdan General Hospital\n\nStill unresolved:\n- Can your hospital assess and treat a knee injury, and which department should the patient visit?\n- How can the patient arrange a visit for a knee injury, and what is the earliest available appointment?\n- Does the patient's status as a GIST student affect the registration, eligibility, or referral process for knee injury care?\n\nClarify the remaining questions before deciding.\n\nQuestions to clarify:\n- Can your hospital assess and treat a knee injury, and which department should the patient visit?\n- How can the patient arrange a visit for a knee injury, and what is the earliest available appointment?\n- Does the patient's status as a GIST student affect the registration, eligibility, or referral process for knee injury care?",
+      "kind": "summary",
+      "createdAt": "2026-09-29T07:37:46.391Z"
+    }
+  ],
+  "transcripts": [],
+  "customerInfo": [
+    {
+      "key": "medical_need",
+      "value": "Seeking hospital care for a knee injury",
+      "sourceMessageId": "45910b68-fb13-4aed-91ba-752a78872496",
+      "label": "Medical need"
+    },
+    {
+      "key": "study_location",
+      "value": "Studies at GIST",
+      "sourceMessageId": "45910b68-fb13-4aed-91ba-752a78872496",
+      "label": "Study location"
+    },
+    {
+      "key": "selected_hospital",
+      "value": "Requests an inquiry to Cheomdan General Hospital",
+      "sourceMessageId": "d511cf8f-030d-4e94-8fe9-03cd5ce6ab95",
+      "label": "Selected hospital"
+    }
+  ],
+  "institutions": [
+    {
+      "id": "ccec27aa-69ea-4bb5-9adf-9b446e4e46f8",
+      "name": "Cheomdan General Hospital (첨단종합병원)",
+      "detail": "A general-hospital alternative with an orthopedic department (정형외과), plus neurosurgery and other specialties, according to its HIRA-based medical listing.",
+      "address": "광주광역시 광산구 첨단중앙로170번길 59 (쌍암동) — 59 Cheomdanjungang-ro 170beon-gil, Gwangsan-gu, Gwangju",
+      "phone": "062-601-8000",
+      "url": "https://mobile.hidoc.co.kr/find/result/view/H0000152529",
+      "sourced": true,
+      "reason": "Ask whether the hospital can assess a knee injury, how to arrange a visit, and if studying at GIST is relevant for access or referrals.",
+      "fictional": false,
+      "callSimulation": true
+    }
+  ],
+  "requiredQuestions": [
+    {
+      "id": "knee_injury_care",
+      "text": "Can your hospital assess and treat a knee injury, and which department should the patient visit?",
+      "korean": "무릎 부상을 진료하고 치료할 수 있나요? 어느 진료과로 가면 되나요?",
+      "status": "unresolved",
+      "resolutionReason": null,
+      "answer": null,
+      "evidence": []
+    },
+    {
+      "id": "visit_arrangements",
+      "text": "How can the patient arrange a visit for a knee injury, and what is the earliest available appointment?",
+      "korean": "무릎 부상 진료를 받으려면 어떻게 방문 예약을 하면 되나요? 가장 빠른 예약 가능 시간은 언제인가요?",
+      "status": "unresolved",
+      "resolutionReason": null,
+      "answer": null,
+      "evidence": []
+    },
+    {
+      "id": "gist_study_relevance",
+      "text": "Does the patient's status as a GIST student affect the registration, eligibility, or referral process for knee injury care?",
+      "korean": "환자가 GIST 학생인 경우 등록, 진료 자격, 또는 진료 의뢰 과정에 영향이 있나요?",
+      "status": "unresolved",
+      "resolutionReason": null,
+      "answer": null,
+      "evidence": []
+    }
+  ],
+  "questionHistory": [],
+  "planReady": true,
+  "pendingRelay": null,
+  "decisionPrompt": null,
+  "summary": {
+    "text": "Fictional simulation only — no real call or booking.\n\nCall outcome: Simulation ended incompletely.\n\nValidated business answers in this simulation:\nNo validated business answers were retained.\n\nCustomer-provided information:\n- Medical need: Seeking hospital care for a knee injury\n- Study location: Studies at GIST\n- Selected hospital: Requests an inquiry to Cheomdan General Hospital\n\nStill unresolved:\n- Can your hospital assess and treat a knee injury, and which department should the patient visit?\n- How can the patient arrange a visit for a knee injury, and what is the earliest available appointment?\n- Does the patient's status as a GIST student affect the registration, eligibility, or referral process for knee injury care?",
+    "details": {
+      "answers": [],
+      "unresolved": [
+        {
+          "id": "knee_injury_care",
+          "text": "Can your hospital assess and treat a knee injury, and which department should the patient visit?"
+        },
+        {
+          "id": "visit_arrangements",
+          "text": "How can the patient arrange a visit for a knee injury, and what is the earliest available appointment?"
+        },
+        {
+          "id": "gist_study_relevance",
+          "text": "Does the patient's status as a GIST student affect the registration, eligibility, or referral process for knee injury care?"
+        }
+      ],
+      "institution": {
+        "id": "ccec27aa-69ea-4bb5-9adf-9b446e4e46f8",
+        "name": null,
+        "fictional": true
+      }
+    },
+    "recommendation": "Clarify the remaining questions before deciding.",
+    "reasoning": "Questions to clarify:\n- Can your hospital assess and treat a knee injury, and which department should the patient visit?\n- How can the patient arrange a visit for a knee injury, and what is the earliest available appointment?\n- Does the patient's status as a GIST student affect the registration, eligibility, or referral process for knee injury care?"
+  },
+  "busy": false,
+  "error": null,
+  "voiceMessage": null,
+  "call": {
+    "id": "15e62b6f-b532-4afa-83a4-248b00ade9c1",
+    "status": "failed",
+    "institutionId": "ccec27aa-69ea-4bb5-9adf-9b446e4e46f8",
+    "authorized": true,
+    "accepted": false,
+    "authorizedAt": "2026-09-29T07:36:18.763Z",
+    "acceptedAt": null,
+    "connected": false,
+    "confirmedKeyDetails": false,
+    "confirmationEvidence": [],
+    "readbackEvidence": [],
+    "endedAt": "2026-09-29T07:37:45.330Z",
+    "reason": "Customer ended the simulated call early.",
+    "success": false
+  },
+  "places": [
+    {
+      "id": "7a5271db-fe36-4f6d-9373-0e44322c02de",
+      "name": "Cheomdan Woori Hospital (첨단우리병원)",
+      "detail": "A focused option for orthopedic care: its official website lists treatment for spine conditions, neck/lower-back discs, and joint surgery, alongside pain medicine and imaging.",
+      "address": "광주광역시 광산구 첨단중앙로182번길 12 (쌍암동) — 12 Cheomdanjungang-ro 182beon-gil, Gwangsan-gu, Gwangju",
+      "phone": "062-970-6000",
+      "url": "https://www.woori-hospital.com/?idx=c665d3e6499b66%2Fc665d3e8999b77",
+      "sourced": true
+    },
+    {
+      "id": "ccec27aa-69ea-4bb5-9adf-9b446e4e46f8",
+      "name": "Cheomdan General Hospital (첨단종합병원)",
+      "detail": "A general-hospital alternative with an orthopedic department (정형외과), plus neurosurgery and other specialties, according to its HIRA-based medical listing.",
+      "address": "광주광역시 광산구 첨단중앙로170번길 59 (쌍암동) — 59 Cheomdanjungang-ro 170beon-gil, Gwangsan-gu, Gwangju",
+      "phone": "062-601-8000",
+      "url": "https://mobile.hidoc.co.kr/find/result/view/H0000152529",
+      "sourced": true
+    }
+  ],
+  "selectedPlace": {
+    "id": "ccec27aa-69ea-4bb5-9adf-9b446e4e46f8",
+    "name": "Cheomdan General Hospital (첨단종합병원)",
+    "detail": "A general-hospital alternative with an orthopedic department (정형외과), plus neurosurgery and other specialties, according to its HIRA-based medical listing.",
+    "address": "광주광역시 광산구 첨단중앙로170번길 59 (쌍암동) — 59 Cheomdanjungang-ro 170beon-gil, Gwangsan-gu, Gwangju",
+    "phone": "062-601-8000",
+    "url": "https://mobile.hidoc.co.kr/find/result/view/H0000152529",
+    "sourced": true
+  },
+  "apiEvidence": [
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_0867238fa7a43824016abb6a183f3887d09eda3bab67e28bcf",
+      "model": "gpt-6-astra",
+      "usage": {
+        "input_tokens": 1301,
+        "input_tokens_details": {
+          "cache_write_tokens": 50,
+          "cached_tokens": 1248
+        },
+        "output_tokens": 78,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1379
+      },
+      "at": "2026-09-29T07:34:51.308Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_0b996ca819b070be016abb6a1b81a487d0995a0e763236fa3e",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1491,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 110,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1601
+      },
+      "at": "2026-09-29T07:34:52.765Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "customerFactEvidence": [
+        {
+          "key": "care_request",
+          "sourceMessageId": "9395d20e-7776-42a6-a8ff-58806f41a3a1",
+          "supportReason": "The message 'i want to go to a hospital' directly supports that the customer wants to go to a hospital.",
+          "sourceQuote": "i want to go to a hospital"
+        }
+      ],
+      "constraintCoverage": [],
+      "questionMeaningChecks": [],
+      "at": "2026-09-29T07:34:52.765Z"
+    },
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_01f0bf69c48ba74d016abb6a30c25487d0951a6de70784d3f8",
+      "model": "gpt-6-astra",
+      "usage": {
+        "input_tokens": 1393,
+        "input_tokens_details": {
+          "cache_write_tokens": 142,
+          "cached_tokens": 1248
+        },
+        "output_tokens": 112,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1505
+      },
+      "at": "2026-09-29T07:35:16.886Z"
+    },
+    {
+      "purpose": "place_discovery",
+      "model": "gpt-6-astra",
+      "responseId": "resp_0065f8693a916d09016abb6a3510c887d084cc5e8b237b67d9",
+      "at": "2026-09-29T07:35:37.504Z",
+      "sourcedPlaces": 2
+    },
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_0f249084652af5e6016abb6a4e3dac87d0b5839d42ae375a92",
+      "model": "gpt-6-astra",
+      "usage": {
+        "input_tokens": 1520,
+        "input_tokens_details": {
+          "cache_write_tokens": 1517,
+          "cached_tokens": 0
+        },
+        "output_tokens": 276,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1796
+      },
+      "at": "2026-09-29T07:35:49.910Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_0252ca627c26520b016abb6a56169087d0b13f02b89d927605",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1889,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 693,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2582
+      },
+      "at": "2026-09-29T07:35:54.114Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": false,
+      "issues": [
+        "semantic_review_rejected",
+        "uncovered_customer_constraints"
+      ],
+      "violations": [
+        {
+          "code": "invalid_plan",
+          "field": "institutions",
+          "quote": "Fictional Hospital A",
+          "explanation": "Candidate uses a fictional institution instead of the requested Cheomdan General Hospital, but the customer provided a specific target (Cheomdan General Hospital, 첨단종합병원) already. At this stage and per instructions, fictional names are only permitted before a user provides an explicit target."
+        },
+        {
+          "code": "missing_constraint",
+          "field": "constraintCoverage",
+          "quote": "Study location 'GIST' is not addressed in any question.",
+          "explanation": "No required question addresses or verifies relevance of the study location at GIST, which may pertain to eligibility, referral, or foreigner status policies."
+        }
+      ],
+      "customerFactEvidence": [
+        {
+          "key": "medical_need",
+          "sourceMessageId": "45910b68-fb13-4aed-91ba-752a78872496",
+          "supportReason": "The user explicitly stated a knee injury when describing their medical concern.",
+          "sourceQuote": "knee injury, I study at GIST"
+        },
+        {
+          "key": "study_location",
+          "sourceMessageId": "45910b68-fb13-4aed-91ba-752a78872496",
+          "supportReason": "\"I study at GIST\" in the user's message directly supports this label.",
+          "sourceQuote": "knee injury, I study at GIST"
+        },
+        {
+          "key": "selected_hospital",
+          "sourceMessageId": "d511cf8f-030d-4e94-8fe9-03cd5ce6ab95",
+          "supportReason": "The user said to prepare an inquiry for Cheomdan General Hospital (첨단종합병원), which is an explicit request for that facility.",
+          "sourceQuote": "Prepare my inquiry for Cheomdan General Hospital (첨단종합병원)"
+        }
+      ],
+      "constraintCoverage": [
+        {
+          "constraint": "medical need: knee injury care",
+          "sourceMessageId": "45910b68-fb13-4aed-91ba-752a78872496",
+          "questionIds": [
+            "knee_injury_care",
+            "visit_arrangements"
+          ],
+          "sourceQuote": "knee injury, I study at GIST"
+        },
+        {
+          "constraint": "selected hospital: Cheomdan General Hospital",
+          "sourceMessageId": "d511cf8f-030d-4e94-8fe9-03cd5ce6ab95",
+          "questionIds": [
+            "knee_injury_care",
+            "visit_arrangements"
+          ],
+          "sourceQuote": "Prepare my inquiry for Cheomdan General Hospital (첨단종합병원)"
+        },
+        {
+          "constraint": "study location: GIST",
+          "sourceMessageId": "45910b68-fb13-4aed-91ba-752a78872496",
+          "questionIds": [],
+          "sourceQuote": "knee injury, I study at GIST"
+        }
+      ],
+      "questionMeaningChecks": [
+        {
+          "questionId": "knee_injury_care",
+          "faithful": true,
+          "explanation": "The Korean preserves all key ideas: assessment and treatment of a knee injury and which department to visit."
+        },
+        {
+          "questionId": "visit_arrangements",
+          "faithful": true,
+          "explanation": "The Korean version properly asks about visit arrangements for a knee injury and earliest appointment time."
+        }
+      ],
+      "at": "2026-09-29T07:35:54.116Z"
+    },
+    {
+      "purpose": "call_plan_repair",
+      "responseId": "resp_0ed305c8382b5d35016abb6a5a4a5087d082a28de73c6f3eeb",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 2384,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 455,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2839
+      },
+      "at": "2026-09-29T07:35:57.424Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_04356558bffde9ad016abb6a5d99ac87d0811661b5bcea5c68",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 2008,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 643,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2651
+      },
+      "at": "2026-09-29T07:36:00.232Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 2,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "customerFactEvidence": [
+        {
+          "key": "medical_need",
+          "sourceMessageId": "45910b68-fb13-4aed-91ba-752a78872496",
+          "supportReason": "The customer specifies 'knee injury' as the reason they want to go to a hospital.",
+          "sourceQuote": "knee injury, I study at GIST"
+        },
+        {
+          "key": "study_location",
+          "sourceMessageId": "45910b68-fb13-4aed-91ba-752a78872496",
+          "supportReason": "\"I study at GIST\" directly supplies this fact.",
+          "sourceQuote": "knee injury, I study at GIST"
+        },
+        {
+          "key": "selected_hospital",
+          "sourceMessageId": "d511cf8f-030d-4e94-8fe9-03cd5ce6ab95",
+          "supportReason": "The customer explicitly states: 'Prepare my inquiry for Cheomdan General Hospital.'",
+          "sourceQuote": "Prepare my inquiry for Cheomdan General Hospital (첨단종합병원)"
+        }
+      ],
+      "constraintCoverage": [
+        {
+          "constraint": "hospital can assess/treat knee injury",
+          "sourceMessageId": "45910b68-fb13-4aed-91ba-752a78872496",
+          "questionIds": [
+            "knee_injury_care"
+          ],
+          "sourceQuote": "knee injury, I study at GIST"
+        },
+        {
+          "constraint": "how to arrange visit and earliest appointment",
+          "sourceMessageId": "9395d20e-7776-42a6-a8ff-58806f41a3a1",
+          "questionIds": [
+            "visit_arrangements"
+          ],
+          "sourceQuote": "i want to go to a hospital"
+        },
+        {
+          "constraint": "GIST student status may affect registration or eligibility",
+          "sourceMessageId": "45910b68-fb13-4aed-91ba-752a78872496",
+          "questionIds": [
+            "gist_study_relevance"
+          ],
+          "sourceQuote": "knee injury, I study at GIST"
+        }
+      ],
+      "questionMeaningChecks": [
+        {
+          "questionId": "knee_injury_care",
+          "faithful": true,
+          "explanation": "The Korean question ('무릎 부상을 진료하고 치료할 수 있나요? 어느 진료과로 가면 되나요?') faithfully includes ability to assess and treat a knee injury and asks which department to visit. Nothing is omitted or added."
+        },
+        {
+          "questionId": "visit_arrangements",
+          "faithful": true,
+          "explanation": "The Korean question ('무릎 부상 진료를 받으려면 어떻게 방문 예약을 하면 되나요? 가장 빠른 예약 가능 시간은 언제인가요?') preserves the meaning of how to book for knee injury and asks for earliest available appointment."
+        },
+        {
+          "questionId": "gist_study_relevance",
+          "faithful": true,
+          "explanation": "The Korean version ('환자가 GIST 학생인 경우 등록, 진료 자격, 또는 진료 의뢰 과정에 영향이 있나요?') is a direct and complete translation, including all conditions affecting registration, eligibility, or referral."
+        }
+      ],
+      "at": "2026-09-29T07:36:00.232Z"
+    },
+    {
+      "purpose": "grounded_recommendation",
+      "responseId": "resp_0fce4786f2879042016abb6ac9d3a487d0a80bb336238dc054",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 581,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 37,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 618
+      },
+      "at": "2026-09-29T07:37:46.390Z"
+    },
+    {
+      "purpose": "recommendation_choice_result",
+      "accepted": true,
+      "action": "clarify_selected_questions",
+      "reasonQuestionIds": [],
+      "clarificationQuestionIds": [
+        "knee_injury_care",
+        "visit_arrangements",
+        "gist_study_relevance"
+      ],
+      "at": "2026-09-29T07:37:46.391Z"
+    }
+  ],
+  "voiceDiagnostics": [],
+  "savedAt": "2026-09-29T07:37:46.393Z"
+}

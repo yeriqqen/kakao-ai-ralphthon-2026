@@ -1,0 +1,144 @@
+{
+  "capturedFrom": "Actual localhost /chat response",
+  "captureNote": "Room was lost after backend restart before /export could complete. This file preserves the actual server-returned public state, not a successful export-route result.",
+  "simulation": true,
+  "realApi": true,
+  "microphone": false,
+  "audibleKorean": false,
+  "id": "b621fa1d-8727-44b5-92e7-93cbbb95d19a",
+  "language": "zh",
+  "version": 10,
+  "revision": 10,
+  "createdAt": "2026-09-29T05:08:00.000Z",
+  "updatedAt": "2026-09-29T05:08:18.395Z",
+  "messages": [
+    {
+      "id": "e54a5cd5-947e-44f4-ae90-3abffede8d55",
+      "role": "user",
+      "text": "我想去医院。",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:08:00.016Z"
+    },
+    {
+      "id": "74ec33f1-db59-4180-a569-46950e9ce919",
+      "role": "assistant",
+      "text": "请告诉我您想去医院的原因，例如是否有身体不适或受伤了？这样我能帮您找到合适的医疗机构。",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:08:03.744Z"
+    },
+    {
+      "id": "75fd9ed2-aa9f-40d4-9d2b-204fadca7082",
+      "role": "user",
+      "text": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:08:15.315Z"
+    },
+    {
+      "id": "c3914a98-9688-4957-965f-70d12c48e832",
+      "role": "assistant",
+      "text": "您想在首尔麻浦区今天下午大约15:30，由女医生为您诊治轻微发痒且持续两天的手臂皮疹。您没有韩国医疗保险，想了解自费咨询费用和预约要求。我会模拟联系符合您需求的医疗机构，确认相关信息。请确认是否现在开始模拟电话联系？",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:08:18.395Z"
+    }
+  ],
+  "transcripts": [],
+  "customerInfo": [
+    {
+      "key": "age",
+      "value": "28",
+      "sourceMessageId": "75fd9ed2-aa9f-40d4-9d2b-204fadca7082"
+    },
+    {
+      "key": "symptom",
+      "value": "手臂轻微发痒的皮疹",
+      "sourceMessageId": "75fd9ed2-aa9f-40d4-9d2b-204fadca7082"
+    },
+    {
+      "key": "symptom_duration",
+      "value": "两天",
+      "sourceMessageId": "75fd9ed2-aa9f-40d4-9d2b-204fadca7082"
+    },
+    {
+      "key": "emergency_symptoms",
+      "value": "无",
+      "sourceMessageId": "75fd9ed2-aa9f-40d4-9d2b-204fadca7082"
+    },
+    {
+      "key": "location",
+      "value": "首尔麻浦区",
+      "sourceMessageId": "75fd9ed2-aa9f-40d4-9d2b-204fadca7082"
+    },
+    {
+      "key": "preferred_appointment_time",
+      "value": "今天15:30左右",
+      "sourceMessageId": "75fd9ed2-aa9f-40d4-9d2b-204fadca7082"
+    },
+    {
+      "key": "preferred_doctor_gender",
+      "value": "女医生",
+      "sourceMessageId": "75fd9ed2-aa9f-40d4-9d2b-204fadca7082"
+    },
+    {
+      "key": "health_insurance",
+      "value": "无韩国医疗保险",
+      "sourceMessageId": "75fd9ed2-aa9f-40d4-9d2b-204fadca7082"
+    },
+    {
+      "key": "inquiry",
+      "value": "自费咨询费用和预约要求",
+      "sourceMessageId": "75fd9ed2-aa9f-40d4-9d2b-204fadca7082"
+    }
+  ],
+  "institutions": [
+    {
+      "id": "seoul_mapo_dermatology_clinic",
+      "name": "首尔麻浦皮肤科诊所",
+      "nameKo": "",
+      "description": "专门治疗皮肤问题，能提供女医生接诊和预约服务，适合您的皮疹症状。",
+      "reason": "专门治疗皮肤问题，能提供女医生接诊和预约服务，适合您的皮疹症状。",
+      "fictional": true
+    }
+  ],
+  "requiredQuestions": [
+    {
+      "id": "consultation_fee",
+      "text": "请问自费咨询费用是多少？",
+      "korean": "자가 부담 진료비가 어떻게 되나요?",
+      "status": "unresolved",
+      "resolutionReason": null,
+      "answer": null,
+      "evidence": []
+    },
+    {
+      "id": "appointment_required",
+      "text": "是否需要预约？如果需要，如何预约？",
+      "korean": "예약이 필요한가요? 필요하다면 어떻게 예약하나요?",
+      "status": "unresolved",
+      "resolutionReason": null,
+      "answer": null,
+      "evidence": []
+    }
+  ],
+  "planReady": true,
+  "pendingRelay": null,
+  "decisionPrompt": null,
+  "summary": null,
+  "busy": false,
+  "error": null,
+  "voiceMessage": null,
+  "call": {
+    "id": null,
+    "status": "idle",
+    "institutionId": null,
+    "authorized": false,
+    "accepted": false,
+    "authorizedAt": null,
+    "acceptedAt": null,
+    "connected": false,
+    "confirmedKeyDetails": false,
+    "confirmationEvidence": [],
+    "endedAt": null,
+    "reason": null,
+    "success": false
+  }
+}

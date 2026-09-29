@@ -1,0 +1,655 @@
+{
+  "simulation": true,
+  "realTelephoneCall": false,
+  "aiProvider": "OpenAI",
+  "hardwareVerification": [],
+  "id": "4dc90384-99af-4f78-bd6d-4c4bf781c9e8",
+  "language": "en",
+  "version": 29,
+  "revision": 29,
+  "createdAt": "2026-09-29T07:43:51.764Z",
+  "updatedAt": "2026-09-29T07:45:49.945Z",
+  "messages": [
+    {
+      "id": "c99803fe-bd02-4e5d-a60c-dc0afe4e0dcf",
+      "role": "user",
+      "text": "i want to ask if a navy bag is available at a shop",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:43:51.770Z"
+    },
+    {
+      "id": "122ff80e-ff23-40c8-8138-96bc0855c613",
+      "role": "assistant",
+      "text": "Which shop would you like to ask, or which area should I look in?",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:43:58.713Z"
+    },
+    {
+      "id": "b2f848f3-cd01-4104-95eb-ef1d20b40365",
+      "role": "user",
+      "text": "i study at gist",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:44:04.715Z"
+    },
+    {
+      "id": "0c79f5aa-75f4-46aa-b4ee-5c63036d902d",
+      "role": "assistant",
+      "text": "Assuming you mean GIST in Gwangju, here are two verified bag-shop options in the city, rather than confirmed walking-distance shops. Select a place below. Listings do not confirm current stock.",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:44:25.056Z"
+    },
+    {
+      "id": "4865cf68-ef83-4d5e-8c62-98e243595e57",
+      "role": "user",
+      "text": "Prepare my inquiry for Samsonite — Lotte Outlet Gwangju Suwan (쌤소나이트 롯데 광주 수완 아울렛)",
+      "kind": "selection",
+      "createdAt": "2026-09-29T07:44:29.754Z"
+    },
+    {
+      "id": "93327589-91cd-4146-9fa0-f16cbe1001bf",
+      "role": "assistant",
+      "text": "Your inquiry is ready. May I proceed with asking whether a navy bag is currently available?",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:44:39.039Z"
+    },
+    {
+      "id": "c2a24e2e-63c2-46d8-832c-8d635913156c",
+      "role": "assistant",
+      "text": "Fictional simulation only — no real call or booking.\n\nCall outcome: Simulation ended incompletely.\n\nValidated business answers in this simulation:\n- Do you currently have any navy bags in stock, and if so, which models are available?\n  Yes, there is a navy bag in stock: specifically, the B model is available.\n\nCustomer-provided information:\n- Item: Looking for a bag\n- Color: Wants a navy bag\n- Study location: Studies at GIST\n- Selected shop: Samsonite — Lotte Outlet Gwangju Suwan\n\nStill unresolved:\nNo required questions remain unresolved.\n\nConsider this option based on the recorded answers.\n\nSelected recorded answers:\n- Do you currently have any navy bags in stock, and if so, which models are available?\n  Yes, there is a navy bag in stock: specifically, the B model is available.",
+      "kind": "summary",
+      "createdAt": "2026-09-29T07:45:49.945Z"
+    }
+  ],
+  "transcripts": [
+    {
+      "id": "item_ETMoGaxAFtqE9f5HSvklN",
+      "role": "assistant",
+      "text": "안녕하세요, YOKOBU AI 도우미입니다. 지금 남색 가방 재고가 있나요? 있다면 어떤 모델이 있는지 알려주세요.",
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "createdAt": "2026-09-29T07:45:01.961Z"
+    },
+    {
+      "id": "item_ETMoQHqAb5STHcq67PwFD",
+      "role": "business",
+      "text": "어 남색 가방 B 모델 재고가 있습니다.",
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "createdAt": "2026-09-29T07:45:14.291Z"
+    },
+    {
+      "id": "item_ETMoWT51aZJj4ALB7wUuh",
+      "role": "assistant",
+      "text": "확인해보면, 남색 가방 재고가 있고, 그중 B 모델이 가능합니다. 이 내용이 맞는지 확인해 주실 수 있을까요?",
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "createdAt": "2026-09-29T07:45:17.942Z",
+      "resolvedQuestionSnapshot": [
+        {
+          "id": "navy_bag_availability",
+          "answer": "Yes, there is a navy bag in stock: specifically, the B model is available.",
+          "evidence": [
+            {
+              "transcriptId": "item_ETMoQHqAb5STHcq67PwFD",
+              "quote": "어 남색 가방 B 모델 재고가 있습니다.",
+              "role": "business"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_ETMofS3lfGmua0HngOr5b",
+      "role": "business",
+      "text": "네, 맞습니다.",
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "createdAt": "2026-09-29T07:45:27.219Z"
+    }
+  ],
+  "customerInfo": [
+    {
+      "key": "requested_item",
+      "value": "Looking for a bag",
+      "sourceMessageId": "c99803fe-bd02-4e5d-a60c-dc0afe4e0dcf",
+      "label": "Item"
+    },
+    {
+      "key": "preferred_color",
+      "value": "Wants a navy bag",
+      "sourceMessageId": "c99803fe-bd02-4e5d-a60c-dc0afe4e0dcf",
+      "label": "Color"
+    },
+    {
+      "key": "study_location",
+      "value": "Studies at GIST",
+      "sourceMessageId": "b2f848f3-cd01-4104-95eb-ef1d20b40365",
+      "label": "Study location"
+    },
+    {
+      "key": "selected_shop",
+      "value": "Samsonite — Lotte Outlet Gwangju Suwan",
+      "sourceMessageId": "4865cf68-ef83-4d5e-8c62-98e243595e57",
+      "label": "Selected shop"
+    }
+  ],
+  "institutions": [
+    {
+      "id": "fb1c56e5-9ca8-46a6-8ce9-82fcc576d87c",
+      "name": "Samsonite — Lotte Outlet Gwangju Suwan (쌤소나이트 롯데 광주 수완 아울렛)",
+      "detail": "A bag-shopping option in Suwan’s Lotte Outlet; Samsonite’s official directory lists the shop on the first floor.",
+      "address": "광주광역시 광산구 장신로 98, 롯데아울렛 광주 수완점 1층",
+      "phone": "062-616-2130",
+      "url": "https://www.samsonite.co.kr/stores",
+      "sourced": true,
+      "reason": "Ask whether navy bags are currently in stock and which models are available.",
+      "fictional": false,
+      "callSimulation": true
+    }
+  ],
+  "requiredQuestions": [
+    {
+      "id": "navy_bag_availability",
+      "text": "Do you currently have any navy bags in stock, and if so, which models are available?",
+      "korean": "현재 남색 가방이 재고로 있나요? 있다면 어떤 모델이 있나요?",
+      "status": "resolved",
+      "resolutionReason": null,
+      "answer": "Yes, there is a navy bag in stock: specifically, the B model is available.",
+      "evidence": [
+        {
+          "transcriptId": "item_ETMoQHqAb5STHcq67PwFD",
+          "quote": "어 남색 가방 B 모델 재고가 있습니다.",
+          "role": "business"
+        }
+      ]
+    }
+  ],
+  "questionHistory": [],
+  "planReady": true,
+  "pendingRelay": null,
+  "decisionPrompt": null,
+  "summary": {
+    "text": "Fictional simulation only — no real call or booking.\n\nCall outcome: Simulation ended incompletely.\n\nValidated business answers in this simulation:\n- Do you currently have any navy bags in stock, and if so, which models are available?\n  Yes, there is a navy bag in stock: specifically, the B model is available.\n\nCustomer-provided information:\n- Item: Looking for a bag\n- Color: Wants a navy bag\n- Study location: Studies at GIST\n- Selected shop: Samsonite — Lotte Outlet Gwangju Suwan\n\nStill unresolved:\nNo required questions remain unresolved.",
+    "details": {
+      "answers": [
+        {
+          "id": "navy_bag_availability",
+          "text": "Do you currently have any navy bags in stock, and if so, which models are available?",
+          "answer": "Yes, there is a navy bag in stock: specifically, the B model is available."
+        }
+      ],
+      "unresolved": [],
+      "institution": {
+        "id": "fb1c56e5-9ca8-46a6-8ce9-82fcc576d87c",
+        "name": null,
+        "fictional": true
+      }
+    },
+    "recommendation": "Consider this option based on the recorded answers.",
+    "reasoning": "Selected recorded answers:\n- Do you currently have any navy bags in stock, and if so, which models are available?\n  Yes, there is a navy bag in stock: specifically, the B model is available."
+  },
+  "busy": false,
+  "error": null,
+  "voiceMessage": null,
+  "call": {
+    "id": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+    "status": "interrupted",
+    "institutionId": "fb1c56e5-9ca8-46a6-8ce9-82fcc576d87c",
+    "authorized": true,
+    "accepted": true,
+    "authorizedAt": "2026-09-29T07:44:44.018Z",
+    "acceptedAt": "2026-09-29T07:44:58.056Z",
+    "connected": false,
+    "confirmedKeyDetails": true,
+    "confirmationEvidence": [
+      {
+        "transcriptId": "item_ETMofS3lfGmua0HngOr5b",
+        "quote": "네, 맞습니다.",
+        "role": "business"
+      }
+    ],
+    "readbackEvidence": [
+      {
+        "questionId": "navy_bag_availability",
+        "transcriptId": "item_ETMoWT51aZJj4ALB7wUuh",
+        "quote": "남색 가방 재고가 있고, 그중 B 모델이 가능합니다.",
+        "role": "assistant"
+      }
+    ],
+    "endedAt": "2026-09-29T07:45:48.972Z",
+    "reason": "Customer ended the simulated call early.",
+    "success": false
+  },
+  "places": [
+    {
+      "id": "fb1c56e5-9ca8-46a6-8ce9-82fcc576d87c",
+      "name": "Samsonite — Lotte Outlet Gwangju Suwan (쌤소나이트 롯데 광주 수완 아울렛)",
+      "detail": "A bag-shopping option in Suwan’s Lotte Outlet; Samsonite’s official directory lists the shop on the first floor.",
+      "address": "광주광역시 광산구 장신로 98, 롯데아울렛 광주 수완점 1층",
+      "phone": "062-616-2130",
+      "url": "https://www.samsonite.co.kr/stores",
+      "sourced": true
+    },
+    {
+      "id": "6b50b223-46a3-4ad7-ae21-7035b14b2be3",
+      "name": "Samsonite — Shinsegae Gwangju (쌤소나이트 신세계 백화점 광주)",
+      "detail": "An alternative for bag shopping at Shinsegae; Samsonite’s official directory lists this branch on the third floor.",
+      "address": "광주광역시 서구 무진대로 932, 신세계백화점 3층",
+      "phone": "062-360-1147",
+      "url": "https://www.samsonite.co.kr/stores",
+      "sourced": true
+    }
+  ],
+  "selectedPlace": {
+    "id": "fb1c56e5-9ca8-46a6-8ce9-82fcc576d87c",
+    "name": "Samsonite — Lotte Outlet Gwangju Suwan (쌤소나이트 롯데 광주 수완 아울렛)",
+    "detail": "A bag-shopping option in Suwan’s Lotte Outlet; Samsonite’s official directory lists the shop on the first floor.",
+    "address": "광주광역시 광산구 장신로 98, 롯데아울렛 광주 수완점 1층",
+    "phone": "062-616-2130",
+    "url": "https://www.samsonite.co.kr/stores",
+    "sourced": true
+  },
+  "apiEvidence": [
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_0ae6daa231559c5b016abb6c37fd6487d081190e07d8f03909",
+      "model": "gpt-6-astra",
+      "usage": {
+        "input_tokens": 1307,
+        "input_tokens_details": {
+          "cache_write_tokens": 56,
+          "cached_tokens": 1248
+        },
+        "output_tokens": 103,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1410
+      },
+      "at": "2026-09-29T07:43:55.502Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_07afb2ea78b3037f016abb6c3cb9ac87d0a77455fe957937f0",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1527,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 244,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1771
+      },
+      "at": "2026-09-29T07:43:58.712Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "customerFactEvidence": [
+        {
+          "key": "item",
+          "sourceMessageId": "c99803fe-bd02-4e5d-a60c-dc0afe4e0dcf",
+          "supportReason": "The user asked about the availability of a bag at a shop, supporting the fact that the item is a bag.",
+          "sourceQuote": "i want to ask if a navy bag is available at a shop"
+        },
+        {
+          "key": "requested_color",
+          "sourceMessageId": "c99803fe-bd02-4e5d-a60c-dc0afe4e0dcf",
+          "supportReason": "The user specified 'navy' as the color of the bag they are inquiring about.",
+          "sourceQuote": "i want to ask if a navy bag is available at a shop"
+        },
+        {
+          "key": "inquiry",
+          "sourceMessageId": "c99803fe-bd02-4e5d-a60c-dc0afe4e0dcf",
+          "supportReason": "The user’s main question is whether a navy bag is available at a shop.",
+          "sourceQuote": "i want to ask if a navy bag is available at a shop"
+        }
+      ],
+      "constraintCoverage": [],
+      "questionMeaningChecks": [],
+      "at": "2026-09-29T07:43:58.713Z"
+    },
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_04fb78771aea14f9016abb6c450c9487d09f8daceb8ca8d7bf",
+      "model": "gpt-6-astra",
+      "usage": {
+        "input_tokens": 1391,
+        "input_tokens_details": {
+          "cache_write_tokens": 140,
+          "cached_tokens": 1248
+        },
+        "output_tokens": 166,
+        "output_tokens_details": {
+          "reasoning_tokens": 60
+        },
+        "total_tokens": 1557
+      },
+      "at": "2026-09-29T07:44:10.688Z"
+    },
+    {
+      "purpose": "place_discovery",
+      "model": "gpt-6-astra",
+      "responseId": "resp_0b3283b7717c1841016abb6c4adfdc87d0b48e9c4581cc98cd",
+      "at": "2026-09-29T07:44:25.056Z",
+      "sourcedPlaces": 2
+    },
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_0f4762cad2c8ce9b016abb6c5df4d087d090ed1ab1ca1eda80",
+      "model": "gpt-6-astra",
+      "usage": {
+        "input_tokens": 1564,
+        "input_tokens_details": {
+          "cache_write_tokens": 1561,
+          "cached_tokens": 0
+        },
+        "output_tokens": 220,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1784
+      },
+      "at": "2026-09-29T07:44:35.988Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_0c8eae95c3e8c75f016abb6c6429a487d0b4238ca79665b76d",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1853,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 435,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2288
+      },
+      "at": "2026-09-29T07:44:39.039Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "customerFactEvidence": [
+        {
+          "key": "requested_item",
+          "sourceMessageId": "c99803fe-bd02-4e5d-a60c-dc0afe4e0dcf",
+          "supportReason": "The user asks if a navy bag is available at a shop, which establishes an interest in purchasing a bag.",
+          "sourceQuote": "i want to ask if a navy bag is available at a shop"
+        },
+        {
+          "key": "preferred_color",
+          "sourceMessageId": "c99803fe-bd02-4e5d-a60c-dc0afe4e0dcf",
+          "supportReason": "The user specifies the color navy in relation to the bag requested.",
+          "sourceQuote": "i want to ask if a navy bag is available at a shop"
+        },
+        {
+          "key": "study_location",
+          "sourceMessageId": "b2f848f3-cd01-4104-95eb-ef1d20b40365",
+          "supportReason": "The user states they study at GIST.",
+          "sourceQuote": "i study at gist"
+        },
+        {
+          "key": "selected_shop",
+          "sourceMessageId": "4865cf68-ef83-4d5e-8c62-98e243595e57",
+          "supportReason": "User requests for inquiry to be prepared for Samsonite — Lotte Outlet Gwangju Suwan, establishing intended retailer.",
+          "sourceQuote": "Prepare my inquiry for Samsonite — Lotte Outlet Gwangju Suwan (쌤소나이트 롯데 광주 수완 아울렛)"
+        }
+      ],
+      "constraintCoverage": [
+        {
+          "constraint": "Ask about availability of a navy bag and which models are available.",
+          "sourceMessageId": "c99803fe-bd02-4e5d-a60c-dc0afe4e0dcf",
+          "questionIds": [
+            "navy_bag_availability"
+          ],
+          "sourceQuote": "i want to ask if a navy bag is available at a shop"
+        }
+      ],
+      "questionMeaningChecks": [
+        {
+          "questionId": "navy_bag_availability",
+          "faithful": true,
+          "explanation": "The Korean question faithfully includes both whether navy bags are in stock and, if so, which models—covering all aspects of the English version."
+        }
+      ],
+      "at": "2026-09-29T07:44:39.039Z"
+    },
+    {
+      "purpose": "realtime_connect",
+      "status": 201,
+      "model": "gpt-realtime",
+      "at": "2026-09-29T07:44:59.018Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "resp_02c5757dda50baf6016abb6c8ac7a087d0b555e2bb897efec2",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1973,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 150,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2123
+      },
+      "at": "2026-09-29T07:45:15.950Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "resp_028c3692f45d1345016abb6c97751c87d08c27a1a0be4167ee",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 2300,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 112,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2412
+      },
+      "at": "2026-09-29T07:45:30.079Z"
+    },
+    {
+      "purpose": "grounded_recommendation",
+      "responseId": "resp_01b63d7dc2d2e49a016abb6cad341487d0968e2c378ae602c5",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 546,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 27,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 573
+      },
+      "at": "2026-09-29T07:45:49.944Z"
+    },
+    {
+      "purpose": "recommendation_choice_result",
+      "accepted": true,
+      "action": "review_recorded_answers",
+      "reasonQuestionIds": [
+        "navy_bag_availability"
+      ],
+      "clarificationQuestionIds": [],
+      "at": "2026-09-29T07:45:49.945Z"
+    }
+  ],
+  "voiceDiagnostics": [
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "call.accepted",
+      "receivedAt": "2026-09-29T07:44:58.327Z",
+      "at": "2026-09-29T07:44:58.072Z"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "remote.track",
+      "receivedAt": "2026-09-29T07:44:59.352Z",
+      "at": "2026-09-29T07:44:59.024Z"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "playback.allowed",
+      "receivedAt": "2026-09-29T07:44:59.352Z",
+      "at": "2026-09-29T07:44:59.095Z"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "connection.registered",
+      "receivedAt": "2026-09-29T07:44:59.938Z",
+      "at": "2026-09-29T07:44:59.684Z"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "session.created",
+      "receivedAt": "2026-09-29T07:45:00.415Z",
+      "at": "2026-09-29T07:44:59.994Z"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "opening.requested",
+      "receivedAt": "2026-09-29T07:45:00.415Z",
+      "at": "2026-09-29T07:44:59.994Z"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:45:00.415Z",
+      "at": "2026-09-29T07:45:00.156Z",
+      "responseId": "resp_ETMoGC4nATBHwrC3r0wuR",
+      "status": "in_progress"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "output_audio_buffer.started",
+      "receivedAt": "2026-09-29T07:45:00.681Z",
+      "at": "2026-09-29T07:45:00.427Z",
+      "responseId": "resp_ETMoGC4nATBHwrC3r0wuR"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "response.done",
+      "receivedAt": "2026-09-29T07:45:02.214Z",
+      "at": "2026-09-29T07:45:01.959Z",
+      "responseId": "resp_ETMoGC4nATBHwrC3r0wuR",
+      "status": "completed"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "output_audio_buffer.stopped",
+      "receivedAt": "2026-09-29T07:45:08.373Z",
+      "at": "2026-09-29T07:45:08.114Z",
+      "responseId": "resp_ETMoGC4nATBHwrC3r0wuR"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "opening.finished",
+      "receivedAt": "2026-09-29T07:45:08.373Z",
+      "at": "2026-09-29T07:45:08.115Z"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "input_audio_buffer.speech_started",
+      "receivedAt": "2026-09-29T07:45:10.314Z",
+      "at": "2026-09-29T07:45:10.056Z"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "input_audio_buffer.speech_stopped",
+      "receivedAt": "2026-09-29T07:45:14.009Z",
+      "at": "2026-09-29T07:45:13.751Z"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:45:16.365Z",
+      "at": "2026-09-29T07:45:16.110Z",
+      "responseId": "resp_ETMoWwnq9lByIFPNDAQ80",
+      "status": "in_progress"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "output_audio_buffer.started",
+      "receivedAt": "2026-09-29T07:45:16.647Z",
+      "at": "2026-09-29T07:45:16.392Z",
+      "responseId": "resp_ETMoWwnq9lByIFPNDAQ80"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "response.done",
+      "receivedAt": "2026-09-29T07:45:18.196Z",
+      "at": "2026-09-29T07:45:17.942Z",
+      "responseId": "resp_ETMoWwnq9lByIFPNDAQ80",
+      "status": "completed"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "output_audio_buffer.stopped",
+      "receivedAt": "2026-09-29T07:45:24.593Z",
+      "at": "2026-09-29T07:45:24.336Z",
+      "responseId": "resp_ETMoWwnq9lByIFPNDAQ80"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "input_audio_buffer.speech_started",
+      "receivedAt": "2026-09-29T07:45:25.651Z",
+      "at": "2026-09-29T07:45:25.396Z"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "input_audio_buffer.speech_stopped",
+      "receivedAt": "2026-09-29T07:45:27.007Z",
+      "at": "2026-09-29T07:45:26.750Z"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:45:30.765Z",
+      "at": "2026-09-29T07:45:30.268Z",
+      "responseId": "resp_ETMoktOnXHZL9vt4j3RXd",
+      "status": "in_progress"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "response.done",
+      "receivedAt": "2026-09-29T07:45:30.765Z",
+      "at": "2026-09-29T07:45:30.507Z",
+      "responseId": "resp_ETMoktOnXHZL9vt4j3RXd",
+      "status": "completed"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "input_audio_buffer.speech_started",
+      "receivedAt": "2026-09-29T07:45:42.272Z",
+      "at": "2026-09-29T07:45:42.016Z"
+    },
+    {
+      "callId": "991eefe5-974b-4a62-a188-3dd22eb4d9c4",
+      "type": "input_audio_buffer.speech_stopped",
+      "receivedAt": "2026-09-29T07:45:48.947Z",
+      "at": "2026-09-29T07:45:48.692Z"
+    }
+  ],
+  "savedAt": "2026-09-29T07:45:49.945Z"
+}

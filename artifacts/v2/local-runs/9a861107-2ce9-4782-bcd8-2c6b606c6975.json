@@ -1,0 +1,229 @@
+{
+  "simulation": true,
+  "realTelephoneCall": false,
+  "aiProvider": "OpenAI",
+  "hardwareVerification": [],
+  "id": "9a861107-2ce9-4782-bcd8-2c6b606c6975",
+  "language": "zh",
+  "version": 10,
+  "revision": 10,
+  "createdAt": "2026-09-29T05:10:55.578Z",
+  "updatedAt": "2026-09-29T05:11:25.072Z",
+  "messages": [
+    {
+      "id": "25a6b4ac-9578-40c9-b158-1723e9f6c71e",
+      "role": "user",
+      "text": "我想去医院。",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:10:55.584Z"
+    },
+    {
+      "id": "c48568bc-3f47-48d9-8e90-0723f49b5e46",
+      "role": "assistant",
+      "text": "请问您是因为哪里不舒服或有什么症状想去医院吗？另外，您现在所在的城市或者地区是哪里？",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:10:57.169Z"
+    },
+    {
+      "id": "07b37754-5d00-4e90-b08a-d481969194d4",
+      "role": "user",
+      "text": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:11:16.960Z"
+    },
+    {
+      "id": "ce4e5091-8e98-4356-a03f-3c44d88018fc",
+      "role": "assistant",
+      "text": "这是一个虚构的模拟演示，为了确保满足您的需求，我将针对您提供的信息设计一个合理的联络计划。您提到手臂有轻微发痒的皮疹，持续两天，无紧急症状，位于首尔麻浦区，希望今天下午15:30左右由女医生接诊，并且没有韩国医疗保险，希望了解自费费用和预约要求。为此，我会建议联系以下几家设有皮肤科的虚构医院，它们具备女医生资源，并适合处理您的病症，同时能够回答自费和预约相关问题。由于这是模拟，不涉及真实拨打或查询。请您确认是否继续模拟通话。",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:11:25.072Z"
+    }
+  ],
+  "transcripts": [],
+  "customerInfo": [
+    {
+      "key": "age",
+      "value": "28",
+      "sourceMessageId": "07b37754-5d00-4e90-b08a-d481969194d4"
+    },
+    {
+      "key": "symptom",
+      "value": "手臂上有轻微发痒的皮疹",
+      "sourceMessageId": "07b37754-5d00-4e90-b08a-d481969194d4"
+    },
+    {
+      "key": "duration",
+      "value": "两天",
+      "sourceMessageId": "07b37754-5d00-4e90-b08a-d481969194d4"
+    },
+    {
+      "key": "emergency",
+      "value": "无紧急症状",
+      "sourceMessageId": "07b37754-5d00-4e90-b08a-d481969194d4"
+    },
+    {
+      "key": "location",
+      "value": "首尔麻浦区",
+      "sourceMessageId": "07b37754-5d00-4e90-b08a-d481969194d4"
+    },
+    {
+      "key": "preferred_time",
+      "value": "今天下午15:30左右",
+      "sourceMessageId": "07b37754-5d00-4e90-b08a-d481969194d4"
+    },
+    {
+      "key": "preferred_doctor_gender",
+      "value": "女",
+      "sourceMessageId": "07b37754-5d00-4e90-b08a-d481969194d4"
+    },
+    {
+      "key": "insurance",
+      "value": "无韩国医疗保险",
+      "sourceMessageId": "07b37754-5d00-4e90-b08a-d481969194d4"
+    },
+    {
+      "key": "self_pay_inquiry",
+      "value": "想确认自费咨询费用",
+      "sourceMessageId": "07b37754-5d00-4e90-b08a-d481969194d4"
+    },
+    {
+      "key": "appointment_inquiry",
+      "value": "是否需要预约",
+      "sourceMessageId": "07b37754-5d00-4e90-b08a-d481969194d4"
+    }
+  ],
+  "institutions": [
+    {
+      "id": "fictional_mfskin_mapo",
+      "name": "首尔麻浦虚构幸福皮肤科诊所",
+      "nameKo": "",
+      "description": "专注于皮肤科，适合治疗皮疹，同时有女医生资源，能提供费用和预约信息。",
+      "reason": "专注于皮肤科，适合治疗皮疹，同时有女医生资源，能提供费用和预约信息。",
+      "fictional": true
+    },
+    {
+      "id": "fictional_mfclinic_mapo",
+      "name": "首尔麻浦虚构康健综合医院",
+      "nameKo": "",
+      "description": "设有皮肤科部门，有女医生执业，适合多样皮肤病咨询，能确认自费及预约政策。",
+      "reason": "设有皮肤科部门，有女医生执业，适合多样皮肤病咨询，能确认自费及预约政策。",
+      "fictional": true
+    },
+    {
+      "id": "fictional_femalederm_mapo",
+      "name": "首尔麻浦虚构女性皮肤专科医院",
+      "nameKo": "",
+      "description": "专为女性医生诊疗的皮肤科机构，方便满足您指定医生性别需求，能讨论费用和预约。",
+      "reason": "专为女性医生诊疗的皮肤科机构，方便满足您指定医生性别需求，能讨论费用和预约。",
+      "fictional": true
+    }
+  ],
+  "requiredQuestions": [
+    {
+      "id": "check_availability_female_doctor",
+      "text": "请问贵机构今天下午15:30左右是否有女医生可预约诊疗？",
+      "korean": "오늘 오후 3시 30분경에 여자 의사 선생님 예약이 가능한가요?",
+      "status": "unresolved",
+      "resolutionReason": null,
+      "answer": null,
+      "evidence": []
+    },
+    {
+      "id": "check_appointment_requirement",
+      "text": "贵机构接受当天预约吗？是否必须提前预约？",
+      "korean": "당일 예약이 가능하며, 사전 예약이 반드시 필요한가요?",
+      "status": "unresolved",
+      "resolutionReason": null,
+      "answer": null,
+      "evidence": []
+    },
+    {
+      "id": "confirm_self_pay_cost",
+      "text": "请问如果没有韩国医疗保险，皮肤科诊疗的自费费用大约是多少？",
+      "korean": "한국 의료 보험이 없을 경우, 피부과 진료의 본인 부담 비용은 대략 얼마인가요?",
+      "status": "unresolved",
+      "resolutionReason": null,
+      "answer": null,
+      "evidence": []
+    }
+  ],
+  "planReady": true,
+  "pendingRelay": null,
+  "decisionPrompt": null,
+  "summary": null,
+  "busy": false,
+  "error": null,
+  "voiceMessage": null,
+  "call": {
+    "id": null,
+    "status": "idle",
+    "institutionId": null,
+    "authorized": false,
+    "accepted": false,
+    "authorizedAt": null,
+    "acceptedAt": null,
+    "connected": false,
+    "confirmedKeyDetails": false,
+    "confirmationEvidence": [],
+    "endedAt": null,
+    "reason": null,
+    "success": false
+  },
+  "apiEvidence": [
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_0fce7d66cda5e374016abb485fd73087d0ac476e87f0836563",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 518,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 52,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 570
+      },
+      "at": "2026-09-29T05:10:57.169Z"
+    },
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_04871bd66e974cb3016abb4875471c87d09412fd2e60719878",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 639,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 418,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1057
+      },
+      "at": "2026-09-29T05:11:21.447Z"
+    },
+    {
+      "purpose": "call_plan_review",
+      "responseId": "resp_0964f99cff247dea016abb4879a74887d09cb99195135e274f",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 923,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 489,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1412
+      },
+      "at": "2026-09-29T05:11:25.072Z"
+    }
+  ],
+  "savedAt": "2026-09-29T05:11:25.075Z"
+}

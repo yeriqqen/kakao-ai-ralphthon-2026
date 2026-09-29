@@ -1,0 +1,509 @@
+{
+  "simulation": true,
+  "type": "actual_exported_interview_function_no_http_no_voice",
+  "language": "ru",
+  "state": {
+    "id": "2b97c3ae-ee50-4eae-a726-dd423fd24be5",
+    "language": "ru",
+    "version": 9,
+    "revision": 9,
+    "createdAt": "2026-09-29T05:16:11.306Z",
+    "updatedAt": "2026-09-29T05:17:30.313Z",
+    "messages": [
+      {
+        "id": "9891c0ad-2163-4a5b-ac76-8d1a3309bb2e",
+        "role": "user",
+        "text": "Я хочу обратиться в больницу.",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:16:11.306Z"
+      },
+      {
+        "id": "b89d176c-0022-41cc-82d2-3813d1fc9315",
+        "role": "assistant",
+        "text": "Понимаю, вы хотите обратиться в больницу. Можете рассказать, пожалуйста, с какой проблемой или симптомами вы хотите обратиться? Это поможет мне подобрать подходящее место и подготовить вопросы для звонка.",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:16:13.922Z"
+      },
+      {
+        "id": "faf25ae1-a100-45e5-b754-1179aa3a23f6",
+        "role": "user",
+        "text": "Это вымышленный пример. Мне 28 лет. Уже два дня у меня лёгкая зудящая сыпь на руке, без срочных симптомов. Я нахожусь в районе Мапхо в Сеуле и хочу прийти сегодня днём, желательно около 15:30. Я предпочитаю женщину-врача. У меня нет корейской медицинской страховки, поэтому я хочу уточнить примерную стоимость приёма при самостоятельной оплате и нужна ли предварительная запись.",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:16:13.922Z"
+      },
+      {
+        "id": "7b697759-f0a6-44c1-ae02-ff9634533127",
+        "role": "assistant",
+        "text": "Вы указали, что вам 28 лет, у вас уже два дня легкая зудящая сыпь на руке без срочных симптомов, вы находитесь в районе Мапхо в Сеуле, хотели бы прийти сегодня около 15:30, предпочитаете женщину-врача, не имеете корейской медицинской страховки и хотите узнать цену приема и необходимость предварительной записи. Все ли данные верны? Если да, могу подготовить вымышленный план звонка в медицинское учреждение для уточнения этих вопросов.",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:16:27.142Z"
+      },
+      {
+        "id": "4403d341-958b-417d-bdc5-400e966213bb",
+        "role": "user",
+        "text": "Да, все данные верны. Пожалуйста, сейчас подготовьте вымышленный план звонка, чтобы уточнить мои требования. Сам звонок пока не начинайте.",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:17:10.662Z"
+      },
+      {
+        "id": "0925a36b-086d-4ee8-9171-0d85525720ee",
+        "role": "assistant",
+        "text": "Я подготовил вымышленный план звонка в медицинское учреждение в районе Мапхо, Сеул, с учётом всех ваших требований и пожеланий. Обратите внимание, что название учреждения нейтральное, без утверждения его специализации или профиля, и все детали вымышлены. Можем ли мы продолжить и начать этот вымышленный звонок?",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:17:30.313Z"
+      }
+    ],
+    "transcripts": [],
+    "customerInfo": [
+      {
+        "key": "age",
+        "value": "28",
+        "sourceMessageId": "faf25ae1-a100-45e5-b754-1179aa3a23f6"
+      },
+      {
+        "key": "symptom_duration",
+        "value": "2 дня",
+        "sourceMessageId": "faf25ae1-a100-45e5-b754-1179aa3a23f6"
+      },
+      {
+        "key": "symptoms",
+        "value": "легкая зудящая сыпь на руке",
+        "sourceMessageId": "faf25ae1-a100-45e5-b754-1179aa3a23f6"
+      },
+      {
+        "key": "urgency",
+        "value": "нет срочных симптомов",
+        "sourceMessageId": "4403d341-958b-417d-bdc5-400e966213bb"
+      },
+      {
+        "key": "location",
+        "value": "район Мапхо, Сеул",
+        "sourceMessageId": "faf25ae1-a100-45e5-b754-1179aa3a23f6"
+      },
+      {
+        "key": "preferred_time",
+        "value": "сегодня около 15:30",
+        "sourceMessageId": "faf25ae1-a100-45e5-b754-1179aa3a23f6"
+      },
+      {
+        "key": "preferred_gender_of_doctor",
+        "value": "женщина",
+        "sourceMessageId": "faf25ae1-a100-45e5-b754-1179aa3a23f6"
+      },
+      {
+        "key": "insurance_status",
+        "value": "нет корейской медицинской страховки",
+        "sourceMessageId": "faf25ae1-a100-45e5-b754-1179aa3a23f6"
+      },
+      {
+        "key": "payment_preference",
+        "value": "самостоятельная оплата",
+        "sourceMessageId": "faf25ae1-a100-45e5-b754-1179aa3a23f6"
+      },
+      {
+        "key": "questions_about",
+        "value": "примерная стоимость приема, необходимость предварительной записи",
+        "sourceMessageId": "faf25ae1-a100-45e5-b754-1179aa3a23f6"
+      },
+      {
+        "key": "symptom_duration_days",
+        "value": "2",
+        "sourceMessageId": "4403d341-958b-417d-bdc5-400e966213bb"
+      },
+      {
+        "key": "symptom_description",
+        "value": "лёгкая зудящая сыпь на руке",
+        "sourceMessageId": "4403d341-958b-417d-bdc5-400e966213bb"
+      },
+      {
+        "key": "preferred_doctor_gender",
+        "value": "женщина",
+        "sourceMessageId": "4403d341-958b-417d-bdc5-400e966213bb"
+      }
+    ],
+    "institutions": [
+      {
+        "id": "fictional_mapho_clinic",
+        "name": "Вымышленное медицинское учреждение района Мапхо",
+        "nameKo": "",
+        "description": "Уточнить возможность приёма пациента с лёгкой зудящей сыпью без срочных симптомов, приём у женщины-врача, возможность посещения сегодня около 15:30, необходимость предварительной записи, ориентировочную стоимость приёма без страховки.",
+        "reason": "Уточнить возможность приёма пациента с лёгкой зудящей сыпью без срочных симптомов, приём у женщины-врача, возможность посещения сегодня около 15:30, необходимость предварительной записи, ориентировочную стоимость приёма без страховки.",
+        "fictional": true
+      }
+    ],
+    "requiredQuestions": [
+      {
+        "id": "q1",
+        "text": "Принимаете ли вы пациента с лёгкой зудящей сыпью без срочных симптомов?",
+        "korean": "급하지 않은 가벼운 가려운 발진 환자를 받으시나요?",
+        "status": "unresolved",
+        "resolutionReason": null,
+        "answer": null,
+        "evidence": []
+      },
+      {
+        "id": "q2",
+        "text": "Есть ли возможность записаться на приём к женщине-врачу сегодня примерно в 15:30?",
+        "korean": "오늘 오후 3시 30분 경 여성 의사 예약이 가능한가요?",
+        "status": "unresolved",
+        "resolutionReason": null,
+        "answer": null,
+        "evidence": []
+      },
+      {
+        "id": "q3",
+        "text": "Обязательна ли предварительная запись или можно прийти без записи?",
+        "korean": "사전 예약이 꼭 필요한가요, 아니면 예약 없이 방문할 수 있나요?",
+        "status": "unresolved",
+        "resolutionReason": null,
+        "answer": null,
+        "evidence": []
+      },
+      {
+        "id": "q4",
+        "text": "Какова примерная стоимость приёма при самостоятельной оплате без корейской медицинской страховки?",
+        "korean": "한국 의료 보험 없이 자비 진료 시 대략 비용은 얼마인가요?",
+        "status": "unresolved",
+        "resolutionReason": null,
+        "answer": null,
+        "evidence": []
+      }
+    ],
+    "planReady": true,
+    "pendingRelay": null,
+    "decisionPrompt": null,
+    "summary": null,
+    "busy": false,
+    "error": null,
+    "voiceMessage": null,
+    "call": {
+      "id": null,
+      "status": "idle",
+      "institutionId": null,
+      "authorized": false,
+      "accepted": false,
+      "authorizedAt": null,
+      "acceptedAt": null,
+      "connected": false,
+      "confirmedKeyDetails": false,
+      "confirmationEvidence": [],
+      "endedAt": null,
+      "reason": null,
+      "success": false
+    }
+  },
+  "apiEvidence": [
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_0aeb7c8040aaee02016abb499be24c87d0bbb75d80f1dd617e",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 635,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 68,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 703
+      },
+      "at": "2026-09-29T05:16:12.923Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_0776b4c364b21b77016abb499d20b487d0bfd2c85016a068f0",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 802,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 19,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 821
+      },
+      "at": "2026-09-29T05:16:13.921Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "constraintCoverage": [],
+      "at": "2026-09-29T05:16:13.921Z"
+    },
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_02f111dfee4f81ea016abb499e20d087d0ae424f6ce84970eb",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 853,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 319,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1172
+      },
+      "at": "2026-09-29T05:16:16.632Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_07689ea9370e2e62016abb49a0d88c87d09794381fc701b11f",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1192,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 506,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1698
+      },
+      "at": "2026-09-29T05:16:20.836Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": false,
+      "issues": [
+        "ungrounded_customer_fact"
+      ],
+      "violations": [],
+      "constraintCoverage": [],
+      "at": "2026-09-29T05:16:20.836Z"
+    },
+    {
+      "purpose": "call_plan_repair",
+      "responseId": "resp_0b49dced82b261fc016abb49a50ee887d09de3cbb0848f7b47",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1177,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 283,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1460
+      },
+      "at": "2026-09-29T05:16:23.474Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_049bd13ff567d56c016abb49a7aea887d0a1655ea4e377e7b5",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1156,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 491,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1647
+      },
+      "at": "2026-09-29T05:16:27.142Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 2,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "constraintCoverage": [],
+      "at": "2026-09-29T05:16:27.142Z"
+    },
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_0139fb34c2af8776016abb49d71d8087d08da84f7854efbfcc",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1067,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 496,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1563
+      },
+      "at": "2026-09-29T05:17:14.777Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_018aaea2e4413d50016abb49dafafc87d0a577880402e32551",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1434,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 808,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2242
+      },
+      "at": "2026-09-29T05:17:20.560Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": false,
+      "issues": [
+        "semantic_review_rejected",
+        "ungrounded_customer_fact"
+      ],
+      "violations": [
+        {
+          "code": "unsupported_business_claim",
+          "field": "institutions[0].name",
+          "quote": "Вымышленная дерматологическая клиника Мапхо",
+          "explanation": "Название содержит специфическую специализацию \"дерматологическая\", что является неподтвержденным бизнес-фактом. Это заявляет о профильном характере учреждения без доказательств."
+        }
+      ],
+      "constraintCoverage": [
+        {
+          "constraint": "легкая зудящая сыпь на руке, без срочных симптомов",
+          "sourceMessageId": "faf25ae1-a100-45e5-b754-1179aa3a23f6",
+          "sourceQuote": "Уже два дня у меня лёгкая зудящая сыпь на руке, без срочных симптомов",
+          "questionIds": [
+            "q1"
+          ]
+        },
+        {
+          "constraint": "предпочитает женщину-врача",
+          "sourceMessageId": "faf25ae1-a100-45e5-b754-1179aa3a23f6",
+          "sourceQuote": "Я предпочитаю женщину-врача",
+          "questionIds": [
+            "q2"
+          ]
+        },
+        {
+          "constraint": "хочу прийти сегодня днём, желательно около 15:30",
+          "sourceMessageId": "faf25ae1-a100-45e5-b754-1179aa3a23f6",
+          "sourceQuote": "хочу прийти сегодня днём, желательно около 15:30",
+          "questionIds": [
+            "q2"
+          ]
+        },
+        {
+          "constraint": "нет корейской медицинской страховки, самостоятельная оплата",
+          "sourceMessageId": "faf25ae1-a100-45e5-b754-1179aa3a23f6",
+          "sourceQuote": "У меня нет корейской медицинской страховки, поэтому я хочу уточнить примерную стоимость приёма при самостоятельной оплате",
+          "questionIds": [
+            "q4"
+          ]
+        },
+        {
+          "constraint": "нужна ли предварительная запись",
+          "sourceMessageId": "faf25ae1-a100-45e5-b754-1179aa3a23f6",
+          "sourceQuote": "нужна ли предварительная запись",
+          "questionIds": [
+            "q3"
+          ]
+        }
+      ],
+      "at": "2026-09-29T05:17:20.561Z"
+    },
+    {
+      "purpose": "call_plan_repair",
+      "responseId": "resp_0fd95df9c68259d5016abb49e0c42c87d096ad1661a6f40a27",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1841,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 518,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2359
+      },
+      "at": "2026-09-29T05:17:24.659Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_0614ff85faa86718016abb49e4dbd887d08cd59935321c9342",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1456,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 735,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2191
+      },
+      "at": "2026-09-29T05:17:30.312Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 2,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "constraintCoverage": [
+        {
+          "constraint": "Приём пациента с лёгкой зудящей сыпью без срочных симптомов",
+          "sourceMessageId": "faf25ae1-a100-45e5-b754-1179aa3a23f6",
+          "sourceQuote": "Уже два дня у меня лёгкая зудящая сыпь на руке, без срочных симптомов.",
+          "questionIds": [
+            "q1"
+          ]
+        },
+        {
+          "constraint": "Приём у женщины-врача сегодня примерно в 15:30",
+          "sourceMessageId": "faf25ae1-a100-45e5-b754-1179aa3a23f6",
+          "sourceQuote": "хочу прийти сегодня днём, желательно около 15:30. Я предпочитаю женщину-врача.",
+          "questionIds": [
+            "q2"
+          ]
+        },
+        {
+          "constraint": "Необходимость предварительной записи",
+          "sourceMessageId": "faf25ae1-a100-45e5-b754-1179aa3a23f6",
+          "sourceQuote": "нужна ли предварительная запись",
+          "questionIds": [
+            "q3"
+          ]
+        },
+        {
+          "constraint": "Стоимость приёма при самостоятельной оплате без корейской медицинской страховки",
+          "sourceMessageId": "faf25ae1-a100-45e5-b754-1179aa3a23f6",
+          "sourceQuote": "я хочу уточнить примерную стоимость приёма при самостоятельной оплате",
+          "questionIds": [
+            "q4"
+          ]
+        }
+      ],
+      "at": "2026-09-29T05:17:30.313Z"
+    }
+  ],
+  "error": null
+}

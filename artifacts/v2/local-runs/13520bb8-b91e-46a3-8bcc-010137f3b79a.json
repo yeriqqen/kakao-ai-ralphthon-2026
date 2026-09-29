@@ -1,0 +1,1518 @@
+{
+  "simulation": true,
+  "realTelephoneCall": false,
+  "aiProvider": "OpenAI",
+  "hardwareVerification": [],
+  "id": "13520bb8-b91e-46a3-8bcc-010137f3b79a",
+  "language": "en",
+  "version": 32,
+  "revision": 32,
+  "createdAt": "2026-09-29T07:16:08.855Z",
+  "updatedAt": "2026-09-29T07:16:08.902Z",
+  "messages": [
+    {
+      "id": "2b8c5d90-8c34-4ad6-9590-ccffe7e37044",
+      "role": "user",
+      "text": "Please check whether the blue notebook is in stock.",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:16:08.865Z"
+    },
+    {
+      "id": "9930b74a-efb2-4031-a85f-a66ce23237c2",
+      "role": "assistant",
+      "text": "A fictional test plan is ready; stock is unknown. Shall we simulate the call?",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:16:08.869Z"
+    },
+    {
+      "id": "8db5ee1f-7e15-4263-b20f-ee6827d435f1",
+      "role": "assistant",
+      "text": "Would another color be okay?",
+      "kind": "relay",
+      "createdAt": "2026-09-29T07:16:08.889Z"
+    },
+    {
+      "id": "02ec5c94-95cf-466e-bbba-26405766e711",
+      "role": "user",
+      "text": "Black is okay.",
+      "kind": "relay",
+      "createdAt": "2026-09-29T07:16:08.892Z"
+    },
+    {
+      "id": "920ff3ae-8079-4a6f-b939-ddc32c33f366",
+      "role": "assistant",
+      "text": "I will relay that black is okay.",
+      "kind": "relay",
+      "createdAt": "2026-09-29T07:16:08.892Z"
+    },
+    {
+      "id": "d194126e-b814-4369-888b-3e7f5984f8a1",
+      "role": "assistant",
+      "text": "Fictional simulation only — no real call or booking.\n\nCall outcome: Simulation completed.\n\nValidated business answers in this simulation:\n- Is a black notebook in stock?\n  The black notebook is in stock.\n\nCustomer-provided information:\n- Would another color be okay?: Black is okay.\n\nStill unresolved:\nNo required questions remain unresolved.\n\nConsider this option based on the recorded answers.\n\nSelected recorded answers:\n- Is a black notebook in stock?\n  The black notebook is in stock.",
+      "kind": "summary",
+      "createdAt": "2026-09-29T07:16:08.902Z"
+    }
+  ],
+  "transcripts": [
+    {
+      "id": "synthetic-color-question",
+      "role": "business",
+      "text": "다른 색상도 괜찮으세요?",
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "createdAt": "2026-09-29T07:16:08.887Z"
+    },
+    {
+      "id": "synthetic-invalid-question",
+      "role": "business",
+      "text": "인사만 합니다.",
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "createdAt": "2026-09-29T07:16:08.893Z"
+    },
+    {
+      "id": "synthetic-stock-answer",
+      "role": "business",
+      "text": "네, 재고가 있습니다.",
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "createdAt": "2026-09-29T07:16:08.894Z"
+    },
+    {
+      "id": "synthetic-readback",
+      "role": "assistant",
+      "text": "검은색 공책 재고가 있다는 말씀이시죠?",
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "createdAt": "2026-09-29T07:16:08.897Z",
+      "resolvedQuestionSnapshot": [
+        {
+          "id": "stock",
+          "answer": "The black notebook is in stock.",
+          "evidence": [
+            {
+              "transcriptId": "synthetic-stock-answer",
+              "quote": "네, 재고가 있습니다.",
+              "role": "business"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "synthetic-confirmation",
+      "role": "business",
+      "text": "네, 맞습니다.",
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "createdAt": "2026-09-29T07:16:08.897Z"
+    }
+  ],
+  "customerInfo": [
+    {
+      "key": "alternative_color",
+      "label": "Would another color be okay?",
+      "value": "Black is okay.",
+      "sourceMessageId": "02ec5c94-95cf-466e-bbba-26405766e711"
+    }
+  ],
+  "institutions": [
+    {
+      "id": "mock-shop",
+      "name": "Fictional HTTP Test Shop",
+      "nameKo": "",
+      "description": "To ask whether the requested notebook is in stock.",
+      "reason": "To ask whether the requested notebook is in stock.",
+      "fictional": true
+    }
+  ],
+  "requiredQuestions": [
+    {
+      "id": "stock",
+      "text": "Is a black notebook in stock?",
+      "korean": "검은색 공책 재고가 있나요?",
+      "status": "resolved",
+      "resolutionReason": null,
+      "answer": "The black notebook is in stock.",
+      "evidence": [
+        {
+          "transcriptId": "synthetic-stock-answer",
+          "quote": "네, 재고가 있습니다.",
+          "role": "business"
+        }
+      ]
+    }
+  ],
+  "questionHistory": [
+    {
+      "id": "stock-before-02ec5c94-95cf-466e-bbba-26405766e711",
+      "text": "Is the blue notebook in stock?",
+      "korean": "파란색 공책 재고가 있나요?",
+      "status": "unresolved",
+      "resolutionReason": null,
+      "answer": null,
+      "evidence": [],
+      "originalQuestionId": "stock",
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "supersededByCustomerMessageId": "02ec5c94-95cf-466e-bbba-26405766e711"
+    }
+  ],
+  "planReady": true,
+  "pendingRelay": null,
+  "decisionPrompt": null,
+  "summary": {
+    "text": "Fictional simulation only — no real call or booking.\n\nCall outcome: Simulation completed.\n\nValidated business answers in this simulation:\n- Is a black notebook in stock?\n  The black notebook is in stock.\n\nCustomer-provided information:\n- Would another color be okay?: Black is okay.\n\nStill unresolved:\nNo required questions remain unresolved.",
+    "details": {
+      "answers": [
+        {
+          "id": "stock",
+          "text": "Is a black notebook in stock?",
+          "answer": "The black notebook is in stock."
+        }
+      ],
+      "unresolved": [],
+      "institution": {
+        "id": "mock-shop",
+        "name": "Fictional HTTP Test Shop",
+        "fictional": true
+      }
+    },
+    "recommendation": "Consider this option based on the recorded answers.",
+    "reasoning": "Selected recorded answers:\n- Is a black notebook in stock?\n  The black notebook is in stock."
+  },
+  "busy": false,
+  "error": null,
+  "voiceMessage": {
+    "id": "6aca4722-b597-4c92-9b94-2de4bc40f83c",
+    "text": "고객의 실제 답변: 검은색도 괜찮습니다.. 고객이 수락한 선택 사항을 반영하세요. 이전 조건으로 돌아가지 마세요. 아래 최신 질문 상태를 따르고, 미해결 질문 중 하나만 이어서 물어보세요.\nCURRENT QUESTIONS: [{\"id\":\"stock\",\"text\":\"Is a black notebook in stock?\",\"korean\":\"검은색 공책 재고가 있나요?\",\"status\":\"unresolved\",\"resolutionReason\":null,\"answer\":null,\"evidence\":[]}]\nCUSTOMER FACTS: [{\"key\":\"alternative_color\",\"label\":\"Would another color be okay?\",\"value\":\"Black is okay.\",\"sourceMessageId\":\"02ec5c94-95cf-466e-bbba-26405766e711\"}]"
+  },
+  "call": {
+    "id": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+    "status": "completed",
+    "institutionId": "mock-shop",
+    "authorized": true,
+    "accepted": true,
+    "authorizedAt": "2026-09-29T07:16:08.870Z",
+    "acceptedAt": "2026-09-29T07:16:08.886Z",
+    "connected": false,
+    "confirmedKeyDetails": true,
+    "confirmationEvidence": [
+      {
+        "transcriptId": "synthetic-confirmation",
+        "quote": "네, 맞습니다.",
+        "role": "business"
+      }
+    ],
+    "readbackEvidence": [
+      {
+        "questionId": "stock",
+        "transcriptId": "synthetic-readback",
+        "quote": "검은색 공책 재고가 있다는 말씀이시죠?",
+        "role": "assistant"
+      }
+    ],
+    "endedAt": "2026-09-29T07:16:08.901Z",
+    "reason": "All required answers supported and key details confirmed.",
+    "success": true
+  },
+  "apiEvidence": [
+    {
+      "purpose": "customer_interview",
+      "responseId": "synthetic-http-setup-customer_interview",
+      "model": "mock-no-openai",
+      "at": "2026-09-29T07:16:08.868Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "synthetic-http-setup-call_plan_validation",
+      "model": "mock-no-openai",
+      "at": "2026-09-29T07:16:08.868Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "customerFactEvidence": [],
+      "constraintCoverage": [
+        {
+          "constraint": "blue notebook stock",
+          "sourceMessageId": "2b8c5d90-8c34-4ad6-9590-ccffe7e37044",
+          "questionIds": [
+            "stock"
+          ],
+          "sourceQuote": "Please check whether the blue notebook is in stock."
+        }
+      ],
+      "questionMeaningChecks": [
+        {
+          "questionId": "stock",
+          "faithful": true,
+          "explanation": "Synthetic setup fixture only."
+        }
+      ],
+      "at": "2026-09-29T07:16:08.868Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "synthetic-http-setup-business_evidence_review",
+      "model": "mock-no-openai",
+      "at": "2026-09-29T07:16:08.888Z"
+    },
+    {
+      "purpose": "customer_relay",
+      "responseId": "synthetic-http-setup-customer_relay",
+      "model": "mock-no-openai",
+      "at": "2026-09-29T07:16:08.889Z"
+    },
+    {
+      "purpose": "relay_answer",
+      "responseId": "synthetic-http-setup-relay_answer",
+      "model": "mock-no-openai",
+      "at": "2026-09-29T07:16:08.892Z"
+    },
+    {
+      "purpose": "relay_plan_update",
+      "responseId": "synthetic-http-setup-relay_plan_update",
+      "model": "mock-no-openai",
+      "at": "2026-09-29T07:16:08.892Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "synthetic-http-setup-business_evidence_review",
+      "model": "mock-no-openai",
+      "at": "2026-09-29T07:16:08.893Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "synthetic-http-setup-business_evidence_review",
+      "model": "mock-no-openai",
+      "at": "2026-09-29T07:16:08.895Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "synthetic-http-setup-business_evidence_review",
+      "model": "mock-no-openai",
+      "at": "2026-09-29T07:16:08.899Z"
+    },
+    {
+      "purpose": "grounded_recommendation",
+      "responseId": "synthetic-http-setup-grounded_recommendation",
+      "model": "mock-no-openai",
+      "at": "2026-09-29T07:16:08.902Z"
+    },
+    {
+      "purpose": "recommendation_choice_result",
+      "accepted": true,
+      "action": "review_recorded_answers",
+      "reasonQuestionIds": [
+        "stock"
+      ],
+      "clarificationQuestionIds": [],
+      "at": "2026-09-29T07:16:08.902Z"
+    }
+  ],
+  "voiceDiagnostics": [
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.877Z",
+      "responseId": "diag-10"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.877Z",
+      "responseId": "diag-11"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.877Z",
+      "responseId": "diag-12"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.877Z",
+      "responseId": "diag-13"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.877Z",
+      "responseId": "diag-14"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.877Z",
+      "responseId": "diag-15"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.877Z",
+      "responseId": "diag-16"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.877Z",
+      "responseId": "diag-17"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.877Z",
+      "responseId": "diag-18"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.877Z",
+      "responseId": "diag-19"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.877Z",
+      "responseId": "diag-20"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.877Z",
+      "responseId": "diag-21"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.877Z",
+      "responseId": "diag-22"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.877Z",
+      "responseId": "diag-23"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.877Z",
+      "responseId": "diag-24"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.877Z",
+      "responseId": "diag-25"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.877Z",
+      "responseId": "diag-26"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.877Z",
+      "responseId": "diag-27"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.877Z",
+      "responseId": "diag-28"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.877Z",
+      "responseId": "diag-29"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-30"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-31"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-32"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-33"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-34"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-35"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-36"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-37"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-38"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-39"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-40"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-41"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-42"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-43"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-44"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-45"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-46"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-47"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-48"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-49"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-50"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-51"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-52"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-53"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-54"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-55"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-56"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-57"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-58"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.878Z",
+      "responseId": "diag-59"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-60"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-61"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-62"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-63"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-64"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-65"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-66"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-67"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-68"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-69"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-70"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-71"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-72"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-73"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-74"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-75"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-76"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-77"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-78"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-79"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-80"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-81"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-82"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-83"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-84"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-85"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-86"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-87"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-88"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-89"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-90"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-91"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-92"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-93"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-94"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-95"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-96"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-97"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-98"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-99"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-100"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-101"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-102"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-103"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-104"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-105"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-106"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-107"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-108"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-109"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-110"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-111"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-112"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-113"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-114"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-115"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-116"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-117"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-118"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.879Z",
+      "responseId": "diag-119"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-120"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-121"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-122"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-123"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-124"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-125"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-126"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-127"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-128"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-129"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-130"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-131"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-132"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-133"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-134"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-135"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-136"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-137"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-138"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-139"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-140"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-141"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-142"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-143"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-144"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-145"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-146"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-147"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-148"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.880Z",
+      "responseId": "diag-149"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-150"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-151"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-152"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-153"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-154"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-155"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-156"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-157"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-158"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-159"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-160"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-161"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-162"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-163"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-164"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-165"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-166"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-167"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-168"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-169"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-170"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-171"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-172"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-173"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-174"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-175"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-176"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-177"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-178"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.881Z",
+      "responseId": "diag-179"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-180"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-181"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-182"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-183"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-184"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-185"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-186"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-187"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-188"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-189"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-190"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-191"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-192"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-193"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-194"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-195"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-196"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-197"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-198"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-199"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-200"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-201"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-202"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-203"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-204"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-205"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-206"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-207"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-208"
+    },
+    {
+      "callId": "9ff7f513-53e3-400b-a8ba-4ef071c68bcd",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:16:08.882Z",
+      "responseId": "diag-209"
+    }
+  ],
+  "savedAt": "2026-09-29T07:16:08.902Z",
+  "syntheticHttpTest": true,
+  "realAPI": false,
+  "realMicrophone": false,
+  "testProvenance": "HTTP authorization and diagnostics fixture; AI setup responses and diagnostic events are synthetic. No live call or audio acceptance."
+}

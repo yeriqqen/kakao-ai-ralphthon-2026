@@ -1,0 +1,394 @@
+{
+  "provenance": "Current exported interview/state functions in a fresh isolated Node process; at most three user turns. No local server, UI, Realtime or microphone interaction.",
+  "publicState": {
+    "id": "555cf0c0-7778-4dfd-8d42-748a34b1a770",
+    "language": "en",
+    "version": 6,
+    "revision": 6,
+    "createdAt": "2026-09-29T06:01:11.643Z",
+    "updatedAt": "2026-09-29T06:03:10.724Z",
+    "messages": [
+      {
+        "id": "5a0d1275-dfb3-4467-adf6-75c60b904c65",
+        "role": "user",
+        "text": "Can you help me check whether a shop has an item in stock?",
+        "kind": "chat",
+        "createdAt": "2026-09-29T06:01:11.651Z"
+      },
+      {
+        "id": "1bbf4f83-c658-4084-be04-946be263abf6",
+        "role": "assistant",
+        "text": "Sure, I can help with that. Could you please tell me the item you're looking for and the name or location of the shop?",
+        "kind": "chat",
+        "createdAt": "2026-09-29T06:01:38.111Z"
+      },
+      {
+        "id": "4355e4d6-656e-4541-a287-e6b687017992",
+        "role": "user",
+        "text": "This is a fictional shop-call simulation. I am looking for a navy waterproof daypack with a capacity of about 20 litres. I do not have a particular brand in mind; any bag matching those specifications is fine. I am looking in Mapo, Seoul, and would like to pick it up this evening. Please check whether the matching item is currently in stock, its price, and the shop closing time or latest pickup time this evening.",
+        "kind": "chat",
+        "createdAt": "2026-09-29T06:01:38.111Z"
+      },
+      {
+        "id": "8a888450-06d1-45dc-8f01-be19c9a7cfdd",
+        "role": "assistant",
+        "text": "A simulation plan is ready to check for a navy waterproof daypack (about 20 litres, any brand) in Mapo, Seoul, for pickup this evening. Details for local shops are fictional and unconfirmed. May I proceed to simulate calling the listed stores to check current stock, price, and closing time or latest pickup time?",
+        "kind": "chat",
+        "createdAt": "2026-09-29T06:03:10.724Z"
+      }
+    ],
+    "transcripts": [],
+    "customerInfo": [
+      {
+        "key": "item_type",
+        "value": "navy waterproof daypack",
+        "sourceMessageId": "4355e4d6-656e-4541-a287-e6b687017992"
+      },
+      {
+        "key": "item_capacity",
+        "value": "about 20 litres",
+        "sourceMessageId": "4355e4d6-656e-4541-a287-e6b687017992"
+      },
+      {
+        "key": "item_brand_preference",
+        "value": "any brand",
+        "sourceMessageId": "4355e4d6-656e-4541-a287-e6b687017992"
+      },
+      {
+        "key": "location_preference",
+        "value": "Mapo, Seoul",
+        "sourceMessageId": "4355e4d6-656e-4541-a287-e6b687017992"
+      },
+      {
+        "key": "pickup_time_preference",
+        "value": "this evening",
+        "sourceMessageId": "4355e4d6-656e-4541-a287-e6b687017992"
+      }
+    ],
+    "institutions": [
+      {
+        "id": "fictional_mapo_outdoor_shop_1",
+        "name": "Fictional Mapo Outdoor Shop 1",
+        "nameKo": "",
+        "description": "To ask whether a navy waterproof daypack with about 20 litres capacity is currently in stock and available for pickup this evening.",
+        "reason": "To ask whether a navy waterproof daypack with about 20 litres capacity is currently in stock and available for pickup this evening.",
+        "fictional": true
+      },
+      {
+        "id": "fictional_mapo_backpack_store_2",
+        "name": "Fictional Mapo Backpack Store 2",
+        "nameKo": "",
+        "description": "To check if any brand's navy waterproof daypack with approximately 20 litres capacity is available now for in-store pickup and to confirm price and tonight's closing time.",
+        "reason": "To check if any brand's navy waterproof daypack with approximately 20 litres capacity is available now for in-store pickup and to confirm price and tonight's closing time.",
+        "fictional": true
+      }
+    ],
+    "requiredQuestions": [
+      {
+        "id": "stock_check",
+        "text": "Do you currently have a navy waterproof daypack with a capacity of about 20 litres in stock, regardless of brand, for pickup this evening?",
+        "korean": "오늘 저녁에 픽업할 수 있는 네이비 방수 데이팩(약 20리터 용량, 브랜드 무관)이 재고로 있나요?",
+        "status": "unresolved",
+        "resolutionReason": null,
+        "answer": null,
+        "evidence": []
+      },
+      {
+        "id": "price_inquiry",
+        "text": "What is the price of the available navy waterproof daypack (about 20 litres)?",
+        "korean": "구매 가능한 네이비 방수 데이팩(약 20리터 용량)의 가격이 얼마인가요?",
+        "status": "unresolved",
+        "resolutionReason": null,
+        "answer": null,
+        "evidence": []
+      },
+      {
+        "id": "closing_time",
+        "text": "What is your closing time or latest possible pickup time this evening?",
+        "korean": "오늘 저녁 매장 마감 시간이나 가장 늦게 픽업할 수 있는 시간이 언제인가요?",
+        "status": "unresolved",
+        "resolutionReason": null,
+        "answer": null,
+        "evidence": []
+      }
+    ],
+    "planReady": true,
+    "pendingRelay": null,
+    "decisionPrompt": null,
+    "summary": null,
+    "busy": false,
+    "error": null,
+    "voiceMessage": null,
+    "call": {
+      "id": null,
+      "status": "idle",
+      "institutionId": null,
+      "authorized": false,
+      "accepted": false,
+      "authorizedAt": null,
+      "acceptedAt": null,
+      "connected": false,
+      "confirmedKeyDetails": false,
+      "confirmationEvidence": [],
+      "readbackEvidence": [],
+      "endedAt": null,
+      "reason": null,
+      "success": false
+    }
+  },
+  "apiEvidence": [
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_0a78a4fa0038c9bf016abb54285d8087d0b8def673d4feac1b",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 979,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1029
+      },
+      "at": "2026-09-29T06:01:24.661Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_09e0132f783003f8016abb5434e6a087d081038f9c56b63b0f",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1458,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 35,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1493
+      },
+      "at": "2026-09-29T06:01:38.110Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "customerFactEvidence": [],
+      "constraintCoverage": [],
+      "questionMeaningChecks": [],
+      "at": "2026-09-29T06:01:38.111Z"
+    },
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_0816364c1eb3efbf016abb54425ab887d094621d381062dd07",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1155,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 139,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1294
+      },
+      "at": "2026-09-29T06:01:53.651Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_0e74bc4ad3502d56016abb5451e1fc87d0b106c1b73badcb50",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1724,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 526,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2250
+      },
+      "at": "2026-09-29T06:02:30.808Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": false,
+      "issues": [
+        "semantic_review_rejected"
+      ],
+      "violations": [
+        {
+          "code": "invalid_plan",
+          "field": "reply",
+          "quote": "To assist you best, could you please confirm if you have any budget constraints or price range for the navy waterproof daypack? Also, do you prefer a particular type of waterproof material or any additional features like laptop compartments or extra pockets?",
+          "explanation": "The customer has already provided actionable information about the desired item (navy waterproof daypack, about 20 litres, any brand), location (Mapo, Seoul), and timeframe (this evening), as well as checkable constraints (stock, price, shop closing/pickup time). The response should prepare a call plan or clarify permission to proceed, not simply solicit additional constraints when the scenario is ready."
+        }
+      ],
+      "customerFactEvidence": [
+        {
+          "key": "item_type",
+          "sourceMessageId": "4355e4d6-656e-4541-a287-e6b687017992",
+          "supportReason": "The user specifically asked for a 'navy waterproof daypack', matching the 'item_type'.",
+          "sourceQuote": "This is a fictional shop-call simulation. I am looking for a navy waterproof daypack with a capacity of about 20 litres. I do not have a particular brand in mind; any bag matching those specifications is fine. I am looking in Mapo, Seoul, and would like to pick it up this evening. Please check whether the matching item is currently in stock, its price, and the shop closing time or latest pickup time this evening."
+        },
+        {
+          "key": "item_capacity",
+          "sourceMessageId": "4355e4d6-656e-4541-a287-e6b687017992",
+          "supportReason": "The user mentioned a capacity of 'about 20 litres', directly supporting this field.",
+          "sourceQuote": "This is a fictional shop-call simulation. I am looking for a navy waterproof daypack with a capacity of about 20 litres. I do not have a particular brand in mind; any bag matching those specifications is fine. I am looking in Mapo, Seoul, and would like to pick it up this evening. Please check whether the matching item is currently in stock, its price, and the shop closing time or latest pickup time this evening."
+        },
+        {
+          "key": "item_brand_preference",
+          "sourceMessageId": "4355e4d6-656e-4541-a287-e6b687017992",
+          "supportReason": "The user stated 'I do not have a particular brand in mind; any bag matching those specifications is fine', supporting 'any brand'.",
+          "sourceQuote": "This is a fictional shop-call simulation. I am looking for a navy waterproof daypack with a capacity of about 20 litres. I do not have a particular brand in mind; any bag matching those specifications is fine. I am looking in Mapo, Seoul, and would like to pick it up this evening. Please check whether the matching item is currently in stock, its price, and the shop closing time or latest pickup time this evening."
+        },
+        {
+          "key": "location_preference",
+          "sourceMessageId": "4355e4d6-656e-4541-a287-e6b687017992",
+          "supportReason": "The preferred location is clearly stated as 'Mapo, Seoul'.",
+          "sourceQuote": "This is a fictional shop-call simulation. I am looking for a navy waterproof daypack with a capacity of about 20 litres. I do not have a particular brand in mind; any bag matching those specifications is fine. I am looking in Mapo, Seoul, and would like to pick it up this evening. Please check whether the matching item is currently in stock, its price, and the shop closing time or latest pickup time this evening."
+        },
+        {
+          "key": "pickup_time_preference",
+          "sourceMessageId": "4355e4d6-656e-4541-a287-e6b687017992",
+          "supportReason": "The user indicated a desire to pick up the item 'this evening'.",
+          "sourceQuote": "This is a fictional shop-call simulation. I am looking for a navy waterproof daypack with a capacity of about 20 litres. I do not have a particular brand in mind; any bag matching those specifications is fine. I am looking in Mapo, Seoul, and would like to pick it up this evening. Please check whether the matching item is currently in stock, its price, and the shop closing time or latest pickup time this evening."
+        }
+      ],
+      "constraintCoverage": [],
+      "questionMeaningChecks": [],
+      "at": "2026-09-29T06:02:30.808Z"
+    },
+    {
+      "purpose": "call_plan_repair",
+      "responseId": "resp_08f8ecadaeaa2470016abb5477067887d0988e291d6736926b",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 2206,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 547,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2753
+      },
+      "at": "2026-09-29T06:02:44.694Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_07b0e68002bf7cdc016abb5484fa9887d0a1a75987154b2ed2",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 2047,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 668,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2715
+      },
+      "at": "2026-09-29T06:03:10.718Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 2,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "customerFactEvidence": [
+        {
+          "key": "item_type",
+          "sourceMessageId": "4355e4d6-656e-4541-a287-e6b687017992",
+          "supportReason": "User explicitly states they are looking for a 'navy waterproof daypack'.",
+          "sourceQuote": "This is a fictional shop-call simulation. I am looking for a navy waterproof daypack with a capacity of about 20 litres. I do not have a particular brand in mind; any bag matching those specifications is fine. I am looking in Mapo, Seoul, and would like to pick it up this evening. Please check whether the matching item is currently in stock, its price, and the shop closing time or latest pickup time this evening."
+        },
+        {
+          "key": "item_capacity",
+          "sourceMessageId": "4355e4d6-656e-4541-a287-e6b687017992",
+          "supportReason": "User specifies 'capacity of about 20 litres' for the item.",
+          "sourceQuote": "This is a fictional shop-call simulation. I am looking for a navy waterproof daypack with a capacity of about 20 litres. I do not have a particular brand in mind; any bag matching those specifications is fine. I am looking in Mapo, Seoul, and would like to pick it up this evening. Please check whether the matching item is currently in stock, its price, and the shop closing time or latest pickup time this evening."
+        },
+        {
+          "key": "item_brand_preference",
+          "sourceMessageId": "4355e4d6-656e-4541-a287-e6b687017992",
+          "supportReason": "User says 'I do not have a particular brand in mind; any bag matching those specifications is fine.'",
+          "sourceQuote": "This is a fictional shop-call simulation. I am looking for a navy waterproof daypack with a capacity of about 20 litres. I do not have a particular brand in mind; any bag matching those specifications is fine. I am looking in Mapo, Seoul, and would like to pick it up this evening. Please check whether the matching item is currently in stock, its price, and the shop closing time or latest pickup time this evening."
+        },
+        {
+          "key": "location_preference",
+          "sourceMessageId": "4355e4d6-656e-4541-a287-e6b687017992",
+          "supportReason": "User requests the search in 'Mapo, Seoul'.",
+          "sourceQuote": "This is a fictional shop-call simulation. I am looking for a navy waterproof daypack with a capacity of about 20 litres. I do not have a particular brand in mind; any bag matching those specifications is fine. I am looking in Mapo, Seoul, and would like to pick it up this evening. Please check whether the matching item is currently in stock, its price, and the shop closing time or latest pickup time this evening."
+        },
+        {
+          "key": "pickup_time_preference",
+          "sourceMessageId": "4355e4d6-656e-4541-a287-e6b687017992",
+          "supportReason": "User indicates preference to 'pick it up this evening'.",
+          "sourceQuote": "This is a fictional shop-call simulation. I am looking for a navy waterproof daypack with a capacity of about 20 litres. I do not have a particular brand in mind; any bag matching those specifications is fine. I am looking in Mapo, Seoul, and would like to pick it up this evening. Please check whether the matching item is currently in stock, its price, and the shop closing time or latest pickup time this evening."
+        }
+      ],
+      "constraintCoverage": [
+        {
+          "constraint": "stock of navy waterproof daypack (about 20 liters, any brand) for pickup this evening",
+          "sourceMessageId": "4355e4d6-656e-4541-a287-e6b687017992",
+          "questionIds": [
+            "stock_check"
+          ],
+          "sourceQuote": "This is a fictional shop-call simulation. I am looking for a navy waterproof daypack with a capacity of about 20 litres. I do not have a particular brand in mind; any bag matching those specifications is fine. I am looking in Mapo, Seoul, and would like to pick it up this evening. Please check whether the matching item is currently in stock, its price, and the shop closing time or latest pickup time this evening."
+        },
+        {
+          "constraint": "price of the item",
+          "sourceMessageId": "4355e4d6-656e-4541-a287-e6b687017992",
+          "questionIds": [
+            "price_inquiry"
+          ],
+          "sourceQuote": "This is a fictional shop-call simulation. I am looking for a navy waterproof daypack with a capacity of about 20 litres. I do not have a particular brand in mind; any bag matching those specifications is fine. I am looking in Mapo, Seoul, and would like to pick it up this evening. Please check whether the matching item is currently in stock, its price, and the shop closing time or latest pickup time this evening."
+        },
+        {
+          "constraint": "closing time/latest possible pickup this evening",
+          "sourceMessageId": "4355e4d6-656e-4541-a287-e6b687017992",
+          "questionIds": [
+            "closing_time"
+          ],
+          "sourceQuote": "This is a fictional shop-call simulation. I am looking for a navy waterproof daypack with a capacity of about 20 litres. I do not have a particular brand in mind; any bag matching those specifications is fine. I am looking in Mapo, Seoul, and would like to pick it up this evening. Please check whether the matching item is currently in stock, its price, and the shop closing time or latest pickup time this evening."
+        }
+      ],
+      "questionMeaningChecks": [
+        {
+          "questionId": "stock_check",
+          "faithful": true,
+          "explanation": "The Korean question fully reflects the English: navy color, waterproof, daypack, about 20L capacity, any brand, for pickup tonight."
+        },
+        {
+          "questionId": "price_inquiry",
+          "faithful": true,
+          "explanation": "Korean accurately captures 'price of available navy waterproof daypack (about 20 liters)'."
+        },
+        {
+          "questionId": "closing_time",
+          "faithful": true,
+          "explanation": "Korean includes both closing time and latest time for pickup this evening as asked."
+        }
+      ],
+      "at": "2026-09-29T06:03:10.723Z"
+    }
+  ]
+}

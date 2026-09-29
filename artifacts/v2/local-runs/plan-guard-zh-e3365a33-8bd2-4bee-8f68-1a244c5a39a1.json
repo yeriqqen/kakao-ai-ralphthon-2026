@@ -1,0 +1,569 @@
+{
+  "simulation": true,
+  "type": "actual_exported_interview_function_no_http_no_voice",
+  "language": "zh",
+  "state": {
+    "id": "e3365a33-8bd2-4bee-8f68-1a244c5a39a1",
+    "language": "zh",
+    "version": 9,
+    "revision": 9,
+    "createdAt": "2026-09-29T05:16:11.330Z",
+    "updatedAt": "2026-09-29T05:17:41.843Z",
+    "messages": [
+      {
+        "id": "2b64b04d-3816-4dc5-bf5e-93b8585f90a1",
+        "role": "user",
+        "text": "我想去医院。",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:16:11.331Z"
+      },
+      {
+        "id": "290e9d57-d7a6-430a-bb34-f0490c18012c",
+        "role": "assistant",
+        "text": "请问您需要去医院看哪方面的医疗服务？比如感冒、外伤、体检或其他？您目前所在的城市或地区是哪里？",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:16:14.024Z"
+      },
+      {
+        "id": "426af3ea-cb56-4b8c-8233-a243fbc8f771",
+        "role": "user",
+        "text": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:16:14.024Z"
+      },
+      {
+        "id": "acb4081a-de35-4426-a246-a2cae88c23a0",
+        "role": "assistant",
+        "text": "谢谢您提供详细信息。您是在首尔麻浦区，28岁，手臂有轻微发痒的皮疹，持续两天，没有紧急症状，想今天下午大约15:30由女医生看诊，且无韩国医疗保险，希望了解自费咨询费用及是否需要预约。请稍等，我会为您准备可能的虚构医疗机构选项和相关的询问问题。",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:16:19.628Z"
+      },
+      {
+        "id": "3ad76451-11fd-4b0d-80db-8701e915f241",
+        "role": "user",
+        "text": "请现在根据我已经提供的需求准备虚构的联系计划。暂时不要开始通话。",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:17:10.707Z"
+      },
+      {
+        "id": "75035cf2-5019-46aa-b713-e4cb2fc9369c",
+        "role": "assistant",
+        "text": "根据您提供的信息，我已为您准备了两个位于首尔麻浦区的虚构医疗机构联系计划，并设计了相关的询问问题，包括能否由女性医生接诊、费用情况、预约需求以及针对无医保者的政策等。请注意，这些机构和信息均为虚构，业务细节未确认。您是否允许我开始进行联系模拟，帮您获取更多信息？",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:17:41.843Z"
+      }
+    ],
+    "transcripts": [],
+    "customerInfo": [
+      {
+        "key": "age",
+        "value": "28",
+        "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771"
+      },
+      {
+        "key": "symptom",
+        "value": "手臂上有轻微发痒的皮疹，持续两天，无紧急症状",
+        "sourceMessageId": "3ad76451-11fd-4b0d-80db-8701e915f241"
+      },
+      {
+        "key": "symptom_duration",
+        "value": "2天",
+        "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771"
+      },
+      {
+        "key": "emergency_symptom",
+        "value": "无",
+        "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771"
+      },
+      {
+        "key": "location",
+        "value": "首尔麻浦区",
+        "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771"
+      },
+      {
+        "key": "preferred_time",
+        "value": "今天下午15:30左右",
+        "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771"
+      },
+      {
+        "key": "gender_preference",
+        "value": "女医生",
+        "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771"
+      },
+      {
+        "key": "medical_insurance",
+        "value": "无韩国医疗保险",
+        "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771"
+      },
+      {
+        "key": "inquiry",
+        "value": "自费咨询费用及预约需求",
+        "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771"
+      },
+      {
+        "key": "preferred_doctor_gender",
+        "value": "女医生",
+        "sourceMessageId": "3ad76451-11fd-4b0d-80db-8701e915f241"
+      },
+      {
+        "key": "insurance_status",
+        "value": "没有韩国医疗保险",
+        "sourceMessageId": "3ad76451-11fd-4b0d-80db-8701e915f241"
+      },
+      {
+        "key": "need_fee_info",
+        "value": "想确认自费咨询费用",
+        "sourceMessageId": "3ad76451-11fd-4b0d-80db-8701e915f241"
+      },
+      {
+        "key": "need_reservation_info",
+        "value": "是否需要预约",
+        "sourceMessageId": "3ad76451-11fd-4b0d-80db-8701e915f241"
+      }
+    ],
+    "institutions": [
+      {
+        "id": "fictional_seoul_mapo_dermatology_clinic",
+        "name": "首尔麻浦虚构皮肤科诊所",
+        "nameKo": "",
+        "description": "查询是否可以今日下午15:30由女医生接诊手臂轻微发痒皮疹，确认无韩国医疗保险者自费费用和预约要求。",
+        "reason": "查询是否可以今日下午15:30由女医生接诊手臂轻微发痒皮疹，确认无韩国医疗保险者自费费用和预约要求。",
+        "fictional": true
+      },
+      {
+        "id": "fictional_mapo_health_center",
+        "name": "麻浦虚构健康中心",
+        "nameKo": "",
+        "description": "询问针对轻微皮肤症状的看诊服务，女性医生是否可安排，费用及预约政策。",
+        "reason": "询问针对轻微皮肤症状的看诊服务，女性医生是否可安排，费用及预约政策。",
+        "fictional": true
+      }
+    ],
+    "requiredQuestions": [
+      {
+        "id": "q1",
+        "text": "您今天下午15:30是否有女性医生可以接诊手臂轻微发痒的皮肤症状？",
+        "korean": "오늘 오후 3시 30분에 여성 의사가 팔 가벼운 가려움 피부 증상을 진료할 수 있습니까?",
+        "status": "unresolved",
+        "resolutionReason": null,
+        "answer": null,
+        "evidence": []
+      },
+      {
+        "id": "q2",
+        "text": "没有韩国医疗保险的情况下，自费咨询费用是多少？",
+        "korean": "한국 의료 보험이 없는 경우 자비 진료 비용이 얼마입니까?",
+        "status": "unresolved",
+        "resolutionReason": null,
+        "answer": null,
+        "evidence": []
+      },
+      {
+        "id": "q3",
+        "text": "针对如此轻微的症状，是否需要提前预约？若需要，预约流程是什么？",
+        "korean": "이와 같은 가벼운 증상에 대해 사전 예약이 필요합니까? 필요하다면 예약 절차는 무엇입니까?",
+        "status": "unresolved",
+        "resolutionReason": null,
+        "answer": null,
+        "evidence": []
+      },
+      {
+        "id": "q4",
+        "text": "是否有针对外国人或无保险者的特别政策或支持？",
+        "korean": "외국인 또는 무보험자에 대한 특별 정책이나 지원이 있습니까?",
+        "status": "unresolved",
+        "resolutionReason": null,
+        "answer": null,
+        "evidence": []
+      }
+    ],
+    "planReady": true,
+    "pendingRelay": null,
+    "decisionPrompt": null,
+    "summary": null,
+    "busy": false,
+    "error": null,
+    "voiceMessage": null,
+    "call": {
+      "id": null,
+      "status": "idle",
+      "institutionId": null,
+      "authorized": false,
+      "accepted": false,
+      "authorizedAt": null,
+      "acceptedAt": null,
+      "connected": false,
+      "confirmedKeyDetails": false,
+      "confirmationEvidence": [],
+      "endedAt": null,
+      "reason": null,
+      "success": false
+    }
+  },
+  "apiEvidence": [
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_0c2e9bf6fe57be3b016abb499be5c087d0bce50c7377e2bf8d",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 636,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 58,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 694
+      },
+      "at": "2026-09-29T05:16:12.772Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_05e3564dbe503aa6016abb499cf85c87d090fd609ae45251da",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 793,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 19,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 812
+      },
+      "at": "2026-09-29T05:16:14.024Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "constraintCoverage": [],
+      "at": "2026-09-29T05:16:14.024Z"
+    },
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_0ff5b4ceeeef0e8a016abb499e3c7487d0863a71ed63e85840",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 813,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 229,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1042
+      },
+      "at": "2026-09-29T05:16:16.441Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_02e6291f952f81e6016abb49a0a43c87d0ba2d33d4c112296a",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1074,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 413,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1487
+      },
+      "at": "2026-09-29T05:16:19.628Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "constraintCoverage": [],
+      "at": "2026-09-29T05:16:19.628Z"
+    },
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_0d2ed32f1dc89126016abb49d7069887d0beed98a3149cd4cb",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 991,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 540,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1531
+      },
+      "at": "2026-09-29T05:17:15.173Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_0cb11da8670dda2e016abb49db654887d08459946305d9d41f",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1439,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 596,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2035
+      },
+      "at": "2026-09-29T05:17:20.730Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": false,
+      "issues": [
+        "premature_plan_fields"
+      ],
+      "violations": [],
+      "constraintCoverage": [
+        {
+          "constraint": "女医生接诊",
+          "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771",
+          "sourceQuote": "我希望由女医生接诊",
+          "questionIds": [
+            "q1"
+          ]
+        },
+        {
+          "constraint": "确定自费咨询费用",
+          "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771",
+          "sourceQuote": "想确认自费咨询费用",
+          "questionIds": [
+            "q2"
+          ]
+        },
+        {
+          "constraint": "确定是否需要预约及预约流程",
+          "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771",
+          "sourceQuote": "是否需要预约",
+          "questionIds": [
+            "q3"
+          ]
+        },
+        {
+          "constraint": "患者无韩国医疗保险",
+          "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771",
+          "sourceQuote": "我没有韩国医疗保险",
+          "questionIds": [
+            "q2",
+            "q4"
+          ]
+        }
+      ],
+      "at": "2026-09-29T05:17:20.730Z"
+    },
+    {
+      "purpose": "call_plan_repair",
+      "responseId": "resp_0d440e6265c01425016abb49e0f05887d0a5cda583062dd6ea",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1634,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 542,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2176
+      },
+      "at": "2026-09-29T05:17:25.327Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_06c74b10fefce324016abb49e587f887d08f602cbfe0b05039",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1441,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 717,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2158
+      },
+      "at": "2026-09-29T05:17:31.055Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 2,
+      "accepted": false,
+      "issues": [
+        "ungrounded_customer_fact"
+      ],
+      "violations": [],
+      "constraintCoverage": [
+        {
+          "constraint": "您28岁，有手臂轻微发痒的皮疹，两天，无紧急症状",
+          "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771",
+          "sourceQuote": "我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状",
+          "questionIds": [
+            "q1"
+          ]
+        },
+        {
+          "constraint": "您在首尔麻浦区，需要今天下午15:30左右就诊",
+          "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771",
+          "sourceQuote": "我在首尔麻浦区，希望今天下午就诊，最好在15:30左右",
+          "questionIds": [
+            "q1"
+          ]
+        },
+        {
+          "constraint": "您希望由女医生接诊",
+          "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771",
+          "sourceQuote": "我希望由女医生接诊",
+          "questionIds": [
+            "q1"
+          ]
+        },
+        {
+          "constraint": "您没有韩国医疗保险，想知道自费咨询费用",
+          "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771",
+          "sourceQuote": "我没有韩国医疗保险，因此想确认自费咨询费用",
+          "questionIds": [
+            "q2",
+            "q4"
+          ]
+        },
+        {
+          "constraint": "是否需要预约及预约流程信息需求",
+          "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771",
+          "sourceQuote": "是否需要预约",
+          "questionIds": [
+            "q3"
+          ]
+        }
+      ],
+      "at": "2026-09-29T05:17:31.055Z"
+    },
+    {
+      "purpose": "call_plan_repair",
+      "responseId": "resp_060779488a5d6338016abb49eb459087d08921b175cb7b2b6a",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1770,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 562,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2332
+      },
+      "at": "2026-09-29T05:17:35.405Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_0440bb2b9540771b016abb49efa85487d0b4051219f8802870",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1461,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 798,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2259
+      },
+      "at": "2026-09-29T05:17:41.843Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 3,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "constraintCoverage": [
+        {
+          "constraint": "手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状",
+          "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771",
+          "sourceQuote": "手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状",
+          "questionIds": [
+            "q1"
+          ]
+        },
+        {
+          "constraint": "我在首尔麻浦区",
+          "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771",
+          "sourceQuote": "我在首尔麻浦区",
+          "questionIds": [
+            "q1"
+          ]
+        },
+        {
+          "constraint": "希望今天下午就诊，最好在15:30左右",
+          "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771",
+          "sourceQuote": "希望今天下午就诊，最好在15:30左右",
+          "questionIds": [
+            "q1"
+          ]
+        },
+        {
+          "constraint": "我希望由女医生接诊",
+          "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771",
+          "sourceQuote": "我希望由女医生接诊",
+          "questionIds": [
+            "q1"
+          ]
+        },
+        {
+          "constraint": "我没有韩国医疗保险",
+          "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771",
+          "sourceQuote": "我没有韩国医疗保险",
+          "questionIds": [
+            "q2",
+            "q4"
+          ]
+        },
+        {
+          "constraint": "想确认自费咨询费用",
+          "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771",
+          "sourceQuote": "想确认自费咨询费用",
+          "questionIds": [
+            "q2"
+          ]
+        },
+        {
+          "constraint": "是否需要预约",
+          "sourceMessageId": "426af3ea-cb56-4b8c-8233-a243fbc8f771",
+          "sourceQuote": "是否需要预约",
+          "questionIds": [
+            "q3"
+          ]
+        }
+      ],
+      "at": "2026-09-29T05:17:41.843Z"
+    }
+  ],
+  "error": null
+}

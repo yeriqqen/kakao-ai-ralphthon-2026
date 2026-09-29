@@ -1,0 +1,1038 @@
+{
+  "simulation": true,
+  "realTelephoneCall": false,
+  "aiProvider": "OpenAI",
+  "hardwareVerification": [],
+  "id": "0b94b082-fda4-4780-91b2-2c868809f51c",
+  "language": "en",
+  "version": 47,
+  "revision": 47,
+  "createdAt": "2026-09-29T07:39:37.395Z",
+  "updatedAt": "2026-09-29T07:43:34.643Z",
+  "messages": [
+    {
+      "id": "99e98c1e-1498-46d4-b80c-8bde0424f1fa",
+      "role": "user",
+      "text": "I want to go to a hospital",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:39:37.412Z"
+    },
+    {
+      "id": "9f9d35eb-70f6-40f7-981a-06ead2d1a24d",
+      "role": "assistant",
+      "text": "What do you need medical care for, and which city or neighborhood in Korea are you in?",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:39:42.813Z"
+    },
+    {
+      "id": "d2a05bf3-e546-49d8-83c4-1b720ce13349",
+      "role": "user",
+      "text": "I need care for knee injury, i study at GIST",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:39:56.875Z"
+    },
+    {
+      "id": "5ed14eeb-5bd4-4bdf-bf5d-19915d2e7f23",
+      "role": "assistant",
+      "text": "Here are two orthopedic-care options to consider around GIST. Which would you like to select? Please confirm orthopedic clinic hours and English-language support before visiting; these listings do not confirm appointment availability.",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:40:36.681Z"
+    },
+    {
+      "id": "b373ec38-457a-4578-82e1-09dfe3e72928",
+      "role": "user",
+      "text": "Prepare my inquiry for KS Hospital (KS병원) — Orthopedics",
+      "kind": "selection",
+      "createdAt": "2026-09-29T07:40:41.202Z"
+    },
+    {
+      "id": "915a01e9-3726-4d40-a70a-551de55a75be",
+      "role": "assistant",
+      "text": "Your inquiry for KS Hospital’s orthopedics department is ready. May I proceed with the call?",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:40:52.069Z"
+    },
+    {
+      "id": "2cd3a30d-a2fd-486a-875b-d3fa5d84262a",
+      "role": "assistant",
+      "text": "The hospital would like to know: Do you need an appointment?",
+      "kind": "relay",
+      "createdAt": "2026-09-29T07:41:54.654Z"
+    },
+    {
+      "id": "ca2ee74d-7efe-486b-9cf9-13cb5d4515c9",
+      "role": "user",
+      "text": "yes",
+      "kind": "relay",
+      "createdAt": "2026-09-29T07:42:17.553Z"
+    },
+    {
+      "id": "8fa44be3-09a1-4e83-9970-bae9e01dab7d",
+      "role": "assistant",
+      "text": "I'll relay your answer to the hospital.",
+      "kind": "relay",
+      "createdAt": "2026-09-29T07:42:17.553Z"
+    },
+    {
+      "id": "3f388166-d78a-4b1e-94fc-a2be5a233e37",
+      "role": "assistant",
+      "text": "This simulated business call cannot proceed, but no reason or unresolved items were provided. Would you like to keep trying or end with an incomplete summary?",
+      "kind": "decision",
+      "createdAt": "2026-09-29T07:42:48.891Z"
+    },
+    {
+      "id": "6ca2d3e0-d383-4e25-aad5-091dea3eb2ea",
+      "role": "assistant",
+      "text": "Fictional simulation only — no real call or booking.\n\nCall outcome: Simulation ended incompletely.\n\nValidated business answers in this simulation:\n- Does your orthopedics department evaluate and treat knee injuries?\n  Yes, the orthopedics department evaluates and treats knee injuries.\n- What are the orthopedic consultation hours, and is an appointment required or can the patient walk in?\n  The orthopedic consultation hours are from 10:00 AM to 5:00 PM, and an appointment is required.\n\nCustomer-provided information:\n- Medical need: Care for a knee injury\n- Study location: Studies at GIST\n- Selected hospital: KS Hospital — Orthopedics\n- The hospital would like to know: Do you need an appointment?: yes\n\nStill unresolved:\nNo required questions remain unresolved.\n\nConsider this option based on the recorded answers.\n\nSelected recorded answers:\n- Does your orthopedics department evaluate and treat knee injuries?\n  Yes, the orthopedics department evaluates and treats knee injuries.\n- What are the orthopedic consultation hours, and is an appointment required or can the patient walk in?\n  The orthopedic consultation hours are from 10:00 AM to 5:00 PM, and an appointment is required.",
+      "kind": "summary",
+      "createdAt": "2026-09-29T07:43:34.643Z"
+    }
+  ],
+  "transcripts": [
+    {
+      "id": "item_ETMkcWJITCuqVbsauByKG",
+      "role": "assistant",
+      "text": "안녕하십니까, YOKOBU AI 도우미입니다. 정형외과에서 무릎 부상을 진료하고 치료하나요?",
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "createdAt": "2026-09-29T07:41:16.524Z"
+    },
+    {
+      "id": "item_ETMkk8C6qNx0RboQhOuz0",
+      "role": "business",
+      "text": "네, 그렇습니다.",
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "createdAt": "2026-09-29T07:41:25.736Z"
+    },
+    {
+      "id": "item_ETMkp8RoykAGdiZkN8kQZ",
+      "role": "assistant",
+      "text": "알려주셔서 감사합니다. 그럼 정형외과 진료 시간은 어떻게 되고, 예약이 필요한지, 아니면 예약 없이 방문해도 되는지 알려주실 수 있을까요?",
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "createdAt": "2026-09-29T07:41:29.772Z"
+    },
+    {
+      "id": "item_ETMl00UjcmZe0A1mJ3sXb",
+      "role": "business",
+      "text": "진료 시간은 오전 10시부터 오후 5시까지고 예약은 필요합니다. 혹시 예약 필요하신가요?",
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "createdAt": "2026-09-29T07:41:49.557Z"
+    },
+    {
+      "id": "item_ETMlGb9Bv7XGnfIGRkTp0",
+      "role": "assistant",
+      "text": "고객님께 확인하고 있으니 잠시만 기다려 주십시오.",
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "createdAt": "2026-09-29T07:41:55.906Z",
+      "resolvedQuestionSnapshot": [
+        {
+          "id": "knee_injury_care",
+          "answer": "Yes, the orthopedics department evaluates and treats knee injuries.",
+          "evidence": [
+            {
+              "transcriptId": "item_ETMkk8C6qNx0RboQhOuz0",
+              "quote": "네, 그렇습니다.",
+              "role": "business"
+            }
+          ]
+        },
+        {
+          "id": "visit_arrangements",
+          "answer": "The orthopedic consultation hours are from 10:00 AM to 5:00 PM, and an appointment is required.",
+          "evidence": [
+            {
+              "transcriptId": "item_ETMl00UjcmZe0A1mJ3sXb",
+              "quote": "진료 시간은 오전 10시부터 오후 5시까지고 예약은 필요합니다.",
+              "role": "business"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_ETMleWxxv9h5uZMWAsxBP",
+      "role": "assistant",
+      "text": "고객님께서 예약이 필요하시다고 확인하셨습니다. \n\n이제 모든 내용을 정리해 드리겠습니다.  \nKS병원 정형외과에서는 무릎 부상을 진료하고 치료하며, 진료 시간은 오전 10시부터 오후 5시까지이고, 예약이 필요하다고 하셨습니다. 이대로 진행하면 될지 확인해 주시겠습니까?",
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "createdAt": "2026-09-29T07:42:22.938Z",
+      "resolvedQuestionSnapshot": [
+        {
+          "id": "knee_injury_care",
+          "answer": "Yes, the orthopedics department evaluates and treats knee injuries.",
+          "evidence": [
+            {
+              "transcriptId": "item_ETMkk8C6qNx0RboQhOuz0",
+              "quote": "네, 그렇습니다.",
+              "role": "business"
+            }
+          ]
+        },
+        {
+          "id": "visit_arrangements",
+          "answer": "The orthopedic consultation hours are from 10:00 AM to 5:00 PM, and an appointment is required.",
+          "evidence": [
+            {
+              "transcriptId": "item_ETMl00UjcmZe0A1mJ3sXb",
+              "quote": "진료 시간은 오전 10시부터 오후 5시까지고 예약은 필요합니다.",
+              "role": "business"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_ETMlzQJvJfb12VJunAo5g",
+      "role": "business",
+      "text": "오전 열한 시에 예약하실래요?",
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "createdAt": "2026-09-29T07:42:42.593Z"
+    },
+    {
+      "id": "item_ETMm9tr4fPchqZstW4rfC",
+      "role": "assistant",
+      "text": "고객님께 확인하고 있으니 잠시만 기다려 주시기 바랍니다.",
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "createdAt": "2026-09-29T07:42:50.530Z",
+      "resolvedQuestionSnapshot": [
+        {
+          "id": "knee_injury_care",
+          "answer": "Yes, the orthopedics department evaluates and treats knee injuries.",
+          "evidence": [
+            {
+              "transcriptId": "item_ETMkk8C6qNx0RboQhOuz0",
+              "quote": "네, 그렇습니다.",
+              "role": "business"
+            }
+          ]
+        },
+        {
+          "id": "visit_arrangements",
+          "answer": "The orthopedic consultation hours are from 10:00 AM to 5:00 PM, and an appointment is required.",
+          "evidence": [
+            {
+              "transcriptId": "item_ETMl00UjcmZe0A1mJ3sXb",
+              "quote": "진료 시간은 오전 10시부터 오후 5시까지고 예약은 필요합니다.",
+              "role": "business"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_ETMmLsN2Elu2ycJkQlxYT",
+      "role": "assistant",
+      "text": "네, 알려주신 내용 기반으로 다시 확인하겠습니다. \n\nKS병원 정형외과에서는 무릎 부상을 진료하고 치료하며, 진료 시간은 오전 10시부터 오후 5시까지이고, 예약이 필요하다는 것까지 확인됐습니다. \n\n이제 모든 내용이 맞는지 최종 확인 부탁드립니다.",
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "createdAt": "2026-09-29T07:43:05.955Z",
+      "resolvedQuestionSnapshot": [
+        {
+          "id": "knee_injury_care",
+          "answer": "Yes, the orthopedics department evaluates and treats knee injuries.",
+          "evidence": [
+            {
+              "transcriptId": "item_ETMkk8C6qNx0RboQhOuz0",
+              "quote": "네, 그렇습니다.",
+              "role": "business"
+            }
+          ]
+        },
+        {
+          "id": "visit_arrangements",
+          "answer": "The orthopedic consultation hours are from 10:00 AM to 5:00 PM, and an appointment is required.",
+          "evidence": [
+            {
+              "transcriptId": "item_ETMl00UjcmZe0A1mJ3sXb",
+              "quote": "진료 시간은 오전 10시부터 오후 5시까지고 예약은 필요합니다.",
+              "role": "business"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_ETMmfTejyJ0tjQc7gL7yK",
+      "role": "business",
+      "text": "Do you wanna like book it, like 11 a.m.? It doesn't understand like Johan's. Yeah, but... Not like kind of perfectly. Let's try again, let's try again.",
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "createdAt": "2026-09-29T07:43:32.834Z"
+    }
+  ],
+  "customerInfo": [
+    {
+      "key": "care_needed",
+      "value": "Care for a knee injury",
+      "sourceMessageId": "d2a05bf3-e546-49d8-83c4-1b720ce13349",
+      "label": "Medical need"
+    },
+    {
+      "key": "study_location",
+      "value": "Studies at GIST",
+      "sourceMessageId": "d2a05bf3-e546-49d8-83c4-1b720ce13349",
+      "label": "Study location"
+    },
+    {
+      "key": "selected_hospital",
+      "value": "KS Hospital — Orthopedics",
+      "sourceMessageId": "b373ec38-457a-4578-82e1-09dfe3e72928",
+      "label": "Selected hospital"
+    },
+    {
+      "key": "appointment_needed",
+      "label": "The hospital would like to know: Do you need an appointment?",
+      "value": "yes",
+      "sourceMessageId": "ca2ee74d-7efe-486b-9cf9-13cb5d4515c9"
+    }
+  ],
+  "institutions": [
+    {
+      "id": "6eab88c4-b796-4a5c-b390-0f06b6680499",
+      "name": "KS Hospital (KS병원) — Orthopedics",
+      "detail": "An alternative in Suwan-dong with orthopedics and rehabilitation medicine listed, useful if you prefer a multidisciplinary hospital.",
+      "address": "광주광역시 광산구 왕버들로 220 (수완동)",
+      "phone": "",
+      "url": "https://www.medisvc.com/hospital/fo/area/240000/48/hospitaldetailview.sd",
+      "sourced": true,
+      "reason": "Ask whether orthopedic care for a knee injury is available and how to arrange a visit.",
+      "fictional": false,
+      "callSimulation": true
+    }
+  ],
+  "requiredQuestions": [
+    {
+      "id": "knee_injury_care",
+      "text": "Does your orthopedics department evaluate and treat knee injuries?",
+      "korean": "정형외과에서 무릎 부상을 진료하고 치료하나요?",
+      "status": "resolved",
+      "resolutionReason": null,
+      "answer": "Yes, the orthopedics department evaluates and treats knee injuries.",
+      "evidence": [
+        {
+          "transcriptId": "item_ETMkk8C6qNx0RboQhOuz0",
+          "quote": "네, 그렇습니다.",
+          "role": "business"
+        }
+      ]
+    },
+    {
+      "id": "visit_arrangements",
+      "text": "What are the orthopedic consultation hours, and is an appointment required or can the patient walk in?",
+      "korean": "정형외과 진료 시간은 어떻게 되며, 예약이 필요한가요 아니면 예약 없이 방문해도 되나요?",
+      "status": "resolved",
+      "resolutionReason": null,
+      "answer": "The orthopedic consultation hours are from 10:00 AM to 5:00 PM, and an appointment is required.",
+      "evidence": [
+        {
+          "transcriptId": "item_ETMl00UjcmZe0A1mJ3sXb",
+          "quote": "진료 시간은 오전 10시부터 오후 5시까지고 예약은 필요합니다.",
+          "role": "business"
+        }
+      ]
+    }
+  ],
+  "questionHistory": [],
+  "planReady": true,
+  "pendingRelay": null,
+  "decisionPrompt": null,
+  "summary": {
+    "text": "Fictional simulation only — no real call or booking.\n\nCall outcome: Simulation ended incompletely.\n\nValidated business answers in this simulation:\n- Does your orthopedics department evaluate and treat knee injuries?\n  Yes, the orthopedics department evaluates and treats knee injuries.\n- What are the orthopedic consultation hours, and is an appointment required or can the patient walk in?\n  The orthopedic consultation hours are from 10:00 AM to 5:00 PM, and an appointment is required.\n\nCustomer-provided information:\n- Medical need: Care for a knee injury\n- Study location: Studies at GIST\n- Selected hospital: KS Hospital — Orthopedics\n- The hospital would like to know: Do you need an appointment?: yes\n\nStill unresolved:\nNo required questions remain unresolved.",
+    "details": {
+      "answers": [
+        {
+          "id": "knee_injury_care",
+          "text": "Does your orthopedics department evaluate and treat knee injuries?",
+          "answer": "Yes, the orthopedics department evaluates and treats knee injuries."
+        },
+        {
+          "id": "visit_arrangements",
+          "text": "What are the orthopedic consultation hours, and is an appointment required or can the patient walk in?",
+          "answer": "The orthopedic consultation hours are from 10:00 AM to 5:00 PM, and an appointment is required."
+        }
+      ],
+      "unresolved": [],
+      "institution": {
+        "id": "6eab88c4-b796-4a5c-b390-0f06b6680499",
+        "name": null,
+        "fictional": true
+      }
+    },
+    "recommendation": "Consider this option based on the recorded answers.",
+    "reasoning": "Selected recorded answers:\n- Does your orthopedics department evaluate and treat knee injuries?\n  Yes, the orthopedics department evaluates and treats knee injuries.\n- What are the orthopedic consultation hours, and is an appointment required or can the patient walk in?\n  The orthopedic consultation hours are from 10:00 AM to 5:00 PM, and an appointment is required."
+  },
+  "busy": false,
+  "error": null,
+  "voiceMessage": {
+    "id": "f71546b8-3c4c-4e69-9856-67e66f00903b",
+    "text": "고객이 대화를 계속하기로 선택했습니다. 아직 미해결된 내용만 다시 명확하게 확인하세요. 답을 얻을 수 없으면 추측하지 말고 다시 고객에게 결정 요청하세요."
+  },
+  "call": {
+    "id": "a776e026-fb88-45c6-8829-d1793c7147c3",
+    "status": "interrupted",
+    "institutionId": "6eab88c4-b796-4a5c-b390-0f06b6680499",
+    "authorized": true,
+    "accepted": true,
+    "authorizedAt": "2026-09-29T07:40:59.984Z",
+    "acceptedAt": "2026-09-29T07:41:12.102Z",
+    "connected": false,
+    "confirmedKeyDetails": false,
+    "confirmationEvidence": [],
+    "readbackEvidence": [],
+    "endedAt": "2026-09-29T07:43:33.321Z",
+    "reason": "Customer ended the simulated call early.",
+    "success": false
+  },
+  "places": [
+    {
+      "id": "3b98700b-0ee2-4d7f-baab-66f9e8b93637",
+      "name": "Cheomdan General Hospital (첨단종합병원) — Orthopedics",
+      "detail": "An option in the Cheomdan area for hospital-based orthopedic care. Its listing confirms an orthopedics department and the address below.",
+      "address": "광주광역시 광산구 첨단중앙로170번길 59 (쌍암동)",
+      "phone": "062-601-8000",
+      "url": "https://www.hidoc.co.kr/find/result/view/H0000152529",
+      "sourced": true
+    },
+    {
+      "id": "6eab88c4-b796-4a5c-b390-0f06b6680499",
+      "name": "KS Hospital (KS병원) — Orthopedics",
+      "detail": "An alternative in Suwan-dong with orthopedics and rehabilitation medicine listed, useful if you prefer a multidisciplinary hospital.",
+      "address": "광주광역시 광산구 왕버들로 220 (수완동)",
+      "phone": "",
+      "url": "https://www.medisvc.com/hospital/fo/area/240000/48/hospitaldetailview.sd",
+      "sourced": true
+    }
+  ],
+  "selectedPlace": {
+    "id": "6eab88c4-b796-4a5c-b390-0f06b6680499",
+    "name": "KS Hospital (KS병원) — Orthopedics",
+    "detail": "An alternative in Suwan-dong with orthopedics and rehabilitation medicine listed, useful if you prefer a multidisciplinary hospital.",
+    "address": "광주광역시 광산구 왕버들로 220 (수완동)",
+    "phone": "",
+    "url": "https://www.medisvc.com/hospital/fo/area/240000/48/hospitaldetailview.sd",
+    "sourced": true
+  },
+  "apiEvidence": [
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_025dc3dc14491740016abb6b3a127887d0bc4ee2cbfb34d671",
+      "model": "gpt-6-astra",
+      "usage": {
+        "input_tokens": 1302,
+        "input_tokens_details": {
+          "cache_write_tokens": 51,
+          "cached_tokens": 1248
+        },
+        "output_tokens": 77,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1379
+      },
+      "at": "2026-09-29T07:39:41.298Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_0a01a6d0e4bade4a016abb6b3d7d5487d0942e0e6946bf7568",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1494,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 113,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1607
+      },
+      "at": "2026-09-29T07:39:42.813Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "customerFactEvidence": [
+        {
+          "key": "requested_facility",
+          "sourceMessageId": "99e98c1e-1498-46d4-b80c-8bde0424f1fa",
+          "supportReason": "The customer explicitly stated 'I want to go to a hospital,' which directly supports the requested_facility value and label.",
+          "sourceQuote": "I want to go to a hospital"
+        }
+      ],
+      "constraintCoverage": [],
+      "questionMeaningChecks": [],
+      "at": "2026-09-29T07:39:42.813Z"
+    },
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_02ceecf34f11d7f3016abb6b4d237087d08c2c72cccd6429ec",
+      "model": "gpt-6-astra",
+      "usage": {
+        "input_tokens": 1402,
+        "input_tokens_details": {
+          "cache_write_tokens": 151,
+          "cached_tokens": 1248
+        },
+        "output_tokens": 175,
+        "output_tokens_details": {
+          "reasoning_tokens": 80
+        },
+        "total_tokens": 1577
+      },
+      "at": "2026-09-29T07:40:05.236Z"
+    },
+    {
+      "purpose": "place_discovery",
+      "model": "gpt-6-astra",
+      "responseId": "resp_0f35663f4bb2c13b016abb6b55764c87d09d5d4a1d94c3e8d4",
+      "at": "2026-09-29T07:40:36.681Z",
+      "sourcedPlaces": 2
+    },
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_02663ecfea3bd1fd016abb6b79b65c87d09e839030c2994596",
+      "model": "gpt-6-astra",
+      "usage": {
+        "input_tokens": 1538,
+        "input_tokens_details": {
+          "cache_write_tokens": 1535,
+          "cached_tokens": 0
+        },
+        "output_tokens": 256,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1794
+      },
+      "at": "2026-09-29T07:40:49.295Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_059ff753d6ffca98016abb6b8179c487d0969f25e55bb31019",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1879,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 494,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2373
+      },
+      "at": "2026-09-29T07:40:52.068Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "customerFactEvidence": [
+        {
+          "key": "care_needed",
+          "sourceMessageId": "d2a05bf3-e546-49d8-83c4-1b720ce13349",
+          "supportReason": "User states 'I need care for knee injury,' which directly supports the value 'Care for a knee injury.'",
+          "sourceQuote": "I need care for knee injury, i study at GIST"
+        },
+        {
+          "key": "study_location",
+          "sourceMessageId": "d2a05bf3-e546-49d8-83c4-1b720ce13349",
+          "supportReason": "User says 'I study at GIST,' which corresponds exactly to 'Studies at GIST.'",
+          "sourceQuote": "I need care for knee injury, i study at GIST"
+        },
+        {
+          "key": "selected_hospital",
+          "sourceMessageId": "b373ec38-457a-4578-82e1-09dfe3e72928",
+          "supportReason": "User instructs 'Prepare my inquiry for KS Hospital (KS병원) — Orthopedics,' directly supporting the hospital selection.",
+          "sourceQuote": "Prepare my inquiry for KS Hospital (KS병원) — Orthopedics"
+        }
+      ],
+      "constraintCoverage": [
+        {
+          "constraint": "User needs orthopedic care for a knee injury.",
+          "sourceMessageId": "d2a05bf3-e546-49d8-83c4-1b720ce13349",
+          "questionIds": [
+            "knee_injury_care"
+          ],
+          "sourceQuote": "I need care for knee injury, i study at GIST"
+        },
+        {
+          "constraint": "User wants to know how to arrange a visit (times/appointment/walk-in).",
+          "sourceMessageId": "b373ec38-457a-4578-82e1-09dfe3e72928",
+          "questionIds": [
+            "visit_arrangements"
+          ],
+          "sourceQuote": "Prepare my inquiry for KS Hospital (KS병원) — Orthopedics"
+        }
+      ],
+      "questionMeaningChecks": [
+        {
+          "questionId": "knee_injury_care",
+          "faithful": true,
+          "explanation": "The English and Korean questions both specifically ask if the orthopedics department handles knee injuries (evaluation and treatment/진료하고 치료)."
+        },
+        {
+          "questionId": "visit_arrangements",
+          "faithful": true,
+          "explanation": "Both the English and Korean versions inquire about consultation hours and whether an appointment is required or a walk-in is possible."
+        }
+      ],
+      "at": "2026-09-29T07:40:52.068Z"
+    },
+    {
+      "purpose": "realtime_connect",
+      "status": 201,
+      "model": "gpt-realtime",
+      "at": "2026-09-29T07:41:13.633Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "resp_094e11ff977fda18016abb6ba5f99c87d0a1113ae2451293e9",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1982,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 156,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2138
+      },
+      "at": "2026-09-29T07:41:27.233Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "resp_00259231e088c7b1016abb6bbe120087d081c467a965b42e8e",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 2282,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 223,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2505
+      },
+      "at": "2026-09-29T07:41:51.412Z"
+    },
+    {
+      "purpose": "customer_relay",
+      "responseId": "resp_00a37f420d620c98016abb6bbf95c087d091ec2a34c7fc8928",
+      "model": "gpt-6-astra",
+      "usage": {
+        "input_tokens": 358,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 41,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 399
+      },
+      "at": "2026-09-29T07:41:54.653Z"
+    },
+    {
+      "purpose": "relay_answer",
+      "responseId": "resp_03f48fbafbca6c35016abb6bd4ce5087d092be69b1ed25f913",
+      "model": "gpt-6-astra",
+      "usage": {
+        "input_tokens": 134,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 34,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 168
+      },
+      "at": "2026-09-29T07:42:16.684Z"
+    },
+    {
+      "purpose": "relay_plan_update",
+      "responseId": "resp_055201d2adc287d6016abb6bd8dc8487d0bd6225a86f4b5fd5",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1193,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 8,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1201
+      },
+      "at": "2026-09-29T07:42:17.553Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "resp_0633df7bf6fd230b016abb6bf2d66c87d0ac954348d4eec358",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 3059,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 85,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 3144
+      },
+      "at": "2026-09-29T07:42:44.215Z"
+    },
+    {
+      "purpose": "call_decision",
+      "responseId": "resp_00bc03c3c286b417016abb6bf462dc87d0a83693a501ffce5f",
+      "model": "gpt-6-astra",
+      "usage": {
+        "input_tokens": 87,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 42,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 129
+      },
+      "at": "2026-09-29T07:42:48.891Z"
+    },
+    {
+      "purpose": "grounded_recommendation",
+      "responseId": "resp_03f223c578600e40016abb6c25d75887d090d2703ff1e9b99a",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 598,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 31,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 629
+      },
+      "at": "2026-09-29T07:43:34.643Z"
+    },
+    {
+      "purpose": "recommendation_choice_result",
+      "accepted": true,
+      "action": "review_recorded_answers",
+      "reasonQuestionIds": [
+        "knee_injury_care",
+        "visit_arrangements"
+      ],
+      "clarificationQuestionIds": [],
+      "at": "2026-09-29T07:43:34.643Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "resp_0ea7f6a492fc6cd5016abb6c2568d087d0be6368d716d6dee9",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 3772,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 89,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 3861
+      },
+      "at": "2026-09-29T07:43:36.381Z"
+    }
+  ],
+  "voiceDiagnostics": [
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "call.accepted",
+      "receivedAt": "2026-09-29T07:41:12.362Z",
+      "at": "2026-09-29T07:41:12.105Z"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "remote.track",
+      "receivedAt": "2026-09-29T07:41:13.917Z",
+      "at": "2026-09-29T07:41:13.646Z"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "playback.allowed",
+      "receivedAt": "2026-09-29T07:41:13.918Z",
+      "at": "2026-09-29T07:41:13.662Z"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "connection.registered",
+      "receivedAt": "2026-09-29T07:41:14.564Z",
+      "at": "2026-09-29T07:41:14.309Z"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "session.created",
+      "receivedAt": "2026-09-29T07:41:14.998Z",
+      "at": "2026-09-29T07:41:14.590Z"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "opening.requested",
+      "receivedAt": "2026-09-29T07:41:14.998Z",
+      "at": "2026-09-29T07:41:14.590Z"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:41:14.998Z",
+      "at": "2026-09-29T07:41:14.744Z",
+      "responseId": "resp_ETMkc8SNKXxNAd2gwGydW",
+      "status": "in_progress"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "output_audio_buffer.started",
+      "receivedAt": "2026-09-29T07:41:15.381Z",
+      "at": "2026-09-29T07:41:15.125Z",
+      "responseId": "resp_ETMkc8SNKXxNAd2gwGydW"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "response.done",
+      "receivedAt": "2026-09-29T07:41:16.776Z",
+      "at": "2026-09-29T07:41:16.522Z",
+      "responseId": "resp_ETMkc8SNKXxNAd2gwGydW",
+      "status": "completed"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "output_audio_buffer.stopped",
+      "receivedAt": "2026-09-29T07:41:21.920Z",
+      "at": "2026-09-29T07:41:21.666Z",
+      "responseId": "resp_ETMkc8SNKXxNAd2gwGydW"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "opening.finished",
+      "receivedAt": "2026-09-29T07:41:21.920Z",
+      "at": "2026-09-29T07:41:21.667Z"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "input_audio_buffer.speech_started",
+      "receivedAt": "2026-09-29T07:41:22.866Z",
+      "at": "2026-09-29T07:41:22.607Z"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "input_audio_buffer.speech_stopped",
+      "receivedAt": "2026-09-29T07:41:24.670Z",
+      "at": "2026-09-29T07:41:24.414Z"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:41:27.646Z",
+      "at": "2026-09-29T07:41:27.390Z",
+      "responseId": "resp_ETMkpVUI2AyzJ5rR6fie9",
+      "status": "in_progress"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "output_audio_buffer.started",
+      "receivedAt": "2026-09-29T07:41:28.007Z",
+      "at": "2026-09-29T07:41:27.750Z",
+      "responseId": "resp_ETMkpVUI2AyzJ5rR6fie9"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "response.done",
+      "receivedAt": "2026-09-29T07:41:30.028Z",
+      "at": "2026-09-29T07:41:29.769Z",
+      "responseId": "resp_ETMkpVUI2AyzJ5rR6fie9",
+      "status": "completed"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "output_audio_buffer.stopped",
+      "receivedAt": "2026-09-29T07:41:38.278Z",
+      "at": "2026-09-29T07:41:38.016Z",
+      "responseId": "resp_ETMkpVUI2AyzJ5rR6fie9"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "input_audio_buffer.speech_started",
+      "receivedAt": "2026-09-29T07:41:39.320Z",
+      "at": "2026-09-29T07:41:39.066Z"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "input_audio_buffer.speech_stopped",
+      "receivedAt": "2026-09-29T07:41:47.284Z",
+      "at": "2026-09-29T07:41:47.022Z"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:41:55.067Z",
+      "at": "2026-09-29T07:41:54.814Z",
+      "responseId": "resp_ETMlGbcsaSjREuDQNJ0rT",
+      "status": "in_progress"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "output_audio_buffer.started",
+      "receivedAt": "2026-09-29T07:41:55.574Z",
+      "at": "2026-09-29T07:41:55.315Z",
+      "responseId": "resp_ETMlGbcsaSjREuDQNJ0rT"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "response.done",
+      "receivedAt": "2026-09-29T07:41:56.161Z",
+      "at": "2026-09-29T07:41:55.906Z",
+      "responseId": "resp_ETMlGbcsaSjREuDQNJ0rT",
+      "status": "completed"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "output_audio_buffer.stopped",
+      "receivedAt": "2026-09-29T07:41:58.924Z",
+      "at": "2026-09-29T07:41:58.669Z",
+      "responseId": "resp_ETMlGbcsaSjREuDQNJ0rT"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:42:18.882Z",
+      "at": "2026-09-29T07:42:18.626Z",
+      "responseId": "resp_ETMlemyms9uW62eTFVKUC",
+      "status": "in_progress"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "output_audio_buffer.started",
+      "receivedAt": "2026-09-29T07:42:19.274Z",
+      "at": "2026-09-29T07:42:19.020Z",
+      "responseId": "resp_ETMlemyms9uW62eTFVKUC"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "response.done",
+      "receivedAt": "2026-09-29T07:42:23.195Z",
+      "at": "2026-09-29T07:42:22.936Z",
+      "responseId": "resp_ETMlemyms9uW62eTFVKUC",
+      "status": "completed"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "output_audio_buffer.stopped",
+      "receivedAt": "2026-09-29T07:42:38.463Z",
+      "at": "2026-09-29T07:42:38.208Z",
+      "responseId": "resp_ETMlemyms9uW62eTFVKUC"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "input_audio_buffer.speech_started",
+      "receivedAt": "2026-09-29T07:42:39.616Z",
+      "at": "2026-09-29T07:42:39.354Z"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "input_audio_buffer.speech_stopped",
+      "receivedAt": "2026-09-29T07:42:42.285Z",
+      "at": "2026-09-29T07:42:42.032Z"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:42:49.307Z",
+      "at": "2026-09-29T07:42:49.053Z",
+      "responseId": "resp_ETMm9m4Ck1XlfgTzao8v4",
+      "status": "in_progress"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "output_audio_buffer.started",
+      "receivedAt": "2026-09-29T07:42:49.714Z",
+      "at": "2026-09-29T07:42:49.459Z",
+      "responseId": "resp_ETMm9m4Ck1XlfgTzao8v4"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "response.done",
+      "receivedAt": "2026-09-29T07:42:50.784Z",
+      "at": "2026-09-29T07:42:50.528Z",
+      "responseId": "resp_ETMm9m4Ck1XlfgTzao8v4",
+      "status": "completed"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "output_audio_buffer.stopped",
+      "receivedAt": "2026-09-29T07:42:55.337Z",
+      "at": "2026-09-29T07:42:55.084Z",
+      "responseId": "resp_ETMm9m4Ck1XlfgTzao8v4"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:43:02.154Z",
+      "at": "2026-09-29T07:43:01.900Z",
+      "responseId": "resp_ETMmLEhFdIX8mGUv8dgcB",
+      "status": "in_progress"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "output_audio_buffer.started",
+      "receivedAt": "2026-09-29T07:43:02.458Z",
+      "at": "2026-09-29T07:43:02.203Z",
+      "responseId": "resp_ETMmLEhFdIX8mGUv8dgcB"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "response.done",
+      "receivedAt": "2026-09-29T07:43:06.206Z",
+      "at": "2026-09-29T07:43:05.953Z",
+      "responseId": "resp_ETMmLEhFdIX8mGUv8dgcB",
+      "status": "completed"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "output_audio_buffer.stopped",
+      "receivedAt": "2026-09-29T07:43:20.905Z",
+      "at": "2026-09-29T07:43:20.649Z",
+      "responseId": "resp_ETMmLEhFdIX8mGUv8dgcB"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "input_audio_buffer.speech_started",
+      "receivedAt": "2026-09-29T07:43:21.397Z",
+      "at": "2026-09-29T07:43:21.137Z"
+    },
+    {
+      "callId": "a776e026-fb88-45c6-8829-d1793c7147c3",
+      "type": "input_audio_buffer.speech_stopped",
+      "receivedAt": "2026-09-29T07:43:32.037Z",
+      "at": "2026-09-29T07:43:31.779Z"
+    }
+  ],
+  "savedAt": "2026-09-29T07:43:36.382Z"
+}

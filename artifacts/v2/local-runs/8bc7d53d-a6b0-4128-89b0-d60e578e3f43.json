@@ -1,0 +1,843 @@
+{
+  "simulation": true,
+  "realTelephoneCall": false,
+  "aiProvider": "OpenAI",
+  "hardwareVerification": [],
+  "id": "8bc7d53d-a6b0-4128-89b0-d60e578e3f43",
+  "language": "en",
+  "version": 39,
+  "revision": 39,
+  "createdAt": "2026-09-29T07:58:15.190Z",
+  "updatedAt": "2026-09-29T08:01:34.072Z",
+  "messages": [
+    {
+      "id": "585e3996-c9c9-4175-8a0e-8e6fe780225b",
+      "role": "user",
+      "text": "Hi, can you check if a backpack is available at a shop",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:58:15.212Z"
+    },
+    {
+      "id": "5eaa25a7-a652-4984-a93d-d713a4106d89",
+      "role": "assistant",
+      "text": "Which shop or area should I check, and what backpack are you looking for?",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:58:20.739Z"
+    },
+    {
+      "id": "39b596e6-013f-49a8-a1df-f257f9b50c51",
+      "role": "user",
+      "text": "seoul gangnam, navy backpack",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:58:38.732Z"
+    },
+    {
+      "id": "e30fa9b1-25cf-4eec-990d-980eb39f5695",
+      "role": "assistant",
+      "text": "Which shop would you like to explore? These three Gangnam locations are officially listed; specific backpack stock is not confirmed.",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:59:05.300Z"
+    },
+    {
+      "id": "7d10356b-1f07-4165-9e2d-6a56888eba8e",
+      "role": "user",
+      "text": "Prepare my inquiry for Samsonite — Starfield COEX Mall (쌤소나이트 스타필드 코엑스)",
+      "kind": "selection",
+      "createdAt": "2026-09-29T07:59:18.350Z"
+    },
+    {
+      "id": "5f6444ef-332f-4394-885f-795fb18fa6a8",
+      "role": "assistant",
+      "text": "Your inquiry for Samsonite at Starfield COEX Mall is ready. May I proceed?",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:59:28.120Z"
+    },
+    {
+      "id": "aa4e3726-65dd-4ce8-b24e-0c54d6d382cb",
+      "role": "assistant",
+      "text": "The shop would like to know: would a black backpack be okay?",
+      "kind": "relay",
+      "createdAt": "2026-09-29T08:00:49.348Z"
+    },
+    {
+      "id": "c33eef97-8aa1-4689-b92e-dfbee52e7625",
+      "role": "user",
+      "text": "yes it is ok",
+      "kind": "relay",
+      "createdAt": "2026-09-29T08:01:11.040Z"
+    },
+    {
+      "id": "95eda973-eac1-46a2-950f-44b5998db145",
+      "role": "assistant",
+      "text": "I’ll let the shop know.",
+      "kind": "relay",
+      "createdAt": "2026-09-29T08:01:11.041Z"
+    },
+    {
+      "id": "94ef66bd-41e8-4eea-b531-f00e9070bba5",
+      "role": "assistant",
+      "text": "Fictional simulation only — no real call or booking.\n\nCall outcome: Simulation ended incompletely.\n\nValidated business answers in this simulation:\n- Do you currently have any navy backpacks available in-store?\n  Only black backpacks are available; there are no navy backpacks currently in-store.\n- Do you currently have any black backpacks available in-store?\n  Only black backpacks are available; there are no navy backpacks currently in-store.\n\nCustomer-provided information:\n- Location: Gangnam, Seoul\n- Item: A backpack\n- Color: Navy backpack\n- Selected shop: Samsonite — Starfield COEX Mall\n- The shop would like to know: would a black backpack be okay?: yes it is ok\n\nStill unresolved:\nNo required questions remain unresolved.\n\nConsider this option based on the recorded answers.\n\nSelected recorded answers:\n- Do you currently have any black backpacks available in-store?\n  Only black backpacks are available; there are no navy backpacks currently in-store.",
+      "kind": "summary",
+      "createdAt": "2026-09-29T08:01:34.072Z"
+    }
+  ],
+  "transcripts": [
+    {
+      "id": "item_ETN2iQyAjgt4koh4GlTeK",
+      "role": "assistant",
+      "text": "안녕하세요, YOKOBU AI 도우미입니다. 지금 매장에 구매 가능한 네이비색 백팩이 있나요?",
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "createdAt": "2026-09-29T07:59:57.976Z"
+    },
+    {
+      "id": "item_ETN2qNS7Q3zp79zFs3NrH",
+      "role": "business",
+      "text": "네이비색은 어때요? 검정색은 어때요? 검정색을 더 좋아하시나요?",
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "createdAt": "2026-09-29T08:00:10.679Z"
+    },
+    {
+      "id": "item_ETN33rScVdSiiwtPs3xO1",
+      "role": "assistant",
+      "text": "고객님은 네이비색 백팩을 요청하셨습니다. 혹시 매장에 다른 네이비색 백팩은 전혀 없는지 다시 한 번 확인 부탁드립니다.",
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "createdAt": "2026-09-29T08:00:20.229Z"
+    },
+    {
+      "id": "item_ETN3FC5sFLohdFljljvlx",
+      "role": "business",
+      "text": "검정색만 있습니다. 검정색 괜찮으실까요?",
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "createdAt": "2026-09-29T08:00:33.856Z"
+    },
+    {
+      "id": "item_ETN3ZXfnxgQ1R2To6wFLt",
+      "role": "assistant",
+      "text": "고객님께 확인 중입니다. 잠시만 기다려 주시겠어요?",
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "createdAt": "2026-09-29T08:00:50.952Z",
+      "resolvedQuestionSnapshot": [
+        {
+          "id": "navy_backpack_availability",
+          "answer": "Only black backpacks are available; there are no navy backpacks currently in-store.",
+          "evidence": [
+            {
+              "transcriptId": "item_ETN3FC5sFLohdFljljvlx",
+              "quote": "검정색만 있습니다.",
+              "role": "business"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "item_ETN3v02OasYGLl86heNAC",
+      "role": "assistant",
+      "text": "고객님께서 검정색 백팩은 괜찮다고 하셨습니다. 그러면 현재 검정색 백팩을 구매할 수 있는 수량이나 종류가 어떻게 되는지 알려주실 수 있을까요?",
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "createdAt": "2026-09-29T08:01:14.305Z",
+      "resolvedQuestionSnapshot": [
+        {
+          "id": "navy_backpack_availability",
+          "answer": "Only black backpacks are available; there are no navy backpacks currently in-store.",
+          "evidence": [
+            {
+              "transcriptId": "item_ETN3FC5sFLohdFljljvlx",
+              "quote": "검정색만 있습니다.",
+              "role": "business"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "customerInfo": [
+    {
+      "key": "shop_location",
+      "value": "Gangnam, Seoul",
+      "sourceMessageId": "39b596e6-013f-49a8-a1df-f257f9b50c51",
+      "label": "Location"
+    },
+    {
+      "key": "requested_item",
+      "value": "A backpack",
+      "sourceMessageId": "39b596e6-013f-49a8-a1df-f257f9b50c51",
+      "label": "Item"
+    },
+    {
+      "key": "requested_color",
+      "value": "Navy backpack",
+      "sourceMessageId": "39b596e6-013f-49a8-a1df-f257f9b50c51",
+      "label": "Color"
+    },
+    {
+      "key": "selected_shop",
+      "value": "Samsonite — Starfield COEX Mall",
+      "sourceMessageId": "7d10356b-1f07-4165-9e2d-6a56888eba8e",
+      "label": "Selected shop"
+    },
+    {
+      "key": "black_color_acceptance",
+      "label": "The shop would like to know: would a black backpack be okay?",
+      "value": "yes it is ok",
+      "sourceMessageId": "c33eef97-8aa1-4689-b92e-dfbee52e7625"
+    }
+  ],
+  "institutions": [
+    {
+      "id": "ecaeab50-3d3a-482c-a1a0-c982ff81e2bb",
+      "name": "Samsonite — Starfield COEX Mall (쌤소나이트 스타필드 코엑스)",
+      "detail": "A convenient bag-shopping stop if you are visiting COEX; Samsonite’s official locator lists unit R116 on B1. Ask about the current backpack selection.",
+      "address": "B1, R116, Starfield COEX Mall, 513 Yeongdong-daero, Gangnam-gu, Seoul (서울 강남구 영동대로 513 스타필드 코엑스몰 B1층 R116호)",
+      "phone": "02-551-8899",
+      "url": "https://www.samsonite.co.kr/stores?horizontalView=true&showMap=true",
+      "sourced": true,
+      "reason": "Ask whether any navy backpacks are currently available in-store.",
+      "fictional": false,
+      "callSimulation": true
+    }
+  ],
+  "requiredQuestions": [
+    {
+      "id": "navy_backpack_availability",
+      "text": "Do you currently have any black backpacks available in-store?",
+      "korean": "현재 매장에 구매 가능한 검정색 백팩이 있나요?",
+      "status": "resolved",
+      "resolutionReason": null,
+      "answer": "Only black backpacks are available; there are no navy backpacks currently in-store.",
+      "evidence": [
+        {
+          "transcriptId": "item_ETN3FC5sFLohdFljljvlx",
+          "quote": "검정색만 있습니다.",
+          "role": "business"
+        }
+      ]
+    }
+  ],
+  "questionHistory": [
+    {
+      "id": "navy_backpack_availability-before-c33eef97-8aa1-4689-b92e-dfbee52e7625",
+      "text": "Do you currently have any navy backpacks available in-store?",
+      "korean": "현재 매장에 구매 가능한 네이비색 백팩이 있나요?",
+      "status": "resolved",
+      "resolutionReason": null,
+      "answer": "Only black backpacks are available; there are no navy backpacks currently in-store.",
+      "evidence": [
+        {
+          "transcriptId": "item_ETN3FC5sFLohdFljljvlx",
+          "quote": "검정색만 있습니다.",
+          "role": "business"
+        }
+      ],
+      "originalQuestionId": "navy_backpack_availability",
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "supersededByCustomerMessageId": "c33eef97-8aa1-4689-b92e-dfbee52e7625"
+    }
+  ],
+  "planReady": true,
+  "pendingRelay": null,
+  "decisionPrompt": null,
+  "summary": {
+    "text": "Fictional simulation only — no real call or booking.\n\nCall outcome: Simulation ended incompletely.\n\nValidated business answers in this simulation:\n- Do you currently have any navy backpacks available in-store?\n  Only black backpacks are available; there are no navy backpacks currently in-store.\n- Do you currently have any black backpacks available in-store?\n  Only black backpacks are available; there are no navy backpacks currently in-store.\n\nCustomer-provided information:\n- Location: Gangnam, Seoul\n- Item: A backpack\n- Color: Navy backpack\n- Selected shop: Samsonite — Starfield COEX Mall\n- The shop would like to know: would a black backpack be okay?: yes it is ok\n\nStill unresolved:\nNo required questions remain unresolved.",
+    "details": {
+      "answers": [
+        {
+          "id": "navy_backpack_availability-before-c33eef97-8aa1-4689-b92e-dfbee52e7625",
+          "text": "Do you currently have any navy backpacks available in-store?",
+          "answer": "Only black backpacks are available; there are no navy backpacks currently in-store.",
+          "superseded": true
+        },
+        {
+          "id": "navy_backpack_availability",
+          "text": "Do you currently have any black backpacks available in-store?",
+          "answer": "Only black backpacks are available; there are no navy backpacks currently in-store."
+        }
+      ],
+      "unresolved": [],
+      "institution": {
+        "id": "ecaeab50-3d3a-482c-a1a0-c982ff81e2bb",
+        "name": null,
+        "fictional": true
+      }
+    },
+    "recommendation": "Consider this option based on the recorded answers.",
+    "reasoning": "Selected recorded answers:\n- Do you currently have any black backpacks available in-store?\n  Only black backpacks are available; there are no navy backpacks currently in-store."
+  },
+  "busy": false,
+  "error": null,
+  "voiceMessage": {
+    "id": "c39a0d59-c833-4b06-aa24-fa94121e6811",
+    "text": "고객의 실제 답변: 네, 검정색 괜찮습니다.. 고객이 수락한 선택 사항을 반영하세요. 이전 조건으로 돌아가지 마세요. 아래 최신 질문 상태를 따르고, 미해결 질문 중 하나만 이어서 물어보세요.\nCURRENT QUESTIONS: [{\"id\":\"navy_backpack_availability\",\"text\":\"Do you currently have any black backpacks available in-store?\",\"korean\":\"현재 매장에 구매 가능한 검정색 백팩이 있나요?\",\"status\":\"resolved\",\"resolutionReason\":null,\"answer\":\"Only black backpacks are available; there are no navy backpacks currently in-store.\",\"evidence\":[{\"transcriptId\":\"item_ETN3FC5sFLohdFljljvlx\",\"quote\":\"검정색만 있습니다.\",\"role\":\"business\"}]}]\nCUSTOMER FACTS: [{\"key\":\"shop_location\",\"value\":\"Gangnam, Seoul\",\"sourceMessageId\":\"39b596e6-013f-49a8-a1df-f257f9b50c51\",\"label\":\"Location\"},{\"key\":\"requested_item\",\"value\":\"A backpack\",\"sourceMessageId\":\"39b596e6-013f-49a8-a1df-f257f9b50c51\",\"label\":\"Item\"},{\"key\":\"requested_color\",\"value\":\"Navy backpack\",\"sourceMessageId\":\"39b596e6-013f-49a8-a1df-f257f9b50c51\",\"label\":\"Color\"},{\"key\":\"selected_shop\",\"value\":\"Samsonite — Starfield COEX Mall\",\"sourceMessageId\":\"7d10356b-1f07-4165-9e2d-6a56888eba8e\",\"label\":\"Selected shop\"},{\"key\":\"black_color_acceptance\",\"label\":\"The shop would like to know: would a black backpack be okay?\",\"value\":\"yes it is ok\",\"sourceMessageId\":\"c33eef97-8aa1-4689-b92e-dfbee52e7625\"}]"
+  },
+  "call": {
+    "id": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+    "status": "interrupted",
+    "institutionId": "ecaeab50-3d3a-482c-a1a0-c982ff81e2bb",
+    "authorized": true,
+    "accepted": true,
+    "authorizedAt": "2026-09-29T07:59:35.267Z",
+    "acceptedAt": "2026-09-29T07:59:51.301Z",
+    "connected": false,
+    "confirmedKeyDetails": false,
+    "confirmationEvidence": [],
+    "readbackEvidence": [],
+    "endedAt": "2026-09-29T08:01:32.899Z",
+    "reason": "The business operator disconnected the simulated call.",
+    "success": false
+  },
+  "places": [
+    {
+      "id": "0266016e-84ec-46c6-b90b-651b65648b88",
+      "name": "TUMI — Hyundai Department Store Trade Center (투미 현대백화점 무역센터점)",
+      "detail": "An option for browsing TUMI backpacks. The official locator places this counter on the third floor.",
+      "address": "3F, Hyundai Department Store, 517 Teheran-ro, Gangnam-gu, Seoul (서울 강남구 테헤란로 517 현대백화점 무역센터점 3층)",
+      "phone": "+82-2-3467-8325",
+      "url": "https://www.tumi.co.kr/stores",
+      "sourced": true
+    },
+    {
+      "id": "ecaeab50-3d3a-482c-a1a0-c982ff81e2bb",
+      "name": "Samsonite — Starfield COEX Mall (쌤소나이트 스타필드 코엑스)",
+      "detail": "A convenient bag-shopping stop if you are visiting COEX; Samsonite’s official locator lists unit R116 on B1. Ask about the current backpack selection.",
+      "address": "B1, R116, Starfield COEX Mall, 513 Yeongdong-daero, Gangnam-gu, Seoul (서울 강남구 영동대로 513 스타필드 코엑스몰 B1층 R116호)",
+      "phone": "02-551-8899",
+      "url": "https://www.samsonite.co.kr/stores?horizontalView=true&showMap=true",
+      "sourced": true
+    },
+    {
+      "id": "2c350a8a-4573-4aad-a1b4-4b731490f539",
+      "name": "Samsonite — Lotte Department Store Gangnam (쌤소나이트 롯데백화점 강남점)",
+      "detail": "Another official Samsonite counter for your backpack search, located on the first floor of Lotte’s Gangnam branch. Confirm models before visiting.",
+      "address": "1F, Lotte Department Store Gangnam, 401 Dogok-ro, Gangnam-gu, Seoul (서울 강남구 도곡로 401 롯데백화점 강남점 1층)",
+      "phone": "02-531-2103",
+      "url": "https://www.samsonite.co.kr/stores?horizontalView=true&showMap=true",
+      "sourced": true
+    }
+  ],
+  "selectedPlace": {
+    "id": "ecaeab50-3d3a-482c-a1a0-c982ff81e2bb",
+    "name": "Samsonite — Starfield COEX Mall (쌤소나이트 스타필드 코엑스)",
+    "detail": "A convenient bag-shopping stop if you are visiting COEX; Samsonite’s official locator lists unit R116 on B1. Ask about the current backpack selection.",
+    "address": "B1, R116, Starfield COEX Mall, 513 Yeongdong-daero, Gangnam-gu, Seoul (서울 강남구 영동대로 513 스타필드 코엑스몰 B1층 R116호)",
+    "phone": "02-551-8899",
+    "url": "https://www.samsonite.co.kr/stores?horizontalView=true&showMap=true",
+    "sourced": true
+  },
+  "apiEvidence": [
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_093ecf436df976c5016abb6f97b89087d094e5c4868d9f2ac3",
+      "model": "gpt-6-astra",
+      "usage": {
+        "input_tokens": 1307,
+        "input_tokens_details": {
+          "cache_write_tokens": 56,
+          "cached_tokens": 1248
+        },
+        "output_tokens": 76,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1383
+      },
+      "at": "2026-09-29T07:58:18.895Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_0d22f70c4114c856016abb6f9b5f0887d0a8aebb648fc741e1",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1495,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 109,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1604
+      },
+      "at": "2026-09-29T07:58:20.739Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "customerFactEvidence": [
+        {
+          "key": "shopping_need",
+          "sourceMessageId": "585e3996-c9c9-4175-8a0e-8e6fe780225b",
+          "supportReason": "The customer asks if a backpack is available at a shop, making this an availability inquiry about a shopping need.",
+          "sourceQuote": "Hi, can you check if a backpack is available at a shop"
+        }
+      ],
+      "constraintCoverage": [],
+      "questionMeaningChecks": [],
+      "at": "2026-09-29T07:58:20.739Z"
+    },
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_0035ac6a8d8d8889016abb6faf2e5887d09901c62e9750f4a9",
+      "model": "gpt-6-astra",
+      "usage": {
+        "input_tokens": 1394,
+        "input_tokens_details": {
+          "cache_write_tokens": 143,
+          "cached_tokens": 1248
+        },
+        "output_tokens": 103,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1497
+      },
+      "at": "2026-09-29T07:58:43.168Z"
+    },
+    {
+      "purpose": "place_discovery",
+      "model": "gpt-6-astra",
+      "responseId": "resp_00e1e29dc940b6cf016abb6fb3596487d090aca9221fcd7889",
+      "at": "2026-09-29T07:59:05.300Z",
+      "sourcedPlaces": 3
+    },
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_0141f88f96333d21016abb6fd689f487d0a8e51d31c32b2ace",
+      "model": "gpt-6-astra",
+      "usage": {
+        "input_tokens": 1539,
+        "input_tokens_details": {
+          "cache_write_tokens": 1536,
+          "cached_tokens": 0
+        },
+        "output_tokens": 198,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1737
+      },
+      "at": "2026-09-29T07:59:24.946Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_04afd193bc87a79b016abb6fdd150887d081b3303f189b3213",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1834,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 443,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2277
+      },
+      "at": "2026-09-29T07:59:28.119Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "customerFactEvidence": [
+        {
+          "key": "shop_location",
+          "sourceMessageId": "39b596e6-013f-49a8-a1df-f257f9b50c51",
+          "supportReason": "The user specifies 'seoul gangnam' as the location.",
+          "sourceQuote": "seoul gangnam, navy backpack"
+        },
+        {
+          "key": "requested_item",
+          "sourceMessageId": "39b596e6-013f-49a8-a1df-f257f9b50c51",
+          "supportReason": "The user mentions wanting to check for a 'backpack'.",
+          "sourceQuote": "seoul gangnam, navy backpack"
+        },
+        {
+          "key": "requested_color",
+          "sourceMessageId": "39b596e6-013f-49a8-a1df-f257f9b50c51",
+          "supportReason": "The user says 'navy backpack', specifying the color.",
+          "sourceQuote": "seoul gangnam, navy backpack"
+        },
+        {
+          "key": "selected_shop",
+          "sourceMessageId": "7d10356b-1f07-4165-9e2d-6a56888eba8e",
+          "supportReason": "The user requests the inquiry for 'Samsonite — Starfield COEX Mall'.",
+          "sourceQuote": "Prepare my inquiry for Samsonite — Starfield COEX Mall (쌤소나이트 스타필드 코엑스)"
+        }
+      ],
+      "constraintCoverage": [
+        {
+          "constraint": "Check for in-store availability of a navy backpack at (Samsonite — Starfield COEX Mall), Gangnam, Seoul",
+          "sourceMessageId": "7d10356b-1f07-4165-9e2d-6a56888eba8e",
+          "questionIds": [
+            "navy_backpack_availability"
+          ],
+          "sourceQuote": "Prepare my inquiry for Samsonite — Starfield COEX Mall (쌤소나이트 스타필드 코엑스)"
+        }
+      ],
+      "questionMeaningChecks": [
+        {
+          "questionId": "navy_backpack_availability",
+          "faithful": true,
+          "explanation": "The English and Korean versions both ask whether any navy (네이비색) backpacks are currently (현재) available to purchase at the store (매장)."
+        }
+      ],
+      "at": "2026-09-29T07:59:28.120Z"
+    },
+    {
+      "purpose": "realtime_connect",
+      "status": 201,
+      "model": "gpt-realtime",
+      "at": "2026-09-29T07:59:52.904Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "resp_0777e85c644d0112016abb700b365887d083378af6cf74a541",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1975,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 157,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2132
+      },
+      "at": "2026-09-29T08:00:12.846Z"
+    },
+    {
+      "purpose": "customer_relay",
+      "responseId": "resp_03a58cf65ddf1ef5016abb700dac6087d0a07a3acb4f21bf6d",
+      "model": "gpt-6-astra",
+      "usage": {
+        "input_tokens": 433,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 81,
+        "output_tokens_details": {
+          "reasoning_tokens": 36
+        },
+        "total_tokens": 514
+      },
+      "at": "2026-09-29T08:00:17.580Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "resp_08e92489f7cbd0b3016abb702209f887d0a6e3e50d67ee65e8",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 2175,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 211,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2386
+      },
+      "at": "2026-09-29T08:00:44.764Z"
+    },
+    {
+      "purpose": "customer_relay",
+      "responseId": "resp_089840020c2aa4c1016abb702cf0f487d0b1e90b511c0af68b",
+      "model": "gpt-6-astra",
+      "usage": {
+        "input_tokens": 417,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 44,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 461
+      },
+      "at": "2026-09-29T08:00:49.348Z"
+    },
+    {
+      "purpose": "relay_answer",
+      "responseId": "resp_0707661439a8f260016abb70435a5487d08efe4273fb26fca0",
+      "model": "gpt-6-astra",
+      "usage": {
+        "input_tokens": 139,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 36,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 175
+      },
+      "at": "2026-09-29T08:01:09.781Z"
+    },
+    {
+      "purpose": "relay_plan_update",
+      "responseId": "resp_01d2907d186acb6b016abb7045f30487d081093ccf5eb24c61",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1096,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 104,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1200
+      },
+      "at": "2026-09-29T08:01:11.040Z"
+    },
+    {
+      "purpose": "grounded_recommendation",
+      "responseId": "resp_0dbba5f10e40c1dd016abb705d21dc87d09028b0a2eb9d5c41",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 655,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 27,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 682
+      },
+      "at": "2026-09-29T08:01:34.072Z"
+    },
+    {
+      "purpose": "recommendation_choice_result",
+      "accepted": true,
+      "action": "review_recorded_answers",
+      "reasonQuestionIds": [
+        "navy_backpack_availability"
+      ],
+      "clarificationQuestionIds": [],
+      "at": "2026-09-29T08:01:34.072Z"
+    }
+  ],
+  "voiceDiagnostics": [
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "call.accepted",
+      "receivedAt": "2026-09-29T07:59:51.570Z",
+      "at": "2026-09-29T07:59:51.317Z"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "remote.track",
+      "receivedAt": "2026-09-29T07:59:56.489Z",
+      "at": "2026-09-29T07:59:52.912Z"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "session.created",
+      "receivedAt": "2026-09-29T07:59:56.489Z",
+      "at": "2026-09-29T07:59:55.955Z"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "playback.allowed",
+      "receivedAt": "2026-09-29T07:59:56.489Z",
+      "at": "2026-09-29T07:59:55.955Z"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "connection.registered",
+      "receivedAt": "2026-09-29T07:59:56.489Z",
+      "at": "2026-09-29T07:59:55.974Z"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "opening.requested",
+      "receivedAt": "2026-09-29T07:59:56.489Z",
+      "at": "2026-09-29T07:59:56.009Z"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T07:59:56.489Z",
+      "at": "2026-09-29T07:59:56.215Z",
+      "responseId": "resp_ETN2ihRp1Xd6Po7mIsqKL",
+      "status": "in_progress"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "output_audio_buffer.started",
+      "receivedAt": "2026-09-29T07:59:56.848Z",
+      "at": "2026-09-29T07:59:56.589Z",
+      "responseId": "resp_ETN2ihRp1Xd6Po7mIsqKL"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "response.done",
+      "receivedAt": "2026-09-29T07:59:58.228Z",
+      "at": "2026-09-29T07:59:57.973Z",
+      "responseId": "resp_ETN2ihRp1Xd6Po7mIsqKL",
+      "status": "completed"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "output_audio_buffer.stopped",
+      "receivedAt": "2026-09-29T08:00:03.977Z",
+      "at": "2026-09-29T08:00:03.719Z",
+      "responseId": "resp_ETN2ihRp1Xd6Po7mIsqKL"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "opening.finished",
+      "receivedAt": "2026-09-29T08:00:03.977Z",
+      "at": "2026-09-29T08:00:03.720Z"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "input_audio_buffer.speech_started",
+      "receivedAt": "2026-09-29T08:00:04.854Z",
+      "at": "2026-09-29T08:00:04.597Z"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "input_audio_buffer.speech_stopped",
+      "receivedAt": "2026-09-29T08:00:10.268Z",
+      "at": "2026-09-29T08:00:10.009Z"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "input_audio_buffer.speech_started",
+      "receivedAt": "2026-09-29T08:00:10.268Z",
+      "at": "2026-09-29T08:00:10.009Z"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "input_audio_buffer.speech_stopped",
+      "receivedAt": "2026-09-29T08:00:11.626Z",
+      "at": "2026-09-29T08:00:11.368Z"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T08:00:18.139Z",
+      "at": "2026-09-29T08:00:17.881Z",
+      "responseId": "resp_ETN33tDWUv7DvkrTlUerz",
+      "status": "in_progress"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "output_audio_buffer.started",
+      "receivedAt": "2026-09-29T08:00:18.544Z",
+      "at": "2026-09-29T08:00:18.291Z",
+      "responseId": "resp_ETN33tDWUv7DvkrTlUerz"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "response.done",
+      "receivedAt": "2026-09-29T08:00:20.489Z",
+      "at": "2026-09-29T08:00:20.227Z",
+      "responseId": "resp_ETN33tDWUv7DvkrTlUerz",
+      "status": "completed"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "output_audio_buffer.stopped",
+      "receivedAt": "2026-09-29T08:00:27.800Z",
+      "at": "2026-09-29T08:00:27.542Z",
+      "responseId": "resp_ETN33tDWUv7DvkrTlUerz"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "input_audio_buffer.speech_started",
+      "receivedAt": "2026-09-29T08:00:29.441Z",
+      "at": "2026-09-29T08:00:29.185Z"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "input_audio_buffer.speech_stopped",
+      "receivedAt": "2026-09-29T08:00:33.211Z",
+      "at": "2026-09-29T08:00:32.954Z"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T08:00:49.776Z",
+      "at": "2026-09-29T08:00:49.517Z",
+      "responseId": "resp_ETN3Zr7ouHTbOer0d7ww0",
+      "status": "in_progress"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "output_audio_buffer.started",
+      "receivedAt": "2026-09-29T08:00:50.219Z",
+      "at": "2026-09-29T08:00:49.965Z",
+      "responseId": "resp_ETN3Zr7ouHTbOer0d7ww0"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "response.done",
+      "receivedAt": "2026-09-29T08:00:51.207Z",
+      "at": "2026-09-29T08:00:50.949Z",
+      "responseId": "resp_ETN3Zr7ouHTbOer0d7ww0",
+      "status": "completed"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "output_audio_buffer.stopped",
+      "receivedAt": "2026-09-29T08:00:55.119Z",
+      "at": "2026-09-29T08:00:54.866Z",
+      "responseId": "resp_ETN3Zr7ouHTbOer0d7ww0"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T08:01:12.142Z",
+      "at": "2026-09-29T08:01:11.889Z",
+      "responseId": "resp_ETN3vmeATLvETWdlEtpUD",
+      "status": "in_progress"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "output_audio_buffer.started",
+      "receivedAt": "2026-09-29T08:01:12.428Z",
+      "at": "2026-09-29T08:01:12.172Z",
+      "responseId": "resp_ETN3vmeATLvETWdlEtpUD"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "response.done",
+      "receivedAt": "2026-09-29T08:01:14.579Z",
+      "at": "2026-09-29T08:01:14.316Z",
+      "responseId": "resp_ETN3vmeATLvETWdlEtpUD",
+      "status": "completed"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "output_audio_buffer.stopped",
+      "receivedAt": "2026-09-29T08:01:23.220Z",
+      "at": "2026-09-29T08:01:22.961Z",
+      "responseId": "resp_ETN3vmeATLvETWdlEtpUD"
+    },
+    {
+      "callId": "c47eaabc-4f52-40f6-9ade-c34300b04313",
+      "type": "input_audio_buffer.speech_started",
+      "receivedAt": "2026-09-29T08:01:23.692Z",
+      "at": "2026-09-29T08:01:23.434Z"
+    }
+  ],
+  "savedAt": "2026-09-29T08:01:34.073Z"
+}

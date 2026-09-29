@@ -1,0 +1,1390 @@
+{
+  "simulation": true,
+  "realTelephoneCall": false,
+  "aiProvider": "OpenAI",
+  "hardwareVerification": [],
+  "id": "1a6bc9e0-7128-424e-a57a-1ed374367532",
+  "language": "en",
+  "version": 20,
+  "revision": 20,
+  "createdAt": "2026-09-29T06:38:26.334Z",
+  "updatedAt": "2026-09-29T06:38:26.490Z",
+  "messages": [
+    {
+      "id": "800b2369-978a-4a16-99e6-f05f4222b579",
+      "role": "user",
+      "text": "Please check whether the blue notebook is in stock.",
+      "kind": "chat",
+      "createdAt": "2026-09-29T06:38:26.372Z"
+    },
+    {
+      "id": "03dad713-4dcd-4088-9fa4-1b696c8e0686",
+      "role": "assistant",
+      "text": "A fictional test plan is ready; stock is unknown. Shall we simulate the call?",
+      "kind": "chat",
+      "createdAt": "2026-09-29T06:38:26.378Z"
+    },
+    {
+      "id": "390549a6-bb9c-4981-8015-a999ba3b94a0",
+      "role": "assistant",
+      "text": "Would another color be okay?",
+      "kind": "relay",
+      "createdAt": "2026-09-29T06:38:26.466Z"
+    },
+    {
+      "id": "ed68265f-1fc6-4671-bf46-42a0d89dc38a",
+      "role": "user",
+      "text": "Black is okay.",
+      "kind": "relay",
+      "createdAt": "2026-09-29T06:38:26.484Z"
+    },
+    {
+      "id": "9a14dfc0-e16c-420b-829b-03d1247814dc",
+      "role": "assistant",
+      "text": "I will relay that black is okay.",
+      "kind": "relay",
+      "createdAt": "2026-09-29T06:38:26.485Z"
+    }
+  ],
+  "transcripts": [
+    {
+      "id": "synthetic-color-question",
+      "role": "business",
+      "text": "다른 색상도 괜찮으세요?",
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "createdAt": "2026-09-29T06:38:26.462Z"
+    },
+    {
+      "id": "synthetic-invalid-question",
+      "role": "business",
+      "text": "인사만 합니다.",
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "createdAt": "2026-09-29T06:38:26.489Z"
+    }
+  ],
+  "customerInfo": [
+    {
+      "key": "alternative_color",
+      "value": "Black is okay.",
+      "sourceMessageId": "ed68265f-1fc6-4671-bf46-42a0d89dc38a"
+    }
+  ],
+  "institutions": [
+    {
+      "id": "mock-shop",
+      "name": "Fictional HTTP Test Shop",
+      "nameKo": "",
+      "description": "To ask whether the requested notebook is in stock.",
+      "reason": "To ask whether the requested notebook is in stock.",
+      "fictional": true
+    }
+  ],
+  "requiredQuestions": [
+    {
+      "id": "stock",
+      "text": "Is the blue notebook in stock?",
+      "korean": "파란색 공책 재고가 있나요?",
+      "status": "unresolved",
+      "resolutionReason": null,
+      "answer": null,
+      "evidence": []
+    }
+  ],
+  "planReady": true,
+  "pendingRelay": null,
+  "decisionPrompt": null,
+  "summary": null,
+  "busy": false,
+  "error": null,
+  "voiceMessage": {
+    "id": "77a58da4-df5d-49ea-ace5-9bd85c98067e",
+    "text": "고객의 실제 답변: 검은색도 괜찮습니다.. 이 내용만 전달하고 나머지 필수 질문을 계속하세요."
+  },
+  "call": {
+    "id": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+    "status": "active",
+    "institutionId": "mock-shop",
+    "authorized": true,
+    "accepted": true,
+    "authorizedAt": "2026-09-29T06:38:26.382Z",
+    "acceptedAt": "2026-09-29T06:38:26.461Z",
+    "connected": true,
+    "confirmedKeyDetails": false,
+    "confirmationEvidence": [],
+    "readbackEvidence": [],
+    "endedAt": null,
+    "reason": null,
+    "success": false
+  },
+  "apiEvidence": [
+    {
+      "purpose": "customer_interview",
+      "responseId": "synthetic-http-setup-customer_interview",
+      "model": "mock-no-openai",
+      "at": "2026-09-29T06:38:26.376Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "synthetic-http-setup-call_plan_validation",
+      "model": "mock-no-openai",
+      "at": "2026-09-29T06:38:26.377Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "customerFactEvidence": [],
+      "constraintCoverage": [
+        {
+          "constraint": "blue notebook stock",
+          "sourceMessageId": "800b2369-978a-4a16-99e6-f05f4222b579",
+          "questionIds": [
+            "stock"
+          ],
+          "sourceQuote": "Please check whether the blue notebook is in stock."
+        }
+      ],
+      "questionMeaningChecks": [
+        {
+          "questionId": "stock",
+          "faithful": true,
+          "explanation": "Synthetic setup fixture only."
+        }
+      ],
+      "at": "2026-09-29T06:38:26.378Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "synthetic-http-setup-business_evidence_review",
+      "model": "mock-no-openai",
+      "at": "2026-09-29T06:38:26.463Z"
+    },
+    {
+      "purpose": "customer_relay",
+      "responseId": "synthetic-http-setup-customer_relay",
+      "model": "mock-no-openai",
+      "at": "2026-09-29T06:38:26.465Z"
+    },
+    {
+      "purpose": "relay_answer",
+      "responseId": "synthetic-http-setup-relay_answer",
+      "model": "mock-no-openai",
+      "at": "2026-09-29T06:38:26.484Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "synthetic-http-setup-business_evidence_review",
+      "model": "mock-no-openai",
+      "at": "2026-09-29T06:38:26.490Z"
+    }
+  ],
+  "voiceDiagnostics": [
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.428Z",
+      "responseId": "diag-10"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.428Z",
+      "responseId": "diag-11"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.428Z",
+      "responseId": "diag-12"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.428Z",
+      "responseId": "diag-13"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.428Z",
+      "responseId": "diag-14"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.428Z",
+      "responseId": "diag-15"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.428Z",
+      "responseId": "diag-16"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.428Z",
+      "responseId": "diag-17"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.428Z",
+      "responseId": "diag-18"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.428Z",
+      "responseId": "diag-19"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.428Z",
+      "responseId": "diag-20"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.428Z",
+      "responseId": "diag-21"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.428Z",
+      "responseId": "diag-22"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.428Z",
+      "responseId": "diag-23"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.428Z",
+      "responseId": "diag-24"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.428Z",
+      "responseId": "diag-25"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.428Z",
+      "responseId": "diag-26"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.428Z",
+      "responseId": "diag-27"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.428Z",
+      "responseId": "diag-28"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.428Z",
+      "responseId": "diag-29"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-30"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-31"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-32"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-33"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-34"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-35"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-36"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-37"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-38"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-39"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-40"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-41"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-42"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-43"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-44"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-45"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-46"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-47"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-48"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-49"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-50"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-51"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-52"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-53"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-54"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-55"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-56"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-57"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-58"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.434Z",
+      "responseId": "diag-59"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-60"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-61"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-62"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-63"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-64"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-65"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-66"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-67"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-68"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-69"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-70"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-71"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-72"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-73"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-74"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-75"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-76"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-77"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-78"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-79"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-80"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-81"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-82"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-83"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-84"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-85"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-86"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-87"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-88"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.438Z",
+      "responseId": "diag-89"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-90"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-91"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-92"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-93"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-94"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-95"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-96"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-97"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-98"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-99"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-100"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-101"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-102"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-103"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-104"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-105"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-106"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-107"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-108"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-109"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-110"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-111"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-112"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-113"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-114"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-115"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-116"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-117"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-118"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.441Z",
+      "responseId": "diag-119"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-120"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-121"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-122"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-123"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-124"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-125"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-126"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-127"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-128"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-129"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-130"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-131"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-132"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-133"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-134"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-135"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-136"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-137"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-138"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-139"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-140"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-141"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-142"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-143"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-144"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-145"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-146"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-147"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-148"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.444Z",
+      "responseId": "diag-149"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-150"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-151"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-152"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-153"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-154"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-155"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-156"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-157"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-158"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-159"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-160"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-161"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-162"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-163"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-164"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-165"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-166"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-167"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-168"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-169"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-170"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-171"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-172"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-173"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-174"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-175"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-176"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-177"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-178"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.446Z",
+      "responseId": "diag-179"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-180"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-181"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-182"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-183"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-184"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-185"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-186"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-187"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-188"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-189"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-190"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-191"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-192"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-193"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-194"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-195"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-196"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-197"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-198"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-199"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-200"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-201"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-202"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-203"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-204"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-205"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-206"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-207"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-208"
+    },
+    {
+      "callId": "d88b829b-eb54-454b-af88-8f7fbf399f91",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:38:26.450Z",
+      "responseId": "diag-209"
+    }
+  ],
+  "savedAt": "2026-09-29T06:38:26.490Z",
+  "syntheticHttpTest": true,
+  "realAPI": false,
+  "realMicrophone": false,
+  "testProvenance": "HTTP authorization and diagnostics fixture; AI setup responses and diagnostic events are synthetic. No live call or audio acceptance."
+}

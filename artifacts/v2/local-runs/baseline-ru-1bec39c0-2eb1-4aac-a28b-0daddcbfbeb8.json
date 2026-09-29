@@ -1,0 +1,158 @@
+{
+  "capturedFrom": "Actual localhost /chat response",
+  "captureNote": "Room was lost after backend restart before /export could complete. This file preserves the actual server-returned public state, not a successful export-route result.",
+  "simulation": true,
+  "realApi": true,
+  "microphone": false,
+  "audibleKorean": false,
+  "id": "1bec39c0-2eb1-4aac-a28b-0daddcbfbeb8",
+  "language": "ru",
+  "version": 10,
+  "revision": 10,
+  "createdAt": "2026-09-29T05:07:59.999Z",
+  "updatedAt": "2026-09-29T05:08:20.263Z",
+  "messages": [
+    {
+      "id": "d802c3ff-3011-4c2a-af5e-246e6c625875",
+      "role": "user",
+      "text": "Я хочу обратиться в больницу.",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:08:00.013Z"
+    },
+    {
+      "id": "2df62207-96e9-4784-822e-943f5b33c496",
+      "role": "assistant",
+      "text": "Пожалуйста, уточните, по какому поводу вы хотите обратиться в больницу? Это связано с экстренной ситуацией или плановым посещением?",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:08:01.192Z"
+    },
+    {
+      "id": "007e1511-c58f-4d0a-9b17-74d6d107149a",
+      "role": "user",
+      "text": "Это вымышленный пример. Мне 28 лет. Уже два дня у меня лёгкая зудящая сыпь на руке, без срочных симптомов. Я нахожусь в районе Мапхо в Сеуле и хочу прийти сегодня днём, желательно около 15:30. Я предпочитаю женщину-врача. У меня нет корейской медицинской страховки, поэтому я хочу уточнить примерную стоимость приёма при самостоятельной оплате и нужна ли предварительная запись.",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:08:15.319Z"
+    },
+    {
+      "id": "4651e9dd-23b2-46b1-9d87-000eba10efcd",
+      "role": "assistant",
+      "text": "Спасибо за информацию. Вы хотели бы обратиться в больницу Мапхо в Сеуле сегодня днём, около 15:30, к женщине-врачу дерматологу для оценки лёгкой зудящей сыпи на руке. Вы не имеете корейской медицинской страховки и хотели бы знать примерную стоимость и необходимость записи. Сейчас я подготовлю детали рекомендуемых учреждений, необходимых вопросов для уточнения при записи, и помощь в имитации звонка для уточнения этих нюансов. Пожалуйста, подтвердите, что вы готовы начать вызов для уточнения условий приёма?",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:08:20.263Z"
+    }
+  ],
+  "transcripts": [],
+  "customerInfo": [
+    {
+      "key": "request",
+      "value": "обратиться в больницу",
+      "sourceMessageId": "d802c3ff-3011-4c2a-af5e-246e6c625875"
+    },
+    {
+      "key": "age",
+      "value": "28",
+      "sourceMessageId": "007e1511-c58f-4d0a-9b17-74d6d107149a"
+    },
+    {
+      "key": "symptom_duration",
+      "value": "два дня",
+      "sourceMessageId": "007e1511-c58f-4d0a-9b17-74d6d107149a"
+    },
+    {
+      "key": "symptom_description",
+      "value": "лёгкая зудящая сыпь на руке",
+      "sourceMessageId": "007e1511-c58f-4d0a-9b17-74d6d107149a"
+    },
+    {
+      "key": "urgency",
+      "value": "нет срочных симптомов",
+      "sourceMessageId": "007e1511-c58f-4d0a-9b17-74d6d107149a"
+    },
+    {
+      "key": "location",
+      "value": "район Мапхо, Сеул",
+      "sourceMessageId": "007e1511-c58f-4d0a-9b17-74d6d107149a"
+    },
+    {
+      "key": "desired_appointment_time",
+      "value": "сегодня днём около 15:30",
+      "sourceMessageId": "007e1511-c58f-4d0a-9b17-74d6d107149a"
+    },
+    {
+      "key": "preferred_doctor_gender",
+      "value": "женщина",
+      "sourceMessageId": "007e1511-c58f-4d0a-9b17-74d6d107149a"
+    },
+    {
+      "key": "insurance",
+      "value": "нет корейской медицинской страховки",
+      "sourceMessageId": "007e1511-c58f-4d0a-9b17-74d6d107149a"
+    },
+    {
+      "key": "payment_preference",
+      "value": "самостоятельная оплата",
+      "sourceMessageId": "007e1511-c58f-4d0a-9b17-74d6d107149a"
+    }
+  ],
+  "institutions": [
+    {
+      "id": "derm_mapho_01",
+      "name": "Мапхо Дерматологическая Клиника «Здоровье Кожи»",
+      "nameKo": "",
+      "description": "консультация дерматолога по зудящей сыпи с приёмом женщины-врача",
+      "reason": "консультация дерматолога по зудящей сыпи с приёмом женщины-врача",
+      "fictional": true
+    }
+  ],
+  "requiredQuestions": [
+    {
+      "id": "cost_info",
+      "text": "Какова приблизительная стоимость приёма при самостоятельной оплате?",
+      "korean": "자가 부담 시 진료 비용은 얼마인가요?",
+      "status": "unresolved",
+      "resolutionReason": null,
+      "answer": null,
+      "evidence": []
+    },
+    {
+      "id": "appointment_needed",
+      "text": "Нужна ли предварительная запись для приёма около 15:30?",
+      "korean": "오후 3시 30분경 진료 예약이 필요한가요?",
+      "status": "unresolved",
+      "resolutionReason": null,
+      "answer": null,
+      "evidence": []
+    },
+    {
+      "id": "female_doctor_available",
+      "text": "Есть ли возможность записи к женщине-врачу дерматологу в этот день?",
+      "korean": "당일 여자 피부과 전문의를 예약할 수 있나요?",
+      "status": "unresolved",
+      "resolutionReason": null,
+      "answer": null,
+      "evidence": []
+    }
+  ],
+  "planReady": true,
+  "pendingRelay": null,
+  "decisionPrompt": null,
+  "summary": null,
+  "busy": false,
+  "error": null,
+  "voiceMessage": null,
+  "call": {
+    "id": null,
+    "status": "idle",
+    "institutionId": null,
+    "authorized": false,
+    "accepted": false,
+    "authorizedAt": null,
+    "acceptedAt": null,
+    "connected": false,
+    "confirmedKeyDetails": false,
+    "confirmationEvidence": [],
+    "endedAt": null,
+    "reason": null,
+    "success": false
+  }
+}

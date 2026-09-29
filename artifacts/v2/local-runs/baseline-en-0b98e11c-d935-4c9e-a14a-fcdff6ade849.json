@@ -1,0 +1,56 @@
+{
+  "capturedFrom": "Actual localhost /chat response",
+  "captureNote": "Room was lost after backend restart before /export could complete. This file preserves the actual server-returned public state, not a successful export-route result.",
+  "simulation": true,
+  "realApi": true,
+  "microphone": false,
+  "audibleKorean": false,
+  "id": "0b98e11c-d935-4c9e-a14a-fcdff6ade849",
+  "language": "en",
+  "version": 5,
+  "revision": 5,
+  "createdAt": "2026-09-29T05:08:00.000Z",
+  "updatedAt": "2026-09-29T05:08:02.193Z",
+  "messages": [
+    {
+      "id": "858b41ab-cdd8-4c6f-9eb8-8e4912312ee6",
+      "role": "user",
+      "text": "What does 'walk-in visit' mean? I only need a general definition; do not arrange a call or suggest clinics.",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:08:00.008Z"
+    },
+    {
+      "id": "3d3b8395-0ffc-4959-81fb-8c8dc78363db",
+      "role": "assistant",
+      "text": "A \"walk-in visit\" means you can go to a medical clinic or hospital without an appointment. You just show up during their working hours and wait for your turn to see a doctor or healthcare provider. It's often used for minor or urgent health issues that don't require scheduling in advance.",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:08:02.192Z"
+    }
+  ],
+  "transcripts": [],
+  "customerInfo": [],
+  "institutions": [],
+  "requiredQuestions": [],
+  "planReady": false,
+  "pendingRelay": null,
+  "decisionPrompt": null,
+  "summary": null,
+  "busy": false,
+  "error": null,
+  "voiceMessage": null,
+  "call": {
+    "id": null,
+    "status": "idle",
+    "institutionId": null,
+    "authorized": false,
+    "accepted": false,
+    "authorizedAt": null,
+    "acceptedAt": null,
+    "connected": false,
+    "confirmedKeyDetails": false,
+    "confirmationEvidence": [],
+    "endedAt": null,
+    "reason": null,
+    "success": false
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "simulation": true,
+  "realTelephoneCall": false,
+  "aiProvider": "OpenAI",
+  "hardwareVerification": [],
+  "id": "fb1c3f6a-abec-47a7-8918-115ad230284c",
+  "language": "en",
+  "version": 10,
+  "revision": 10,
+  "createdAt": "2026-09-29T07:16:08.904Z",
+  "updatedAt": "2026-09-29T07:16:08.907Z",
+  "messages": [
+    {
+      "id": "62f46644-0eb9-4b8b-856d-7540c6272ffa",
+      "role": "user",
+      "text": "Please check whether the blue notebook is in stock.",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:16:08.904Z"
+    },
+    {
+      "id": "b05ddbfb-3454-4628-aeb6-658c519b3785",
+      "role": "assistant",
+      "text": "A fictional test plan is ready; stock is unknown. Shall we simulate the call?",
+      "kind": "chat",
+      "createdAt": "2026-09-29T07:16:08.905Z"
+    },
+    {
+      "id": "f8c5ec8e-9ea6-4d38-8923-049a98f8a76e",
+      "role": "assistant",
+      "text": "Fictional simulation only — no real call or booking.\n\nCall outcome: Simulation ended incompletely.\n\nValidated business answers in this simulation:\nNo validated business answers were retained.\n\nCustomer-provided information:\nNo customer details were retained.\n\nStill unresolved:\n- Is the blue notebook in stock?\n\nA grounded recommendation is unavailable for this run.\n\nReview the recorded facts and unresolved questions before choosing a next step.",
+      "kind": "summary",
+      "createdAt": "2026-09-29T07:16:08.907Z"
+    }
+  ],
+  "transcripts": [],
+  "customerInfo": [],
+  "institutions": [
+    {
+      "id": "mock-shop",
+      "name": "Fictional HTTP Test Shop",
+      "nameKo": "",
+      "description": "To ask whether the requested notebook is in stock.",
+      "reason": "To ask whether the requested notebook is in stock.",
+      "fictional": true
+    }
+  ],
+  "requiredQuestions": [
+    {
+      "id": "stock",
+      "text": "Is the blue notebook in stock?",
+      "korean": "파란색 공책 재고가 있나요?",
+      "status": "unresolved",
+      "resolutionReason": null,
+      "answer": null,
+      "evidence": []
+    }
+  ],
+  "questionHistory": [],
+  "planReady": true,
+  "pendingRelay": null,
+  "decisionPrompt": null,
+  "summary": {
+    "text": "Fictional simulation only — no real call or booking.\n\nCall outcome: Simulation ended incompletely.\n\nValidated business answers in this simulation:\nNo validated business answers were retained.\n\nCustomer-provided information:\nNo customer details were retained.\n\nStill unresolved:\n- Is the blue notebook in stock?",
+    "details": {
+      "answers": [],
+      "unresolved": [
+        {
+          "id": "stock",
+          "text": "Is the blue notebook in stock?"
+        }
+      ],
+      "institution": {
+        "id": "mock-shop",
+        "name": "Fictional HTTP Test Shop",
+        "fictional": true
+      }
+    },
+    "recommendation": "A grounded recommendation is unavailable for this run.",
+    "reasoning": "Review the recorded facts and unresolved questions before choosing a next step."
+  },
+  "busy": false,
+  "error": null,
+  "voiceMessage": null,
+  "call": {
+    "id": "e7490564-fa71-436b-95c8-07c28b93762d",
+    "status": "failed",
+    "institutionId": "mock-shop",
+    "authorized": true,
+    "accepted": false,
+    "authorizedAt": "2026-09-29T07:16:08.905Z",
+    "acceptedAt": null,
+    "connected": false,
+    "confirmedKeyDetails": false,
+    "confirmationEvidence": [],
+    "readbackEvidence": [],
+    "endedAt": "2026-09-29T07:16:08.906Z",
+    "reason": "declined",
+    "success": false
+  },
+  "apiEvidence": [
+    {
+      "purpose": "customer_interview",
+      "responseId": "synthetic-http-setup-customer_interview",
+      "model": "mock-no-openai",
+      "at": "2026-09-29T07:16:08.905Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "synthetic-http-setup-call_plan_validation",
+      "model": "mock-no-openai",
+      "at": "2026-09-29T07:16:08.905Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "customerFactEvidence": [],
+      "constraintCoverage": [
+        {
+          "constraint": "blue notebook stock",
+          "sourceMessageId": "62f46644-0eb9-4b8b-856d-7540c6272ffa",
+          "questionIds": [
+            "stock"
+          ],
+          "sourceQuote": "Please check whether the blue notebook is in stock."
+        }
+      ],
+      "questionMeaningChecks": [
+        {
+          "questionId": "stock",
+          "faithful": true,
+          "explanation": "Synthetic setup fixture only."
+        }
+      ],
+      "at": "2026-09-29T07:16:08.905Z"
+    },
+    {
+      "purpose": "grounded_recommendation",
+      "responseId": "synthetic-http-setup-grounded_recommendation",
+      "model": "mock-no-openai",
+      "at": "2026-09-29T07:16:08.907Z"
+    },
+    {
+      "purpose": "recommendation_unavailable",
+      "code": "INVALID_ADVICE_CHOICE",
+      "at": "2026-09-29T07:16:08.907Z"
+    },
+    {
+      "purpose": "recommendation_fallback",
+      "accepted": false,
+      "at": "2026-09-29T07:16:08.907Z"
+    }
+  ],
+  "voiceDiagnostics": [],
+  "savedAt": "2026-09-29T07:16:08.907Z"
+}

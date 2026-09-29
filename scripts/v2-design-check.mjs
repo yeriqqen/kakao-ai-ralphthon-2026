@@ -208,7 +208,12 @@ try {
       f.touch(r => { r.call.status = 'awaiting_decision'; r.decisionPrompt = copy.question; });
       await page.getByRole('button', { name: translations[language].continueCall, exact: true }).click();
       assert.equal(f.room.decisionPrompt, null);
-      f.touch(r => { r.call = { status: 'completed', connected: false }; r.requiredQuestions[0].status = 'resolved'; r.requiredQuestions[0].answer = language === 'zh' ? '下午三点可以。' : language === 'ru' ? 'Есть запись в 15:00.' : 'An appointment is available at 3 pm.'; r.summary = { text: copy.summary, recommendation: copy.recommendation, reasoning: copy.reasoning }; });
+      f.touch(r => { r.call = { status: 'completed', connected: false }; r.requiredQuestions[0].status = 'resolved'; r.requiredQuestions[0].answer = language === 'zh' ? '下午三点可以。' : language === 'ru' ? 'Есть запись в 15:00.' : 'An appointment is available at 3 pm.'; r.summary = { text: copy.summary, details: { answers: [{ id: 'availability', answer: r.requiredQuestions[0].answer }], unresolved: [] }, recommendation: copy.recommendation, reasoning: copy.reasoning }; });
+      await page.locator('.result-answers').waitFor();
+      assert.equal(await page.locator('.result-details').getAttribute('open'), null);
+      assert.equal(await page.locator('.business-panel').count(), 0);
+      await scrollTo(page, '.result-card'); await capture(page, `${language}-result-clean-390`);
+      await page.locator('.result-details > summary').click();
       await page.getByText(copy.summary, { exact: true }).waitFor(); assert.equal(await page.locator('#call-state.is-active').count(), 0);
       const text = await page.locator('#context').innerText(); for (const item of [copy.summary, copy.recommendation, copy.reasoning]) assert.ok(text.includes(item));
       assert.doesNotMatch(text, /first_visit_internal_key|location_internal_key/);

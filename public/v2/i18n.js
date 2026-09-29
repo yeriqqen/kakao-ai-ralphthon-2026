@@ -118,6 +118,8 @@ export const translations = {
 // Presentation copy is shared by the new layout; the simulation vocabulary above
 // remains the source for permissions, relay states and evidence.
 Object.assign(translations.en, {
+  resultDetails: 'Details and full record',
+  setupDetails: 'How the demo works', businessTitle: 'Call controls', result: 'Your call summary', recommendation: 'Next step',
   welcome: 'A little more local.', intro: 'Life in Korea, in your language.\nTell us what you need. We’ll take it from there.',
   placeholder: 'What can I help you with?', newChat: 'New chat',
   skip: 'Skip to conversation', chatHint: 'A conversation, in your language', latest: 'Latest update', startersLabel: 'Conversation starters',
@@ -127,6 +129,8 @@ Object.assign(translations.en, {
   everydayPrompt: 'I would like to ask a hair salon about an appointment.',
 });
 Object.assign(translations.ru, {
+  resultDetails: 'Подробности и полная запись',
+  setupDetails: 'Как работает демо', businessTitle: 'Управление звонком', result: 'Итоги звонка', recommendation: 'Следующий шаг',
   welcome: 'Здесь чуть ближе.', intro: 'Жизнь в Корее на вашем языке.\nРасскажите, что нужно. Остальное — вместе.',
   placeholder: 'Чем я могу помочь?', newChat: 'Новый чат',
   skip: 'Перейти к разговору', chatHint: 'Разговор на вашем языке', latest: 'Последнее обновление', startersLabel: 'С чего начать разговор',
@@ -136,6 +140,8 @@ Object.assign(translations.ru, {
   everydayPrompt: 'Я хочу узнать о записи на стрижку в парикмахерскую.',
 });
 Object.assign(translations.zh, {
+  resultDetails: '详情与完整记录',
+  setupDetails: '演示说明', businessTitle: '通话控制', result: '通话摘要', recommendation: '下一步',
   welcome: '让生活更近一点。', intro: '用您的语言，安心生活在韩国。\n告诉我们您的需要，一起迈出下一步。',
   placeholder: '有什么可以帮您？', newChat: '新对话',
   skip: '跳转到对话', chatHint: '用您的语言轻松交流', latest: '最新消息', startersLabel: '开始对话',

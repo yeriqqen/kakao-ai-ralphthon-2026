@@ -92,7 +92,7 @@ test('one structured AI choice selects exact retained answers without generating
   const room = pricedSummaryRoom(), purposes = [];
   const decision = { action: 'clarify_selected_questions', reasonQuestionIds: ['cost'], clarificationQuestionIds: ['time'] };
   globalThis.fetch = async (_url, options) => { const body = JSON.parse(options.body); purposes.push(body.text.format.name); assert.deepEqual(body.text.format.schema.properties.reasonQuestionIds.items.enum, ['cost']); assert.deepEqual(body.text.format.schema.properties.clarificationQuestionIds.items.enum, ['time']); assert(!('reasoning' in body.text.format.schema.properties)); return mockResponse(decision); };
-  try { const facts = factualSummary(room); assert.deepEqual(await summarize(room), { text: facts.text, ...renderAdviceChoice(facts, decision, room.language) }); assert.deepEqual(purposes, ['grounded_recommendation']); assert.equal(room.apiEvidence.at(-1).purpose, 'recommendation_choice_result'); }
+  try { const facts = factualSummary(room); assert.deepEqual(await summarize(room), { text: facts.text, details: { answers: facts.answers, unresolved: facts.unresolved, institution: facts.institution }, ...renderAdviceChoice(facts, decision, room.language) }); assert.deepEqual(purposes, ['grounded_recommendation']); assert.equal(room.apiEvidence.at(-1).purpose, 'recommendation_choice_result'); }
   finally { globalThis.fetch = originalFetch; if (originalKey === undefined) delete process.env.OPENAI_API_KEY; else process.env.OPENAI_API_KEY = originalKey; }
 });
 test('invalid AI IDs or action consistency produce explicit unavailable advice with facts intact', async () => {

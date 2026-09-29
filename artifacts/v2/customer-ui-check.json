@@ -1,6 +1,6 @@
 {
   "title": "V2 customer UI checks with synthetic API routes",
-  "timestamp": "2026-09-29T06:32:35.315Z",
+  "timestamp": "2026-09-29T07:04:52.532Z",
   "mock": true,
   "simulation": true,
   "method": "Isolated browser. All API responses are synthetic fixtures. External requests are blocked. No OpenAI request, microphone capture or audio playback.",

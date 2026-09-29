@@ -9,6 +9,7 @@ let sending = false, polling = false, online = true, selectedInstitution = '', l
 let lastMessagesSignature = '', lastContextSignature = '', generation = 0, dialogAction = null;
 let lastVisibleSignature = '';
 let lastPresentation = {};
+const presentedMessages = new Set();
 const t = (key, values) => translate(language, key, values);
 const motion = () => matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
 const nearLatest = () => window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 220;
@@ -120,10 +121,12 @@ function renderMessages() {
   lastMessagesSignature = signature; const fragment = document.createDocumentFragment();
   for (const message of messages) {
     if (!['user', 'assistant'].includes(message.role) || !message.text) continue;
+    if (message.kind === 'relay' && message.text === state?.pendingRelay?.question) continue;
     // The current result is rendered once, with its separate recommendation
     // and reasoning below. Earlier call summaries remain in chat history.
     if (message.kind === 'summary' && state?.summary && message.text === [state.summary.text, state.summary.recommendation, state.summary.reasoning].join('\n\n')) continue;
     const article = node('article', `message ${message.role}`); article.dataset.messageId = message.id || '';
+    if (message.id && !presentedMessages.has(message.id)) { article.classList.add('is-new'); presentedMessages.add(message.id); }
     const label = node('p', 'message-label'); if (message.role === 'assistant') label.append(icon('spark'));
     label.append(document.createTextNode(t(message.role === 'user' ? 'you' : 'assistant')));
     article.append(label, node('p', 'message-content', message.text)); fragment.append(article);
@@ -167,7 +170,7 @@ function renderContext() {
     plan.append(node('p', '', t('permission')));
     plan.append(button(t('yes'), () => mutate('authorize', { institutionId: selectedInstitution }), 'primary-button', sending || state.busy || !selectedInstitution || !online));
     fragment.append(plan);
-  } else if (state.requiredQuestions?.length) {
+  } else if (state.requiredQuestions?.length && !state.summary) {
     const block = section(); block.append(questionDetails()); fragment.append(block);
   }
   if (state.pendingRelay?.question) {
@@ -177,8 +180,8 @@ function renderContext() {
     const decision = section(t('decisionTitle'), 'decision'); if (state.decisionPrompt) decision.append(node('p', '', state.decisionPrompt));
     const actions = node('div', 'button-row'); actions.append(button(t('continueCall'), () => mutate('decision', { action: 'continue' }), 'primary-button', sending || !online), button(t('stopCall'), () => mutate('decision', { action: 'end' }), 'secondary-button', sending || !online)); decision.append(actions); fragment.append(decision);
   }
-  if (credentials?.businessToken) {
-    const business = section(t('businessTitle'), 'business-panel'); business.append(node('p', 'business-instructions', t('businessHelp')));
+  if (credentials?.businessToken && !state.summary) {
+    const business = section(t('businessTitle'), 'business-panel');
     const actions = node('div', 'button-row'); const link = businessLink();
     if (link) {
       const open = node('a', 'secondary-button link-button', t('openBusiness')); open.href = link; open.target = '_blank'; open.rel = 'noopener noreferrer'; actions.append(open);
@@ -186,24 +189,41 @@ function renderContext() {
     }
     if (liveStates.has(status)) actions.append(button(t('endCall'), () => confirmAction('end'), 'quiet-button', sending));
     if (['interrupted', 'failed'].includes(status) && state.planReady && selectedInstitution) actions.append(button(t('retryCall'), () => mutate('authorize', { institutionId: selectedInstitution }), 'primary-button', sending || state.busy || !online));
-    business.append(actions, node('p', 'muted', t('linkNotice'))); fragment.append(business);
+    const setup = node('details', 'setup-details'); setup.dataset.detailKey = 'setup'; setup.append(node('summary', '', t('setupDetails')), node('p', 'business-instructions', t('businessHelp')), node('p', 'muted', t('linkNotice')));
+    business.append(actions, setup); fragment.append(business);
   }
   if (state.summary) {
     const result = section(t('result'), 'result-card'); result.querySelector('h2').prepend(icon('note'));
     result.append(node('p', 'fictional-note', t('simulation')));
-    if ((state.requiredQuestions || []).some((question) => question.status !== 'resolved')) result.append(node('p', 'fictional-note', t('unresolvedWarning')));
-    if (state.summary.text && !state.messages?.some((message) => message.role === 'assistant' && message.text === state.summary.text)) result.append(node('p', 'summary-text', state.summary.text));
+    const facts = state.summary.details;
+    if (facts?.unresolved?.length || (state.requiredQuestions || []).some((question) => question.status !== 'resolved')) result.append(node('p', 'fictional-note', t('unresolvedWarning')));
+    if (facts?.answers) {
+      const list = node('ul', 'result-answers');
+      for (const answer of facts.answers) list.append(node('li', '', answer.answer));
+      result.append(list);
+      if (facts.unresolved?.length) {
+        result.append(node('h3', '', t('unresolved')));
+        const remaining = node('ul', 'result-unresolved');
+        for (const question of facts.unresolved) remaining.append(node('li', '', question.text));
+        result.append(remaining);
+      }
+    } else if (state.summary.text && !state.messages?.some((message) => message.role === 'assistant' && message.text === state.summary.text)) result.append(node('p', 'summary-text', state.summary.text));
     if (state.summary.recommendation) { result.append(node('h3', '', t('recommendation')), node('p', 'recommendation-text', typeof state.summary.recommendation === 'string' ? state.summary.recommendation : state.summary.recommendation.text || '')); }
-    if (state.summary.reasoning) result.append(node('h3', '', t('reasoning')), node('p', 'recommendation-text', state.summary.reasoning));
+    const details = node('details', 'result-details'); details.dataset.detailKey = 'result'; details.append(node('summary', '', t('resultDetails')));
+    if (state.summary.reasoning) details.append(node('h3', '', t('reasoning')), node('p', 'recommendation-text', state.summary.reasoning));
+    if (facts && state.summary.text) details.append(node('p', 'summary-text', state.summary.text));
+    details.append(button(t('export'), downloadEvidence, 'quiet-button', sending)); result.append(details);
     fragment.append(result);
   }
   if (state.customerInfo?.length) {
     const block = section(); const details = node('details'); details.append(node('summary', '', t('supplied'))); const list = node('ul', 'detail-list');
     for (const item of state.customerInfo) list.append(node('li', '', item.label ? `${item.label}: ${item.value}` : item.value)); details.append(list); block.append(details); fragment.append(block);
   }
-  if (['completed', 'interrupted', 'failed'].includes(status) || state.summary) {
+  if (['completed', 'interrupted', 'failed'].includes(status) && !state.summary) {
     const evidence = section(); evidence.append(button(t('export'), downloadEvidence, 'secondary-button', sending), node('p', 'muted', t('exportHelp'))); fragment.append(evidence);
   }
+  const expanded = new Set([...$('context').querySelectorAll('details[open][data-detail-key]')].map(el => el.dataset.detailKey));
+  fragment.querySelectorAll('details[data-detail-key]').forEach(el => { el.open = expanded.has(el.dataset.detailKey); });
   $('context').replaceChildren(fragment);
 }
 function render() {

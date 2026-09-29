@@ -1,0 +1,375 @@
+{
+  "syntheticBrowserTest": true,
+  "realMicrophoneVerified": false,
+  "audibleKoreanVerified": false,
+  "note": "The original app download below was generated through synthetic recognition callbacks. Its microphone source entries are not real hardware observations.",
+  "originalDownload": {
+    "simulation": true,
+    "label": "Simulated call — fictional example; no real clinic contacted.",
+    "complete": true,
+    "summary": "Клиника открыта. Женщина-врач сегодня не принимает, но доступен другой врач. Принимают без корейской государственной медицинской страховки. Консультация — примерно 20 000 вон. Сейчас ожидание — 15 минут.",
+    "facts": [
+      {
+        "key": "open",
+        "label": "Клиника открыта",
+        "status": "Confirmed in simulation",
+        "value": true,
+        "evidence": [
+          {
+            "transcriptId": 2,
+            "text": "네, 오늘 진료합니다.",
+            "source": "microphone"
+          }
+        ],
+        "conflicted": false,
+        "display": "Открыта"
+      },
+      {
+        "key": "femaleDoctor",
+        "label": "Женщина-врач сегодня",
+        "status": "Confirmed in simulation",
+        "value": false,
+        "evidence": [
+          {
+            "transcriptId": 4,
+            "text": "오늘 여자 의사 선생님은 진료하지 않습니다.",
+            "source": "microphone-edited"
+          }
+        ],
+        "conflicted": false,
+        "display": "Не принимает"
+      },
+      {
+        "key": "otherDoctor",
+        "label": "Другой врач",
+        "status": "Confirmed in simulation",
+        "value": true,
+        "evidence": [
+          {
+            "transcriptId": 6,
+            "text": "다른 의사 선생님은 진료 가능합니다.",
+            "source": "microphone"
+          }
+        ],
+        "conflicted": false,
+        "display": "Принимает"
+      },
+      {
+        "key": "uninsured",
+        "label": "Приём без государственной страховки",
+        "status": "Confirmed in simulation",
+        "value": true,
+        "evidence": [
+          {
+            "transcriptId": 12,
+            "text": "국민건강보험이 없어도 진료받을 수 있습니다.",
+            "source": "microphone"
+          }
+        ],
+        "conflicted": false,
+        "display": "Принимают"
+      },
+      {
+        "key": "cost",
+        "label": "Стоимость консультации",
+        "status": "Confirmed in simulation",
+        "value": {
+          "amount": 20000,
+          "approximate": true
+        },
+        "evidence": [
+          {
+            "transcriptId": 14,
+            "text": "진찰료는 약 2만 원입니다.",
+            "source": "microphone"
+          }
+        ],
+        "conflicted": false,
+        "display": "Примерно 20 000 вон"
+      },
+      {
+        "key": "wait",
+        "label": "Время ожидания",
+        "status": "Confirmed in simulation",
+        "value": {
+          "minutes": 15,
+          "approximate": false
+        },
+        "evidence": [
+          {
+            "transcriptId": 16,
+            "text": "지금 대기 시간은 15분입니다.",
+            "source": "microphone"
+          }
+        ],
+        "conflicted": false,
+        "display": "15 минут"
+      }
+    ],
+    "pendingRelay": null,
+    "sheets": {
+      "label": "데모용 가상 정보 — 실제 환자 정보 아님.",
+      "reception": "접수용: 나이: 7세 / 건강보험: 국민건강보험 없음.",
+      "doctor": "진료용: 증상: 기침 / 증상 기간: 2일."
+    },
+    "readbackKorean": "시뮬레이션에서 확인된 내용을 말씀드리겠습니다. 오늘 진료합니다. 오늘 여자 의사 선생님 진료는 불가능합니다. 다른 의사 선생님 진료가 가능합니다. 국민건강보험이 없어도 진료받을 수 있습니다. 진찰료는 약 20000원입니다. 대기 시간은 15분입니다. 감사합니다.",
+    "transcript": [
+      {
+        "id": 1,
+        "role": "assistant",
+        "text": "안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?",
+        "language": "ko",
+        "source": "local-script"
+      },
+      {
+        "id": 2,
+        "role": "receptionist",
+        "text": "네, 오늘 진료합니다.",
+        "language": "ko",
+        "source": "microphone"
+      },
+      {
+        "id": 3,
+        "role": "assistant",
+        "text": "오늘 여자 의사 선생님께 진료를 받을 수 있나요?",
+        "language": "ko",
+        "source": "local-script"
+      },
+      {
+        "id": 4,
+        "role": "receptionist",
+        "text": "오늘 여자 의사 선생님은 진료하지 않습니다.",
+        "language": "ko",
+        "source": "microphone-edited"
+      },
+      {
+        "id": 5,
+        "role": "assistant",
+        "text": "다른 의사 선생님께 진료를 받을 수 있나요?",
+        "language": "ko",
+        "source": "local-script"
+      },
+      {
+        "id": 6,
+        "role": "receptionist",
+        "text": "다른 의사 선생님은 진료 가능합니다.",
+        "language": "ko",
+        "source": "microphone"
+      },
+      {
+        "id": 7,
+        "role": "assistant",
+        "text": "국민건강보험이 없는 환자도 진료를 받을 수 있나요?",
+        "language": "ko",
+        "source": "local-script"
+      },
+      {
+        "id": 8,
+        "role": "receptionist",
+        "text": "처음 방문하시나요?",
+        "language": "ko",
+        "source": "microphone"
+      },
+      {
+        "id": 9,
+        "role": "assistant",
+        "text": "잠시만 기다려 주세요. 사용자에게 확인하겠습니다.",
+        "language": "ko",
+        "source": "local-script"
+      },
+      {
+        "id": 10,
+        "role": "user",
+        "text": "Да.",
+        "language": "ru",
+        "source": "typed-relay"
+      },
+      {
+        "id": 11,
+        "role": "assistant",
+        "text": "네, 처음 방문입니다.",
+        "language": "ko",
+        "source": "local-script"
+      },
+      {
+        "id": 12,
+        "role": "receptionist",
+        "text": "국민건강보험이 없어도 진료받을 수 있습니다.",
+        "language": "ko",
+        "source": "microphone"
+      },
+      {
+        "id": 13,
+        "role": "assistant",
+        "text": "국민건강보험이 없으면 진찰료가 대략 얼마인가요?",
+        "language": "ko",
+        "source": "local-script"
+      },
+      {
+        "id": 14,
+        "role": "receptionist",
+        "text": "진찰료는 약 2만 원입니다.",
+        "language": "ko",
+        "source": "microphone"
+      },
+      {
+        "id": 15,
+        "role": "assistant",
+        "text": "지금 대기 시간은 몇 분인가요?",
+        "language": "ko",
+        "source": "local-script"
+      },
+      {
+        "id": 16,
+        "role": "receptionist",
+        "text": "지금 대기 시간은 15분입니다.",
+        "language": "ko",
+        "source": "microphone"
+      },
+      {
+        "id": 17,
+        "role": "assistant",
+        "text": "감사합니다. 확인된 내용을 정리하겠습니다.",
+        "language": "ko",
+        "source": "local-script"
+      },
+      {
+        "id": 18,
+        "role": "assistant",
+        "text": "시뮬레이션에서 확인된 내용을 말씀드리겠습니다. 오늘 진료합니다. 오늘 여자 의사 선생님 진료는 불가능합니다. 다른 의사 선생님 진료가 가능합니다. 국민건강보험이 없어도 진료받을 수 있습니다. 진찰료는 약 20000원입니다. 대기 시간은 15분입니다. 감사합니다.",
+        "language": "ko",
+        "source": "local-script"
+      }
+    ],
+    "limitations": [
+      "Deterministic local Korean phrase matching; no general AI translation or real clinic verification.",
+      "Typed and scripted input do not verify live microphone recognition.",
+      "Value hypothesis: Unverified; no actual user feedback."
+    ],
+    "audioEvidence": {
+      "recognitionSupported": true,
+      "synthesisSupported": true,
+      "microphoneAttempts": 7,
+      "microphoneStreamsGranted": 7,
+      "recognitionResults": [
+        {
+          "text": "네, 오늘 진료합니다.",
+          "confidence": 0.99,
+          "at": "2026-09-29T03:48:17.215Z"
+        },
+        {
+          "text": "다른 의사 선생님은 진료 가능합니다.",
+          "confidence": 0.99,
+          "at": "2026-09-29T03:48:17.381Z"
+        },
+        {
+          "text": "처음 방문하시나요?",
+          "confidence": 0.99,
+          "at": "2026-09-29T03:48:17.448Z"
+        },
+        {
+          "text": "국민건강보험이 없어도 진료받을 수 있습니다.",
+          "confidence": 0.99,
+          "at": "2026-09-29T03:48:17.548Z"
+        },
+        {
+          "text": "진찰료는 약 2만 원입니다.",
+          "confidence": 0.99,
+          "at": "2026-09-29T03:48:17.615Z"
+        },
+        {
+          "text": "지금 대기 시간은 15분입니다.",
+          "confidence": 0.99,
+          "at": "2026-09-29T03:48:17.679Z"
+        }
+      ],
+      "recognitionErrors": [],
+      "speechEvents": [
+        {
+          "text": "안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?",
+          "voice": "Synthetic Korean test voice",
+          "localService": true,
+          "requestedAt": "2026-09-29T03:48:17.118Z",
+          "started": true,
+          "ended": true
+        },
+        {
+          "text": "오늘 여자 의사 선생님께 진료를 받을 수 있나요?",
+          "voice": "Synthetic Korean test voice",
+          "localService": true,
+          "requestedAt": "2026-09-29T03:48:17.245Z",
+          "started": true,
+          "ended": true
+        },
+        {
+          "text": "다른 의사 선생님께 진료를 받을 수 있나요?",
+          "voice": "Synthetic Korean test voice",
+          "localService": true,
+          "requestedAt": "2026-09-29T03:48:17.345Z",
+          "started": true,
+          "ended": true
+        },
+        {
+          "text": "국민건강보험이 없는 환자도 진료를 받을 수 있나요?",
+          "voice": "Synthetic Korean test voice",
+          "localService": true,
+          "requestedAt": "2026-09-29T03:48:17.412Z",
+          "started": true,
+          "ended": true
+        },
+        {
+          "text": "잠시만 기다려 주세요. 사용자에게 확인하겠습니다.",
+          "voice": "Synthetic Korean test voice",
+          "localService": true,
+          "requestedAt": "2026-09-29T03:48:17.480Z",
+          "started": true,
+          "ended": true
+        },
+        {
+          "text": "네, 처음 방문입니다. 국민건강보험이 없는 환자도 진료를 받을 수 있나요?",
+          "voice": "Synthetic Korean test voice",
+          "localService": true,
+          "requestedAt": "2026-09-29T03:48:17.513Z",
+          "started": true,
+          "ended": true
+        },
+        {
+          "text": "국민건강보험이 없으면 진찰료가 대략 얼마인가요?",
+          "voice": "Synthetic Korean test voice",
+          "localService": true,
+          "requestedAt": "2026-09-29T03:48:17.578Z",
+          "started": true,
+          "ended": true
+        },
+        {
+          "text": "지금 대기 시간은 몇 분인가요?",
+          "voice": "Synthetic Korean test voice",
+          "localService": true,
+          "requestedAt": "2026-09-29T03:48:17.645Z",
+          "started": true,
+          "ended": true
+        },
+        {
+          "text": "감사합니다. 확인된 내용을 정리하겠습니다.",
+          "voice": "Synthetic Korean test voice",
+          "localService": true,
+          "requestedAt": "2026-09-29T03:48:17.712Z",
+          "started": true,
+          "ended": true
+        },
+        {
+          "text": "시뮬레이션에서 확인된 내용을 말씀드리겠습니다. 오늘 진료합니다. 오늘 여자 의사 선생님 진료는 불가능합니다. 다른 의사 선생님 진료가 가능합니다. 국민건강보험이 없어도 진료받을 수 있습니다. 진찰료는 약 20000원입니다. 대기 시간은 15분입니다. 감사합니다.",
+          "voice": "Synthetic Korean test voice",
+          "localService": true,
+          "requestedAt": "2026-09-29T03:48:17.749Z",
+          "started": true,
+          "ended": true
+        }
+      ],
+      "userConfirmedAudible": false,
+      "note": "API events do not establish audible quality. Actual microphone and human feedback must be assessed separately."
+    },
+    "generatedAt": "2026-09-29T03:48:17.778Z",
+    "evidenceWarning": "Fictional simulation only. Rule-based language mapping; browser speech integration. No real clinic was contacted."
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "simulation": true,
+  "archive": "artifacts/yokobu-runnable-demo.zip",
+  "actual_microphone_verified": false,
+  "checks": [
+    "Required runnable and submission files present",
+    "Extracted archive starts with Node and serves HTTP 200",
+    "All required browser modules/styles served"
+  ],
+  "status": "passed"
+}

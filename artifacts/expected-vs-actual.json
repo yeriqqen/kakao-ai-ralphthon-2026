@@ -1,0 +1,785 @@
+{
+  "generatedAt": "2026-09-29T03:43:47.535Z",
+  "simulation": true,
+  "title": "YOKOBU deterministic fictional example — expected versus actual",
+  "command": "npm run verify",
+  "inputSource": "synthetic-fixture",
+  "allPassed": true,
+  "totals": {
+    "passed": 14,
+    "failed": 0
+  },
+  "capabilityVerdict": {
+    "deterministicConversation": "Demonstrated with synthetic text inputs",
+    "actualMicrophoneConversation": "Unverified — this command does not access a microphone",
+    "audibleKoreanSpeech": "Unverified — this command checks generated Korean text only",
+    "browserIntegration": "See separate artifacts/browser-results.json; injected speech events are synthetic",
+    "generalLanguageUnderstanding": "Mocked by a limited deterministic local phrase matcher",
+    "realPhoneCall": "Out of scope — no call placed",
+    "userValue": "Unverified — no actual user feedback"
+  },
+  "checks": [
+    {
+      "id": "before-input",
+      "description": "No clinic answer exists before the receptionist speaks.",
+      "status": "PASS",
+      "expected": [
+        "Unclear",
+        "Unclear",
+        "Unclear",
+        "Unclear",
+        "Unclear",
+        "Unclear"
+      ],
+      "actual": [
+        "Unclear",
+        "Unclear",
+        "Unclear",
+        "Unclear",
+        "Unclear",
+        "Unclear"
+      ],
+      "evidence": {
+        "summary": "Подтверждённых сведений о клинике пока нет. Все неуточнённые данные — Unclear.",
+        "transcript": [
+          {
+            "id": 1,
+            "role": "assistant",
+            "text": "안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?",
+            "language": "ko",
+            "source": "local-script"
+          }
+        ]
+      }
+    },
+    {
+      "id": "known-age",
+      "description": "Previously collected age answers a Korean follow-up without a user relay.",
+      "status": "PASS",
+      "expected": {
+        "kind": "known-answer",
+        "containsAge": true,
+        "relay": null
+      },
+      "actual": {
+        "kind": "known-answer",
+        "containsAge": true,
+        "relay": null
+      },
+      "evidence": {
+        "response": "아이는 7세입니다. 오늘 여자 의사 선생님께 진료를 받을 수 있나요?"
+      }
+    },
+    {
+      "id": "relay-question",
+      "description": "Unknown prior-visit status is relayed in Russian.",
+      "status": "PASS",
+      "expected": {
+        "kind": "relay",
+        "russian": "Вы впервые в этой клинике?",
+        "undisclosed": true
+      },
+      "actual": {
+        "kind": "relay",
+        "russian": "Вы впервые в этой клинике?",
+        "undisclosed": true
+      },
+      "evidence": {}
+    },
+    {
+      "id": "relay-answer",
+      "description": "The user’s explicit Russian answer is returned in Korean.",
+      "status": "PASS",
+      "expected": "네, 처음 방문입니다.",
+      "actual": "네, 처음 방문입니다.",
+      "evidence": {
+        "userInput": "Да.",
+        "pendingRelay": null
+      }
+    },
+    {
+      "id": "russian-summary",
+      "description": "The six facts produce the exact requested Russian summary.",
+      "status": "PASS",
+      "expected": "Клиника открыта. Женщина-врач сегодня не принимает, но доступен другой врач. Принимают без корейской государственной медицинской страховки. Консультация — примерно 20 000 вон. Сейчас ожидание — 15 минут.",
+      "actual": "Клиника открыта. Женщина-врач сегодня не принимает, но доступен другой врач. Принимают без корейской государственной медицинской страховки. Консультация — примерно 20 000 вон. Сейчас ожидание — 15 минут.",
+      "evidence": {}
+    },
+    {
+      "id": "supported-facts",
+      "description": "Every supported fact has the simulation-only confirmation status and transcript evidence.",
+      "status": "PASS",
+      "expected": [
+        {
+          "status": "Confirmed in simulation",
+          "hasEvidence": true,
+          "syntheticOnly": true
+        },
+        {
+          "status": "Confirmed in simulation",
+          "hasEvidence": true,
+          "syntheticOnly": true
+        },
+        {
+          "status": "Confirmed in simulation",
+          "hasEvidence": true,
+          "syntheticOnly": true
+        },
+        {
+          "status": "Confirmed in simulation",
+          "hasEvidence": true,
+          "syntheticOnly": true
+        },
+        {
+          "status": "Confirmed in simulation",
+          "hasEvidence": true,
+          "syntheticOnly": true
+        },
+        {
+          "status": "Confirmed in simulation",
+          "hasEvidence": true,
+          "syntheticOnly": true
+        }
+      ],
+      "actual": [
+        {
+          "status": "Confirmed in simulation",
+          "hasEvidence": true,
+          "syntheticOnly": true
+        },
+        {
+          "status": "Confirmed in simulation",
+          "hasEvidence": true,
+          "syntheticOnly": true
+        },
+        {
+          "status": "Confirmed in simulation",
+          "hasEvidence": true,
+          "syntheticOnly": true
+        },
+        {
+          "status": "Confirmed in simulation",
+          "hasEvidence": true,
+          "syntheticOnly": true
+        },
+        {
+          "status": "Confirmed in simulation",
+          "hasEvidence": true,
+          "syntheticOnly": true
+        },
+        {
+          "status": "Confirmed in simulation",
+          "hasEvidence": true,
+          "syntheticOnly": true
+        }
+      ],
+      "evidence": {}
+    },
+    {
+      "id": "reception-sheet",
+      "description": "Korean reception sheet contains only supplied fictional age and insurance.",
+      "status": "PASS",
+      "expected": "접수용: 나이: 7세 / 건강보험: 국민건강보험 없음.",
+      "actual": "접수용: 나이: 7세 / 건강보험: 국민건강보험 없음.",
+      "evidence": {}
+    },
+    {
+      "id": "doctor-sheet",
+      "description": "Korean doctor sheet contains only supplied fictional symptoms and duration.",
+      "status": "PASS",
+      "expected": "진료용: 증상: 기침 / 증상 기간: 2일.",
+      "actual": "진료용: 증상: 기침 / 증상 기간: 2일.",
+      "evidence": {}
+    },
+    {
+      "id": "sheet-label",
+      "description": "Both sheets carry the required fictional-data label.",
+      "status": "PASS",
+      "expected": "데모용 가상 정보 — 실제 환자 정보 아님.",
+      "actual": "데모용 가상 정보 — 실제 환자 정보 아님.",
+      "evidence": {}
+    },
+    {
+      "id": "evidence-only-readback",
+      "description": "Korean readback includes received cost and wait facts.",
+      "status": "PASS",
+      "expected": {
+        "cost": true,
+        "wait": true
+      },
+      "actual": {
+        "cost": true,
+        "wait": true
+      },
+      "evidence": {
+        "text": "시뮬레이션에서 확인된 내용을 말씀드리겠습니다. 오늘 진료합니다. 오늘 여자 의사 선생님 진료는 불가능합니다. 다른 의사 선생님 진료가 가능합니다. 국민건강보험이 없어도 진료받을 수 있습니다. 진찰료는 약 20000원입니다. 대기 시간은 15분입니다. 감사합니다.",
+        "audibleVerification": "Unverified"
+      }
+    },
+    {
+      "id": "empty-request",
+      "description": "An empty request stops with useful guidance.",
+      "status": "PASS",
+      "expected": true,
+      "actual": true,
+      "evidence": {
+        "message": "Введите запрос перед началом симуляции."
+      }
+    },
+    {
+      "id": "ambiguous-answer",
+      "description": "An uncertain wait time is Unclear and excluded from the summary.",
+      "status": "PASS",
+      "expected": {
+        "status": "Unclear",
+        "value": null,
+        "includedInSummary": false
+      },
+      "actual": {
+        "status": "Unclear",
+        "value": null,
+        "includedInSummary": false
+      },
+      "evidence": {}
+    },
+    {
+      "id": "missing-user-answer",
+      "description": "Without a user answer, the relay remains unresolved and no personal fact is guessed.",
+      "status": "PASS",
+      "expected": {
+        "kind": "paused",
+        "status": "Unclear",
+        "complete": false,
+        "firstVisitUnknown": true
+      },
+      "actual": {
+        "kind": "paused",
+        "status": "Unclear",
+        "complete": false,
+        "firstVisitUnknown": true
+      },
+      "evidence": {}
+    },
+    {
+      "id": "same-turn-contradiction",
+      "description": "Conflicting statements within a single turn do not become confirmed.",
+      "status": "PASS",
+      "expected": {
+        "status": "Unclear",
+        "value": null,
+        "conflicted": true
+      },
+      "actual": {
+        "status": "Unclear",
+        "value": null,
+        "conflicted": true
+      },
+      "evidence": {}
+    }
+  ],
+  "example": {
+    "inputs": {
+      "request": "Узнайте в этой детской клинике, принимает ли сегодня женщина-врач, принимают ли пациентов без корейской государственной медицинской страховки и сколько сейчас ждать.",
+      "age": 7,
+      "symptoms": "кашель",
+      "duration": 2,
+      "insurance": "none"
+    },
+    "receptionistScript": [
+      "네, 오늘 진료합니다.",
+      "오늘 여자 의사 선생님은 진료하지 않습니다.",
+      "다른 의사 선생님은 진료 가능합니다.",
+      "국민건강보험이 없어도 진료받을 수 있습니다.",
+      "진찰료는 약 2만 원입니다.",
+      "지금 대기 시간은 15분입니다."
+    ],
+    "report": {
+      "simulation": true,
+      "label": "Simulated call — fictional example; no real clinic contacted.",
+      "complete": true,
+      "summary": "Клиника открыта. Женщина-врач сегодня не принимает, но доступен другой врач. Принимают без корейской государственной медицинской страховки. Консультация — примерно 20 000 вон. Сейчас ожидание — 15 минут.",
+      "facts": [
+        {
+          "key": "open",
+          "label": "Клиника открыта",
+          "status": "Confirmed in simulation",
+          "value": true,
+          "evidence": [
+            {
+              "transcriptId": 2,
+              "text": "네, 오늘 진료합니다.",
+              "source": "synthetic-fixture"
+            }
+          ],
+          "conflicted": false,
+          "display": "Открыта"
+        },
+        {
+          "key": "femaleDoctor",
+          "label": "Женщина-врач сегодня",
+          "status": "Confirmed in simulation",
+          "value": false,
+          "evidence": [
+            {
+              "transcriptId": 6,
+              "text": "오늘 여자 의사 선생님은 진료하지 않습니다.",
+              "source": "synthetic-fixture"
+            }
+          ],
+          "conflicted": false,
+          "display": "Не принимает"
+        },
+        {
+          "key": "otherDoctor",
+          "label": "Другой врач",
+          "status": "Confirmed in simulation",
+          "value": true,
+          "evidence": [
+            {
+              "transcriptId": 8,
+              "text": "다른 의사 선생님은 진료 가능합니다.",
+              "source": "synthetic-fixture"
+            }
+          ],
+          "conflicted": false,
+          "display": "Принимает"
+        },
+        {
+          "key": "uninsured",
+          "label": "Приём без государственной страховки",
+          "status": "Confirmed in simulation",
+          "value": true,
+          "evidence": [
+            {
+              "transcriptId": 14,
+              "text": "국민건강보험이 없어도 진료받을 수 있습니다.",
+              "source": "synthetic-fixture"
+            }
+          ],
+          "conflicted": false,
+          "display": "Принимают"
+        },
+        {
+          "key": "cost",
+          "label": "Стоимость консультации",
+          "status": "Confirmed in simulation",
+          "value": {
+            "amount": 20000,
+            "approximate": true
+          },
+          "evidence": [
+            {
+              "transcriptId": 16,
+              "text": "진찰료는 약 2만 원입니다.",
+              "source": "synthetic-fixture"
+            }
+          ],
+          "conflicted": false,
+          "display": "Примерно 20 000 вон"
+        },
+        {
+          "key": "wait",
+          "label": "Время ожидания",
+          "status": "Confirmed in simulation",
+          "value": {
+            "minutes": 15,
+            "approximate": false
+          },
+          "evidence": [
+            {
+              "transcriptId": 18,
+              "text": "지금 대기 시간은 15분입니다.",
+              "source": "synthetic-fixture"
+            }
+          ],
+          "conflicted": false,
+          "display": "15 минут"
+        }
+      ],
+      "pendingRelay": null,
+      "sheets": {
+        "label": "데모용 가상 정보 — 실제 환자 정보 아님.",
+        "reception": "접수용: 나이: 7세 / 건강보험: 국민건강보험 없음.",
+        "doctor": "진료용: 증상: 기침 / 증상 기간: 2일."
+      },
+      "readbackKorean": "시뮬레이션에서 확인된 내용을 말씀드리겠습니다. 오늘 진료합니다. 오늘 여자 의사 선생님 진료는 불가능합니다. 다른 의사 선생님 진료가 가능합니다. 국민건강보험이 없어도 진료받을 수 있습니다. 진찰료는 약 20000원입니다. 대기 시간은 15분입니다. 감사합니다.",
+      "transcript": [
+        {
+          "id": 1,
+          "role": "assistant",
+          "text": "안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?",
+          "language": "ko",
+          "source": "local-script"
+        },
+        {
+          "id": 2,
+          "role": "receptionist",
+          "text": "네, 오늘 진료합니다.",
+          "language": "ko",
+          "source": "synthetic-fixture"
+        },
+        {
+          "id": 3,
+          "role": "assistant",
+          "text": "오늘 여자 의사 선생님께 진료를 받을 수 있나요?",
+          "language": "ko",
+          "source": "local-script"
+        },
+        {
+          "id": 4,
+          "role": "receptionist",
+          "text": "아이는 몇 살인가요?",
+          "language": "ko",
+          "source": "synthetic-fixture"
+        },
+        {
+          "id": 5,
+          "role": "assistant",
+          "text": "아이는 7세입니다. 오늘 여자 의사 선생님께 진료를 받을 수 있나요?",
+          "language": "ko",
+          "source": "local-script"
+        },
+        {
+          "id": 6,
+          "role": "receptionist",
+          "text": "오늘 여자 의사 선생님은 진료하지 않습니다.",
+          "language": "ko",
+          "source": "synthetic-fixture"
+        },
+        {
+          "id": 7,
+          "role": "assistant",
+          "text": "다른 의사 선생님께 진료를 받을 수 있나요?",
+          "language": "ko",
+          "source": "local-script"
+        },
+        {
+          "id": 8,
+          "role": "receptionist",
+          "text": "다른 의사 선생님은 진료 가능합니다.",
+          "language": "ko",
+          "source": "synthetic-fixture"
+        },
+        {
+          "id": 9,
+          "role": "assistant",
+          "text": "국민건강보험이 없는 환자도 진료를 받을 수 있나요?",
+          "language": "ko",
+          "source": "local-script"
+        },
+        {
+          "id": 10,
+          "role": "receptionist",
+          "text": "처음 방문하시나요?",
+          "language": "ko",
+          "source": "synthetic-fixture"
+        },
+        {
+          "id": 11,
+          "role": "assistant",
+          "text": "잠시만 기다려 주세요. 사용자에게 확인하겠습니다.",
+          "language": "ko",
+          "source": "local-script"
+        },
+        {
+          "id": 12,
+          "role": "user",
+          "text": "Да.",
+          "language": "ru",
+          "source": "typed-relay"
+        },
+        {
+          "id": 13,
+          "role": "assistant",
+          "text": "네, 처음 방문입니다.",
+          "language": "ko",
+          "source": "local-script"
+        },
+        {
+          "id": 14,
+          "role": "receptionist",
+          "text": "국민건강보험이 없어도 진료받을 수 있습니다.",
+          "language": "ko",
+          "source": "synthetic-fixture"
+        },
+        {
+          "id": 15,
+          "role": "assistant",
+          "text": "국민건강보험이 없으면 진찰료가 대략 얼마인가요?",
+          "language": "ko",
+          "source": "local-script"
+        },
+        {
+          "id": 16,
+          "role": "receptionist",
+          "text": "진찰료는 약 2만 원입니다.",
+          "language": "ko",
+          "source": "synthetic-fixture"
+        },
+        {
+          "id": 17,
+          "role": "assistant",
+          "text": "지금 대기 시간은 몇 분인가요?",
+          "language": "ko",
+          "source": "local-script"
+        },
+        {
+          "id": 18,
+          "role": "receptionist",
+          "text": "지금 대기 시간은 15분입니다.",
+          "language": "ko",
+          "source": "synthetic-fixture"
+        },
+        {
+          "id": 19,
+          "role": "assistant",
+          "text": "감사합니다. 확인된 내용을 정리하겠습니다.",
+          "language": "ko",
+          "source": "local-script"
+        },
+        {
+          "id": 20,
+          "role": "assistant",
+          "text": "시뮬레이션에서 확인된 내용을 말씀드리겠습니다. 오늘 진료합니다. 오늘 여자 의사 선생님 진료는 불가능합니다. 다른 의사 선생님 진료가 가능합니다. 국민건강보험이 없어도 진료받을 수 있습니다. 진찰료는 약 20000원입니다. 대기 시간은 15분입니다. 감사합니다.",
+          "language": "ko",
+          "source": "local-script"
+        }
+      ],
+      "limitations": [
+        "Deterministic local Korean phrase matching; no general AI translation or real clinic verification.",
+        "Typed and scripted input do not verify live microphone recognition.",
+        "Value hypothesis: Unverified; no actual user feedback."
+      ]
+    }
+  },
+  "safetyCases": {
+    "ambiguous": {
+      "simulation": true,
+      "label": "Simulated call — fictional example; no real clinic contacted.",
+      "complete": false,
+      "summary": "Подтверждённых сведений о клинике пока нет. Все неуточнённые данные — Unclear.",
+      "facts": [
+        {
+          "key": "open",
+          "label": "Клиника открыта",
+          "status": "Unclear",
+          "value": null,
+          "evidence": [],
+          "conflicted": false,
+          "display": "Неясно"
+        },
+        {
+          "key": "femaleDoctor",
+          "label": "Женщина-врач сегодня",
+          "status": "Unclear",
+          "value": null,
+          "evidence": [],
+          "conflicted": false,
+          "display": "Неясно"
+        },
+        {
+          "key": "otherDoctor",
+          "label": "Другой врач",
+          "status": "Unclear",
+          "value": null,
+          "evidence": [],
+          "conflicted": false,
+          "display": "Неясно"
+        },
+        {
+          "key": "uninsured",
+          "label": "Приём без государственной страховки",
+          "status": "Unclear",
+          "value": null,
+          "evidence": [],
+          "conflicted": false,
+          "display": "Неясно"
+        },
+        {
+          "key": "cost",
+          "label": "Стоимость консультации",
+          "status": "Unclear",
+          "value": null,
+          "evidence": [],
+          "conflicted": false,
+          "display": "Неясно"
+        },
+        {
+          "key": "wait",
+          "label": "Время ожидания",
+          "status": "Unclear",
+          "value": null,
+          "evidence": [
+            {
+              "transcriptId": 2,
+              "text": "아마 대기 시간은 15분일 것 같아요.",
+              "source": "synthetic-fixture"
+            }
+          ],
+          "conflicted": false,
+          "display": "Неясно"
+        }
+      ],
+      "pendingRelay": null,
+      "sheets": {
+        "label": "데모용 가상 정보 — 실제 환자 정보 아님.",
+        "reception": "접수용: 나이: 7세 / 건강보험: 국민건강보험 없음.",
+        "doctor": "진료용: 증상: 기침 / 증상 기간: 2일."
+      },
+      "readbackKorean": "시뮬레이션에서 확인된 정보가 없습니다. 확인되지 않은 사항은 미확인으로 남기겠습니다.",
+      "transcript": [
+        {
+          "id": 1,
+          "role": "assistant",
+          "text": "안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?",
+          "language": "ko",
+          "source": "local-script"
+        },
+        {
+          "id": 2,
+          "role": "receptionist",
+          "text": "아마 대기 시간은 15분일 것 같아요.",
+          "language": "ko",
+          "source": "synthetic-fixture"
+        },
+        {
+          "id": 3,
+          "role": "assistant",
+          "text": "죄송하지만 답변을 명확하게 확인하지 못했습니다. 오늘 진료하시나요?",
+          "language": "ko",
+          "source": "local-script"
+        }
+      ],
+      "limitations": [
+        "Deterministic local Korean phrase matching; no general AI translation or real clinic verification.",
+        "Typed and scripted input do not verify live microphone recognition.",
+        "Value hypothesis: Unverified; no actual user feedback."
+      ]
+    },
+    "missingUserResponse": {
+      "simulation": true,
+      "label": "Simulated call — fictional example; no real clinic contacted.",
+      "complete": false,
+      "summary": "Подтверждённых сведений о клинике пока нет. Все неуточнённые данные — Unclear.",
+      "facts": [
+        {
+          "key": "open",
+          "label": "Клиника открыта",
+          "status": "Unclear",
+          "value": null,
+          "evidence": [],
+          "conflicted": false,
+          "display": "Неясно"
+        },
+        {
+          "key": "femaleDoctor",
+          "label": "Женщина-врач сегодня",
+          "status": "Unclear",
+          "value": null,
+          "evidence": [],
+          "conflicted": false,
+          "display": "Неясно"
+        },
+        {
+          "key": "otherDoctor",
+          "label": "Другой врач",
+          "status": "Unclear",
+          "value": null,
+          "evidence": [],
+          "conflicted": false,
+          "display": "Неясно"
+        },
+        {
+          "key": "uninsured",
+          "label": "Приём без государственной страховки",
+          "status": "Unclear",
+          "value": null,
+          "evidence": [],
+          "conflicted": false,
+          "display": "Неясно"
+        },
+        {
+          "key": "cost",
+          "label": "Стоимость консультации",
+          "status": "Unclear",
+          "value": null,
+          "evidence": [],
+          "conflicted": false,
+          "display": "Неясно"
+        },
+        {
+          "key": "wait",
+          "label": "Время ожидания",
+          "status": "Unclear",
+          "value": null,
+          "evidence": [],
+          "conflicted": false,
+          "display": "Неясно"
+        }
+      ],
+      "pendingRelay": {
+        "kind": "firstVisit",
+        "question": "처음 방문하시나요?",
+        "russian": "Вы впервые в этой клинике?",
+        "transcriptId": 2,
+        "status": "Unclear"
+      },
+      "sheets": {
+        "label": "데모용 가상 정보 — 실제 환자 정보 아님.",
+        "reception": "접수용: 나이: 7세 / 건강보험: 국민건강보험 없음.",
+        "doctor": "진료용: 증상: 기침 / 증상 기간: 2일."
+      },
+      "readbackKorean": "시뮬레이션에서 확인된 정보가 없습니다. 확인되지 않은 사항은 미확인으로 남기겠습니다.",
+      "transcript": [
+        {
+          "id": 1,
+          "role": "assistant",
+          "text": "안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?",
+          "language": "ko",
+          "source": "local-script"
+        },
+        {
+          "id": 2,
+          "role": "receptionist",
+          "text": "처음 방문하시나요?",
+          "language": "ko",
+          "source": "synthetic-fixture"
+        },
+        {
+          "id": 3,
+          "role": "assistant",
+          "text": "잠시만 기다려 주세요. 사용자에게 확인하겠습니다.",
+          "language": "ko",
+          "source": "local-script"
+        },
+        {
+          "id": 4,
+          "role": "assistant",
+          "text": "시뮬레이션에서 확인된 정보가 없습니다. 확인되지 않은 사항은 미확인으로 남기겠습니다.",
+          "language": "ko",
+          "source": "local-script"
+        }
+      ],
+      "limitations": [
+        "Deterministic local Korean phrase matching; no general AI translation or real clinic verification.",
+        "Typed and scripted input do not verify live microphone recognition.",
+        "Value hypothesis: Unverified; no actual user feedback."
+      ]
+    },
+    "sameTurnContradiction": {
+      "key": "femaleDoctor",
+      "label": "Женщина-врач сегодня",
+      "status": "Unclear",
+      "value": null,
+      "evidence": [
+        {
+          "transcriptId": 2,
+          "text": "여자 의사 선생님은 진료 가능합니다. 여자 의사 선생님은 진료 불가능합니다.",
+          "source": "synthetic-fixture"
+        }
+      ],
+      "conflicted": true,
+      "display": "Неясно"
+    }
+  }
+}

@@ -1,0 +1,831 @@
+{
+  "title": "YOKOBU isolated browser logic and layout checks",
+  "timestamp": "2026-09-29T03:48:11.135Z",
+  "baseURL": "http://localhost:4173",
+  "simulation": true,
+  "method": "Typed fictional input and controlled synthetic recognition success/error events with synthetic speech output in an isolated browser profile. No hardware audio capture or playback.",
+  "realMicrophoneVerified": false,
+  "audibleKoreanVerified": false,
+  "twoPhonesVerified": false,
+  "checks": [
+    {
+      "name": "empty-request",
+      "status": "passed",
+      "speech": "SYNTHETIC — not actual microphone or audible speech",
+      "networkBlocked": [],
+      "details": {
+        "expected": "Stay at request with guidance; no fabricated result"
+      },
+      "actual": {
+        "visibleStages": [
+          "request-stage"
+        ],
+        "requestError": "Напишите запрос или нажмите «Вставить пример».",
+        "detailsError": "",
+        "koreanPrompt": "",
+        "micStatus": "버튼을 누르고 한국어로 답해 주세요.",
+        "speechStatus": "",
+        "relayQuestion": "",
+        "summary": "",
+        "facts": "",
+        "unresolvedRelay": "",
+        "factValues": [],
+        "conversation": "",
+        "receptionSheet": "",
+        "doctorSheet": "",
+        "verificationNote": "",
+        "syntheticSpeech": {
+          "source": "Synthetic browser test doubles; no microphone or speakers used",
+          "spokenTexts": [],
+          "recognitionStarts": 0,
+          "recognitionStops": 0,
+          "recognitionAborts": 0,
+          "getUserMediaCalls": 0,
+          "tracks": [],
+          "permissionRequests": [],
+          "emittedResults": [],
+          "realMicrophoneVerified": false,
+          "audibleSpeechVerified": false
+        }
+      },
+      "pageErrors": []
+    },
+    {
+      "name": "fixture-relay-summary-sheets",
+      "status": "passed",
+      "speech": "SYNTHETIC — not actual microphone or audible speech",
+      "networkBlocked": [],
+      "details": {
+        "expectedSummary": "Клиника открыта. Женщина-врач сегодня не принимает, но доступен другой врач. Принимают без корейской государственной медицинской страховки. Консультация — примерно 20 000 вон. Сейчас ожидание — 15 минут.",
+        "actualSummary": "Клиника открыта. Женщина-врач сегодня не принимает, но доступен другой врач. Принимают без корейской государственной медицинской страховки. Консультация — примерно 20 000 вон. Сейчас ожидание — 15 минут.",
+        "input": "Typed fictional text; synthesis callbacks mocked"
+      },
+      "actual": {
+        "visibleStages": [
+          "result-stage"
+        ],
+        "requestError": "",
+        "detailsError": "",
+        "koreanPrompt": "시뮬레이션에서 확인된 내용을 말씀드리겠습니다. 오늘 진료합니다. 오늘 여자 의사 선생님 진료는 불가능합니다. 다른 의사 선생님 진료가 가능합니다. 국민건강보험이 없어도 진료받을 수 있습니다. 진찰료는 약 20000원입니다. 대기 시간은 15분입니다. 감사합니다.",
+        "micStatus": "버튼을 누르고 한국어로 답해 주세요.",
+        "speechStatus": "한국어 음성 재생 완료. 실제로 들렸는지는 팀원이 확인해 주세요.",
+        "relayQuestion": "Вы впервые в этой клинике?",
+        "summary": "Клиника открыта. Женщина-врач сегодня не принимает, но доступен другой врач. Принимают без корейской государственной медицинской страховки. Консультация — примерно 20 000 вон. Сейчас ожидание — 15 минут.",
+        "facts": "Клиника открытаОткрытаConfirmed in simulationОснование: 네, 오늘 진료합니다.Женщина-врач сегодняНе принимаетConfirmed in simulationОснование: 오늘 여자 의사 선생님은 진료하지 않습니다.Другой врачПринимаетConfirmed in simulationОснование: 다른 의사 선생님은 진료 가능합니다.Приём без государственной страховкиПринимаютConfirmed in simulationОснование: 국민건강보험이 없어도 진료받을 수 있습니다.Стоимость консультацииПримерно 20 000 вонConfirmed in simulationОснование: 진찰료는 약 2만 원입니다.Время ожидания15 минутConfirmed in simulationОснование: 지금 대기 시간은 15분입니다.",
+        "unresolvedRelay": "",
+        "factValues": [
+          "Открыта",
+          "Не принимает",
+          "Принимает",
+          "Принимают",
+          "Примерно 20 000 вон",
+          "15 минут"
+        ],
+        "conversation": "ВЫ · ВЫМЫШЛЕННЫЙ ЗАПРОСУзнайте в этой детской клинике, принимает ли сегодня женщина-врач, принимают ли пациентов без корейской государственной медицинской страховки и сколько сейчас ждать.YOKOBUНачинаем симуляцию. Если клиника спросит о том, чего мы ещё не знаем, я передам вопрос вам.YOKOBU · 한국어안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?АДМИНИСТРАТОР · ТЕКСТОВЫЙ ВВОД네, 오늘 진료합니다.YOKOBU · 한국어오늘 여자 의사 선생님께 진료를 받을 수 있나요?АДМИНИСТРАТОР · ТЕКСТОВЫЙ ВВОД아이는 몇 살인가요?YOKOBU · 한국어아이는 7세입니다. 오늘 여자 의사 선생님께 진료를 받을 수 있나요?АДМИНИСТРАТОР · ТЕКСТОВЫЙ ВВОД처음 방문하시나요?YOKOBU · 한국어잠시만 기다려 주세요. 사용자에게 확인하겠습니다.ВЫ · ОТВЕТ КЛИНИКЕДа.YOKOBU · 한국어네, 처음 방문입니다.АДМИНИСТРАТОР · ТЕКСТОВЫЙ ВВОД오늘 여자 의사 선생님은 진료하지 않습니다.YOKOBU · 한국어다른 의사 선생님께 진료를 받을 수 있나요?АДМИНИСТРАТОР · ТЕКСТОВЫЙ ВВОД다른 의사 선생님은 진료 가능합니다.YOKOBU · 한국어국민건강보험이 없는 환자도 진료를 받을 수 있나요?АДМИНИСТРАТОР · ТЕКСТОВЫЙ ВВОД국민건강보험이 없어도 진료받을 수 있습니다.YOKOBU · 한국어국민건강보험이 없으면 진찰료가 대략 얼마인가요?АДМИНИСТРАТОР · ТЕКСТОВЫЙ ВВОД진찰료는 약 2만 원입니다.YOKOBU · 한국어지금 대기 시간은 몇 분인가요?АДМИНИСТРАТОР · ТЕКСТОВЫЙ ВВОД지금 대기 시간은 15분입니다.YOKOBU · 한국어감사합니다. 확인된 내용을 정리하겠습니다.",
+        "receptionSheet": "접수용: 나이: 7세 / 건강보험: 국민건강보험 없음.",
+        "doctorSheet": "진료용: 증상: 기침 / 증상 기간: 2일.",
+        "verificationNote": "Вымышленная симуляция. Передано реплик с микрофона: 0. Другие способы ввода отмечены отдельно. Общая языковая модель и реальный телефон не подключены. Пользовательская ценность: Unverified.",
+        "syntheticSpeech": {
+          "source": "Synthetic browser test doubles; no microphone or speakers used",
+          "spokenTexts": [
+            "안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?",
+            "오늘 여자 의사 선생님께 진료를 받을 수 있나요?",
+            "아이는 7세입니다. 오늘 여자 의사 선생님께 진료를 받을 수 있나요?",
+            "잠시만 기다려 주세요. 사용자에게 확인하겠습니다.",
+            "네, 처음 방문입니다. 오늘 여자 의사 선생님께 진료를 받을 수 있나요?",
+            "다른 의사 선생님께 진료를 받을 수 있나요?",
+            "국민건강보험이 없는 환자도 진료를 받을 수 있나요?",
+            "국민건강보험이 없으면 진찰료가 대략 얼마인가요?",
+            "지금 대기 시간은 몇 분인가요?",
+            "감사합니다. 확인된 내용을 정리하겠습니다.",
+            "시뮬레이션에서 확인된 내용을 말씀드리겠습니다. 오늘 진료합니다. 오늘 여자 의사 선생님 진료는 불가능합니다. 다른 의사 선생님 진료가 가능합니다. 국민건강보험이 없어도 진료받을 수 있습니다. 진찰료는 약 20000원입니다. 대기 시간은 15분입니다. 감사합니다."
+          ],
+          "recognitionStarts": 0,
+          "recognitionStops": 0,
+          "recognitionAborts": 0,
+          "getUserMediaCalls": 0,
+          "tracks": [],
+          "permissionRequests": [],
+          "emittedResults": [],
+          "realMicrophoneVerified": false,
+          "audibleSpeechVerified": false
+        }
+      },
+      "pageErrors": []
+    },
+    {
+      "name": "ambiguous-input-no-fabrication",
+      "status": "passed",
+      "speech": "SYNTHETIC — not actual microphone or audible speech",
+      "networkBlocked": [],
+      "details": {
+        "expected": "All clinic facts Unclear; no fixture defaults"
+      },
+      "actual": {
+        "visibleStages": [
+          "result-stage"
+        ],
+        "requestError": "",
+        "detailsError": "",
+        "koreanPrompt": "시뮬레이션에서 확인된 정보가 없습니다. 확인되지 않은 사항은 미확인으로 남기겠습니다.",
+        "micStatus": "버튼을 누르고 한국어로 답해 주세요.",
+        "speechStatus": "한국어 음성 출력 중 · Synthetic Korean test voice",
+        "relayQuestion": "",
+        "summary": "Подтверждённых сведений о клинике пока нет. Все неуточнённые данные — Unclear.",
+        "facts": "Клиника открытаНеясноUnclearОснование: 잘 모르겠어요. 확인이 필요합니다.Женщина-врач сегодняНеясноUnclearНет однозначного ответа в разговоре.Другой врачНеясноUnclearНет однозначного ответа в разговоре.Приём без государственной страховкиНеясноUnclearНет однозначного ответа в разговоре.Стоимость консультацииНеясноUnclearНет однозначного ответа в разговоре.Время ожиданияНеясноUnclearНет однозначного ответа в разговоре.",
+        "unresolvedRelay": "",
+        "factValues": [
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "Неясно"
+        ],
+        "conversation": "ВЫ · ВЫМЫШЛЕННЫЙ ЗАПРОСУзнайте в этой детской клинике, принимает ли сегодня женщина-врач, принимают ли пациентов без корейской государственной медицинской страховки и сколько сейчас ждать.YOKOBUНачинаем симуляцию. Если клиника спросит о том, чего мы ещё не знаем, я передам вопрос вам.YOKOBU · 한국어안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?АДМИНИСТРАТОР · ТЕКСТОВЫЙ ВВОД잘 모르겠어요. 확인이 필요합니다.YOKOBUОтвет неоднозначен или не распознан локальным сценарием. Данные не подтверждены.YOKOBU · 한국어죄송하지만 답변을 명확하게 확인하지 못했습니다. 오늘 진료하시나요?",
+        "receptionSheet": "접수용: 나이: 7세 / 건강보험: 국민건강보험 없음.",
+        "doctorSheet": "진료용: 증상: 기침 / 증상 기간: 2일.",
+        "verificationNote": "Вымышленная симуляция. Передано реплик с микрофона: 0. Другие способы ввода отмечены отдельно. Общая языковая модель и реальный телефон не подключены. Пользовательская ценность: Unverified.",
+        "syntheticSpeech": {
+          "source": "Synthetic browser test doubles; no microphone or speakers used",
+          "spokenTexts": [
+            "안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?",
+            "죄송하지만 답변을 명확하게 확인하지 못했습니다. 오늘 진료하시나요?",
+            "시뮬레이션에서 확인된 정보가 없습니다. 확인되지 않은 사항은 미확인으로 남기겠습니다."
+          ],
+          "recognitionStarts": 0,
+          "recognitionStops": 0,
+          "recognitionAborts": 0,
+          "getUserMediaCalls": 0,
+          "tracks": [],
+          "permissionRequests": [],
+          "emittedResults": [],
+          "realMicrophoneVerified": false,
+          "audibleSpeechVerified": false
+        }
+      },
+      "pageErrors": []
+    },
+    {
+      "name": "changed-wait",
+      "status": "passed",
+      "speech": "SYNTHETIC — not actual microphone or audible speech",
+      "networkBlocked": [],
+      "details": {
+        "expected": "Actual 45-minute wait, other facts unresolved",
+        "actualSummary": "Сейчас ожидание — 45 минут."
+      },
+      "actual": {
+        "visibleStages": [
+          "result-stage"
+        ],
+        "requestError": "",
+        "detailsError": "",
+        "koreanPrompt": "시뮬레이션에서 확인된 내용을 말씀드리겠습니다. 대기 시간은 45분입니다. 감사합니다.",
+        "micStatus": "버튼을 누르고 한국어로 답해 주세요.",
+        "speechStatus": "한국어 음성 출력 중 · Synthetic Korean test voice",
+        "relayQuestion": "",
+        "summary": "Сейчас ожидание — 45 минут.",
+        "facts": "Клиника открытаНеясноUnclearНет однозначного ответа в разговоре.Женщина-врач сегодняНеясноUnclearНет однозначного ответа в разговоре.Другой врачНеясноUnclearНет однозначного ответа в разговоре.Приём без государственной страховкиНеясноUnclearНет однозначного ответа в разговоре.Стоимость консультацииНеясноUnclearНет однозначного ответа в разговоре.Время ожидания45 минутConfirmed in simulationОснование: 대기 시간은 45분입니다.",
+        "unresolvedRelay": "",
+        "factValues": [
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "45 минут"
+        ],
+        "conversation": "ВЫ · ВЫМЫШЛЕННЫЙ ЗАПРОСУзнайте в этой детской клинике, принимает ли сегодня женщина-врач, принимают ли пациентов без корейской государственной медицинской страховки и сколько сейчас ждать.YOKOBUНачинаем симуляцию. Если клиника спросит о том, чего мы ещё не знаем, я передам вопрос вам.YOKOBU · 한국어안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?АДМИНИСТРАТОР · ТЕКСТОВЫЙ ВВОД대기 시간은 45분입니다.YOKOBU · 한국어오늘 진료하시나요?",
+        "receptionSheet": "접수용: 나이: 7세 / 건강보험: 국민건강보험 없음.",
+        "doctorSheet": "진료용: 증상: 기침 / 증상 기간: 2일.",
+        "verificationNote": "Вымышленная симуляция. Передано реплик с микрофона: 0. Другие способы ввода отмечены отдельно. Общая языковая модель и реальный телефон не подключены. Пользовательская ценность: Unverified.",
+        "syntheticSpeech": {
+          "source": "Synthetic browser test doubles; no microphone or speakers used",
+          "spokenTexts": [
+            "안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?",
+            "오늘 진료하시나요?",
+            "시뮬레이션에서 확인된 내용을 말씀드리겠습니다. 대기 시간은 45분입니다. 감사합니다."
+          ],
+          "recognitionStarts": 0,
+          "recognitionStops": 0,
+          "recognitionAborts": 0,
+          "getUserMediaCalls": 0,
+          "tracks": [],
+          "permissionRequests": [],
+          "emittedResults": [],
+          "realMicrophoneVerified": false,
+          "audibleSpeechVerified": false
+        }
+      },
+      "pageErrors": []
+    },
+    {
+      "name": "synthetic-microphone-denied",
+      "status": "passed",
+      "speech": "SYNTHETIC — not actual microphone or audible speech",
+      "networkBlocked": [],
+      "details": {
+        "expected": "Visible permission guidance, no fabricated facts",
+        "actualDeniedMechanism": "Synthetic recognition not-allowed / getUserMedia NotAllowedError; no OS/browser permissions changed"
+      },
+      "actual": {
+        "visibleStages": [
+          "result-stage"
+        ],
+        "requestError": "",
+        "detailsError": "",
+        "koreanPrompt": "시뮬레이션에서 확인된 정보가 없습니다. 확인되지 않은 사항은 미확인으로 남기겠습니다.",
+        "micStatus": "마이크 권한이 거부되었습니다. 사이트 설정에서 직접 허용한 뒤 재시도하세요. 답변은 생성되지 않았습니다.",
+        "speechStatus": "한국어 음성 출력 중 · Synthetic Korean test voice",
+        "relayQuestion": "",
+        "summary": "Подтверждённых сведений о клинике пока нет. Все неуточнённые данные — Unclear.",
+        "facts": "Клиника открытаНеясноUnclearНет однозначного ответа в разговоре.Женщина-врач сегодняНеясноUnclearНет однозначного ответа в разговоре.Другой врачНеясноUnclearНет однозначного ответа в разговоре.Приём без государственной страховкиНеясноUnclearНет однозначного ответа в разговоре.Стоимость консультацииНеясноUnclearНет однозначного ответа в разговоре.Время ожиданияНеясноUnclearНет однозначного ответа в разговоре.",
+        "unresolvedRelay": "",
+        "factValues": [
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "Неясно"
+        ],
+        "conversation": "ВЫ · ВЫМЫШЛЕННЫЙ ЗАПРОСУзнайте в этой детской клинике, принимает ли сегодня женщина-врач, принимают ли пациентов без корейской государственной медицинской страховки и сколько сейчас ждать.YOKOBUНачинаем симуляцию. Если клиника спросит о том, чего мы ещё не знаем, я передам вопрос вам.YOKOBU · 한국어안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?",
+        "receptionSheet": "접수용: 나이: 7세 / 건강보험: 국민건강보험 없음.",
+        "doctorSheet": "진료용: 증상: 기침 / 증상 기간: 2일.",
+        "verificationNote": "Вымышленная симуляция. Передано реплик с микрофона: 0. Другие способы ввода отмечены отдельно. Общая языковая модель и реальный телефон не подключены. Пользовательская ценность: Unverified.",
+        "syntheticSpeech": {
+          "source": "Synthetic browser test doubles; no microphone or speakers used",
+          "spokenTexts": [
+            "안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?",
+            "시뮬레이션에서 확인된 정보가 없습니다. 확인되지 않은 사항은 미확인으로 남기겠습니다."
+          ],
+          "recognitionStarts": 0,
+          "recognitionStops": 0,
+          "recognitionAborts": 0,
+          "getUserMediaCalls": 1,
+          "tracks": [],
+          "permissionRequests": [
+            {
+              "id": 1,
+              "state": "synthetic-denied"
+            }
+          ],
+          "emittedResults": [],
+          "realMicrophoneVerified": false,
+          "audibleSpeechVerified": false
+        }
+      },
+      "pageErrors": []
+    },
+    {
+      "name": "synthetic-recognition-success-and-save",
+      "status": "passed",
+      "speech": "SYNTHETIC — not actual microphone or audible speech",
+      "networkBlocked": [],
+      "details": {
+        "expected": "Synthetic final recognition callbacks produce fixture results; unedited interim input is blocked; corrections are labeled; tracks release; download and local save contain valid JSON",
+        "downloadWrapper": "artifacts/browser-synthetic-download.json",
+        "localSavedEvidence": "artifacts/local-runs/simulation-2026-09-29T03-48-17.820Z.json",
+        "provenance": "Synthetic transport marker was added by test request interception before POST; app facts and transcript were unchanged."
+      },
+      "actual": {
+        "visibleStages": [
+          "result-stage"
+        ],
+        "requestError": "",
+        "detailsError": "",
+        "koreanPrompt": "시뮬레이션에서 확인된 내용을 말씀드리겠습니다. 오늘 진료합니다. 오늘 여자 의사 선생님 진료는 불가능합니다. 다른 의사 선생님 진료가 가능합니다. 국민건강보험이 없어도 진료받을 수 있습니다. 진찰료는 약 20000원입니다. 대기 시간은 15분입니다. 감사합니다.",
+        "micStatus": "인식 완료. 텍스트를 확인하고 «이 답변 전달하기»를 눌러 주세요.",
+        "speechStatus": "한국어 음성 재생 완료. 실제로 들렸는지는 팀원이 확인해 주세요.",
+        "relayQuestion": "Вы впервые в этой клинике?",
+        "summary": "Клиника открыта. Женщина-врач сегодня не принимает, но доступен другой врач. Принимают без корейской государственной медицинской страховки. Консультация — примерно 20 000 вон. Сейчас ожидание — 15 минут.",
+        "facts": "Клиника открытаОткрытаConfirmed in simulationОснование: 네, 오늘 진료합니다.Женщина-врач сегодняНе принимаетConfirmed in simulationОснование: 오늘 여자 의사 선생님은 진료하지 않습니다.Другой врачПринимаетConfirmed in simulationОснование: 다른 의사 선생님은 진료 가능합니다.Приём без государственной страховкиПринимаютConfirmed in simulationОснование: 국민건강보험이 없어도 진료받을 수 있습니다.Стоимость консультацииПримерно 20 000 вонConfirmed in simulationОснование: 진찰료는 약 2만 원입니다.Время ожидания15 минутConfirmed in simulationОснование: 지금 대기 시간은 15분입니다.",
+        "unresolvedRelay": "",
+        "factValues": [
+          "Открыта",
+          "Не принимает",
+          "Принимает",
+          "Принимают",
+          "Примерно 20 000 вон",
+          "15 минут"
+        ],
+        "conversation": "ВЫ · ВЫМЫШЛЕННЫЙ ЗАПРОСУзнайте в этой детской клинике, принимает ли сегодня женщина-врач, принимают ли пациентов без корейской государственной медицинской страховки и сколько сейчас ждать.YOKOBUНачинаем симуляцию. Если клиника спросит о том, чего мы ещё не знаем, я передам вопрос вам.YOKOBU · 한국어안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?АДМИНИСТРАТОР · МИКРОФОН네, 오늘 진료합니다.YOKOBU · 한국어오늘 여자 의사 선생님께 진료를 받을 수 있나요?АДМИНИСТРАТОР · ТЕКСТОВЫЙ ВВОД오늘 여자 의사 선생님은 진료하지 않습니다.YOKOBU · 한국어다른 의사 선생님께 진료를 받을 수 있나요?АДМИНИСТРАТОР · МИКРОФОН다른 의사 선생님은 진료 가능합니다.YOKOBU · 한국어국민건강보험이 없는 환자도 진료를 받을 수 있나요?АДМИНИСТРАТОР · МИКРОФОН처음 방문하시나요?YOKOBU · 한국어잠시만 기다려 주세요. 사용자에게 확인하겠습니다.ВЫ · ОТВЕТ КЛИНИКЕДа.YOKOBU · 한국어네, 처음 방문입니다.АДМИНИСТРАТОР · МИКРОФОН국민건강보험이 없어도 진료받을 수 있습니다.YOKOBU · 한국어국민건강보험이 없으면 진찰료가 대략 얼마인가요?АДМИНИСТРАТОР · МИКРОФОН진찰료는 약 2만 원입니다.YOKOBU · 한국어지금 대기 시간은 몇 분인가요?АДМИНИСТРАТОР · МИКРОФОН지금 대기 시간은 15분입니다.YOKOBU · 한국어감사합니다. 확인된 내용을 정리하겠습니다.",
+        "receptionSheet": "접수용: 나이: 7세 / 건강보험: 국민건강보험 없음.",
+        "doctorSheet": "진료용: 증상: 기침 / 증상 기간: 2일.",
+        "verificationNote": "Вымышленная симуляция. Передано реплик с микрофона: 6. Другие способы ввода отмечены отдельно. Общая языковая модель и реальный телефон не подключены. Пользовательская ценность: Unverified.",
+        "syntheticSpeech": {
+          "source": "Synthetic browser test doubles; no microphone or speakers used",
+          "spokenTexts": [
+            "안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?",
+            "오늘 여자 의사 선생님께 진료를 받을 수 있나요?",
+            "다른 의사 선생님께 진료를 받을 수 있나요?",
+            "국민건강보험이 없는 환자도 진료를 받을 수 있나요?",
+            "잠시만 기다려 주세요. 사용자에게 확인하겠습니다.",
+            "네, 처음 방문입니다. 국민건강보험이 없는 환자도 진료를 받을 수 있나요?",
+            "국민건강보험이 없으면 진찰료가 대략 얼마인가요?",
+            "지금 대기 시간은 몇 분인가요?",
+            "감사합니다. 확인된 내용을 정리하겠습니다.",
+            "시뮬레이션에서 확인된 내용을 말씀드리겠습니다. 오늘 진료합니다. 오늘 여자 의사 선생님 진료는 불가능합니다. 다른 의사 선생님 진료가 가능합니다. 국민건강보험이 없어도 진료받을 수 있습니다. 진찰료는 약 20000원입니다. 대기 시간은 15분입니다. 감사합니다."
+          ],
+          "recognitionStarts": 7,
+          "recognitionStops": 0,
+          "recognitionAborts": 1,
+          "getUserMediaCalls": 7,
+          "tracks": [
+            {
+              "id": "synthetic-track-1",
+              "readyState": "ended",
+              "stopCalls": 1
+            },
+            {
+              "id": "synthetic-track-2",
+              "readyState": "ended",
+              "stopCalls": 1
+            },
+            {
+              "id": "synthetic-track-3",
+              "readyState": "ended",
+              "stopCalls": 1
+            },
+            {
+              "id": "synthetic-track-4",
+              "readyState": "ended",
+              "stopCalls": 1
+            },
+            {
+              "id": "synthetic-track-5",
+              "readyState": "ended",
+              "stopCalls": 1
+            },
+            {
+              "id": "synthetic-track-6",
+              "readyState": "ended",
+              "stopCalls": 1
+            },
+            {
+              "id": "synthetic-track-7",
+              "readyState": "ended",
+              "stopCalls": 1
+            }
+          ],
+          "permissionRequests": [
+            {
+              "id": 1,
+              "state": "synthetic-granted"
+            },
+            {
+              "id": 2,
+              "state": "synthetic-granted"
+            },
+            {
+              "id": 3,
+              "state": "synthetic-granted"
+            },
+            {
+              "id": 4,
+              "state": "synthetic-granted"
+            },
+            {
+              "id": 5,
+              "state": "synthetic-granted"
+            },
+            {
+              "id": 6,
+              "state": "synthetic-granted"
+            },
+            {
+              "id": 7,
+              "state": "synthetic-granted"
+            }
+          ],
+          "emittedResults": [
+            {
+              "text": "네, 오늘 진료합니다.",
+              "final": false,
+              "index": 0,
+              "late": false,
+              "synthetic": true
+            },
+            {
+              "text": "네, 오늘 진료합니다.",
+              "final": true,
+              "index": 0,
+              "late": false,
+              "synthetic": true
+            },
+            {
+              "text": "오늘 여자 의사 선생님은 진료하지 않습니다.",
+              "final": false,
+              "index": 1,
+              "late": false,
+              "synthetic": true
+            },
+            {
+              "text": "이전 인식이 수정한 내용을 덮어쓰면 안 됩니다.",
+              "final": true,
+              "index": 1,
+              "late": true,
+              "synthetic": true
+            },
+            {
+              "text": "다른 의사 선생님은 진료 가능합니다.",
+              "final": true,
+              "index": 2,
+              "late": false,
+              "synthetic": true
+            },
+            {
+              "text": "처음 방문하시나요?",
+              "final": true,
+              "index": 3,
+              "late": false,
+              "synthetic": true
+            },
+            {
+              "text": "국민건강보험이 없어도 진료받을 수 있습니다.",
+              "final": true,
+              "index": 4,
+              "late": false,
+              "synthetic": true
+            },
+            {
+              "text": "진찰료는 약 2만 원입니다.",
+              "final": true,
+              "index": 5,
+              "late": false,
+              "synthetic": true
+            },
+            {
+              "text": "지금 대기 시간은 15분입니다.",
+              "final": true,
+              "index": 6,
+              "late": false,
+              "synthetic": true
+            }
+          ],
+          "realMicrophoneVerified": false,
+          "audibleSpeechVerified": false
+        }
+      },
+      "pageErrors": []
+    },
+    {
+      "name": "synthetic-stale-events-and-draft-reset",
+      "status": "passed",
+      "speech": "SYNTHETIC — not actual microphone or audible speech",
+      "networkBlocked": [],
+      "details": {
+        "expected": "Old result/error ignored; new draft starts empty; no-speech releases tracks and fabricates no answer"
+      },
+      "actual": {
+        "visibleStages": [
+          "result-stage"
+        ],
+        "requestError": "",
+        "detailsError": "",
+        "koreanPrompt": "시뮬레이션에서 확인된 정보가 없습니다. 확인되지 않은 사항은 미확인으로 남기겠습니다.",
+        "micStatus": "말소리가 인식되지 않았습니다. 다시 시도해 주세요. 답변은 생성되지 않았습니다. 명시적 텍스트 대체 입력을 사용할 수 있습니다.",
+        "speechStatus": "한국어 음성 출력 중 · Synthetic Korean test voice",
+        "relayQuestion": "",
+        "summary": "Подтверждённых сведений о клинике пока нет. Все неуточнённые данные — Unclear.",
+        "facts": "Клиника открытаНеясноUnclearНет однозначного ответа в разговоре.Женщина-врач сегодняНеясноUnclearНет однозначного ответа в разговоре.Другой врачНеясноUnclearНет однозначного ответа в разговоре.Приём без государственной страховкиНеясноUnclearНет однозначного ответа в разговоре.Стоимость консультацииНеясноUnclearНет однозначного ответа в разговоре.Время ожиданияНеясноUnclearНет однозначного ответа в разговоре.",
+        "unresolvedRelay": "",
+        "factValues": [
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "Неясно"
+        ],
+        "conversation": "ВЫ · ВЫМЫШЛЕННЫЙ ЗАПРОСУзнайте в этой детской клинике, принимает ли сегодня женщина-врач, принимают ли пациентов без корейской государственной медицинской страховки и сколько сейчас ждать.YOKOBUНачинаем симуляцию. Если клиника спросит о том, чего мы ещё не знаем, я передам вопрос вам.YOKOBU · 한국어안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?",
+        "receptionSheet": "접수용: 나이: 7세 / 건강보험: 국민건강보험 없음.",
+        "doctorSheet": "진료용: 증상: 기침 / 증상 기간: 2일.",
+        "verificationNote": "Вымышленная симуляция. Передано реплик с микрофона: 0. Другие способы ввода отмечены отдельно. Общая языковая модель и реальный телефон не подключены. Пользовательская ценность: Unverified.",
+        "syntheticSpeech": {
+          "source": "Synthetic browser test doubles; no microphone or speakers used",
+          "spokenTexts": [
+            "안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?",
+            "시뮬레이션에서 확인된 정보가 없습니다. 확인되지 않은 사항은 미확인으로 남기겠습니다."
+          ],
+          "recognitionStarts": 2,
+          "recognitionStops": 0,
+          "recognitionAborts": 1,
+          "getUserMediaCalls": 2,
+          "tracks": [
+            {
+              "id": "synthetic-track-1",
+              "readyState": "ended",
+              "stopCalls": 1
+            },
+            {
+              "id": "synthetic-track-2",
+              "readyState": "ended",
+              "stopCalls": 1
+            }
+          ],
+          "permissionRequests": [
+            {
+              "id": 1,
+              "state": "synthetic-granted"
+            },
+            {
+              "id": 2,
+              "state": "synthetic-granted"
+            }
+          ],
+          "emittedResults": [
+            {
+              "text": "네, 오늘 진료합니다.",
+              "final": true,
+              "index": 0,
+              "late": false,
+              "synthetic": true
+            },
+            {
+              "text": "대기 시간은 999분입니다.",
+              "final": true,
+              "index": 0,
+              "late": true,
+              "synthetic": true
+            }
+          ],
+          "realMicrophoneVerified": false,
+          "audibleSpeechVerified": false
+        }
+      },
+      "pageErrors": []
+    },
+    {
+      "name": "synthetic-permission-cancel-race",
+      "status": "passed",
+      "speech": "SYNTHETIC — not actual microphone or audible speech",
+      "networkBlocked": [],
+      "details": {
+        "expected": "One permission request, no recognition after cancel, eventual synthetic stream released"
+      },
+      "actual": {
+        "visibleStages": [
+          "result-stage"
+        ],
+        "requestError": "",
+        "detailsError": "",
+        "koreanPrompt": "시뮬레이션에서 확인된 정보가 없습니다. 확인되지 않은 사항은 미확인으로 남기겠습니다.",
+        "micStatus": "마이크 입력을 멈췄습니다. 임시 결과는 직접 수정하거나 다시 인식해 주세요.",
+        "speechStatus": "한국어 음성 재생 완료. 실제로 들렸는지는 팀원이 확인해 주세요.",
+        "relayQuestion": "",
+        "summary": "Подтверждённых сведений о клинике пока нет. Все неуточнённые данные — Unclear.",
+        "facts": "Клиника открытаНеясноUnclearНет однозначного ответа в разговоре.Женщина-врач сегодняНеясноUnclearНет однозначного ответа в разговоре.Другой врачНеясноUnclearНет однозначного ответа в разговоре.Приём без государственной страховкиНеясноUnclearНет однозначного ответа в разговоре.Стоимость консультацииНеясноUnclearНет однозначного ответа в разговоре.Время ожиданияНеясноUnclearНет однозначного ответа в разговоре.",
+        "unresolvedRelay": "",
+        "factValues": [
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "Неясно"
+        ],
+        "conversation": "ВЫ · ВЫМЫШЛЕННЫЙ ЗАПРОСУзнайте в этой детской клинике, принимает ли сегодня женщина-врач, принимают ли пациентов без корейской государственной медицинской страховки и сколько сейчас ждать.YOKOBUНачинаем симуляцию. Если клиника спросит о том, чего мы ещё не знаем, я передам вопрос вам.YOKOBU · 한국어안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?",
+        "receptionSheet": "접수용: 나이: 7세 / 건강보험: 국민건강보험 없음.",
+        "doctorSheet": "진료용: 증상: 기침 / 증상 기간: 2일.",
+        "verificationNote": "Вымышленная симуляция. Передано реплик с микрофона: 0. Другие способы ввода отмечены отдельно. Общая языковая модель и реальный телефон не подключены. Пользовательская ценность: Unverified.",
+        "syntheticSpeech": {
+          "source": "Synthetic browser test doubles; no microphone or speakers used",
+          "spokenTexts": [
+            "안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?",
+            "시뮬레이션에서 확인된 정보가 없습니다. 확인되지 않은 사항은 미확인으로 남기겠습니다."
+          ],
+          "recognitionStarts": 0,
+          "recognitionStops": 0,
+          "recognitionAborts": 0,
+          "getUserMediaCalls": 1,
+          "tracks": [
+            {
+              "id": "synthetic-track-1",
+              "readyState": "ended",
+              "stopCalls": 1
+            }
+          ],
+          "permissionRequests": [
+            {
+              "id": 1,
+              "state": "synthetic-granted"
+            }
+          ],
+          "emittedResults": [],
+          "realMicrophoneVerified": false,
+          "audibleSpeechVerified": false
+        }
+      },
+      "pageErrors": []
+    },
+    {
+      "name": "synthetic-finish-during-permission",
+      "status": "passed",
+      "speech": "SYNTHETIC — not actual microphone or audible speech",
+      "networkBlocked": [],
+      "details": {
+        "expected": "Result remains Unclear; late permission resolution releases stream without hidden recognition"
+      },
+      "actual": {
+        "visibleStages": [
+          "result-stage"
+        ],
+        "requestError": "",
+        "detailsError": "",
+        "koreanPrompt": "시뮬레이션에서 확인된 정보가 없습니다. 확인되지 않은 사항은 미확인으로 남기겠습니다.",
+        "micStatus": "마이크 접근 권한을 확인하는 중… 다시 누르면 취소됩니다.",
+        "speechStatus": "한국어 음성 출력 중 · Synthetic Korean test voice",
+        "relayQuestion": "",
+        "summary": "Подтверждённых сведений о клинике пока нет. Все неуточнённые данные — Unclear.",
+        "facts": "Клиника открытаНеясноUnclearНет однозначного ответа в разговоре.Женщина-врач сегодняНеясноUnclearНет однозначного ответа в разговоре.Другой врачНеясноUnclearНет однозначного ответа в разговоре.Приём без государственной страховкиНеясноUnclearНет однозначного ответа в разговоре.Стоимость консультацииНеясноUnclearНет однозначного ответа в разговоре.Время ожиданияНеясноUnclearНет однозначного ответа в разговоре.",
+        "unresolvedRelay": "",
+        "factValues": [
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "Неясно"
+        ],
+        "conversation": "ВЫ · ВЫМЫШЛЕННЫЙ ЗАПРОСУзнайте в этой детской клинике, принимает ли сегодня женщина-врач, принимают ли пациентов без корейской государственной медицинской страховки и сколько сейчас ждать.YOKOBUНачинаем симуляцию. Если клиника спросит о том, чего мы ещё не знаем, я передам вопрос вам.YOKOBU · 한국어안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?",
+        "receptionSheet": "접수용: 나이: 7세 / 건강보험: 국민건강보험 없음.",
+        "doctorSheet": "진료용: 증상: 기침 / 증상 기간: 2일.",
+        "verificationNote": "Вымышленная симуляция. Передано реплик с микрофона: 0. Другие способы ввода отмечены отдельно. Общая языковая модель и реальный телефон не подключены. Пользовательская ценность: Unverified.",
+        "syntheticSpeech": {
+          "source": "Synthetic browser test doubles; no microphone or speakers used",
+          "spokenTexts": [
+            "안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?",
+            "시뮬레이션에서 확인된 정보가 없습니다. 확인되지 않은 사항은 미확인으로 남기겠습니다."
+          ],
+          "recognitionStarts": 0,
+          "recognitionStops": 0,
+          "recognitionAborts": 0,
+          "getUserMediaCalls": 1,
+          "tracks": [
+            {
+              "id": "synthetic-track-1",
+              "readyState": "ended",
+              "stopCalls": 1
+            }
+          ],
+          "permissionRequests": [
+            {
+              "id": 1,
+              "state": "synthetic-granted"
+            }
+          ],
+          "emittedResults": [],
+          "realMicrophoneVerified": false,
+          "audibleSpeechVerified": false
+        }
+      },
+      "pageErrors": []
+    },
+    {
+      "name": "unanswered-relay-remains-unclear",
+      "status": "passed",
+      "speech": "SYNTHETIC — not actual microphone or audible speech",
+      "networkBlocked": [],
+      "details": {
+        "expected": "Unanswered first-visit question remains visibly Unclear in the result",
+        "actual": "Unclear — Вы впервые в этой клинике? Ответ пользователя не получен; мы его не предполагали."
+      },
+      "actual": {
+        "visibleStages": [
+          "result-stage"
+        ],
+        "requestError": "",
+        "detailsError": "",
+        "koreanPrompt": "시뮬레이션에서 확인된 정보가 없습니다. 확인되지 않은 사항은 미확인으로 남기겠습니다.",
+        "micStatus": "버튼을 누르고 한국어로 답해 주세요.",
+        "speechStatus": "한국어 음성 출력 중 · Synthetic Korean test voice",
+        "relayQuestion": "Вы впервые в этой клинике?",
+        "summary": "Подтверждённых сведений о клинике пока нет. Все неуточнённые данные — Unclear.",
+        "facts": "Клиника открытаНеясноUnclearНет однозначного ответа в разговоре.Женщина-врач сегодняНеясноUnclearНет однозначного ответа в разговоре.Другой врачНеясноUnclearНет однозначного ответа в разговоре.Приём без государственной страховкиНеясноUnclearНет однозначного ответа в разговоре.Стоимость консультацииНеясноUnclearНет однозначного ответа в разговоре.Время ожиданияНеясноUnclearНет однозначного ответа в разговоре.",
+        "unresolvedRelay": "Unclear — Вы впервые в этой клинике? Ответ пользователя не получен; мы его не предполагали.",
+        "factValues": [
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "Неясно",
+          "Неясно"
+        ],
+        "conversation": "ВЫ · ВЫМЫШЛЕННЫЙ ЗАПРОСУзнайте в этой детской клинике, принимает ли сегодня женщина-врач, принимают ли пациентов без корейской государственной медицинской страховки и сколько сейчас ждать.YOKOBUНачинаем симуляцию. Если клиника спросит о том, чего мы ещё не знаем, я передам вопрос вам.YOKOBU · 한국어안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?АДМИНИСТРАТОР · ТЕКСТОВЫЙ ВВОД처음 방문하시나요?YOKOBU · 한국어잠시만 기다려 주세요. 사용자에게 확인하겠습니다.",
+        "receptionSheet": "접수용: 나이: 7세 / 건강보험: 국민건강보험 없음.",
+        "doctorSheet": "진료용: 증상: 기침 / 증상 기간: 2일.",
+        "verificationNote": "Вымышленная симуляция. Передано реплик с микрофона: 0. Другие способы ввода отмечены отдельно. Общая языковая модель и реальный телефон не подключены. Пользовательская ценность: Unverified.",
+        "syntheticSpeech": {
+          "source": "Synthetic browser test doubles; no microphone or speakers used",
+          "spokenTexts": [
+            "안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?",
+            "잠시만 기다려 주세요. 사용자에게 확인하겠습니다.",
+            "시뮬레이션에서 확인된 정보가 없습니다. 확인되지 않은 사항은 미확인으로 남기겠습니다."
+          ],
+          "recognitionStarts": 0,
+          "recognitionStops": 0,
+          "recognitionAborts": 0,
+          "getUserMediaCalls": 0,
+          "tracks": [],
+          "permissionRequests": [],
+          "emittedResults": [],
+          "realMicrophoneVerified": false,
+          "audibleSpeechVerified": false
+        }
+      },
+      "pageErrors": []
+    },
+    {
+      "name": "mobile-layout-390px",
+      "status": "passed",
+      "speech": "SYNTHETIC — not actual microphone or audible speech",
+      "networkBlocked": [],
+      "details": {
+        "request": {
+          "viewport": 390,
+          "width": 390,
+          "overflowing": []
+        },
+        "call": {
+          "viewport": 390,
+          "width": 390,
+          "overflowing": []
+        },
+        "relay": {
+          "viewport": 390,
+          "width": 390,
+          "overflowing": []
+        },
+        "result": {
+          "viewport": 390,
+          "width": 390,
+          "overflowing": []
+        }
+      },
+      "actual": {
+        "visibleStages": [
+          "result-stage"
+        ],
+        "requestError": "",
+        "detailsError": "",
+        "koreanPrompt": "시뮬레이션에서 확인된 내용을 말씀드리겠습니다. 오늘 진료합니다. 오늘 여자 의사 선생님 진료는 불가능합니다. 다른 의사 선생님 진료가 가능합니다. 국민건강보험이 없어도 진료받을 수 있습니다. 진찰료는 약 20000원입니다. 대기 시간은 15분입니다. 감사합니다.",
+        "micStatus": "버튼을 누르고 한국어로 답해 주세요.",
+        "speechStatus": "한국어 음성 재생 완료. 실제로 들렸는지는 팀원이 확인해 주세요.",
+        "relayQuestion": "Вы впервые в этой клинике?",
+        "summary": "Клиника открыта. Женщина-врач сегодня не принимает, но доступен другой врач. Принимают без корейской государственной медицинской страховки. Консультация — примерно 20 000 вон. Сейчас ожидание — 15 минут.",
+        "facts": "Клиника открытаОткрытаConfirmed in simulationОснование: 네, 오늘 진료합니다.Женщина-врач сегодняНе принимаетConfirmed in simulationОснование: 오늘 여자 의사 선생님은 진료하지 않습니다.Другой врачПринимаетConfirmed in simulationОснование: 다른 의사 선생님은 진료 가능합니다.Приём без государственной страховкиПринимаютConfirmed in simulationОснование: 국민건강보험이 없어도 진료받을 수 있습니다.Стоимость консультацииПримерно 20 000 вонConfirmed in simulationОснование: 진찰료는 약 2만 원입니다.Время ожидания15 минутConfirmed in simulationОснование: 지금 대기 시간은 15분입니다.",
+        "unresolvedRelay": "",
+        "factValues": [
+          "Открыта",
+          "Не принимает",
+          "Принимает",
+          "Принимают",
+          "Примерно 20 000 вон",
+          "15 минут"
+        ],
+        "conversation": "ВЫ · ВЫМЫШЛЕННЫЙ ЗАПРОСУзнайте в этой детской клинике, принимает ли сегодня женщина-врач, принимают ли пациентов без корейской государственной медицинской страховки и сколько сейчас ждать.YOKOBUНачинаем симуляцию. Если клиника спросит о том, чего мы ещё не знаем, я передам вопрос вам.YOKOBU · 한국어안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?АДМИНИСТРАТОР · ТЕКСТОВЫЙ ВВОД처음 방문하시나요?YOKOBU · 한국어잠시만 기다려 주세요. 사용자에게 확인하겠습니다.ВЫ · ОТВЕТ КЛИНИКЕДа.YOKOBU · 한국어네, 처음 방문입니다.АДМИНИСТРАТОР · ТЕКСТОВЫЙ ВВОД네, 오늘 진료합니다.YOKOBU · 한국어오늘 여자 의사 선생님께 진료를 받을 수 있나요?АДМИНИСТРАТОР · ТЕКСТОВЫЙ ВВОД오늘 여자 의사 선생님은 진료하지 않습니다.YOKOBU · 한국어다른 의사 선생님께 진료를 받을 수 있나요?АДМИНИСТРАТОР · ТЕКСТОВЫЙ ВВОД다른 의사 선생님은 진료 가능합니다.YOKOBU · 한국어국민건강보험이 없는 환자도 진료를 받을 수 있나요?АДМИНИСТРАТОР · ТЕКСТОВЫЙ ВВОД국민건강보험이 없어도 진료받을 수 있습니다.YOKOBU · 한국어국민건강보험이 없으면 진찰료가 대략 얼마인가요?АДМИНИСТРАТОР · ТЕКСТОВЫЙ ВВОД진찰료는 약 2만 원입니다.YOKOBU · 한국어지금 대기 시간은 몇 분인가요?АДМИНИСТРАТОР · ТЕКСТОВЫЙ ВВОД지금 대기 시간은 15분입니다.YOKOBU · 한국어감사합니다. 확인된 내용을 정리하겠습니다.",
+        "receptionSheet": "접수용: 나이: 7세 / 건강보험: 국민건강보험 없음.",
+        "doctorSheet": "진료용: 증상: 기침 / 증상 기간: 2일.",
+        "verificationNote": "Вымышленная симуляция. Передано реплик с микрофона: 0. Другие способы ввода отмечены отдельно. Общая языковая модель и реальный телефон не подключены. Пользовательская ценность: Unverified.",
+        "syntheticSpeech": {
+          "source": "Synthetic browser test doubles; no microphone or speakers used",
+          "spokenTexts": [
+            "안녕하세요. 저는 외국인 주민을 대신해 문의드리는 AI 도우미입니다. 실제 전화가 아닌 시뮬레이션입니다. 오늘 진료하시나요?",
+            "잠시만 기다려 주세요. 사용자에게 확인하겠습니다.",
+            "네, 처음 방문입니다. 오늘 진료하시나요?",
+            "오늘 여자 의사 선생님께 진료를 받을 수 있나요?",
+            "다른 의사 선생님께 진료를 받을 수 있나요?",
+            "국민건강보험이 없는 환자도 진료를 받을 수 있나요?",
+            "국민건강보험이 없으면 진찰료가 대략 얼마인가요?",
+            "지금 대기 시간은 몇 분인가요?",
+            "감사합니다. 확인된 내용을 정리하겠습니다.",
+            "시뮬레이션에서 확인된 내용을 말씀드리겠습니다. 오늘 진료합니다. 오늘 여자 의사 선생님 진료는 불가능합니다. 다른 의사 선생님 진료가 가능합니다. 국민건강보험이 없어도 진료받을 수 있습니다. 진찰료는 약 20000원입니다. 대기 시간은 15분입니다. 감사합니다."
+          ],
+          "recognitionStarts": 0,
+          "recognitionStops": 0,
+          "recognitionAborts": 0,
+          "getUserMediaCalls": 0,
+          "tracks": [],
+          "permissionRequests": [],
+          "emittedResults": [],
+          "realMicrophoneVerified": false,
+          "audibleSpeechVerified": false
+        }
+      },
+      "pageErrors": []
+    }
+  ],
+  "screenshots": [
+    "browser-desktop-request.png",
+    "browser-desktop-live-relay.png",
+    "browser-desktop-results.png",
+    "browser-mobile-request.png",
+    "browser-mobile-live-relay.png",
+    "browser-mobile-results.png"
+  ],
+  "errors": [],
+  "browser": "154.0.8037.58",
+  "status": "passed"
+}

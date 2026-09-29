@@ -1,0 +1,38 @@
+{
+  "purpose": "Prepared local review package; NOT submitted; ZIP acceptance Unconfirmed",
+  "official_destination": "https://ralphthon.org/kakao-ai-dot-2026/app",
+  "deadline_kst": "2026-09-29 16:30",
+  "raw_prompts_or_codex_session_logs_included": false,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 2039,
+      "sha256": "691d95fd2e21087e83ca18c0e75c1f3207030db7a23e9ba440e0b1ca9aa73872"
+    },
+    {
+      "path": "slides.pdf",
+      "bytes": 808323,
+      "sha256": "2526c668b40266e67f0719dd126f37acb1b3154abbc5d637624c6a2fa3ad99d2"
+    },
+    {
+      "path": "solution.md",
+      "bytes": 2458,
+      "sha256": "0d95348c43f6f3739ad72004e80fec70e9ab22a120ec59b8dcf839a6404f4aac"
+    },
+    {
+      "path": "codex-use.md",
+      "bytes": 1175,
+      "sha256": "bbb0ffaaf80268cec1d8de558d10fb04910b9d87f656befd4d2dceca06081815"
+    },
+    {
+      "path": "verification-summary.md",
+      "bytes": 2972,
+      "sha256": "921c8f96e6995bb7f74fa0089aee182185c26ab9bdb509dfce7d8295d4d88fce"
+    },
+    {
+      "path": "demo-guide.md",
+      "bytes": 6570,
+      "sha256": "200741549dde7ae64d010e1606a5fa06d8120d43f7383b206a18debd42a1382f"
+    }
+  ]
+}

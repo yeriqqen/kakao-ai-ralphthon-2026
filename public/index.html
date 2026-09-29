@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="YOKOBU — fictional Russian/Korean clinic conversation simulation. No actual calls.">
+  <title>YOKOBU · Simulated clinic conversation</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='20' fill='%231b5147'/%3E%3Cpath d='M17 19h30v21H33l-9 8v-8h-7z' fill='%23dff296'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="YOKOBU home"><span class="brand-mark" aria-hidden="true">yo.</span> YOKOBU</a>
+      <div class="side-caption">На связи —<br>на вашем языке.</div>
+      <nav aria-label="Этапы разговора"><ol id="steps">
+        <li class="active" data-step="request"><span>01</span> Ваш запрос</li>
+        <li data-step="details"><span>02</span> Немного деталей</li>
+        <li data-step="plan"><span>03</span> План разговора</li>
+        <li data-step="call"><span>04</span> Разговор и результат</li>
+      </ol></nav>
+      <div class="side-bottom"><span class="small-dot"></span> Только симуляция<br><small>Без реального звонка.<br>Вымышленная клиника и данные.</small></div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar"><div class="breadcrumb">Консьерж <span>/</span> Детская клиника</div><span class="simulation-tag">Simulated call</span></header>
+      <main>
+        <div class="page-heading"><div><p class="eyebrow">РУССКИЙ ↔ 한국어</p><h1>Понятно. На любом конце.</h1><p class="subtitle">Вы пишете. YOKOBU говорит по-корейски.</p></div><span class="clinic-icon" aria-hidden="true">✚</span></div>
+        <div id="global-status" role="status" aria-live="polite"></div>
+        <section id="request-stage" class="panel stage">
+          <div class="section-number">01 / ВАШ ЗАПРОС</div><h2>Что узнать в клинике?</h2>
+          <p>Начнём с вымышленного примера: врач, страховка и время ожидания.</p>
+          <form id="request-form" novalidate>
+            <label for="request">Напишите по-русски</label>
+            <textarea id="request" rows="4" placeholder="Узнайте в этой детской клинике…" required></textarea>
+            <p class="field-error" id="request-error" role="alert"></p>
+            <div class="form-actions"><button type="button" id="load-example" class="secondary">Вставить пример</button><button class="primary" type="submit">Продолжить <span aria-hidden="true">↗</span></button></div>
+          </form>
+          <div class="scope-note"><span aria-hidden="true">ⓘ</span><p>Разговор и перевод в этом демо работают по заданным правилам. Общая модель ИИ не подключена. Информация из реальной клиники не запрашивается.</p></div>
+        </section>
+        <section id="details-stage" class="panel stage" hidden>
+          <div class="section-number">02 / НЕМНОГО ДЕТАЛЕЙ</div><h2>Чтобы ответить на вопросы клиники</h2><p>Только необходимые сведения. Используйте вымышленные данные.</p>
+          <blockquote id="request-preview"></blockquote>
+          <form id="details-form" novalidate>
+            <div class="fields-grid"><div><label for="age">Возраст ребёнка</label><div class="suffix-input"><input id="age" type="number" min="0" max="17" required><span>лет</span></div></div><div><label for="insurance">Государственная страховка Кореи</label><select id="insurance" required><option value="">Выберите</option><option value="none">Нет</option><option value="national">Есть</option></select></div><div><label for="symptoms">Симптомы</label><select id="symptoms" required><option value="">Выберите</option><option value="кашель">Кашель</option></select></div><div><label for="duration">Сколько дней?</label><div class="suffix-input"><input id="duration" type="number" min="1" max="365" required><span>дней</span></div></div></div>
+            <p class="field-error" id="details-error" role="alert"></p><div class="form-actions"><button id="fill-details" type="button" class="secondary">Пример: 7 лет, кашель 2 дня, без страховки</button><button class="primary" type="submit">Составить план ↗</button></div>
+          </form>
+        </section>
+        <section id="plan-stage" class="panel stage" hidden>
+          <div class="section-number">03 / ПЛАН РАЗГОВОРА</div><h2>Вот что мы спросим</h2><p>План на корейском. Разговор начнётся только после вашего действия.</p>
+          <ol id="call-plan" class="plan-list" lang="ko"></ol>
+          <div class="consent-note"><strong>Микрофон — для участника в роли администратора.</strong><p>Ваша сторона работает текстом. Для распознавания браузер может передавать голос своему провайдеру. Используйте только вымышленные реплики; приложение не сохраняет аудио.</p></div>
+          <div class="form-actions"><span class="subtle">Никакого реального звонка</span><button id="start-simulation" class="primary">Start simulation <span aria-hidden="true">↗</span></button></div>
+        </section>
+        <section id="call-stage" class="stage" hidden>
+          <div class="conversation-grid">
+            <section class="panel user-panel" aria-label="Пользователь · Simulated call">
+              <div class="panel-top"><div><div class="section-number">ВАША СТОРОНА</div><h2>Вы в курсе разговора</h2></div><span class="simulation-tag">Simulated call</span></div>
+              <div id="conversation" class="conversation" aria-live="polite" aria-relevant="additions"></div>
+              <div id="relay-box" class="relay-box" hidden><div class="eyebrow">НУЖЕН ВАШ ОТВЕТ</div><h3 id="relay-question"></h3><p>Мы не знаем ответа и ждём вас.</p><form id="relay-form"><label for="relay-answer">Ответ по-русски</label><div class="inline-input"><input id="relay-answer" autocomplete="off" placeholder="Например: Да"><button class="primary" type="submit">Передать</button></div><p id="relay-error" class="field-error" role="alert"></p></form></div>
+              <div id="user-call-status" class="waiting-status">Вы можете следить за разговором здесь — слушать и говорить не нужно.</div>
+            </section>
+            <section class="panel receptionist-panel" aria-label="접수 담당자 · Simulated call" lang="ko">
+              <div class="panel-top"><div><div class="section-number">접수 담당자 역할</div><h2>한국어 대화</h2></div><span class="simulation-tag">Simulated call</span></div>
+              <div class="agent-prompt"><div class="speaker-label"><span class="avatar">y</span> YOKOBU <span class="audio-indicator" id="audio-indicator">대기</span></div><p id="korean-prompt"></p><button class="text-button" id="repeat-speech">↻ 다시 듣기</button></div>
+              <p id="speech-status" class="capability-note" role="status"></p>
+              <div class="microphone-area"><button id="microphone" class="microphone-button" type="button"><span aria-hidden="true">◉</span> 마이크로 답하기</button><p id="mic-status" role="status">버튼을 누르고 한국어로 답해 주세요.</p></div>
+              <form id="receptionist-form"><label for="receptionist-text">인식한 말 확인 · 필요하면 수정</label><textarea id="receptionist-text" rows="3" placeholder="음성 인식 결과가 여기에 표시됩니다."></textarea><p class="input-provenance" id="input-provenance">직접 입력은 텍스트 대체 입력으로 기록됩니다.</p><button id="send-receptionist" class="secondary full-width" type="submit">이 답변 전달하기 →</button></form>
+              <details class="script-guide"><summary>가상 접수 시나리오 보기</summary><p>팀원이 아래 문장을 마이크로 말합니다. 최초 방문 여부는 사용자에게 확인해야 합니다.</p><ol id="script-lines"></ol><p class="mock-label">음성 인식 불가 시 아래 버튼은 합성 텍스트 입력입니다. 마이크 검증으로 간주하지 않습니다.</p><button id="insert-fixture" class="secondary" type="button">다음 가상 답변 삽입</button></details>
+            </section>
+          </div>
+          <div class="end-row"><span>Неясные ответы останутся помечены «Unclear».</span><button id="finish-simulation" class="secondary">Завершить и показать результат →</button></div>
+        </section>
+        <section id="result-stage" class="stage" hidden>
+          <div class="panel result-panel"><div class="section-number">РЕЗУЛЬТАТ / SIMULATED CALL</div><h2 id="result-heading">Всё важное — перед вами.</h2><p class="result-label">Только результат симуляции. Не подтверждено реальной клиникой.</p><p id="unresolved-relay" class="consent-note" hidden></p><p id="summary" class="summary"></p><div id="fact-list" class="fact-list"></div><details class="readback"><summary>한국어로 확인한 내용 · Korean readback</summary><p id="readback-text" lang="ko"></p><button id="repeat-readback" class="text-button">↻ Прослушать по-корейски</button></details></div>
+          <div class="sheets-grid"><section class="panel sheet" lang="ko"><div class="section-number">01 / RECEPTION</div><h2>접수용</h2><p class="fictional-label">데모용 가상 정보 — 실제 환자 정보 아님.</p><p id="reception-sheet"></p></section><section class="panel sheet" lang="ko"><div class="section-number">02 / DOCTOR</div><h2>진료용</h2><p class="fictional-label">데모용 가상 정보 — 실제 환자 정보 아님.</p><p id="doctor-sheet"></p></section></div>
+          <div class="result-actions"><button id="download-report" class="primary">Сохранить результат JSON ↓</button><button id="print-sheets" class="secondary">Печать результата</button><button id="restart" class="text-button">Начать заново ↗</button></div><label class="audio-confirm"><input type="checkbox" id="heard-korean"> Участник команды подтверждает: корейская речь действительно слышна.</label><p id="verification-note" class="subtle"></p>
+        </section>
+        <footer>YOKOBU <span>Вымышленный сценарий · Данные исчезают при обновлении страницы · Без записи аудио</span></footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

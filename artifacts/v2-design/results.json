@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T07:04:56.360Z",
+  "generatedAt": "2026-09-29T07:26:10.264Z",
   "mock": true,
   "realAPI": false,
   "realMicrophone": false,
@@ -132,6 +132,14 @@
       "passed": true
     },
     {
+      "name": "Real listing cards are responsive, sourced, and selection does not authorize",
+      "passed": true
+    },
+    {
+      "name": "Debug shows shared transcript without microphone or call mutations",
+      "passed": true
+    },
+    {
       "name": "No page errors, unexpected network, or microphone attempts",
       "passed": true
     }
@@ -172,20 +180,25 @@
     "en-summary-1440.png",
     "business-pending-1440.png",
     "business-pending-390.png",
-    "business-pending-320.png"
+    "business-pending-320.png",
+    "discovery-320.png",
+    "discovery-390.png",
+    "discovery-1440.png",
+    "debug-live-1440.png",
+    "debug-live-390.png"
   ],
   "errors": [],
   "unexpectedNetwork": [],
   "sources": {
-    "public/v2/customer.js": "9ffe32bdfa66e77a1a997350ff09395034f09683083da23125ae6576e00c9b99",
-    "public/v2/index.html": "bc93a88f31e622771ca32c4f480f2b27feaebfddf16e14d06bf12c6b55fbba1a",
-    "public/v2/styles.css": "01aaa48b07e982451b173a33df0764e65db728777dc2572406fd3398b45491db",
+    "public/v2/customer.js": "711359d08e3692a25abac1621236d8c0db377c6f8b9772f7e692c20844b64939",
+    "public/v2/index.html": "776e40e9fe421e26211177bb4e755cd22b8c7253665ac674c299edf341808a7a",
+    "public/v2/styles.css": "612386252cbf46706496034999026c424238d882013c2b4b27f77b56824205e9",
     "public/v2/theme.css": "d869fa4589d14cc9672cff3d44d370b083433ad617c94dc257c30e87181bde44",
-    "public/v2/i18n.js": "0109012d0896f2c2903267c377cf8b42137d5558ebc46e67467e175b7024b6fc",
-    "public/v2/business.html": "2dc922a10034810feafce2b92aa804257ab8344b40ea72218c53f2020f11e7a0",
-    "public/v2/business.css": "465647baff773614e9d8440a27bbb8be83569591e7d7e7909b5c0ae5f6aa5d51",
-    "scripts/v2-design-check.mjs": "522e879a6de146da6fbcf170f1d5bb1221cc014cbe80bb067cdeafed47e51a52"
+    "public/v2/i18n.js": "194b63656a043205fb22fcf94da85e8ba90798cf072f6e4af7ec49c81f76bed6",
+    "public/v2/business.html": "bdc33871c51b4b1c548299faed190e1dae403f6a2e71349cdab9ddd2415035df",
+    "public/v2/business.css": "31a60413e8a9c6f9b4a153d698e8e0b38da25b768c3e2e8c717f9702c63e7ca9",
+    "scripts/v2-design-check.mjs": "28c1b0f78fa3a113681c6f5d21fe8ed7f9cd136aa071fb7271f571942743c01e"
   },
   "passed": true,
-  "passedChecks": 32
+  "passedChecks": 34
 }

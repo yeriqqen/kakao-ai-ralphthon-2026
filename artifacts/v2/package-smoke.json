@@ -1,8 +1,8 @@
 {
   "type": "extracted_local_package_smoke_no_api_or_audio",
-  "archiveSha256": "8d8f561a7ee842cc63e6a3cc3a37b3499d84954a6d9229aaa341b801fc80e6b7",
-  "passed": 8,
-  "total": 8,
+  "archiveSha256": "b218c4a4e808aba2d95317856c9b58fad841884784393e29e6dc7bd9c117b1af",
+  "passed": 10,
+  "total": 10,
   "checks": [
     {
       "name": "archive excludes .env, git and local-runs",
@@ -18,6 +18,14 @@
     },
     {
       "name": "extracted server serves /business",
+      "passed": true
+    },
+    {
+      "name": "extracted server serves /debug",
+      "passed": true
+    },
+    {
+      "name": "extracted server serves /v2/debug.js",
       "passed": true
     },
     {

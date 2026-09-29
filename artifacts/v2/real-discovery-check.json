@@ -1,0 +1,72 @@
+{
+  "at": "2026-09-29T07:26:54.369Z",
+  "realAPI": true,
+  "realTelephoneCall": false,
+  "model": "gpt-6-astra",
+  "request": "Find 2–3 general clinics near Hongik University Station in Seoul. I would like to ask whether a female doctor is available this afternoon, whether they accept patients without Korean national health insurance, and the consultation price. Do not book anything.",
+  "places": [
+    {
+      "id": "d9fb842a-c81e-4903-9fd0-5bd6ed7f91d5",
+      "name": "Gippeum Internal Medicine Clinic (기쁨내과의원)",
+      "detail": "Near Hongik University Station. Lists internal medicine, pediatrics and ENT, making it a useful option for general medical concerns. Address and phone are supported by its HIRA-based listing.",
+      "address": "1F, 5 Yeonhui-ro, Mapo-gu, Seoul — 서울특별시 마포구 연희로 5, 1층 (동교동)",
+      "phone": "02-3143-7575",
+      "url": "https://mobile.hidoc.co.kr/find/result/view/H0000157707",
+      "sourced": true
+    },
+    {
+      "id": "47cd9a92-6ee2-4e98-942c-0249c8fc294a",
+      "name": "Friend Doctor Yonsei Internal Medicine Clinic (프렌닥터연세내과의원)",
+      "detail": "Listed across from Hongik University Station Exit 3. Offers internal medicine alongside ENT, neurology and dermatology—a nearby option for general medical concerns.",
+      "address": "1–2F, 191 Yanghwa-ro, Mapo-gu, Seoul — 서울특별시 마포구 양화로 191, 1~2층 (동교동)",
+      "phone": "02-322-7506",
+      "url": "https://www.hospdatainfo.com/hosp_main/hosp_view?hosp_id=A1115089",
+      "sourced": true
+    }
+  ],
+  "selectedPlace": {
+    "id": "d9fb842a-c81e-4903-9fd0-5bd6ed7f91d5",
+    "name": "Gippeum Internal Medicine Clinic (기쁨내과의원)",
+    "detail": "Near Hongik University Station. Lists internal medicine, pediatrics and ENT, making it a useful option for general medical concerns. Address and phone are supported by its HIRA-based listing.",
+    "address": "1F, 5 Yeonhui-ro, Mapo-gu, Seoul — 서울특별시 마포구 연희로 5, 1층 (동교동)",
+    "phone": "02-3143-7575",
+    "url": "https://mobile.hidoc.co.kr/find/result/view/H0000157707",
+    "sourced": true
+  },
+  "planReady": true,
+  "questions": [
+    {
+      "id": "female_doctor_availability",
+      "text": "Is a female doctor available for a general medical consultation this afternoon?",
+      "korean": "오늘 오후에 일반 진료를 받을 수 있는 여성 의사 선생님이 계신가요?",
+      "status": "unresolved",
+      "resolutionReason": null,
+      "answer": null,
+      "evidence": []
+    },
+    {
+      "id": "insurance_acceptance",
+      "text": "Do you accept patients without Korean national health insurance?",
+      "korean": "한국 국민건강보험이 없는 환자도 진료를 받을 수 있나요?",
+      "status": "unresolved",
+      "resolutionReason": null,
+      "answer": null,
+      "evidence": []
+    },
+    {
+      "id": "consultation_price",
+      "text": "What is the consultation price for a patient without Korean national health insurance? This is an inquiry only; please do not make a booking.",
+      "korean": "한국 국민건강보험이 없는 환자의 진찰료는 얼마인가요? 문의만 드리는 것이니 예약은 하지 말아 주세요.",
+      "status": "unresolved",
+      "resolutionReason": null,
+      "answer": null,
+      "evidence": []
+    }
+  ],
+  "messages": [
+    "Find 2–3 general clinics near Hongik University Station in Seoul. I would like to ask whether a female doctor is available this afternoon, whether they accept patients without Korean national health insurance, and the consultation price. Do not book anything.",
+    "Here are two nearby options for general medical care. Please select a clinic. Listings do not confirm appointment availability; English-language support is unverified.",
+    "Prepare my inquiry for Gippeum Internal Medicine Clinic (기쁨내과의원)",
+    "Your inquiry for Gippeum Internal Medicine Clinic is ready, and will include all your specified questions with no booking requested. May I proceed?"
+  ]
+}

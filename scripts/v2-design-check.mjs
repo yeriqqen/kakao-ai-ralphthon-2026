@@ -76,7 +76,7 @@ const fixtureCopy = {
   ru: { request: 'Найдите клинику рядом с Хондэ на завтра после обеда.', clarification: 'Вам удобнее приём после обеда?', answer: 'Да, после 14:00.', plan: 'Я уточню свободное время и возможность обслуживания на английском языке.', institution: 'Семейная клиника Хондэ', reason: 'Вымышленная клиника для этой демонстрации.', question: 'Есть ли запись на завтра после 14:00?', relay: 'Это ваш первый визит?', reply: 'Да, я приду впервые.', summary: 'Вымышленная клиника подтвердила время и помощь на английском.', recommendation: 'Возьмите удостоверение личности и приходите на десять минут раньше.', reasoning: 'Эти рекомендации основаны на информации, подтверждённой в симуляции.' },
   zh: { request: '请找一家弘大附近明天下午可以预约的诊所。', clarification: '您希望预约下午的时间吗？', answer: '是的，下午两点以后。', plan: '我会确认预约时间以及是否提供英语服务。', institution: '弘大家庭诊所', reason: '用于本次演示的虚构诊所。', question: '明天下午两点以后可以预约吗？', relay: '这是您的第一次就诊吗？', reply: '是的，这是我第一次就诊。', summary: '虚构诊所确认了下午的时间和英语服务。', recommendation: '请携带身份证件并提前十分钟到达。', reasoning: '这些建议基于模拟中确认的信息。' },
 };
-async function setup({ language = 'en', width = 390, height = 844, business = false } = {}) {
+async function setup({ language = 'en', width = 390, height = 844, business = false, debug = false } = {}) {
   const context = await browser.newContext({ viewport: { width, height }, reducedMotion: 'reduce' }); contexts.push(context);
   let room = null, version = 0, chats = 0;
   const requests = [], errors = [];
@@ -86,7 +86,7 @@ async function setup({ language = 'en', width = 390, height = 844, business = fa
     window.RTCPeerConnection = class { constructor() { throw new Error('WebRTC prohibited during synthetic design QA'); } };
   });
   const touch = fn => { fn(room); room.version = ++version; };
-  if (business) room = { id: 'design-room', version: ++version, call: { status: 'pending', connected: false }, requiredQuestions: [{ id: 'availability', text: fixtureCopy.en.question, korean: '내일 오후 두 시 이후에 예약할 수 있나요?', status: 'unresolved', evidence: [] }], messages: [], pendingRelay: null };
+  if (business || debug) room = { id: 'design-room', version: ++version, call: { status: 'pending', connected: false }, requiredQuestions: [{ id: 'availability', text: fixtureCopy.en.question, korean: '내일 오후 두 시 이후에 예약할 수 있나요?', status: 'unresolved', evidence: [] }], messages: [], transcripts: [], apiEvidence: [], voiceDiagnostics: [], pendingRelay: null };
   await context.route('**/*', async route => {
     const request = route.request(), url = new URL(request.url());
     if (url.origin !== origin) { report.unexpectedNetwork.push(url.origin + url.pathname); return route.abort(); }
@@ -100,7 +100,7 @@ async function setup({ language = 'en', width = 390, height = 844, business = fa
         return json({ id: room.id, customerToken: 'synthetic-customer-token', businessToken: 'synthetic-business-token', state: room });
       }
       if (url.pathname.startsWith('/api/rooms/design-room')) {
-        assert.equal(request.headers().authorization, `Bearer synthetic-${business ? 'business' : 'customer'}-token`);
+        assert.equal(request.headers().authorization, `Bearer synthetic-${business || debug ? 'business' : 'customer'}-token`);
         const operation = url.pathname.slice('/api/rooms/design-room'.length), copy = fixtureCopy[language];
         if (request.method() === 'POST') {
           if (operation === '/chat') {
@@ -114,6 +114,8 @@ async function setup({ language = 'en', width = 390, height = 844, business = fa
               r.requiredQuestions = [{ id: 'availability', text: copy.question, status: 'unresolved' }];
               r.customerInfo = [{ key: 'location_internal_key', value: 'Hongdae, Seoul' }];
             });
+          } else if (operation === '/select-place') {
+            const selected = room.places.find(p => p.id === request.postDataJSON().placeId); assert(selected); touch(r => { r.selectedPlace = selected; r.planReady = true; r.institutions = [{...selected, reason:'Ask the requested questions'}]; });
           } else if (operation === '/authorize') {
             assert.equal(request.postDataJSON().institutionId, 'fictional-clinic'); touch(r => { r.call = { status: 'pending', connected: false }; });
           } else if (operation === '/decision') {
@@ -126,7 +128,7 @@ async function setup({ language = 'en', width = 390, height = 844, business = fa
       report.unexpectedNetwork.push(url.pathname); return route.fulfill({ status: 503, json: { error: { code: 'QA_BLOCKED' } } });
     }
     if (url.pathname === '/favicon.ico') return route.fulfill({ status: 204 });
-    const relative = url.pathname === '/' || url.pathname === '/v2/' ? 'v2/index.html' : url.pathname === '/business' ? 'v2/business.html' : url.pathname.slice(1);
+    const relative = url.pathname === '/' || url.pathname === '/v2/' ? 'v2/index.html' : url.pathname === '/business' ? 'v2/business.html' : url.pathname === '/debug' ? 'v2/debug.html' : url.pathname.slice(1);
     const file = path.resolve(root, 'public', relative);
     assert.ok(file.startsWith(path.resolve(root, 'public') + path.sep));
     try {
@@ -135,7 +137,7 @@ async function setup({ language = 'en', width = 390, height = 844, business = fa
     } catch { report.unexpectedNetwork.push(url.pathname); return route.fulfill({ status: 404, body: 'Missing local fixture asset' }); }
   });
   const page = await context.newPage(); page.setDefaultTimeout(6000); page.on('pageerror', error => { errors.push(error.message); report.errors.push(error.message); });
-  await page.goto(business ? `${origin}/business?room=design-room#token=synthetic-business-token` : `${origin}/v2/`);
+  await page.goto(debug ? `${origin}/debug?room=design-room#token=synthetic-business-token` : business ? `${origin}/business?room=design-room#token=synthetic-business-token` : `${origin}/v2/`);
   await page.evaluate(() => document.fonts.ready);
   if (!business && language !== 'en') await page.getByRole('button', { name: languageNames[language], exact: true }).click();
   const send = async text => { await page.locator('#message-input').fill(text); await page.locator('#send').click(); await page.waitForFunction(() => !document.querySelector('#send').disabled); };
@@ -182,7 +184,7 @@ try {
       assert.equal(f.room.planReady, true); assert.equal(f.room.call.status, 'idle');
       assert.equal(f.requests.find(r => r.path === '/api/rooms').body.language, language);
       assert.equal(await page.locator('.institution-option input').isChecked(), true);
-      const businessLink = await page.getByRole('link', { name: translations[language].openBusiness, exact: true }).getAttribute('href');
+      const businessLink = await page.locator('#phone-link').getAttribute('href');
       assert.equal(businessLink, `${origin}/business?room=design-room#token=synthetic-business-token`);
       await scrollTo(page, '.institution-options'); await noOverflow(page, `${language} plan`); await capture(page, `${language}-plan-390`);
     });
@@ -291,6 +293,27 @@ try {
     assert.equal(await business.page.evaluate(() => window.__blockedMediaAttempts), 0);
     assert.equal(business.requests.some(request => request.path.endsWith('/accept') || request.path.endsWith('/realtime')), false);
     assert.equal(await business.page.locator('#heard-korean').isDisabled(), true);
+  });
+  await check('Real listing cards are responsive, sourced, and selection does not authorize', async () => {
+    const f = await setup({width:390}); await f.send('Find a clinic in Hongdae.');
+    f.touch(r => { r.places = [1,2,3].map(i => ({id:'place-'+i,name:'Sourced clinic '+i,address:'123 Hongdae street, Seoul',detail:'A clinic listing for the requested neighborhood.',url:'https://example.com/clinic-'+i,phone:''})); });
+    await f.page.locator('.place-card').first().waitFor(); assert.equal(await f.page.locator('.place-card').count(),3);
+    assert.equal(await f.page.getByRole('link',{name:'Source',exact:true}).first().getAttribute('href'),'https://example.com/clinic-1');
+    assert.match(await f.page.getByRole('link',{name:'Open in maps',exact:true}).first().getAttribute('href'),/^https:\/\/www.google.com\/maps\/search/);
+    for (const width of [320,390,1440]) { await f.page.setViewportSize({width,height:900}); await noOverflow(f.page,'discovery '+width); await capture(f.page,'discovery-'+width); }
+    await f.page.getByRole('button',{name:'Choose this place',exact:true}).first().click();
+    await f.page.getByText('Real listing · The following call is a microphone demo.',{exact:false}).waitFor();
+    assert.equal(f.requests.some(r => r.path.endsWith('/authorize')),false); assert.equal(f.room.selectedPlace.id,'place-1');
+  });
+  const debug = await setup({ debug: true, width: 1440, height: 1000 });
+  await check('Debug shows shared transcript without microphone or call mutations', async () => {
+    await debug.page.locator('#debug-status').filter({ hasText: 'pending' }).waitFor();
+    debug.touch(r => { r.call.status = 'active'; r.call.connected = true; r.transcripts.push({ id:'spoken', role:'business', text:'검정색은 있습니다.' }); });
+    await debug.page.locator('#transcript').filter({ hasText: '검정색은 있습니다.' }).waitFor();
+    assert.equal(await debug.page.evaluate(() => window.__blockedMediaAttempts), 0);
+    assert(debug.requests.every(r => r.method === 'GET'));
+    assert(debug.requests.some(r => r.path.endsWith('/debug')));
+    for (const width of [1440, 390]) { await debug.page.setViewportSize({width,height:900}); await noOverflow(debug.page, `debug ${width}`); await capture(debug.page, `debug-live-${width}`); }
   });
   await check('No page errors, unexpected network, or microphone attempts', async () => {
     assert.deepEqual(report.errors, []); assert.deepEqual(report.unexpectedNetwork, []);

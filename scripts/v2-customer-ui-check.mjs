@@ -68,7 +68,7 @@ try {
   await check('selected-language-room-creation', () => assert.equal(createdLanguage, 'ru'));
   await check('server-content-displayed', async () => assert.match(await page.locator('#messages').innerText(), /Синтетический вопрос/));
   await check('no-internal-customer-key-in-UI', async () => assert.doesNotMatch(await page.locator('#context').innerText(), /private_prior_visit_status/));
-  await check('business-tab-before-authorization-with-fragment-token', async () => { const link = await page.getByRole('link', { name: 'Открыть вкладку организации', exact: true }).getAttribute('href'); assert.equal(link, 'http://localhost:4199/business?room=test-room#token=synthetic-business-token'); assert.equal(current.call.status, 'idle'); });
+  await check('business-tab-before-authorization-with-fragment-token', async () => { const link = await page.locator('#phone-link').getAttribute('href'); assert.equal(link, 'http://localhost:4199/business?room=test-room#token=synthetic-business-token'); assert.equal(current.call.status, 'idle'); });
   await check('explicit-authorization-pending-not-green', async () => { await page.getByRole('button', { name: 'Да', exact: true }).click(); await page.waitForTimeout(100); assert.equal(current.call.status, 'pending'); assert.equal(await page.locator('#call-state.is-active').count(), 0); });
   current.call = { status: 'active', connected: false }; current.version = ++revision; await page.waitForTimeout(1200);
   await check('unconnected-active-not-green', async () => assert.equal(await page.locator('#call-state.is-active').count(), 0));

@@ -60,15 +60,15 @@ const pendingTranscripts = new Map();
 let businessSpeaking = false;
 const terminal = new Set(['completed', 'interrupted', 'failed']);
 const statusText = {
-  idle: ['Waiting for customer · 고객 요청 대기', 'No incoming call yet', 'The customer must approve the proposed simulated call first. Your microphone is off.'],
-  pending: ['Incoming simulated call · 수신 대기', 'The customer has authorized a call', 'Accept when you are ready. For the relay rehearsal, ask one unknown customer detail after the assistant’s opening question, before answering the service questions.'],
-  connecting: ['Connecting · 연결 중', 'Connecting to OpenAI Realtime', 'Allow the microphone when your browser asks. Connection has not been verified yet.'],
-  active: ['Live simulated call · 가상 통화 중', 'You can speak in Korean', 'Answer naturally as the fictional business. Watch the generated questions and tell the assistant when a detail is unclear.'],
-  waiting_customer: ['Waiting for customer · 고객 답변 대기', 'The customer is being asked in chat', 'Microphone input is paused. The assistant will relay the customer’s answer in Korean.'],
-  awaiting_decision: ['Customer decision needed · 고객 결정 대기', 'The conversation needs a decision', 'Microphone input is paused while the customer decides how to proceed. Unresolved questions remain unresolved.'],
-  completed: ['Simulation completed · 완료', 'The simulated conversation has ended', 'The customer receives a conversation-grounded summary. This is not verification by a real business.'],
-  interrupted: ['Call interrupted · 통화 중단', 'This was not a successful completion', 'Unresolved questions must remain visible in the customer’s chat.'],
-  failed: ['Connection failed · 연결 실패', 'The voice connection could not continue', 'No successful call is claimed. Return to the customer chat to decide how to proceed.'],
+  idle: ['Ready for a call', 'Ready when you are', 'Your next call will appear here.'],
+  pending: ['Incoming call', 'YOKOBU is calling', 'Korean voice assistant'],
+  connecting: ['Connecting', 'Connecting your call', 'Allow microphone access to continue.'],
+  active: ['Connected', 'You’re connected', 'Speak naturally in Korean.'],
+  waiting_customer: ['On hold', 'Checking with the customer', 'We’ll be right back.'],
+  awaiting_decision: ['On hold', 'Waiting for a decision', 'The customer is choosing how to proceed.'],
+  completed: ['Call completed', 'All taken care of', 'The customer has received your answers.'],
+  interrupted: ['Call ended', 'Until next time', 'The conversation has ended.'],
+  failed: ['Unable to connect', 'Call unavailable', 'Please try again from Chat.'],
 };
 
 function showError(message) { $('error').textContent = message; $('error').hidden = !message; }
@@ -77,8 +77,8 @@ function live() { return peer?.connectionState === 'connected' && channel?.ready
 function syncMicrophone() {
   const enabled = live() && currentStatus() === 'active' && !openingPending && playbackAllowed && !responseBusy && !assistantSpeaking && pendingPlayback.size === 0 && !waitingTool && !state?.pendingRelay && !muted && !endingAudio && pendingToolCount === 0 && (businessSpeaking || pendingTranscripts.size === 0);
   microphone?.getAudioTracks().forEach(track => { track.enabled = enabled; });
-  $('microphone-status').textContent = enabled ? 'Microphone live · 마이크 사용 중' : microphone ? 'Microphone paused · 마이크 일시 정지' : 'Microphone inactive · 마이크 꺼짐';
-  $('mute-mic').textContent = muted ? 'Unmute microphone · 마이크 켜기' : 'Mute microphone · 마이크 끄기';
+  $('microphone-status').textContent = enabled ? 'Microphone on' : microphone ? 'Listening paused' : 'Microphone off';
+  $('mute-mic').textContent = muted ? 'Unmute' : 'Mute';
 }
 async function api(path = '', { method = 'GET', body, sdp = false, keepalive = false } = {}) {
   const headers = { Authorization: `Bearer ${token}` };
@@ -152,13 +152,19 @@ function renderQuestions() {
 function render() {
   const status = localFailure ? 'failed' : currentStatus();
   const text = statusText[status] || statusText.idle;
-  $('call-status').textContent = text[0];
+  $('call-status').textContent = state?.call?.reason === 'declined' ? 'Declined' : text[0];
   $('call-status').className = 'status' + (status === 'active' && live() ? ' active' : ['pending', 'connecting', 'waiting_customer', 'awaiting_decision'].includes(status) ? ' waiting' : ['failed', 'interrupted'].includes(status) ? ' failed' : '');
-  $('call-heading').textContent = text[1]; $('call-detail').textContent = text[2];
+  $('call-heading').textContent = state?.call?.reason === 'declined' ? 'Call declined' : text[1]; $('call-detail').textContent = state?.call?.reason === 'declined' ? 'The caller has been notified.' : text[2];
+  document.body.dataset.callState = status;
+  const institution = state?.institutions?.find(item => item.id === state.call.institutionId);
+  $('business-name').textContent = institution?.name?.replace(/^(?:Fictional\s+|Вымышленн[а-я]+\s+|虚构\s*)/iu, '') || '';
+  const elapsed = state?.call?.acceptedAt ? Math.max(0, Math.floor(((state.call.endedAt ? Date.parse(state.call.endedAt) : Date.now()) - Date.parse(state.call.acceptedAt)) / 1000)) : 0;
+  $('call-timer').textContent = state?.call?.accepted ? `${String(Math.floor(elapsed / 60)).padStart(2, '0')}:${String(elapsed % 60).padStart(2, '0')}` : '';
+  $('decline-call').hidden = status !== 'pending' || accepting || !!peer;
   $('connection-label').textContent = live() ? 'OpenAI connection established' : accepting ? 'Connection not yet verified' : 'Not connected';
   if (openingPending && live()) {
-    $('call-heading').textContent = 'Preparing the Korean opening';
-    $('call-detail').textContent = 'Listen for the greeting and first question. Your microphone stays paused until the assistant finishes.';
+    $('call-heading').textContent = 'You’re connected';
+    $('call-detail').textContent = 'Your assistant is speaking…';
     $('connection-label').textContent = openingAudioStarted ? 'Opening audio received · Listen, then reply' : 'Waiting for the assistant’s opening audio';
   }
   $('accept-call').hidden = status !== 'pending' || accepting || !!peer;
@@ -167,7 +173,7 @@ function render() {
   $('mute-mic').hidden = !live() || terminal.has(status);
   const waiting = ['waiting_customer', 'awaiting_decision'].includes(status) || waitingTool;
   $('waiting-note').hidden = !waiting;
-  $('waiting-note').textContent = status === 'awaiting_decision' ? 'The assistant cannot proceed yet. Waiting for the customer’s decision. · 고객의 결정을 기다리고 있습니다.' : 'Please wait while the assistant checks with the customer. Microphone input is paused. · 고객에게 확인 중입니다.';
+  $('waiting-note').textContent = status === 'awaiting_decision' ? 'Waiting for the customer’s decision.' : 'Checking with the customer…';
   renderQuestions(); syncMicrophone();
 }
 function addTranscript(id, role, text) {
@@ -495,7 +501,7 @@ async function acceptCall() {
         openingTimer = setTimeout(() => {
           if (attempt === generation && !openingAudioStarted) {
             diagnostic('opening.timeout');
-            disconnect('The assistant’s opening audio did not start within 12 seconds. Return to the customer chat and select Retry this simulation.');
+            disconnect('The assistant’s opening audio did not start within 12 seconds. Return to the customer chat and select Try again.');
           }
         }, 12000);
         await pollOnce();
@@ -518,6 +524,8 @@ async function acceptCall() {
   }
 }
 $('accept-call').addEventListener('click', acceptCall);
+$('decline-call').addEventListener('click', async () => { $('decline-call').disabled = true; try { applyState(await post('/decline', {})); } catch { showError('The call could not be declined. Please try again.'); } finally { $('decline-call').disabled = false; } });
+const debugLink = new URL('/debug', location.origin); debugLink.searchParams.set('room', roomId || ''); debugLink.hash = `token=${encodeURIComponent(token || '')}`; if (roomId && token) { $('debug-link').href = debugLink.href; window.name = `yokobu-call-${roomId}`; $('debug-link').target = `yokobu-debug-${roomId}`; $('chat-link').target = `yokobu-chat-${roomId}`; }
 $('end-call').addEventListener('click', () => disconnect('The business operator disconnected the simulated call.', false));
 $('mute-mic').addEventListener('click', () => { muted = !muted; syncMicrophone(); });
 $('play-audio').addEventListener('click', playRemoteAudio);
@@ -532,6 +540,6 @@ window.addEventListener('pagehide', () => {
   releasePeer();
   if (wasConnected) api('/connection', { method: 'POST', body: { connected: false, reason: 'Business tab closed or navigated away.' }, keepalive: true }).catch(() => {});
 });
-if (!roomId || !token) { stopped = true; showError('Open the business link from the customer chat. This page needs its room and access token; no microphone has been activated.'); }
+if (!roomId || !token) { stopped = true; showError('Start a conversation in Chat, then open Call from its top bar.'); }
 else if (!/^[A-Za-z0-9_-]{1,160}$/.test(roomId) || token.length > 2048) { stopped = true; showError('This business room link is invalid. Open a new link from the customer chat.'); }
 else { if (!isSecureContext) showError('Microphone access needs localhost or HTTPS.'); pollLoop(); }

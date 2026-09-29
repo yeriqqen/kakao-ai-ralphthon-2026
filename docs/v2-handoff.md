@@ -1,3 +1,5 @@
+> Latest presentation update: [three-view UI and real place discovery](v2-presentation-ui.md). Use the header Chat / Debug / Call links. The older checkpoint below describes the successful voice rehearsal.
+
 # V2 PR #1 handoff — 2026-09-29, 16:10 KST
 
 Use `feat/v2-design-integration`. Newer local work remains preserved at `codex/pre-pr1-checkpoint` (`eb4e5ce`); it was carried onto this branch as `ea7d30f`. Preference repairs are in `8ce4526`, integrated with teammate updates through `92cedd6` by merge `da81743`. The local `.env` is ignored. V1 remains available.

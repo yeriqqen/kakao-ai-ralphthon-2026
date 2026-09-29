@@ -4,13 +4,19 @@
   "realMicrophone": false,
   "audibleKorean": false,
   "provenance": "Synthetic browser events and mocked HTTP. Does not prove microphone capture, OpenAI connectivity, speech quality, or audible Korean.",
-  "generatedAt": "2026-09-29T07:05:13.742Z",
+  "generatedAt": "2026-09-29T07:24:36.521Z",
   "checks": [
+    {
+      "name": "Phone decline never activates microphone and diagnostics stay off the call screen",
+      "passed": true,
+      "mock": true,
+      "detail": "A pending call can be declined without Accept, WebRTC, or microphone access."
+    },
     {
       "name": "Authorization and explicit acceptance gate microphone",
       "passed": true,
       "mock": true,
-      "detail": "No microphone request before authorized Accept; one mocked connection acknowledgement after data channel opens; translated generated question visible; audible status remains unverified."
+      "detail": "No microphone request before authorized Accept; one mocked connection acknowledgement after data channel opens; generated questions retained for state; the phone surface hides diagnostics; audible status remains unverified."
     },
     {
       "name": "Laptop turn taking follows actual playback",
@@ -125,10 +131,10 @@
     }
   ],
   "sources": {
-    "public/v2/business.js": "e44a9878a51863408d7ef0d31a5d62d804b88a49d7d2182d1442cc976531f1b9",
-    "public/v2/business.html": "2dc922a10034810feafce2b92aa804257ab8344b40ea72218c53f2020f11e7a0",
-    "public/v2/business.css": "465647baff773614e9d8440a27bbb8be83569591e7d7e7909b5c0ae5f6aa5d51",
-    "scripts/v2-business-ui-check.mjs": "76cd726e67548e4cfe2c79792eae45b03c227340823979e6abd19581ab7955fd"
+    "public/v2/business.js": "e23a85470b6ffe3b4306041a43414b92729a7f5b318b28b4c7da1583c3fb1d73",
+    "public/v2/business.html": "39893a904b80be3ddb00ec13d81ee25e9f0bab1ead3de8e1f82cbc5977987720",
+    "public/v2/business.css": "31a60413e8a9c6f9b4a153d698e8e0b38da25b768c3e2e8c717f9702c63e7ca9",
+    "scripts/v2-business-ui-check.mjs": "86e93639ff03bc2dd9eca65b53fa71e1cb201676727c693518be16b2a4cc0682"
   },
   "requestEvidence": [
     {
@@ -174,83 +180,83 @@
         "events": [
           {
             "type": "call.accepted",
-            "at": "2026-09-29T07:05:16.268Z"
+            "at": "2026-09-29T07:24:38.856Z"
           },
           {
             "type": "remote.track",
-            "at": "2026-09-29T07:05:16.279Z"
+            "at": "2026-09-29T07:24:38.861Z"
           },
           {
             "type": "session.created",
-            "at": "2026-09-29T07:05:16.280Z"
+            "at": "2026-09-29T07:24:38.862Z"
           },
           {
             "type": "playback.allowed",
-            "at": "2026-09-29T07:05:16.280Z"
+            "at": "2026-09-29T07:24:38.862Z"
           },
           {
             "type": "connection.registered",
-            "at": "2026-09-29T07:05:16.308Z"
+            "at": "2026-09-29T07:24:38.869Z"
           },
           {
             "type": "opening.requested",
-            "at": "2026-09-29T07:05:16.312Z"
+            "at": "2026-09-29T07:24:38.875Z"
           },
           {
             "type": "response.created",
-            "at": "2026-09-29T07:05:16.353Z",
+            "at": "2026-09-29T07:24:38.900Z",
             "responseId": "r-intro"
           },
           {
             "type": "output_audio_buffer.started",
-            "at": "2026-09-29T07:05:16.355Z",
+            "at": "2026-09-29T07:24:38.901Z",
             "responseId": "r-intro"
           },
           {
             "type": "output_audio_buffer.stopped",
-            "at": "2026-09-29T07:05:16.357Z",
+            "at": "2026-09-29T07:24:38.902Z",
             "responseId": "older-audio"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T07:05:16.360Z",
+            "at": "2026-09-29T07:24:38.903Z",
             "responseId": "r-intro",
             "status": "completed"
           },
           {
             "type": "output_audio_buffer.stopped",
-            "at": "2026-09-29T07:05:16.361Z",
+            "at": "2026-09-29T07:24:38.906Z",
             "responseId": "r-intro"
           },
           {
             "type": "opening.finished",
-            "at": "2026-09-29T07:05:16.361Z"
+            "at": "2026-09-29T07:24:38.906Z"
           },
           {
             "type": "response.created",
-            "at": "2026-09-29T07:05:16.488Z",
+            "at": "2026-09-29T07:24:39.022Z",
             "responseId": "r-question"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T07:05:16.540Z",
+            "at": "2026-09-29T07:24:39.046Z",
             "responseId": "r-question",
             "status": "cancelled"
           },
           {
             "type": "response.created",
-            "at": "2026-09-29T07:05:16.569Z",
+            "at": "2026-09-29T07:24:39.050Z",
             "responseId": "r-wait"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T07:05:16.572Z",
+            "at": "2026-09-29T07:24:39.050Z",
             "responseId": "r-question",
             "status": "cancelled"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T07:05:16.576Z",
+            "at": "2026-09-29T07:24:39.051Z",
             "responseId": "r-wait",
             "status": "completed"
           }
@@ -265,12 +271,12 @@
         "events": [
           {
             "type": "response.created",
-            "at": "2026-09-29T07:05:17.765Z",
+            "at": "2026-09-29T07:24:40.473Z",
             "responseId": "r-resume"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T07:05:17.769Z",
+            "at": "2026-09-29T07:24:40.475Z",
             "responseId": "r-resume",
             "status": "completed"
           }
@@ -314,14 +320,6 @@
       }
     },
     {
-      "operation": "/connection",
-      "method": "POST",
-      "input": {
-        "connected": false,
-        "reason": "completed_audio_finished"
-      }
-    },
-    {
       "operation": "/diagnostics",
       "method": "POST",
       "input": {
@@ -329,48 +327,56 @@
         "events": [
           {
             "type": "response.created",
-            "at": "2026-09-29T07:05:19.107Z",
+            "at": "2026-09-29T07:24:41.655Z",
             "responseId": "r-tool"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T07:05:19.180Z",
+            "at": "2026-09-29T07:24:41.662Z",
             "responseId": "r-tool",
             "status": "completed"
           },
           {
             "type": "response.created",
-            "at": "2026-09-29T07:05:19.208Z",
+            "at": "2026-09-29T07:24:41.665Z",
             "responseId": "r-finish-request"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T07:05:19.417Z",
+            "at": "2026-09-29T07:24:41.676Z",
             "responseId": "r-finish-request",
             "status": "completed"
           },
           {
             "type": "response.created",
-            "at": "2026-09-29T07:05:19.496Z",
+            "at": "2026-09-29T07:24:41.678Z",
             "responseId": "r-goodbye"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T07:05:19.521Z",
+            "at": "2026-09-29T07:24:41.681Z",
             "responseId": "r-goodbye",
             "status": "completed"
           },
           {
             "type": "output_audio_buffer.stopped",
-            "at": "2026-09-29T07:05:19.534Z",
+            "at": "2026-09-29T07:24:41.684Z",
             "responseId": "r-finish-request"
           },
           {
             "type": "output_audio_buffer.stopped",
-            "at": "2026-09-29T07:05:19.542Z",
+            "at": "2026-09-29T07:24:41.686Z",
             "responseId": "r-goodbye"
           }
         ]
+      }
+    },
+    {
+      "operation": "/connection",
+      "method": "POST",
+      "input": {
+        "connected": false,
+        "reason": "completed_audio_finished"
       }
     }
   ],

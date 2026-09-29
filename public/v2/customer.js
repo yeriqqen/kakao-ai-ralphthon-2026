@@ -107,10 +107,10 @@ async function sendMessage(event) {
     if (error.code === 'CONNECTION_FAILED') online = false;
   } finally { sending = false; render(); $('message-input').focus(); }
 }
-function businessLink() {
+function businessLink(view = '/business') {
   if (!credentials?.businessToken || !credentials?.id) return '';
   // The business token stays in a fragment, never a query or a request log.
-  const link = new URL('/business', config?.publicBaseUrl || location.origin);
+  const link = new URL(view, config?.publicBaseUrl || location.origin);
   link.searchParams.set('room', credentials.id); link.hash = `token=${encodeURIComponent(credentials.businessToken)}`;
   return link.href;
 }
@@ -154,19 +154,33 @@ function renderContext() {
   lastContextSignature = signature; const fragment = document.createDocumentFragment();
   if (!state) { $('context').replaceChildren(); return; }
   const status = state.call?.status || 'idle';
+  if (state.places?.length && !state.selectedPlace && status === 'idle') {
+    const places = section(t('placesTitle'), 'places-section'); places.append(node('p', 'muted', t('listingNote')));
+    for (const place of state.places) {
+      const card = node('article', 'place-card'); card.append(node('h3', '', place.name), node('p', '', place.detail), node('p', 'place-address', place.address));
+      if (place.phone) card.append(node('p', 'place-address', place.phone));
+      const links = node('div', 'place-links');
+      for (const [label, href] of [[t('placeSource'), place.url], [t('placeMaps'), `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.name + ' ' + place.address)}`]]) {
+        try { const url = new URL(href); if (!['https:', 'http:'].includes(url.protocol)) continue; const link = node('a', '', label); link.href = url.href; link.target = '_blank'; link.rel = 'noopener noreferrer'; links.append(link); } catch {}
+      }
+      card.append(links, button(t('selectPlace'), () => mutate('select-place', { placeId: place.id }), 'primary-button', sending || state.busy || !online)); places.append(card);
+    }
+    fragment.append(places);
+  }
   if (state.planReady && status === 'idle') {
-    const plan = section(t('plan')); plan.append(node('p', 'fictional-note', t('fictional')));
+    const plan = section(t('plan'));
     const institutions = state.institutions || [];
     if (institutions.length) {
       const options = node('fieldset', 'institution-options'); options.append(node('legend', '', t('chooseInstitution')));
       for (const institution of institutions) {
         const label = node('label', 'institution-option'); const radio = document.createElement('input'); radio.type = 'radio'; radio.name = 'institution'; radio.value = institution.id; radio.checked = selectedInstitution === institution.id; radio.disabled = sending;
         radio.addEventListener('change', () => { selectedInstitution = institution.id; render(); });
-        const copy = node('span'); copy.append(node('strong', '', institution.name), node('p', '', institution.reason)); label.append(radio, copy); options.append(label);
+        const copy = node('span'); copy.append(node('strong', '', institution.name.replace(/^(?:Fictional\s+|Вымышленн[а-я]+\s+|虚构\s*)/iu, '')), node('p', '', institution.reason)); label.append(radio, copy); options.append(label);
       }
       plan.append(options);
     } else plan.append(node('p', 'muted', t('noInstitution')));
     const questions = questionDetails(); if (questions) plan.append(questions);
+    if (state.selectedPlace) plan.append(node('p', 'muted', t('discoveryCallNote')));
     plan.append(node('p', '', t('permission')));
     plan.append(button(t('yes'), () => mutate('authorize', { institutionId: selectedInstitution }), 'primary-button', sending || state.busy || !selectedInstitution || !online));
     fragment.append(plan);
@@ -180,21 +194,15 @@ function renderContext() {
     const decision = section(t('decisionTitle'), 'decision'); if (state.decisionPrompt) decision.append(node('p', '', state.decisionPrompt));
     const actions = node('div', 'button-row'); actions.append(button(t('continueCall'), () => mutate('decision', { action: 'continue' }), 'primary-button', sending || !online), button(t('stopCall'), () => mutate('decision', { action: 'end' }), 'secondary-button', sending || !online)); decision.append(actions); fragment.append(decision);
   }
-  if (credentials?.businessToken && !state.summary) {
-    const business = section(t('businessTitle'), 'business-panel');
-    const actions = node('div', 'button-row'); const link = businessLink();
-    if (link) {
-      const open = node('a', 'secondary-button link-button', t('openBusiness')); open.href = link; open.target = '_blank'; open.rel = 'noopener noreferrer'; actions.append(open);
-      actions.append(button(t('copyLink'), async (event) => { const target = event.currentTarget; try { await navigator.clipboard.writeText(link); target.textContent = t('copied'); } catch { setError('COPY_FAILED'); } }, 'quiet-button'));
-    }
-    if (liveStates.has(status)) actions.append(button(t('endCall'), () => confirmAction('end'), 'quiet-button', sending));
-    if (['interrupted', 'failed'].includes(status) && state.planReady && selectedInstitution) actions.append(button(t('retryCall'), () => mutate('authorize', { institutionId: selectedInstitution }), 'primary-button', sending || state.busy || !online));
-    const setup = node('details', 'setup-details'); setup.dataset.detailKey = 'setup'; setup.append(node('summary', '', t('setupDetails')), node('p', 'business-instructions', t('businessHelp')), node('p', 'muted', t('linkNotice')));
-    business.append(actions, setup); fragment.append(business);
+  if (liveStates.has(status)) {
+    const actions = section('', 'call-actions'); actions.append(button(t('endCall'), () => confirmAction('end'), 'quiet-button', sending)); fragment.append(actions);
+  } else if (['interrupted', 'failed'].includes(status) && state.planReady && selectedInstitution) {
+    const actions = section('', 'call-actions'); actions.append(button(t('retryCall'), () => mutate('authorize', { institutionId: selectedInstitution }), 'primary-button', sending || state.busy || !online)); fragment.append(actions);
   }
+
   if (state.summary) {
     const result = section(t('result'), 'result-card'); result.querySelector('h2').prepend(icon('note'));
-    result.append(node('p', 'fictional-note', t('simulation')));
+    if (state.selectedPlace) result.append(node('p', 'muted', t('discoveryResultNote')));
     const facts = state.summary.details;
     if (facts?.unresolved?.length || (state.requiredQuestions || []).some((question) => question.status !== 'resolved')) result.append(node('p', 'fictional-note', t('unresolvedWarning')));
     if (facts?.answers) {
@@ -245,6 +253,8 @@ function render() {
   document.querySelectorAll('[data-ui]').forEach(element => element.textContent = t(element.dataset.ui));
   document.documentElement.lang = language; document.title = t('title');
   for (const [id, key] of Object.entries({ subtitle:'subtitle', 'new-chat-label':'newChat', 'simulation-label':'simulation', 'welcome-title':'welcome', 'welcome-intro':'intro', 'language-label':'chooseLanguage', 'text-note':'textOnly', working:'thinking', 'dismiss-error':'closeError' })) $(id).textContent = t(key);
+  if (credentials?.id) window.name = `yokobu-chat-${credentials.id}`;
+  for (const [id, view] of [['phone-link', '/business'], ['debug-link', '/debug']]) { const link = businessLink(view); $(id).setAttribute('aria-disabled', String(!link)); if (link) { $(id).href = link; $(id).target = `yokobu-${id === 'phone-link' ? 'call' : 'debug'}-${credentials.id}`; $(id).removeAttribute('rel'); } else $(id).removeAttribute('href'); }
   $('new-chat').setAttribute('aria-label', t('newChat')); $('new-chat').title = t('newChat');
   $('fixed-language').textContent = credentials ? t('selectedLanguage', { language: languageNames[language] }) : '';
   $('welcome').hidden = Boolean(credentials || pendingText);
@@ -271,7 +281,7 @@ function render() {
   const green = online && state?.call?.connected === true && connectedStates.has(status);
   const unresolvedCompletion = status === 'completed' && state?.requiredQuestions?.some((question) => question.status !== 'resolved');
   $('call-state').className = `call-state${green ? ' is-active' : ''}${(!online || ['failed', 'interrupted'].includes(status) || unresolvedCompletion) ? ' is-failed' : ''}`;
-  $('call-state-text').textContent = !online ? t('offline') : unresolvedCompletion ? t('unresolvedWarning') : t(connectedStates.has(status) && !state?.call?.connected ? 'connecting' : status);
+  $('call-state-text').textContent = !online ? t('offline') : unresolvedCompletion ? t('unresolvedWarning') : state?.call?.reason === 'declined' ? t('declined') : t(connectedStates.has(status) && !state?.call?.connected ? 'connecting' : status);
   const error = localError || state?.error?.code || (!online ? 'CONNECTION_FAILED' : '');
   $('error').hidden = !error; $('error-text').textContent = error ? t(error) : '';
   renderMessages(); renderContext();

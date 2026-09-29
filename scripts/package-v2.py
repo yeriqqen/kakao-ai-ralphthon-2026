@@ -90,7 +90,7 @@ def smoke_archive() -> None:
                 except (OSError, ValueError):
                     time.sleep(0.1)
             checks.append({"name": "extracted v2 server starts without credential leakage", "passed": config is not None and config.get("configured") is False})
-            for route in ("/", "/business", "/legacy", "/v2/customer.js", "/v2/business.js", "/fonts/InterVariable.woff2"):
+            for route in ("/", "/business", "/debug", "/v2/debug.js", "/legacy", "/v2/customer.js", "/v2/business.js", "/fonts/InterVariable.woff2"):
                 passed = False
                 try:
                     with urllib.request.urlopen(f"http://127.0.0.1:{port}{route}", timeout=2) as response:

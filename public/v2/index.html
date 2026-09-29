@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="referrer" content="no-referrer">
   <meta name="theme-color" content="#fafaf7">
-  <title>YOKOBU · A little more local.</title>
+  <title>YOKOBU · Chat</title>
   <link rel="preload" href="/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/v2/theme.css">
   <link rel="stylesheet" href="/v2/styles.css">
@@ -25,10 +25,10 @@
   <div class="chat-app">
     <header class="app-header">
       <div class="brand-block"><a class="brand" href="/v2/" aria-label="Yokobu"><svg class="icon brand-mark" aria-hidden="true"><use href="#i-spark"/></svg>yokobu<span class="brand-dot" aria-hidden="true">.</span></a><span id="subtitle"></span></div>
-      <div class="header-actions"><span id="fixed-language"></span><button id="new-chat" class="quiet-button new-chat" type="button"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span id="new-chat-label"></span></button></div>
+      <div class="header-actions"><nav class="view-tabs" aria-label="Workspace"><span class="view-tab selected" data-ui="chatView">Chat</span><a id="debug-link" class="view-tab" target="_blank" rel="noopener noreferrer" data-ui="debugView">Debug</a><a id="phone-link" class="view-tab" target="_blank" rel="noopener noreferrer" data-ui="phoneView">Call</a></nav><span id="fixed-language"></span><button id="new-chat" class="quiet-button new-chat" type="button"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span id="new-chat-label"></span></button></div>
     </header>
     <main id="main" tabindex="-1">
-      <div class="conversation-meta"><span id="simulation-label"></span></div>
+      <details class="app-about"><summary data-ui="about">About</summary><p id="simulation-label"></p></details>
       <section id="welcome" class="welcome">
         <div class="hero-mark" aria-hidden="true"><svg class="icon"><use href="#i-spark"/></svg></div>
         <h1 id="welcome-title"></h1><p id="welcome-intro"></p>

@@ -151,6 +151,20 @@ Object.assign(translations.zh, {
   everydayPrompt: '我想向理发店询问预约时间。',
 });
 
+// Presentation copy; the About panel retains the demo boundary without repeating it in the flow.
+const discoveryCopy = {
+ en: { placesTitle: 'Places to consider', listingNote: 'Sourced listings · Availability still needs to be confirmed.', placeSource: 'Source', placeMaps: 'Open in maps', selectPlace: 'Choose this place', discoveryCallNote: 'Real listing · The following call is a microphone demo. This business will not be contacted.', discoveryResultNote: 'Demo conversation results, not confirmation from the listed business.' },
+ ru: { placesTitle: 'Варианты поблизости', listingNote: 'Данные из источников · Доступность нужно уточнить.', placeSource: 'Источник', placeMaps: 'На карте', selectPlace: 'Выбрать', discoveryCallNote: 'Реальное место · Далее демонстрация через микрофон, без звонка организации.', discoveryResultNote: 'Результаты демонстрации, не подтверждение от организации.' },
+ zh: { placesTitle: '可考虑的地点', listingNote: '有来源的商家信息 · 服务情况仍需确认。', placeSource: '来源', placeMaps: '在地图中打开', selectPlace: '选择此地点', discoveryCallNote: '真实地点 · 接下来是麦克风演示，不会联系该商家。', discoveryResultNote: '演示对话结果，并非商家的实际确认。' },
+};
+for (const [lang, copy] of Object.entries(discoveryCopy)) Object.assign(translations[lang], copy);
+const presentationCopy = {
+  en: { title:'YOKOBU · Chat', chatView:'Chat', debugView:'Debug', phoneView:'Call', about:'About', simulation:'Live place search and AI chat. Calls are microphone demonstrations; no real business is contacted or booked.', textOnly:'Your conversation stays in text.', plan:'Call plan', chooseInstitution:'Choose a business', resolved:'Answered', permission:'Shall I call them now?', retryCall:'Try again', endCall:'End call', result:'Call summary', endTitle:'End this call?', endConfirm:'End call', active:'Call in progress', completed:'Call completed', interrupted:'Call interrupted', declined:'Call declined', restartBody:'Start fresh and choose another language. Any active call will end.' },
+  ru: { title:'YOKOBU · Чат', chatView:'Чат', debugView:'Отладка', phoneView:'Звонок', about:'О приложении', simulation:'Реальный поиск мест и ИИ-диалог. Звонки демонстрируются через микрофон, без связи с организацией или бронирования.', textOnly:'Общайтесь через текст.', plan:'План звонка', chooseInstitution:'Выберите организацию', resolved:'Получен ответ', permission:'Позвонить им сейчас?', retryCall:'Попробовать снова', endCall:'Завершить звонок', result:'Итоги звонка', endTitle:'Завершить звонок?', endConfirm:'Завершить звонок', active:'Идёт звонок', completed:'Звонок завершён', interrupted:'Звонок прерван', declined:'Звонок отклонён', restartBody:'Начните заново и выберите другой язык. Активный звонок завершится.' },
+  zh: { title:'YOKOBU · 聊天', chatView:'聊天', debugView:'调试', phoneView:'通话', about:'关于', simulation:'实时地点搜索和 AI 聊天。通话为麦克风演示，不会联系真实商家或进行预约。', textOnly:'全程通过文字交流。', plan:'通话计划', chooseInstitution:'选择机构', resolved:'已回答', permission:'现在联系他们吗？', retryCall:'重试', endCall:'结束通话', result:'通话总结', endTitle:'结束通话？', endConfirm:'结束通话', active:'通话中', completed:'通话已结束', interrupted:'通话已中断', declined:'通话已拒绝', restartBody:'开始新对话并选择语言。当前通话将结束。' }
+};
+for (const language of languages) Object.assign(translations[language], presentationCopy[language]);
+
 export function translate(language, key, values = {}) {
   let result = translations[language]?.[key] ?? translations.en[key] ?? translations.en.UNKNOWN;
   for (const [name, value] of Object.entries(values)) result = result.replaceAll(`{${name}}`, String(value));

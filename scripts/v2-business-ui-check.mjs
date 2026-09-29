@@ -81,6 +81,7 @@ async function setup({ status = 'idle', deny = false, sessionCreated = true, rem
     if (req.headers().authorization !== 'Bearer mock-business-token') throw new Error('Missing room authorization header');
     if (req.method() === 'POST') {
       if (operation === '/accept') mutate(r => { r.call.status = 'connecting'; });
+      else if (operation === '/decline') mutate(r => { r.call.status = 'failed'; r.call.reason = 'declined'; });
       else if (operation === '/realtime') return route.fulfill({ status: 200, contentType: 'application/sdp', body: 'v=0\r\ns=SYNTHETIC_ANSWER_NO_NETWORK_NO_AUDIO\r\n' });
       else if (operation === '/connection') mutate(r => { r.call.connected = input.connected; if (input.connected) r.call.status = 'active'; else if (r.call.status !== 'completed') r.call.status = 'interrupted'; });
       else if (operation === '/transcript') { if (control.onTranscript) await control.onTranscript(input); }
@@ -103,6 +104,13 @@ async function setup({ status = 'idle', deny = false, sessionCreated = true, rem
   return { context, page, room, requests, errors, unexpected, control, mutate, emit, snapshot, responseCount, responses, accept };
 }
 try {
+  const declined = await setup({ status: 'pending' });
+  await declined.page.locator('#decline-call').click();
+  await declined.page.getByRole('heading', { name: 'Call declined' }).waitFor();
+  assert.equal((await declined.snapshot()).getUserMediaCalls, 0);
+  assert.equal(declined.requests.some(r => ['/accept', '/realtime'].includes(r.operation)), false);
+  assert.equal(await declined.page.locator('#transcript').isVisible(), false);
+  check('Phone decline never activates microphone and diagnostics stay off the call screen', 'A pending call can be declined without Accept, WebRTC, or microphone access.');
   const f = await setup();
   assert.equal(await f.page.locator('#accept-call').isVisible(), false);
   assert.equal((await f.snapshot()).getUserMediaCalls, 0);
@@ -119,7 +127,7 @@ try {
   assert.equal(openingRequest.response.tool_choice, 'none');
   assert.deepEqual(openingRequest.response.output_modalities, ['audio']);
   assert.equal((await f.snapshot()).tracks[0].enabled, false);
-  check('Authorization and explicit acceptance gate microphone', 'No microphone request before authorized Accept; one mocked connection acknowledgement after data channel opens; translated generated question visible; audible status remains unverified.');
+  check('Authorization and explicit acceptance gate microphone', 'No microphone request before authorized Accept; one mocked connection acknowledgement after data channel opens; generated questions retained for state; the phone surface hides diagnostics; audible status remains unverified.');
 
   await f.emit({ type: 'response.created', response: { id: 'r-intro' } });
   await f.emit({ type: 'output_audio_buffer.started', response_id: 'r-intro' });

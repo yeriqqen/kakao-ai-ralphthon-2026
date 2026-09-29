@@ -29,8 +29,18 @@ globalThis.fetch = async (url, options) => {
   } else if (purpose === 'business_evidence_review') {
     const input = JSON.parse(body.input), quote = input.newestBusinessTranscript.text;
     output = { utteranceKind: 'unclear', answers: [], confirmedKeyDetails: false, confirmationQuote: '', readbackEvidence: [], unavailable: false, explanation: '', customerQuestion: { asked: true, key: 'alternative_color', questionKorean: '다른 색상도 괜찮으세요?', evidenceQuote: quote === '인사만 합니다.' ? 'fabricated quotation' : quote } };
+    if (quote === '네, 재고가 있습니다.') {
+      output.customerQuestion.asked = false; output.utteranceKind = 'substantive_answer';
+      output.answers = [{ questionId: 'stock', status: 'resolved', answer: 'The blue notebook is in stock.', evidenceQuote: quote, reason: '', changesPriorAnswer: false }];
+    } else if (quote === '네, 맞습니다.') {
+      const readback = input.recentConversation.filter(item => item.role === 'assistant').at(-1);
+      output.customerQuestion.asked = false; output.utteranceKind = 'readback_confirmation';
+      output.confirmedKeyDetails = true; output.confirmationQuote = quote;
+      output.readbackEvidence = [{ questionId: 'stock', transcriptId: readback.id, quote: readback.text }];
+    }
   } else if (purpose === 'customer_relay') output = { known: false, key: 'alternative_color', question: 'Would another color be okay?', answerKorean: '' };
   else if (purpose === 'relay_answer') output = { answerKorean: '검은색도 괜찮습니다.', acknowledgement: 'I will relay that black is okay.' };
+  else if (purpose === 'grounded_recommendation') output = { action: 'review_recorded_answers', reasonQuestionIds: ['stock'], clarificationQuestionIds: [] };
   else throw new Error('Unexpected AI purpose in HTTP-only test: ' + purpose);
   return new Response(JSON.stringify({ id: 'synthetic-http-setup-' + purpose, model: 'mock-no-openai', status: 'completed', output: [{ content: [{ type: 'output_text', text: JSON.stringify(output) }] }] }), { status: 200, headers: { 'Content-Type': 'application/json' } });
 };
@@ -130,6 +140,32 @@ try {
     const response = await request('/transcript', created.businessToken, { id: 'synthetic-invalid-question', role: 'business', text: '인사만 합니다.' });
     assert.equal(response.status, 200);
     const room = await response.json(); assert.equal(room.pendingRelay, null); assert.equal(room.call.status, 'active');
+  });
+  await check('resolved answer alone cannot bypass readback confirmation through HTTP', async () => {
+    const response = await request('/transcript', created.businessToken, { id: 'synthetic-stock-answer', role: 'business', text: '네, 재고가 있습니다.' });
+    assert.equal(response.status, 200);
+    const room = await response.json(); assert.equal(room.requiredQuestions[0].status, 'resolved');
+    const result = await request('/tool', created.businessToken, { callId: 'synthetic-early-finish', name: 'complete_call', arguments: {} }).then(r => r.json());
+    assert.equal(result.allowComplete, false);
+  });
+  await check('HTTP review retains the saved transcript metadata and accepts a valid readback', async () => {
+    assert.equal((await request('/transcript', created.businessToken, { id: 'synthetic-readback', role: 'assistant', text: '파란색 공책 재고가 있다는 말씀이시죠?' })).status, 200);
+    const response = await request('/transcript', created.businessToken, { id: 'synthetic-confirmation', role: 'business', text: '네, 맞습니다.' });
+    assert.equal(response.status, 200);
+    const room = await response.json();
+    assert.equal(room.call.confirmedKeyDetails, true);
+    assert.equal(room.call.readbackEvidence[0].transcriptId, 'synthetic-readback');
+    assert.equal(room.call.confirmationEvidence[0].transcriptId, 'synthetic-confirmation');
+  });
+  await check('confirmed HTTP flow completes and generates its grounded summary', async () => {
+    const result = await request('/tool', created.businessToken, { callId: 'synthetic-valid-finish', name: 'complete_call', arguments: {} }).then(r => r.json());
+    assert.equal(result.allowComplete, true);
+    let room;
+    for (let i = 0; i < 20; i++) { room = await request('', created.customerToken).then(r => r.json()); if (room.summary) break; await new Promise(resolve => setTimeout(resolve, 20)); }
+    assert.equal(room.call.status, 'completed'); assert.equal(room.call.success, true);
+    assert.match(room.summary.text, /The blue notebook is in stock/);
+    assert.match(room.summary.text, /Simulation completed/);
+    assert.match(room.summary.recommendation, /recorded answers/);
   });
   const result = { checkedAt: new Date().toISOString(), type: 'real_local_http_with_mocked_plan_setup', realHTTP: true, realOpenAI: false, realMicrophone: false, syntheticHttpTest: true, childConfiguration: 'Dummy key; child fetch replaced with synthetic setup responses and upstream network blocked', provenance: 'Real isolated localhost HTTP routes. Plan generation and validation are synthetic setup fixtures; all upstream network is blocked. No actual business or audio evidence.', fixtureRoomId, passed: checks.length, total: checks.length, checks };
   await mkdir(output, { recursive: true });

@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-09-29T06:38:26.493Z",
+  "checkedAt": "2026-09-29T06:46:02.413Z",
   "type": "real_local_http_with_mocked_plan_setup",
   "realHTTP": true,
   "realOpenAI": false,
@@ -7,9 +7,9 @@
   "syntheticHttpTest": true,
   "childConfiguration": "Dummy key; child fetch replaced with synthetic setup responses and upstream network blocked",
   "provenance": "Real isolated localhost HTTP routes. Plan generation and validation are synthetic setup fixtures; all upstream network is blocked. No actual business or audio evidence.",
-  "fixtureRoomId": "1a6bc9e0-7128-424e-a57a-1ed374367532",
-  "passed": 27,
-  "total": 27,
+  "fixtureRoomId": "a859dd77-dd78-49fa-b0ea-5e3e2402c77c",
+  "passed": 30,
+  "total": 30,
   "checks": [
     {
       "name": "/ is served",
@@ -117,6 +117,18 @@
     },
     {
       "name": "an invented question quote cannot trigger a relay",
+      "passed": true
+    },
+    {
+      "name": "resolved answer alone cannot bypass readback confirmation through HTTP",
+      "passed": true
+    },
+    {
+      "name": "HTTP review retains the saved transcript metadata and accepts a valid readback",
+      "passed": true
+    },
+    {
+      "name": "confirmed HTTP flow completes and generates its grounded summary",
       "passed": true
     }
   ]

@@ -164,8 +164,9 @@ const handler = async (req, res) => {
         const id = messageText(input.id);
         const exists = room.transcripts.some(item => item.id === id && item.role === input.role);
         if (!exists) {
-          const transcript = { id, role: input.role, text };
-          state.appendTranscript(room, transcript);
+          // Confirmation validation needs the saved call ID and transcript
+          // metadata, not the unstamped browser request object.
+          const transcript = state.appendTranscript(room, { id, role: input.role, text });
           if (input.role === 'business' && !terminal.has(room.call.status)) {
             const callId = room.call.id;
             room.reviewChain = room.reviewChain.catch(() => {}).then(async () => {

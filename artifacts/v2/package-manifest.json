@@ -52,8 +52,8 @@
     },
     {
       "path": "artifacts/v2/http-check.json",
-      "bytes": 3225,
-      "sha256": "7f211155b2f3e1617aad0f566996b1d43488ee464f3671b1fe06b611ea17f400"
+      "bytes": 3593,
+      "sha256": "c4397a11369e21571fec1467c5d0e641f19f8d14ca65638e750d85b1475bdcf2"
     },
     {
       "path": "artifacts/v2/live-api-check.json",
@@ -113,7 +113,7 @@
     {
       "path": "docs/v2-handoff.md",
       "bytes": 1848,
-      "sha256": "24f941a7178517ffbb552dfa9df5f84f83974012a2b3a366290ab92ade262c85"
+      "sha256": "c9ca2e30254a1ab65005033632c6b35359381608f97fe8b26ac13b75fdd1a703"
     },
     {
       "path": "docs/v2-official-and-plan.md",
@@ -122,8 +122,8 @@
     },
     {
       "path": "docs/v2-pr1-review.md",
-      "bytes": 5807,
-      "sha256": "4140accd98fa4351ecb14a3d7f7d4301964d5b5cd2569287eb2ba590273b6ba8"
+      "bytes": 6289,
+      "sha256": "0f53842c8b0ac67e6b5ddec3956544798871f505e67e29f7f8bc57c5b9eafa6c"
     },
     {
       "path": "docs/v2-shop-demo.md",
@@ -252,8 +252,8 @@
     },
     {
       "path": "scripts/check-v2-http.mjs",
-      "bytes": 14456,
-      "sha256": "d1d75e21afed3115c3efb503f14ddb130c8058776d947dddca11ccebe93bfcfb"
+      "bytes": 17553,
+      "sha256": "5badbd5ce921fcc12266e7958793f32b55aa013f7582211ee89afa6d7f628c45"
     },
     {
       "path": "scripts/package-demo.py",
@@ -292,8 +292,8 @@
     },
     {
       "path": "server-v2.mjs",
-      "bytes": 19737,
-      "sha256": "3573bef4621d8200e8ec809be063eef2e8bb34032d60c5b1dd67ea6d9d98e92b"
+      "bytes": 19856,
+      "sha256": "e5f298ff5b8e70904f5072c3a8229491be71e68be404f64de3fc620b14e46121"
     },
     {
       "path": "server.mjs",
@@ -323,7 +323,7 @@
   ],
   "archive": {
     "path": "artifacts/v2/yokobu-v2-runnable.zip",
-    "bytes": 580052,
-    "sha256": "ac446c18ad5dc02c3547f10e810f5f7227725b4d6b411822187c6079decd945f"
+    "bytes": 580990,
+    "sha256": "41b29efaf029a71e1d295aafc6c199879ca290d0e26b2f5c14c6aed617b890f0"
   }
 }

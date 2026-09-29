@@ -8,6 +8,7 @@ Newer local work was preserved first on `codex/pre-pr1-checkpoint` at `eb4e5ce`,
 
 - **Voice turn ordering:** consecutive speech fragments could queue multiple replies; generation completion could precede playback start and incorrectly release the microphone. Playback now drains by response ID, adjacent reviews coalesce, and an ongoing second utterance blocks the next response without truncating capture. A server-provided known answer gets one continuation.
 - **Missed business question:** the third PR microphone run captured the alternative-color question, but Realtime skipped its relay tool. The server's semantic review now extracts explicit customer questions with exact transcript evidence, checks known information, and opens an unknown-detail relay before continuing. Later voice-tool requests reuse the same pending question.
+- **Readback confirmation rejected at the HTTP boundary:** the transcript route passed the original request object into the state validator, omitting the saved `callId`. Its same-call check therefore rejected valid confirmations even though isolated state replays passed. The route now passes the persisted transcript record. A full HTTP regression covers required answers, refusal of early completion, saved readback evidence, accepted confirmation, completion, and final summary.
 - **Repeated questions:** continuation control now selects the next unresolved question explicitly, prohibits recollecting resolved answers, distinguishes clarification from confirmation, and requests completion once the server validates the full readback. The original third run's pickup transcript was ambiguous, so it remained unresolved even while the voice assistant claimed to understand it. This mismatch is a recorded failure; targeted control requires another live test.
 - **Unsupported facts:** greetings, apologies, and incomplete speech must not resolve stock/price. Intent guards and a fragment clarification instruction were added. Recorded real API replays retain no facts for the greeting, apology, or isolated “now.” These are bounded regressions, not a guarantee of model reliability.
 - **Transcription prompt leakage:** an actual transcript repeated the transcription instruction. That prompt was removed; the Korean language setting and existing transcription model remain.
@@ -31,7 +32,7 @@ A three-request real API replay of the third run's actual business question corr
 ## Verification and next run
 
 - `npm test`: 64 unit tests.
-- `npm run test:http`: 27 real localhost checks with mocked upstream AI; no external network/audio.
+- `npm run test:http`: 30 real localhost checks with mocked upstream AI; no external network/audio.
 - `npm run test:customer`: 20 mocked browser checks.
 - `npm run test:business`: 16 mocked browser checks.
 - `CHROME_EXECUTABLE='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' npm run test:ui`: 32 design checks, all three languages, 320–1440 pixels.

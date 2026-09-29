@@ -2,8 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
   createRoom, publicRoom, appendMessage, applyPlan, authorizeCall, acceptCall, setConnection,
-  appendTranscript, applyBusinessReview, requestRelay, resolveRelay, canComplete, finishCall,
+  appendTranscript, applyBusinessReview, requestRelay, resolveRelay, refineQuestionsAfterRelay, canComplete, finishCall,
 } from '../lib/v2-state.mjs';
+import { factualSummary } from '../lib/v2-summary.mjs';
 
 function planned(language = 'en') {
   const room = createRoom(language);
@@ -391,4 +392,40 @@ test('an identical repeated answer preserves its original evidence through confi
   }, business);
   assert.deepEqual(room.requiredQuestions[0].evidence, original);
   assert.equal(canComplete(room), true);
+});
+
+test('customer relay can refine a question target without erasing its earlier business evidence', () => {
+  const room = planned(); authorizeCall(room, 'fictional-clinic'); acceptCall(room); setConnection(room, true);
+  const spoken = appendTranscript(room, { id: 'original-option', role: 'business', text: '오늘은 문을 닫았어요.' });
+  applyBusinessReview(room, { answers: [{ questionId: 'opening', status: 'resolved', answer: 'Closed today.', evidenceQuote: spoken.text }] }, spoken);
+  requestRelay(room, 'another_day', 'Would tomorrow work?');
+  const relay = resolveRelay(room, 'Tomorrow works.');
+  assert.throws(() => refineQuestionsAfterRelay(room, [{ questionId: 'invented', text: 'Invented', korean: '질문' }], relay), error => error.code === 'INVALID_RELAY_UPDATE');
+  refineQuestionsAfterRelay(room, [{ questionId: 'opening', text: 'Are you open tomorrow?', korean: '내일 진료하시나요?' }], relay);
+  assert.equal(room.requiredQuestions[0].status, 'unresolved');
+  assert.equal(room.requiredQuestions[0].answer, null);
+  assert.equal(room.questionHistory.length, 1);
+  assert.equal(room.questionHistory[0].answer, 'Closed today.');
+  assert.equal(room.questionHistory[0].evidence[0].transcriptId, spoken.id);
+  assert.equal(room.questionHistory[0].supersededByCustomerMessageId, relay.sourceMessageId);
+  assert.equal(room.customerInfo.at(-1).label, 'Would tomorrow work?');
+  assert.equal(canComplete(room), false);
+  assert.equal(publicRoom(room).questionHistory[0].callId, room.call.id);
+  const facts = factualSummary(room);
+  assert.equal(facts.answers[0].superseded, true);
+  assert.equal(facts.answers[0].answer, 'Closed today.');
+  assert(facts.unresolved.some(question => question.text === 'Are you open tomorrow?'));
+});
+
+test('refined targets retain applicable business facts but reject fabricated and older-call evidence', () => {
+  for (const sourceKind of ['valid', 'fabricated', 'older-call']) {
+    const room = planned(); authorizeCall(room, 'fictional-clinic'); acceptCall(room); setConnection(room, true);
+    const spoken = appendTranscript(room, { id: 'availability', role: 'business', text: '내일은 진료합니다.' });
+    if (sourceKind === 'older-call') spoken.callId = 'another-call';
+    requestRelay(room, 'another_day', 'Would tomorrow work?');
+    const relay = resolveRelay(room, 'Tomorrow works.');
+    refineQuestionsAfterRelay(room, [{ questionId: 'opening', text: 'Are you open tomorrow?', korean: '내일 진료하시나요?', retainedAnswer: { applicable: true, answer: 'Open tomorrow.', transcriptId: spoken.id, quote: sourceKind === 'fabricated' ? '없는 내용' : spoken.text } }], relay);
+    assert.equal(room.requiredQuestions[0].status, sourceKind === 'valid' ? 'resolved' : 'unresolved');
+    assert.equal(canComplete(room), false);
+  }
 });

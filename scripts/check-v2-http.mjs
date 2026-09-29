@@ -31,7 +31,7 @@ globalThis.fetch = async (url, options) => {
     output = { utteranceKind: 'unclear', answers: [], confirmedKeyDetails: false, confirmationQuote: '', readbackEvidence: [], unavailable: false, explanation: '', customerQuestion: { asked: true, key: 'alternative_color', questionKorean: '다른 색상도 괜찮으세요?', evidenceQuote: quote === '인사만 합니다.' ? 'fabricated quotation' : quote } };
     if (quote === '네, 재고가 있습니다.') {
       output.customerQuestion.asked = false; output.utteranceKind = 'substantive_answer';
-      output.answers = [{ questionId: 'stock', status: 'resolved', answer: 'The blue notebook is in stock.', evidenceQuote: quote, reason: '', changesPriorAnswer: false }];
+      output.answers = [{ questionId: 'stock', status: 'resolved', answer: 'The black notebook is in stock.', evidenceQuote: quote, reason: '', changesPriorAnswer: false }];
     } else if (quote === '네, 맞습니다.') {
       const readback = input.recentConversation.filter(item => item.role === 'assistant').at(-1);
       output.customerQuestion.asked = false; output.utteranceKind = 'readback_confirmation';
@@ -40,6 +40,7 @@ globalThis.fetch = async (url, options) => {
     }
   } else if (purpose === 'customer_relay') output = { known: false, key: 'alternative_color', question: 'Would another color be okay?', answerKorean: '' };
   else if (purpose === 'relay_answer') output = { answerKorean: '검은색도 괜찮습니다.', acknowledgement: 'I will relay that black is okay.' };
+  else if (purpose === 'relay_plan_update') output = { updates: [{ questionId: 'stock', text: 'Is a black notebook in stock?', korean: '검은색 공책 재고가 있나요?', retainedAnswer: { applicable: false, answer: '', transcriptId: '', quote: '' } }] };
   else if (purpose === 'grounded_recommendation') output = { action: 'review_recorded_answers', reasonQuestionIds: ['stock'], clarificationQuestionIds: [] };
   else throw new Error('Unexpected AI purpose in HTTP-only test: ' + purpose);
   return new Response(JSON.stringify({ id: 'synthetic-http-setup-' + purpose, model: 'mock-no-openai', status: 'completed', output: [{ content: [{ type: 'output_text', text: JSON.stringify(output) }] }] }), { status: 200, headers: { 'Content-Type': 'application/json' } });
@@ -135,6 +136,10 @@ try {
     const room = await response.json();
     assert.equal(room.call.status, 'active'); assert.equal(room.pendingRelay, null);
     assert.match(room.voiceMessage.text, /검은색도 괜찮습니다/);
+    assert.equal(room.requiredQuestions[0].text, 'Is a black notebook in stock?');
+    assert.equal(room.requiredQuestions[0].status, 'unresolved');
+    assert.equal(room.questionHistory[0].text, 'Is the blue notebook in stock?');
+    assert.match(room.voiceMessage.text, /Is a black notebook in stock/);
   });
   await check('an invented question quote cannot trigger a relay', async () => {
     const response = await request('/transcript', created.businessToken, { id: 'synthetic-invalid-question', role: 'business', text: '인사만 합니다.' });
@@ -149,7 +154,7 @@ try {
     assert.equal(result.allowComplete, false);
   });
   await check('HTTP review retains the saved transcript metadata and accepts a valid readback', async () => {
-    assert.equal((await request('/transcript', created.businessToken, { id: 'synthetic-readback', role: 'assistant', text: '파란색 공책 재고가 있다는 말씀이시죠?' })).status, 200);
+    assert.equal((await request('/transcript', created.businessToken, { id: 'synthetic-readback', role: 'assistant', text: '검은색 공책 재고가 있다는 말씀이시죠?' })).status, 200);
     const response = await request('/transcript', created.businessToken, { id: 'synthetic-confirmation', role: 'business', text: '네, 맞습니다.' });
     assert.equal(response.status, 200);
     const room = await response.json();
@@ -163,7 +168,7 @@ try {
     let room;
     for (let i = 0; i < 20; i++) { room = await request('', created.customerToken).then(r => r.json()); if (room.summary) break; await new Promise(resolve => setTimeout(resolve, 20)); }
     assert.equal(room.call.status, 'completed'); assert.equal(room.call.success, true);
-    assert.match(room.summary.text, /The blue notebook is in stock/);
+    assert.match(room.summary.text, /The black notebook is in stock/);
     assert.match(room.summary.text, /Simulation completed/);
     assert.match(room.summary.recommendation, /recorded answers/);
   });

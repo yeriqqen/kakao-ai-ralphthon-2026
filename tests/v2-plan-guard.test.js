@@ -159,3 +159,11 @@ test('social speech and readback classification cannot author new business facts
     }
   } finally { globalThis.fetch = originalFetch; if (originalKey === undefined) delete process.env.OPENAI_API_KEY; else process.env.OPENAI_API_KEY = originalKey; }
 });
+
+test('inferred cross-question answers are discarded even in a substantive business turn', async () => {
+  const originalFetch = globalThis.fetch, originalKey = process.env.OPENAI_API_KEY; process.env.OPENAI_API_KEY = 'synthetic-test-key';
+  const explicit = { questionId: 'fit', answerBasis: 'explicit_answer', answer: 'Not in stock.' };
+  globalThis.fetch = async () => mockResponse({ utteranceKind: 'substantive_answer', answers: [explicit, { questionId: 'cost', answerBasis: 'inferred', answer: 'No price because unavailable.' }] });
+  try { assert.deepEqual((await reviewBusiness(pricedSummaryRoom(), { id: 'stock-only', text: '재고가 없습니다.' })).answers, [explicit]); }
+  finally { globalThis.fetch = originalFetch; if (originalKey === undefined) delete process.env.OPENAI_API_KEY; else process.env.OPENAI_API_KEY = originalKey; }
+});

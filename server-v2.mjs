@@ -119,11 +119,13 @@ const handler = async (req, res) => {
           if (room.pendingRelay) {
             const relayId = room.pendingRelay.id;
             const translation = await ai.translateRelay(room, text);
+            const refinement = await ai.refineRelayPlan(room, text);
             if (room.call.endedAt || room.pendingRelay?.id !== relayId) throw apiError('INVALID_STATE', 409);
             const message = state.appendMessage(room, 'user', text, 'relay');
-            state.resolveRelay(room, message);
+            const resolvedRelay = state.resolveRelay(room, message);
+            state.refineQuestionsAfterRelay(room, refinement.updates, resolvedRelay);
             state.appendMessage(room, 'assistant', translation.acknowledgement, 'relay');
-            room.voiceMessage = { id: randomUUID(), text: `고객의 실제 답변: ${translation.answerKorean}. 이 내용만 전달하고 나머지 필수 질문을 계속하세요.` };
+            room.voiceMessage = { id: randomUUID(), text: `고객의 실제 답변: ${translation.answerKorean}. 고객이 수락한 선택 사항을 반영하세요. 이전 조건으로 돌아가지 마세요. 아래 최신 질문 상태를 따르고, 미해결 질문 중 하나만 이어서 물어보세요.\nCURRENT QUESTIONS: ${JSON.stringify(room.requiredQuestions)}\nCUSTOMER FACTS: ${JSON.stringify(room.customerInfo)}` };
           } else {
             if (room.call.status !== 'idle') throw apiError('INVALID_STATE', 409);
             room.planReady = false;
@@ -175,7 +177,8 @@ const handler = async (req, res) => {
               if (room.call.id !== callId || terminal.has(room.call.status)) return;
               state.applyBusinessReview(room, review, transcript);
               if (review.unavailable && room.call.status === 'active') await askDecision(room, review.explanation);
-              // The evidence review also catches explicit customer questions.
+              // Catch explicit questions and offered alternatives that need a
+              // customer preference decision, even without a spoken question.
               // Do not rely on the voice model remembering to call its tool.
               const question = review.customerQuestion;
               if (question?.asked && question.key?.trim() && question.questionKorean?.trim() && question.evidenceQuote?.trim() && transcript.text.includes(question.evidenceQuote) && room.call.status === 'active') {

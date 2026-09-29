@@ -23,14 +23,14 @@ const wait = ms => new Promise(done => setTimeout(done, ms));
 function fixture(status = 'idle') {
   return { id: 'mock-room', revision: 1, version: 1, call: { id: 'mock-call', status, connected: false }, requiredQuestions: [{ id: 'availability', korean: '오늘 진료하나요?', text: 'Are consultations available today?', status: 'unresolved', evidence: [] }], messages: [], pendingRelay: null, decisionPrompt: null, voiceMessage: null };
 }
-async function setup({ status = 'idle', deny = false, sessionCreated = true, remoteTrack = true, playPending = false, playBlocked = false, fastOpeningTimeout = false } = {}) {
+async function setup({ status = 'idle', deny = false, sessionCreated = true, remoteTrack = true, playPending = false, playBlocked = false, fastOpeningTimeout = false, fastFinishTimeout = false } = {}) {
   const context = await browser.newContext({ viewport: { width: 1280, height: 900 } }); contexts.push(context);
   const room = fixture(status), requests = [], unexpected = [], errors = [];
   const control = { onTranscript: null, toolResult: { ok: true, pending: false, allowComplete: false } };
   const mutate = fn => { fn(room); room.revision++; room.version = room.revision; };
-  await context.addInitScript(({ deny, sessionCreated, remoteTrack, playPending, playBlocked, fastOpeningTimeout }) => {
+  await context.addInitScript(({ deny, sessionCreated, remoteTrack, playPending, playBlocked, fastOpeningTimeout, fastFinishTimeout }) => {
     const mock = { sent: [], tracks: [], peers: [], getUserMediaCalls: 0, deny, sessionCreated, remoteTrack, playPending, playBlocked };
-    if (fastOpeningTimeout) { const originalTimeout = window.setTimeout.bind(window); window.setTimeout = (callback, delay, ...args) => originalTimeout(callback, delay === 12000 ? 250 : delay, ...args); }
+    if (fastOpeningTimeout || fastFinishTimeout) { const originalTimeout = window.setTimeout.bind(window); window.setTimeout = (callback, delay, ...args) => originalTimeout(callback, fastOpeningTimeout && delay === 12000 || fastFinishTimeout && delay === 8000 ? 250 : delay, ...args); }
     window.__mockRealtime = mock;
     const mediaDevices = { async getUserMedia() {
       mock.getUserMediaCalls++;
@@ -63,7 +63,7 @@ async function setup({ status = 'idle', deny = false, sessionCreated = true, rem
     mock.emitSession = () => mock.emit({ type: 'session.created', session: { id: 'mock-session', type: 'realtime' } });
     mock.attachRemoteTrack = () => { const event = new Event('track'); event.streams = [new MediaStream()]; event.track = { kind: 'audio', readyState: 'live' }; mock.peers.at(-1).dispatchEvent(event); };
     mock.fail = () => { const peer = mock.peers.at(-1); peer.connectionState = 'failed'; peer.dispatchEvent(new Event('connectionstatechange')); };
-  }, { deny, sessionCreated, remoteTrack, playPending, playBlocked, fastOpeningTimeout });
+  }, { deny, sessionCreated, remoteTrack, playPending, playBlocked, fastOpeningTimeout, fastFinishTimeout });
   await context.route('**/*', async route => {
     const req = route.request(), url = new URL(req.url());
     if (url.origin !== 'http://localhost:4173') { unexpected.push(url.origin + url.pathname); return route.abort(); }
@@ -177,9 +177,11 @@ try {
   check('Customer update resumes once without replacing session instructions', 'Application context is injected once by voiceMessage.id; response.create has no instructions override.');
   assert((await f.snapshot()).sent.filter(e => e.type === 'response.create').every(e => !e.response?.instructions));
 
-  f.control.onTranscript = null;
+  f.control.onTranscript = async () => f.mutate(r => { r.call.confirmedKeyDetails = true; r.requiredQuestions[0].status = 'resolved'; });
   await f.emit({ type: 'conversation.item.input_audio_transcription.completed', item_id: 'business-answer', transcript: 'That is correct.' });
   await f.responses(5); await f.emit({ type: 'response.created', response: { id: 'r-tool' } });
+  assert.deepEqual((await f.snapshot()).sent.filter(e => e.type === 'response.create').at(-1).response.tool_choice, { type: 'function', name: 'complete_call' });
+  check('Confirmed readback requests completion instead of another question', 'Forced function choice still requires server allowComplete; no client-only success.');
   const tool = { type: 'function_call', name: 'complete_call', call_id: 'tool-1', arguments: '{}' };
   await f.emit({ type: 'response.function_call_arguments.done', ...tool, type: 'response.function_call_arguments.done', response_id: 'r-tool' });
   await f.emit({ type: 'response.output_item.done', response_id: 'r-tool', item: tool });
@@ -199,6 +201,8 @@ try {
   assert.equal(await f.responseCount(), 6);
   await f.emit({ type: 'response.done', response: { id: 'r-finish-request', status: 'completed', output: [finishTool] } });
   await f.responses(7); await f.emit({ type: 'response.created', response: { id: 'r-goodbye' } });
+  let releaseFarewell; const heldFarewell = new Promise(done => { releaseFarewell = done; });
+  f.control.onTranscript = async input => { if (input.id === 'assistant-goodbye') await heldFarewell; };
   await f.emit({ type: 'response.output_audio_transcript.done', item_id: 'assistant-goodbye', transcript: '확인해 주셔서 감사합니다. 안녕히 계세요.' });
   await f.emit({ type: 'response.done', response: { id: 'r-goodbye', status: 'completed', output: [] } });
   assert.equal((await f.snapshot()).tracks[0].stopped, false);
@@ -207,6 +211,8 @@ try {
   await f.emit({ type: 'output_audio_buffer.stopped', response_id: 'r-goodbye' });
   await f.page.waitForFunction(() => window.__mockRealtime.tracks.every(t => t.stopped));
   assert(f.requests.some(r => r.operation === '/transcript' && r.input.id === 'assistant-goodbye'));
+  releaseFarewell();
+  check('Local shutdown is independent of stalled farewell saving', 'Matching playback-stop releases microphone while optional farewell HTTP request is still held.');
   check('Authoritative completion waits for final audio playback event', 'Only server allowComplete starts goodbye; response.done and an old playback-stop do not close tracks; matching goodbye playback-stop releases tracks and preserves farewell text. Audio event itself is synthetic.');
 
   await f.page.setViewportSize({ width: 390, height: 844 });
@@ -310,6 +316,15 @@ try {
   check('Autoplay refusal requires explicit playback before microphone can open', 'Synthetic playback rejection keeps the mic paused even after provider audio-stop; mocked successful Play incoming audio releases the opening gate. This is not proof of audible sound.');
   await blocked.page.locator('#end-call').click();
 
+  const watchdog = await setup({ status: 'pending', fastFinishTimeout: true });
+  await watchdog.accept();
+  await watchdog.emit({ type: 'response.created', response: { id: 'watchdog-opening' } });
+  await watchdog.emit({ type: 'response.done', response: { id: 'watchdog-opening', status: 'completed', output: [] } });
+  watchdog.mutate(r => { r.call.status = 'completed'; });
+  await watchdog.page.waitForFunction(() => window.__mockRealtime.tracks.every(t => t.stopped));
+  assert.equal((await watchdog.snapshot()).peers[0].state, 'closed');
+  check('Missing goodbye events cannot keep completed call open', 'Accelerated eight-second watchdog releases the peer and microphone when no final playback event arrives.');
+
   const denied = await setup({ status: 'pending', deny: true });
   await denied.page.locator('#accept-call').click();
   await denied.page.locator('#error').filter({ hasText: 'Microphone permission was denied' }).waitFor();
@@ -324,7 +339,7 @@ try {
   await failed.page.locator('#error').filter({ hasText: 'WebRTC failed' }).waitFor();
   assert.equal((await failed.snapshot()).peers[0].state, 'closed');
   check('Connection failure closes peer and releases microphone', 'Synthetic failed state stops all tracks and displays interrupted failure rather than successful completion.');
-  for (const flow of [f, delayed, silent, blocked, denied, failed]) { assert.deepEqual(flow.errors, []); assert.deepEqual(flow.unexpected, []); }
+  for (const flow of [f, delayed, silent, blocked, watchdog, denied, failed]) { assert.deepEqual(flow.errors, []); assert.deepEqual(flow.unexpected, []); }
   report.requestEvidence = f.requests.filter(r => r.method === 'POST');
   report.eventEvidence = (await f.snapshot()).sent;
   report.unexpectedNetwork = [];

@@ -194,13 +194,13 @@ function pumpResponse() {
   responseBusy = true; requestedResponseKind = task.kind; activeResponseId = null;
   syncMicrophone();
   // Keep the server's full system instructions. Control messages do not replace them.
-  send({ type: 'response.create', ...(['opening', 'wait', 'goodbye'].includes(task.kind) ? { response: { tool_choice: 'none', output_modalities: ['audio'] } } : {}) });
+  send({ type: 'response.create', ...(['opening', 'wait', 'goodbye'].includes(task.kind) ? { response: { tool_choice: 'none', output_modalities: ['audio'] } } : task.kind === 'complete' ? { response: { tool_choice: { type: 'function', name: 'complete_call' } } } : {}) });
 }
 function respond(instructions = '', text = '', kind = 'normal') {
-  if (['normal', 'continuation'].includes(kind) && (isWaiting() || terminal.has(currentStatus()))) return;
+  if (['normal', 'continuation', 'complete'].includes(kind) && (isWaiting() || terminal.has(currentStatus()))) return;
   // Consecutive reviewed fragments update one pending reply with the latest state.
   // Tool results, customer relay updates and control responses remain separate.
-  if (kind === 'continuation') responseQueue = responseQueue.filter(task => task.kind !== 'continuation');
+  if (['continuation', 'complete'].includes(kind)) responseQueue = responseQueue.filter(task => !['continuation', 'complete'].includes(task.kind));
   responseQueue.push({ instructions, text, kind }); pumpResponse();
 }
 function continueAfterBusinessReview() {
@@ -212,7 +212,7 @@ function continueAfterBusinessReview() {
     : state.call.confirmedKeyDetails
       ? 'The server has retained every answer and validated the business confirmation of the full readback. Call complete_call now. Do not ask or read back the questions again.'
       : 'Every required question has a retained answer. Read back only those recorded facts once, ask whether they are correct, and wait. Do not collect the answers again or add facts beyond the retained answers.';
-  respond(`Continue in Korean using the application state below as authoritative, even if earlier audio sounded different. ${action} If the latest business utterance asks for unknown customer information, address it through request_customer_detail before continuing the checklist.`, JSON.stringify({ requiredQuestions: state.requiredQuestions, confirmedKeyDetails: state.call.confirmedKeyDetails }), 'continuation');
+  respond(`Continue in Korean using the application state below as authoritative, even if earlier audio sounded different. ${action} If the latest business utterance asks for unknown customer information, address it through request_customer_detail before continuing the checklist.`, JSON.stringify({ requiredQuestions: state.requiredQuestions, confirmedKeyDetails: state.call.confirmedKeyDetails }), !unresolved.length && state.call.confirmedKeyDetails ? 'complete' : 'continuation');
 }
 function ensureWaitNotice() {
   if (waitNoticeActive || channel?.readyState !== 'open') return;
@@ -255,8 +255,8 @@ async function disconnect(reason, failed = true) {
 async function finishPlayback() {
   if (!endingAudio || finishClosing) return;
   finishClosing = true;
-  await transcriptQueue;
-  if (!endingAudio) return;
+  // The server has already validated the call evidence. Saving the optional
+  // farewell must never hold the microphone or peer open after playback.
   releasePeer();
   post('/connection', { connected: false, reason: 'completed_audio_finished' }).catch(() => {});
 }
@@ -264,7 +264,7 @@ function planGoodbye() {
   if (endingAudio) return;
   endingAudio = true; goodbyeResponse = null; responseQueue = []; syncMicrophone();
   respond('The application has authorized completion. Briefly thank the fictional business in Korean and end. Do not ask another question or call another tool.', '', 'goodbye');
-  finishTimer = setTimeout(finishPlayback, 20000);
+  finishTimer = setTimeout(finishPlayback, 8000);
 }
 
 function trackPendingTranscript(id) {
@@ -407,7 +407,7 @@ function handleEvent(event) {
 function enqueueTool(event) {
   if (!event.call_id || toolCalls.has(event.call_id) || cancelledResponses.has(event.response_id)) return;
   toolCalls.add(event.call_id);
-  continuationNeeded = false; responseQueue = responseQueue.filter(task => task.kind !== 'continuation');
+  continuationNeeded = false; responseQueue = responseQueue.filter(task => !['continuation', 'complete'].includes(task.kind));
   const eventGeneration = generation;
   pendingToolCount++; syncMicrophone();
   toolQueue = toolQueue.then(() => runTool(event, eventGeneration)).catch(() => {
@@ -429,7 +429,7 @@ function applyState(next) {
   if (isWaiting()) ensureWaitNotice();
   if (newVoiceMessage && channel?.readyState === 'open' && status === 'active' && !isWaiting()) {
     seenVoiceMessages.add(voice.id);
-    continuationNeeded = false; responseQueue = responseQueue.filter(task => task.kind !== 'continuation');
+    continuationNeeded = false; responseQueue = responseQueue.filter(task => !['continuation', 'complete'].includes(task.kind));
     respond('Relay this application-provided update naturally in polite Korean. Reuse the supplied customer information, then continue only the unresolved required questions.', `Application update from the customer chat:\n${voice.text}`);
   }
   if (status === 'completed' && peer && !completingTool && !endingAudio) planGoodbye();

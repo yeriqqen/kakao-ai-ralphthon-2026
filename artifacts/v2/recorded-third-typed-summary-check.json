@@ -1,0 +1,471 @@
+{
+  "startedAt": "2026-09-29T06:06:37.840Z",
+  "type": "actual_OpenAI_structured_advice_on_preserved_third_call_evidence",
+  "realAPI": true,
+  "newBusinessReview": false,
+  "newMicrophone": false,
+  "newRealtime": false,
+  "newAudio": false,
+  "liveAcceptance": false,
+  "providerCallLimit": 2,
+  "sourceReplayArtifact": "artifacts/v2/actual-third-readback-replay.json",
+  "sourceNativeArtifact": "artifacts/v2/live-native-rehearsal-third-attempt.json",
+  "sourceReplayCallStatus": "active",
+  "actualNativeOutcome": "interrupted",
+  "reconstruction": "Copied the corrected replay supported answers and their exact original business quotes. Retained internal replay call IDs for evidence consistency, but restored the original actual call interrupted outcome, end time and reason. No original evidence file or live room was changed.",
+  "sources": {
+    "lib/v2-ai.mjs": "1f16800cc534903f3951a7540e2f96d05c5162d1cb40780a17d8a4dd758ec330",
+    "lib/v2-summary.mjs": "2c72af63219e7fd029e6582278e0bd5a6d187ddc10a5140972de5c4e43d8d5f1",
+    "lib/v2-state.mjs": "5069af13d83734176f7198bca1d1276568eb3f531a6dd618d789bcf274ac199a",
+    "docs/v2-handoff.md": "9a42ed3013c78258901c814c69fdc513f2183eba1661d6c74d7d250123444778"
+  },
+  "inputState": {
+    "id": "61d9289e-4f1b-4597-8fe8-2249209a67dc",
+    "language": "en",
+    "version": 19,
+    "revision": 19,
+    "createdAt": "2026-09-29T05:44:38.671Z",
+    "updatedAt": "2026-09-29T05:44:45.009Z",
+    "messages": [
+      {
+        "id": "61205f04-3d1f-487a-94d6-a6b8cafe5f55",
+        "role": "user",
+        "text": "I want to go to a hospital",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:33:04.446Z"
+      },
+      {
+        "id": "76136ed8-a308-4cf9-b863-5fbf02b9bea3",
+        "role": "assistant",
+        "text": "Could you please tell me what kind of medical issue or symptom you have? Also, where are you located or where do you prefer to go to the hospital? This will help me find the most appropriate options for you.",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:33:07.612Z"
+      },
+      {
+        "id": "1496c722-54be-4cee-85d4-be8d4f11cea3",
+        "role": "user",
+        "text": "I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment.",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:33:25.461Z"
+      },
+      {
+        "id": "c265ec59-61be-4111-941d-70e5f3dbd8b1",
+        "role": "assistant",
+        "text": "Thank you for the detailed information. To assist you appropriately, I will simulate contacting some fictional hospitals in the Mapo area of Seoul that might handle your mild itchy rash visit this afternoon around 3:30 pm. I'll also inquire whether a female doctor is available, the need for an appointment, and the expected self-pay consultation cost given you do not have Korean health insurance. This will help us understand if these hospitals can meet your preferences and requirements. May I proceed with preparing this simulated inquiry call?",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:33:32.273Z"
+      },
+      {
+        "id": "77d45a0d-ac7d-45d4-8cf3-1beafabc5fa7",
+        "role": "user",
+        "text": "Yes, please prepare the simulated call plan.",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:33:56.147Z"
+      },
+      {
+        "id": "16343ed4-5b43-457e-a073-c361884ddcf3",
+        "role": "assistant",
+        "text": "I have prepared a plan to simulate inquiry calls to two fictional hospitals in Mapo, Seoul, regarding your mild itchy rash. I will ask about their ability to see you this afternoon around 3:30 pm, female doctor availability, the necessity of an appointment, and the expected self-pay consultation cost without Korean health insurance. Please note these details are unconfirmed and part of a simulation. Would you like me to proceed with this simulated call now?",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:34:04.217Z"
+      }
+    ],
+    "transcripts": [
+      {
+        "id": "item_ETKp1fmrV1u3u2wYG9Ivz",
+        "role": "assistant",
+        "text": "안녕하세요. 지금 바로 여쭙겠습니다. 오늘 오후 3시 30분경에 가벼운 가려운 발진 환자를 진료할 수 있나요?",
+        "callId": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+        "createdAt": "2026-09-29T05:44:38.673Z"
+      },
+      {
+        "id": "item_ETKpA5S3giA8zXJ8v6asv",
+        "role": "business",
+        "text": "네, 진료가 가능하니까 해당 시간 맞춰서 방문을 해주시면 됩니다.",
+        "callId": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+        "createdAt": "2026-09-29T05:44:38.673Z"
+      },
+      {
+        "id": "item_ETKpJtnEzIvjEblWd8ozk",
+        "role": "assistant",
+        "text": "알겠습니다. 그럼 다음으로 여쭤보겠습니다. 그 시간에 여성 의사 선생님이 진료 가능한가요?",
+        "callId": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+        "createdAt": "2026-09-29T05:44:40.115Z"
+      },
+      {
+        "id": "item_ETKpSjILHe9UZDNk1n1hp",
+        "role": "business",
+        "text": "네, 가능합니다. 여성 의사 선생님이 있습니다.",
+        "callId": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+        "createdAt": "2026-09-29T05:44:40.115Z"
+      },
+      {
+        "id": "item_ETKpaDNrVT0kU7lXZXM1t",
+        "role": "assistant",
+        "text": "네, 확인했습니다. 이제 다음으로 여쭤보겠습니다. 예약이 필요한가요, 아니면 예약 없이 방문할 수 있나요?",
+        "callId": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+        "createdAt": "2026-09-29T05:44:41.134Z"
+      },
+      {
+        "id": "item_ETKpjEtUu3Z1FMKWtS5fF",
+        "role": "business",
+        "text": "예약 없이 방문할 수 있습니다.",
+        "callId": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+        "createdAt": "2026-09-29T05:44:41.134Z"
+      },
+      {
+        "id": "item_ETKprGsOXNLCP2pCYNWoH",
+        "role": "assistant",
+        "text": "알겠습니다. 마지막으로 여쭤보겠습니다. 한국 건강 보험이 없는 환자의 자비 진료 예상 비용은 얼마인가요?",
+        "callId": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+        "createdAt": "2026-09-29T05:44:42.293Z"
+      },
+      {
+        "id": "item_ETKq1VEa44D0InUnjNwU9",
+        "role": "business",
+        "text": "보험이 없는 경우에는 10만 원이 넘어갈 수도 있을 것 같습니다.",
+        "callId": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+        "createdAt": "2026-09-29T05:44:42.293Z"
+      },
+      {
+        "id": "item_ETKqAs01eClc1stSIkjAg",
+        "role": "assistant",
+        "text": "네, 감사합니다. 지금까지 내용을 정리해보겠습니다. 오늘 오후 3시 30분경에 가벼운 가려운 발진 환자 진료가 가능하고, 그 시간에 여성 의사 선생님도 진료 가능하며, 예약 없이 방문이 가능합니다. 그리고 한국 건강 보험이 없는 환자의 자비 진료 예상 비용은 10만 원이 넘어갈 수 있다고 하셨습니다. 이 내용이 맞는지 확인 부탁드립니다.",
+        "callId": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+        "createdAt": "2026-09-29T05:44:43.414Z",
+        "resolvedQuestionSnapshot": [
+          {
+            "id": "q1",
+            "answer": "Yes, you can see a doctor for a mild itchy rash this afternoon around 3:30 pm.",
+            "evidence": [
+              {
+                "transcriptId": "item_ETKpA5S3giA8zXJ8v6asv",
+                "quote": "네, 진료가 가능하니까 해당 시간 맞춰서 방문을 해주시면 됩니다.",
+                "role": "business"
+              }
+            ]
+          },
+          {
+            "id": "q2",
+            "answer": "Yes, a female doctor is available at that time.",
+            "evidence": [
+              {
+                "transcriptId": "item_ETKpSjILHe9UZDNk1n1hp",
+                "quote": "네, 가능합니다. 여성 의사 선생님이 있습니다.",
+                "role": "business"
+              }
+            ]
+          },
+          {
+            "id": "q3",
+            "answer": "You can visit without an appointment (walk-in is allowed).",
+            "evidence": [
+              {
+                "transcriptId": "item_ETKpjEtUu3Z1FMKWtS5fF",
+                "quote": "예약 없이 방문할 수 있습니다.",
+                "role": "business"
+              }
+            ]
+          },
+          {
+            "id": "q4",
+            "answer": "The expected self-pay consultation cost for a patient without Korean health insurance may exceed 100,000 KRW.",
+            "evidence": [
+              {
+                "transcriptId": "item_ETKq1VEa44D0InUnjNwU9",
+                "quote": "보험이 없는 경우에는 10만 원이 넘어갈 수도 있을 것 같습니다.",
+                "role": "business"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "item_ETKqaoNZ5U3cEjeSNcwyR",
+        "role": "business",
+        "text": "네, 맞습니다.",
+        "callId": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+        "createdAt": "2026-09-29T05:44:43.414Z"
+      }
+    ],
+    "customerInfo": [
+      {
+        "key": "age",
+        "value": "28",
+        "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+      },
+      {
+        "key": "symptom",
+        "value": "mild itchy rash on arm for two days",
+        "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+      },
+      {
+        "key": "urgency",
+        "value": "no urgent symptoms",
+        "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+      },
+      {
+        "key": "location_preference",
+        "value": "Mapo, Seoul",
+        "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+      },
+      {
+        "key": "preferred_time",
+        "value": "this afternoon around 3:30 pm",
+        "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+      },
+      {
+        "key": "gender_preference",
+        "value": "female doctor",
+        "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+      },
+      {
+        "key": "insurance_status",
+        "value": "no Korean health insurance",
+        "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+      }
+    ],
+    "institutions": [
+      {
+        "id": "fictional_hospital_mapo_derma_001",
+        "name": "Fictional Mapo Dermatology Hospital",
+        "nameKo": "",
+        "description": "To confirm if they can provide consultation for mild itchy rash this afternoon, female doctor availability, appointment necessity, and self-pay costs without Korean insurance.",
+        "reason": "To confirm if they can provide consultation for mild itchy rash this afternoon, female doctor availability, appointment necessity, and self-pay costs without Korean insurance.",
+        "fictional": true
+      },
+      {
+        "id": "fictional_hospital_mapo_general_002",
+        "name": "Fictional Mapo General Hospital",
+        "nameKo": "",
+        "description": "To inquire about scheduling a visit this afternoon for your rash, female doctor availability, if an appointment is required, and consultation fees for uninsured patients.",
+        "reason": "To inquire about scheduling a visit this afternoon for your rash, female doctor availability, if an appointment is required, and consultation fees for uninsured patients.",
+        "fictional": true
+      }
+    ],
+    "requiredQuestions": [
+      {
+        "id": "q1",
+        "text": "Can you see a patient with a mild itchy rash this afternoon around 3:30 pm?",
+        "korean": "오늘 오후 3시 30분경에 가벼운 가려운 발진 환자를 진료할 수 있나요?",
+        "status": "resolved",
+        "resolutionReason": null,
+        "answer": "Yes, you can see a doctor for a mild itchy rash this afternoon around 3:30 pm.",
+        "evidence": [
+          {
+            "transcriptId": "item_ETKpA5S3giA8zXJ8v6asv",
+            "quote": "네, 진료가 가능하니까 해당 시간 맞춰서 방문을 해주시면 됩니다.",
+            "role": "business"
+          }
+        ]
+      },
+      {
+        "id": "q2",
+        "text": "Is a female doctor available to consult at that time?",
+        "korean": "그 시간에 여성 의사 선생님이 진료 가능한가요?",
+        "status": "resolved",
+        "resolutionReason": null,
+        "answer": "Yes, a female doctor is available at that time.",
+        "evidence": [
+          {
+            "transcriptId": "item_ETKpSjILHe9UZDNk1n1hp",
+            "quote": "네, 가능합니다. 여성 의사 선생님이 있습니다.",
+            "role": "business"
+          }
+        ]
+      },
+      {
+        "id": "q3",
+        "text": "Is it necessary to have an appointment or can I come as a walk-in?",
+        "korean": "예약이 필요한가요, 아니면 예약 없이 방문할 수 있나요?",
+        "status": "resolved",
+        "resolutionReason": null,
+        "answer": "You can visit without an appointment (walk-in is allowed).",
+        "evidence": [
+          {
+            "transcriptId": "item_ETKpjEtUu3Z1FMKWtS5fF",
+            "quote": "예약 없이 방문할 수 있습니다.",
+            "role": "business"
+          }
+        ]
+      },
+      {
+        "id": "q4",
+        "text": "What is the expected self-pay consultation cost for a patient without Korean health insurance?",
+        "korean": "한국 건강 보험이 없는 환자의 자비 진료 예상 비용은 얼마인가요?",
+        "status": "resolved",
+        "resolutionReason": null,
+        "answer": "The expected self-pay consultation cost for a patient without Korean health insurance may exceed 100,000 KRW.",
+        "evidence": [
+          {
+            "transcriptId": "item_ETKq1VEa44D0InUnjNwU9",
+            "quote": "보험이 없는 경우에는 10만 원이 넘어갈 수도 있을 것 같습니다.",
+            "role": "business"
+          }
+        ]
+      }
+    ],
+    "planReady": true,
+    "pendingRelay": null,
+    "decisionPrompt": null,
+    "summary": null,
+    "busy": false,
+    "error": null,
+    "voiceMessage": null,
+    "call": {
+      "id": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+      "status": "interrupted",
+      "institutionId": "fictional_hospital_mapo_derma_001",
+      "authorized": true,
+      "accepted": true,
+      "authorizedAt": "2026-09-29T05:44:38.672Z",
+      "acceptedAt": "2026-09-29T05:44:38.672Z",
+      "connected": false,
+      "confirmedKeyDetails": true,
+      "confirmationEvidence": [
+        {
+          "transcriptId": "item_ETKqaoNZ5U3cEjeSNcwyR",
+          "quote": "네, 맞습니다.",
+          "role": "business"
+        }
+      ],
+      "readbackEvidence": [
+        {
+          "questionId": "q1",
+          "transcriptId": "item_ETKqAs01eClc1stSIkjAg",
+          "quote": "오늘 오후 3시 30분경에 가벼운 가려운 발진 환자 진료가 가능하고",
+          "role": "assistant"
+        },
+        {
+          "questionId": "q2",
+          "transcriptId": "item_ETKqAs01eClc1stSIkjAg",
+          "quote": "그 시간에 여성 의사 선생님도 진료 가능하며",
+          "role": "assistant"
+        },
+        {
+          "questionId": "q3",
+          "transcriptId": "item_ETKqAs01eClc1stSIkjAg",
+          "quote": "예약 없이 방문이 가능합니다.",
+          "role": "assistant"
+        },
+        {
+          "questionId": "q4",
+          "transcriptId": "item_ETKqAs01eClc1stSIkjAg",
+          "quote": "한국 건강 보험이 없는 환자의 자비 진료 예상 비용은 10만 원이 넘어갈 수 있다고 하셨습니다.",
+          "role": "assistant"
+        }
+      ],
+      "endedAt": "2026-09-29T05:39:51.742Z",
+      "reason": "The business operator disconnected the simulated call.",
+      "success": false
+    }
+  },
+  "manualAudit": {
+    "status": "passed_recorded_text_regression_only",
+    "scope": "One real structured summary recommendation provider response against preserved, supported answers from the third actual call; no new business review, microphone, Realtime session, or audio.",
+    "observations": [
+      "All four supported business answers and customer-provided details are rendered in English without raw Korean or internal transcript IDs.",
+      "Both factual text and recommendation reasoning preserve the cost qualifier: may exceed 100,000 KRW.",
+      "No unsupported comparison with public facilities, invented price certainty, or new business availability claim is added.",
+      "The accepted review_recorded_answers action selects q1, q2, q3, and q4, all valid resolved question IDs, with no clarification IDs.",
+      "The factual report preserves the original actual native call outcome: interrupted, success false, simulation ended incompletely."
+    ],
+    "passedChecks": 9,
+    "totalChecks": 9,
+    "realProviderResponses": 1,
+    "liveVoiceAcceptance": "Unverified by this regression; this does not convert the interrupted human rehearsal into a completed call."
+  },
+  "output": {
+    "text": "Fictional simulation only — no real call or booking.\n\nCall outcome: Simulation ended incompletely.\n\nValidated business answers in this simulation:\n- Can you see a patient with a mild itchy rash this afternoon around 3:30 pm?\n  Yes, you can see a doctor for a mild itchy rash this afternoon around 3:30 pm.\n- Is a female doctor available to consult at that time?\n  Yes, a female doctor is available at that time.\n- Is it necessary to have an appointment or can I come as a walk-in?\n  You can visit without an appointment (walk-in is allowed).\n- What is the expected self-pay consultation cost for a patient without Korean health insurance?\n  The expected self-pay consultation cost for a patient without Korean health insurance may exceed 100,000 KRW.\n\nCustomer-provided information:\n- Age: 28\n- Symptoms: mild itchy rash on arm for two days\n- Urgency: no urgent symptoms\n- Location: Mapo, Seoul\n- Preferred time: this afternoon around 3:30 pm\n- Doctor preference: female doctor\n- Insurance: no Korean health insurance\n\nStill unresolved:\nNo required questions remain unresolved.",
+    "recommendation": "In this simulation, consider this option based on the recorded answers.",
+    "reasoning": "Selected recorded answers:\n- Can you see a patient with a mild itchy rash this afternoon around 3:30 pm?\n  Yes, you can see a doctor for a mild itchy rash this afternoon around 3:30 pm.\n- Is a female doctor available to consult at that time?\n  Yes, a female doctor is available at that time.\n- Is it necessary to have an appointment or can I come as a walk-in?\n  You can visit without an appointment (walk-in is allowed).\n- What is the expected self-pay consultation cost for a patient without Korean health insurance?\n  The expected self-pay consultation cost for a patient without Korean health insurance may exceed 100,000 KRW."
+  },
+  "apiEvidence": [
+    {
+      "purpose": "grounded_recommendation",
+      "responseId": "resp_096f6cc1605fdb76016abb556e2c7c87d0a05c87db67ed4ee4",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 654,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 32,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 686
+      },
+      "at": "2026-09-29T06:07:15.803Z"
+    },
+    {
+      "purpose": "recommendation_choice_result",
+      "accepted": true,
+      "action": "review_recorded_answers",
+      "reasonQuestionIds": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "clarificationQuestionIds": [],
+      "at": "2026-09-29T06:07:15.803Z"
+    }
+  ],
+  "providerResponses": 1,
+  "choice": {
+    "purpose": "recommendation_choice_result",
+    "accepted": true,
+    "action": "review_recorded_answers",
+    "reasonQuestionIds": [
+      "q1",
+      "q2",
+      "q3",
+      "q4"
+    ],
+    "clarificationQuestionIds": [],
+    "at": "2026-09-29T06:07:15.803Z"
+  },
+  "checks": [
+    {
+      "name": "Exactly one real structured provider response",
+      "passed": true
+    },
+    {
+      "name": "Typed choice accepted instead of fallback",
+      "passed": true
+    },
+    {
+      "name": "English rendered output has no raw Korean or provider/transcript IDs",
+      "passed": true
+    },
+    {
+      "name": "Actual interrupted outcome retained",
+      "passed": true
+    },
+    {
+      "name": "All four business answers remain supported and displayed exactly",
+      "passed": true
+    },
+    {
+      "name": "Price uncertainty retained exactly",
+      "passed": true
+    },
+    {
+      "name": "No unsupported comparison with public facilities",
+      "passed": true
+    },
+    {
+      "name": "Choice IDs all reference the permitted categories",
+      "passed": true
+    },
+    {
+      "name": "Recommendation and reasoning match deterministic rendering of that choice",
+      "passed": true
+    }
+  ],
+  "finishedAt": "2026-09-29T06:07:15.804Z",
+  "passed": 9,
+  "total": 9
+}

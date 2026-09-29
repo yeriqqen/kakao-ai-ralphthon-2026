@@ -34,7 +34,7 @@ async function exclusive(room, action) {
 async function saveEvidence(room) {
   const dir = fileURLToPath(new URL('./artifacts/v2/local-runs/', import.meta.url));
   await mkdir(dir, { recursive: true });
-  await writeFile(path.join(dir, `${room.id}.json`), JSON.stringify({ simulation: true, realTelephoneCall: false, aiProvider: 'OpenAI', hardwareVerification: room.observations || [], ...pub(room), apiEvidence: room.apiEvidence || [], savedAt: new Date().toISOString() }, null, 2) + '\n');
+  await writeFile(path.join(dir, `${room.id}.json`), JSON.stringify({ simulation: true, realTelephoneCall: false, aiProvider: 'OpenAI', hardwareVerification: room.observations || [], ...pub(room), apiEvidence: room.apiEvidence || [], voiceDiagnostics: room.voiceDiagnostics || [], savedAt: new Date().toISOString() }, null, 2) + '\n');
 }
 async function finalSummary(room) {
   if (room.summary || room.summaryPending) return;
@@ -71,7 +71,7 @@ const handler = async (req, res) => {
     if (url.pathname === '/api/rooms' && req.method === 'POST') {
       const input = await body(req);
       if (!['en', 'ru', 'zh'].includes(input.language)) throw apiError('INVALID_INPUT');
-      const room = state.createRoom(input.language); room.apiEvidence = []; room.observations = []; room.reviewChain = Promise.resolve(); room.toolResults = new Map();
+      const room = state.createRoom(input.language); room.apiEvidence = []; room.observations = []; room.voiceDiagnostics = []; room.reviewChain = Promise.resolve(); room.toolResults = new Map();
       rooms.set(room.id, room);
       return json(res, 201, { id: room.id, customerToken: room.customerToken, businessToken: room.businessToken, state: pub(room) });
     }
@@ -91,7 +91,7 @@ const handler = async (req, res) => {
         void askDecision(room, '고객 답변이 1분 이상 도착하지 않았습니다. 더 기다릴지 미완료 상태로 종료할지 결정이 필요합니다.').catch(error => { room.error = { code: error.code || 'AI_ERROR' }; }).finally(() => { room.decisionPending = false; });
       }
       if (req.method === 'GET') {
-        if (operation === 'export') { await saveEvidence(room); return json(res, 200, { simulation: true, ...pub(room), apiEvidence: room.apiEvidence, observations: room.observations }); }
+        if (operation === 'export') { await saveEvidence(room); return json(res, 200, { simulation: true, ...pub(room), apiEvidence: room.apiEvidence, observations: room.observations, voiceDiagnostics: room.voiceDiagnostics }); }
         if (!operation) return json(res, 200, pub(room));
         throw apiError('NOT_FOUND', 404);
       }
@@ -124,6 +124,7 @@ const handler = async (req, res) => {
         state.authorizeCall(room, input.institutionId);
         room.realtimeStarted = false; room.toolResults.clear(); room.voiceMessage = null;
         room.observations = [];
+        room.voiceDiagnostics = [];
       } else if (operation === 'accept') {
         requireRole(role, 'business'); state.acceptCall(room);
       } else if (operation === 'realtime') {
@@ -209,6 +210,19 @@ const handler = async (req, res) => {
         else throw apiError('INVALID_INPUT');
       } else if (operation === 'end') {
         requireRole(role, 'customer'); state.finishCall(room, { reason: 'Customer ended the simulated call early.', success: false }); await finalSummary(room);
+      } else if (operation === 'diagnostics') {
+        requireRole(role, 'business');
+        if (!room.call.id || input.callId !== room.call.id || !Array.isArray(input.events) || input.events.length > 30) throw apiError('INVALID_INPUT');
+        const allowed = new Set(['call.accepted', 'remote.track', 'playback.allowed', 'playback.blocked', 'connection.registered', 'opening.requested', 'opening.finished', 'opening.timeout', 'session.created', 'response.created', 'response.done', 'output_audio_buffer.started', 'output_audio_buffer.stopped', 'output_audio_buffer.cleared', 'error', 'input_audio_buffer.speech_started', 'input_audio_buffer.speech_stopped']);
+        for (const event of input.events) {
+          if (!event || !allowed.has(event.type)) continue;
+          const safe = { callId: room.call.id, type: event.type, receivedAt: new Date().toISOString() };
+          if (typeof event.at === 'string' && /^\d{4}-\d\d-\d\dT[\d:.]+Z$/.test(event.at) && event.at.length < 30) safe.at = event.at;
+          for (const field of ['responseId', 'status', 'code']) if (typeof event[field] === 'string' && /^[A-Za-z0-9_.-]{1,100}$/.test(event[field])) safe[field] = event[field];
+          room.voiceDiagnostics.push(safe);
+        }
+        room.voiceDiagnostics = room.voiceDiagnostics.slice(-200);
+        await saveEvidence(room); return json(res, 200, { ok: true });
       } else if (operation === 'observation') {
         requireRole(role, 'business');
         room.observations.push({ callId: room.call.id, audibleKorean: input.audibleKorean === true, deviceLabel: String(input.deviceLabel || 'Laptop business tab').slice(0, 200), source: 'human_operator_self_report', at: new Date().toISOString() }); await saveEvidence(room);

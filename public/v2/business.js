@@ -14,6 +14,17 @@ let accepting = false;
 let closing = false;
 let muted = false;
 let connectionAnnounced = false;
+let sessionReady = false;
+let remoteTrackReady = false;
+let playbackAllowed = false;
+let openingPending = false;
+let openingSent = false;
+let openingResponseId = null;
+let openingAudioStarted = false;
+let openingAudioStopped = false;
+let openingTimer = null;
+let diagnosticTimer = null;
+let diagnosticEvents = [];
 let waitingTool = false;
 let completingTool = false;
 let endingAudio = false;
@@ -60,7 +71,7 @@ function showError(message) { $('error').textContent = message; $('error').hidde
 function currentStatus() { return state?.call?.status || 'idle'; }
 function live() { return peer?.connectionState === 'connected' && channel?.readyState === 'open' && connectionAnnounced; }
 function syncMicrophone() {
-  const enabled = live() && currentStatus() === 'active' && !responseBusy && !assistantSpeaking && !waitingTool && !state?.pendingRelay && !muted && !endingAudio && pendingToolCount === 0 && pendingTranscripts.size === 0;
+  const enabled = live() && currentStatus() === 'active' && !openingPending && playbackAllowed && !responseBusy && !assistantSpeaking && !waitingTool && !state?.pendingRelay && !muted && !endingAudio && pendingToolCount === 0 && pendingTranscripts.size === 0;
   microphone?.getAudioTracks().forEach(track => { track.enabled = enabled; });
   $('microphone-status').textContent = enabled ? 'Microphone live · 마이크 사용 중' : microphone ? 'Microphone paused · 마이크 일시 정지' : 'Microphone inactive · 마이크 꺼짐';
   $('mute-mic').textContent = muted ? 'Unmute microphone · 마이크 켜기' : 'Mute microphone · 마이크 끄기';
@@ -79,6 +90,42 @@ async function api(path = '', { method = 'GET', body, sdp = false, keepalive = f
   return response.json();
 }
 function post(path, body) { return api(path, { method: 'POST', body }); }
+function flushDiagnostics() {
+  clearTimeout(diagnosticTimer);
+  if (!diagnosticEvents.length || !state?.call?.id) return;
+  const events = diagnosticEvents.splice(0, 30);
+  api('/diagnostics', { method: 'POST', body: { callId: state.call.id, events }, keepalive: true }).catch(() => {});
+}
+function diagnostic(type, details = {}) {
+  diagnosticEvents.push({ type, at: new Date().toISOString(), ...details });
+  if (diagnosticEvents.length >= 30) flushDiagnostics();
+  else { clearTimeout(diagnosticTimer); diagnosticTimer = setTimeout(flushDiagnostics, 250); }
+}
+function finishOpening() {
+  if (!openingPending || !openingAudioStopped || !playbackAllowed) return;
+  openingPending = false; diagnostic('opening.finished'); render();
+}
+function playRemoteAudio() {
+  const attempt = generation;
+  // Do not await this promise before response.create: the remote stream may be
+  // silent until the first response is requested.
+  $('remote-audio').play().then(() => {
+    if (attempt !== generation) return;
+    playbackAllowed = true; $('play-audio').hidden = true; showError('');
+    diagnostic('playback.allowed'); finishOpening(); syncMicrophone();
+  }).catch(() => {
+    if (attempt !== generation) return;
+    playbackAllowed = false; $('play-audio').hidden = false;
+    diagnostic('playback.blocked'); syncMicrophone();
+    showError('Your browser blocked playback. Select “Play incoming audio” to hear the Korean assistant.');
+  });
+}
+function maybeStartOpening() {
+  if (!openingPending || openingSent || !sessionReady || !remoteTrackReady || !live() || currentStatus() !== 'active') return;
+  openingSent = true; diagnostic('opening.requested');
+  respond('Greet the fictional business briefly in Korean and immediately ask the first required question. Do not announce a long agenda. Wait for the business answer.', '', 'opening');
+  render();
+}
 function renderQuestions() {
   const list = $('required-questions'); list.replaceChildren();
   const questions = state?.requiredQuestions || [];
@@ -105,6 +152,11 @@ function render() {
   $('call-status').className = 'status' + (status === 'active' && live() ? ' active' : ['pending', 'connecting', 'waiting_customer', 'awaiting_decision'].includes(status) ? ' waiting' : ['failed', 'interrupted'].includes(status) ? ' failed' : '');
   $('call-heading').textContent = text[1]; $('call-detail').textContent = text[2];
   $('connection-label').textContent = live() ? 'OpenAI connection established' : accepting ? 'Connection not yet verified' : 'Not connected';
+  if (openingPending && live()) {
+    $('call-heading').textContent = 'Preparing the Korean opening';
+    $('call-detail').textContent = 'Listen for the greeting and first question. Your microphone stays paused until the assistant finishes.';
+    $('connection-label').textContent = openingAudioStarted ? 'Opening audio received · Listen, then reply' : 'Waiting for the assistant’s opening audio';
+  }
   $('accept-call').hidden = status !== 'pending' || accepting || !!peer;
   $('accept-call').disabled = accepting || !isSecureContext || !navigator.mediaDevices?.getUserMedia;
   $('end-call').hidden = !peer && !accepting;
@@ -138,7 +190,7 @@ function pumpResponse() {
   responseBusy = true; requestedResponseKind = task.kind; activeResponseId = null;
   syncMicrophone();
   // Keep the server's full system instructions. Control messages do not replace them.
-  send({ type: 'response.create', ...(['wait', 'goodbye'].includes(task.kind) ? { response: { tool_choice: 'none' } } : {}) });
+  send({ type: 'response.create', ...(['opening', 'wait', 'goodbye'].includes(task.kind) ? { response: { tool_choice: 'none', output_modalities: ['audio'] } } : {}) });
 }
 function respond(instructions = '', text = '', kind = 'normal') {
   if (kind === 'normal' && (isWaiting() || terminal.has(currentStatus()))) return;
@@ -159,7 +211,7 @@ function ensureWaitNotice() {
 
 function releasePeer() {
   ++generation; closing = true;
-  clearTimeout(connectionTimer); clearTimeout(finishTimer);
+  clearTimeout(connectionTimer); clearTimeout(finishTimer); clearTimeout(openingTimer); flushDiagnostics();
   microphone?.getTracks().forEach(track => track.stop()); microphone = null;
   const oldChannel = channel; channel = null;
   const oldPeer = peer; peer = null;
@@ -168,6 +220,7 @@ function releasePeer() {
   accepting = false; connectionAnnounced = false; waitingTool = false; responseBusy = false; assistantSpeaking = false; speakingResponseId = null; endingAudio = false; completingTool = false;
   responseQueue = []; activeResponseId = null; requestedResponseKind = null; activeResponseKind = null; cancellationPending = false;
   waitNoticeActive = false; finishClosing = false;
+  sessionReady = false; remoteTrackReady = false; playbackAllowed = false; openingPending = false; openingSent = false; openingResponseId = null; openingAudioStarted = false; openingAudioStopped = false;
   for (const item of pendingTranscripts.values()) item.resolve();
   pendingTranscripts.clear();
   closing = false; render();
@@ -262,9 +315,14 @@ async function runTool(event, eventGeneration) {
   } finally { completingTool = false; }
 }
 function handleEvent(event) {
+  if (['session.created', 'response.created', 'response.done', 'output_audio_buffer.started', 'output_audio_buffer.stopped', 'output_audio_buffer.cleared', 'error', 'input_audio_buffer.speech_started', 'input_audio_buffer.speech_stopped'].includes(event.type)) {
+    diagnostic(event.type, { responseId: event.response?.id || event.response_id, status: event.response?.status, code: event.error?.code || event.response?.status_details?.error?.code });
+  }
+  if (event.type === 'session.created') { sessionReady = true; maybeStartOpening(); }
   if (event.type === 'response.created') {
     responseBusy = true; activeResponseId = event.response?.id || null;
     activeResponseKind = requestedResponseKind || 'normal'; requestedResponseKind = null;
+    if (activeResponseKind === 'opening') openingResponseId = activeResponseId;
     if (cancellationPending && activeResponseId) cancelledResponses.add(activeResponseId);
     if (endingAudio && activeResponseKind === 'goodbye') goodbyeResponse = activeResponseId;
   }
@@ -291,11 +349,13 @@ function handleEvent(event) {
   if (event.type === 'response.function_call_arguments.done') enqueueTool(event);
   if (event.type === 'response.output_item.done' && event.item?.type === 'function_call') enqueueTool({ ...event.item, response_id: event.response_id });
   if (event.type === 'output_audio_buffer.started') {
+    if (openingPending && event.response_id === openingResponseId) { openingAudioStarted = true; clearTimeout(openingTimer); }
     assistantSpeaking = true; speakingResponseId = event.response_id || null; syncMicrophone();
     $('connection-label').textContent = 'OpenAI audio is playing · Listen, then reply'; $('heard-korean').disabled = false;
   }
   if (event.type === 'output_audio_buffer.cleared' && (!event.response_id || !speakingResponseId || event.response_id === speakingResponseId)) { assistantSpeaking = false; speakingResponseId = null; syncMicrophone(); }
   if (event.type === 'output_audio_buffer.stopped') {
+    if (openingPending && openingAudioStarted && event.response_id === openingResponseId) { openingAudioStopped = true; finishOpening(); }
     if (!event.response_id || !speakingResponseId || event.response_id === speakingResponseId) { assistantSpeaking = false; speakingResponseId = null; syncMicrophone(); }
     if (endingAudio && goodbyeResponse && event.response_id === goodbyeResponse) finishPlayback();
     else render();
@@ -354,6 +414,9 @@ async function acceptCall() {
   if (accepting || peer || currentStatus() !== 'pending') return;
   if (!isSecureContext || !navigator.mediaDevices?.getUserMedia || !window.RTCPeerConnection) { showError('Voice requires a browser with microphone support on localhost or HTTPS.'); return; }
   accepting = true; localFailure = ''; showError(''); muted = false;
+  openingPending = true; openingSent = false; openingAudioStarted = false; openingAudioStopped = false;
+  $('heard-korean').checked = false; $('heard-korean').disabled = true;
+  $('observation-status').textContent = 'Audible Korean: Unverified';
   const attempt = ++generation;
   render();
   let stream;
@@ -361,6 +424,7 @@ async function acceptCall() {
     await post('/accept', {});
     if (attempt !== generation) return;
     await pollOnce();
+    diagnostic('call.accepted');
     stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: false });
     if (attempt !== generation || currentStatus() !== 'connecting') { stream.getTracks().forEach(track => track.stop()); return; }
     microphone = stream;
@@ -370,12 +434,12 @@ async function acceptCall() {
       if (attempt !== generation) return;
       $('audio-panel').hidden = false;
       $('remote-audio').srcObject = event.streams[0] || new MediaStream([event.track]);
-      $('remote-audio').play().catch(() => { $('play-audio').hidden = false; showError('Your browser blocked playback. Select “Play incoming audio” to hear the Korean assistant.'); });
+      remoteTrackReady = true; diagnostic('remote.track'); playRemoteAudio(); maybeStartOpening();
     });
     connection.addEventListener('connectionstatechange', () => {
       if (attempt !== generation || closing) return;
       if (['failed', 'disconnected', 'closed'].includes(connection.connectionState)) disconnect(`WebRTC ${connection.connectionState}. The call is interrupted and microphone input has stopped.`);
-      else render();
+      else { render(); maybeStartOpening(); }
     });
     stream.getTracks().forEach(track => connection.addTrack(track, stream));
     const events = connection.createDataChannel('oai-events'); channel = events;
@@ -389,8 +453,15 @@ async function acceptCall() {
         await post('/connection', { connected: true });
         if (attempt !== generation) return;
         connectionAnnounced = true; accepting = false; clearTimeout(connectionTimer);
+        diagnostic('connection.registered');
+        openingTimer = setTimeout(() => {
+          if (attempt === generation && !openingAudioStarted) {
+            diagnostic('opening.timeout');
+            disconnect('The assistant’s opening audio did not start within 12 seconds. Return to the customer chat and select Retry this simulation.');
+          }
+        }, 12000);
         await pollOnce();
-        respond('Greet the fictional business briefly in Korean and immediately ask the first required question. Do not announce a long agenda. Wait for the business answer.');
+        maybeStartOpening();
       } catch { disconnect('The voice connection could not be registered with the customer chat.'); }
     });
     events.addEventListener('close', () => { if (attempt === generation && !closing) disconnect('The Realtime event channel disconnected.'); });
@@ -411,7 +482,7 @@ async function acceptCall() {
 $('accept-call').addEventListener('click', acceptCall);
 $('end-call').addEventListener('click', () => disconnect('The business operator disconnected the simulated call.', false));
 $('mute-mic').addEventListener('click', () => { muted = !muted; syncMicrophone(); });
-$('play-audio').addEventListener('click', async () => { try { await $('remote-audio').play(); $('play-audio').hidden = true; showError(''); } catch { showError('Audio could not play. Check the laptop’s output and browser audio controls.'); } });
+$('play-audio').addEventListener('click', playRemoteAudio);
 $('heard-korean').addEventListener('change', async () => {
   const audibleKorean = $('heard-korean').checked;
   try { await post('/observation', { audibleKorean, deviceLabel: $('device-label').value.trim() || 'Laptop business tab' }); $('observation-status').textContent = audibleKorean ? 'Audible Korean: confirmed by the human operator for this simulation.' : 'Audible Korean: Unverified'; }

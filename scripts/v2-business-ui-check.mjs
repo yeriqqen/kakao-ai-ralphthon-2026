@@ -23,13 +23,14 @@ const wait = ms => new Promise(done => setTimeout(done, ms));
 function fixture(status = 'idle') {
   return { id: 'mock-room', revision: 1, version: 1, call: { id: 'mock-call', status, connected: false }, requiredQuestions: [{ id: 'availability', korean: '오늘 진료하나요?', text: 'Are consultations available today?', status: 'unresolved', evidence: [] }], messages: [], pendingRelay: null, decisionPrompt: null, voiceMessage: null };
 }
-async function setup({ status = 'idle', deny = false } = {}) {
+async function setup({ status = 'idle', deny = false, sessionCreated = true, remoteTrack = true, playPending = false, playBlocked = false, fastOpeningTimeout = false } = {}) {
   const context = await browser.newContext({ viewport: { width: 1280, height: 900 } }); contexts.push(context);
   const room = fixture(status), requests = [], unexpected = [], errors = [];
   const control = { onTranscript: null, toolResult: { ok: true, pending: false, allowComplete: false } };
   const mutate = fn => { fn(room); room.revision++; room.version = room.revision; };
-  await context.addInitScript(({ deny }) => {
-    const mock = { sent: [], tracks: [], peers: [], getUserMediaCalls: 0, deny };
+  await context.addInitScript(({ deny, sessionCreated, remoteTrack, playPending, playBlocked, fastOpeningTimeout }) => {
+    const mock = { sent: [], tracks: [], peers: [], getUserMediaCalls: 0, deny, sessionCreated, remoteTrack, playPending, playBlocked };
+    if (fastOpeningTimeout) { const originalTimeout = window.setTimeout.bind(window); window.setTimeout = (callback, delay, ...args) => originalTimeout(callback, delay === 12000 ? 250 : delay, ...args); }
     window.__mockRealtime = mock;
     const mediaDevices = { async getUserMedia() {
       mock.getUserMediaCalls++;
@@ -52,15 +53,17 @@ async function setup({ status = 'idle', deny = false } = {}) {
       createDataChannel(label) { mock.dataChannelLabel = label; this.channel = new MockDataChannel(); mock.channel = this.channel; return this.channel; }
       async createOffer() { return { type: 'offer', sdp: 'v=0\r\ns=SYNTHETIC_NO_NETWORK_NO_AUDIO\r\n' }; }
       async setLocalDescription(value) { this.localDescription = value; }
-      async setRemoteDescription(value) { this.remoteDescription = value; this.connectionState = 'connected'; this.dispatchEvent(new Event('connectionstatechange')); this.channel.open(); }
+      async setRemoteDescription(value) { this.remoteDescription = value; this.connectionState = 'connected'; this.dispatchEvent(new Event('connectionstatechange')); if (mock.remoteTrack) mock.attachRemoteTrack(); this.channel.open(); if (mock.sessionCreated) mock.emitSession(); }
       close() { this.connectionState = 'closed'; this.dispatchEvent(new Event('connectionstatechange')); }
     }
     window.RTCPeerConnection = MockPeer;
-    HTMLMediaElement.prototype.play = async function () {};
+    HTMLMediaElement.prototype.play = function () { return mock.playBlocked ? Promise.reject(new DOMException('Synthetic autoplay denial', 'NotAllowedError')) : mock.playPending ? new Promise(() => {}) : Promise.resolve(); };
     HTMLMediaElement.prototype.pause = function () {};
     mock.emit = event => mock.channel.dispatchEvent(new MessageEvent('message', { data: JSON.stringify(event) }));
+    mock.emitSession = () => mock.emit({ type: 'session.created', session: { id: 'mock-session', type: 'realtime' } });
+    mock.attachRemoteTrack = () => { const event = new Event('track'); event.streams = [new MediaStream()]; event.track = { kind: 'audio', readyState: 'live' }; mock.peers.at(-1).dispatchEvent(event); };
     mock.fail = () => { const peer = mock.peers.at(-1); peer.connectionState = 'failed'; peer.dispatchEvent(new Event('connectionstatechange')); };
-  }, { deny });
+  }, { deny, sessionCreated, remoteTrack, playPending, playBlocked, fastOpeningTimeout });
   await context.route('**/*', async route => {
     const req = route.request(), url = new URL(req.url());
     if (url.origin !== 'http://localhost:4173') { unexpected.push(url.origin + url.pathname); return route.abort(); }
@@ -80,7 +83,7 @@ async function setup({ status = 'idle', deny = false } = {}) {
       else if (operation === '/tool') {
         if (control.toolResult.allowComplete) mutate(r => { r.call.status = 'completed'; r.call.connected = false; });
         return route.fulfill({ status: 200, json: control.toolResult });
-      } else if (operation !== '/observation') throw new Error(`Unexpected mock API operation ${operation}`);
+      } else if (!['/observation', '/diagnostics'].includes(operation)) throw new Error(`Unexpected mock API operation ${operation}`);
     }
     return route.fulfill({ status: 200, json: structuredClone(room) });
   });
@@ -108,6 +111,10 @@ try {
   assert.equal(f.requests.filter(r => r.operation === '/connection' && r.input?.connected).length, 1);
   assert.match(await f.page.locator('#required-questions').innerText(), /Are consultations available today/);
   assert.equal(await f.page.locator('#heard-korean').isDisabled(), true);
+  const openingRequest = (await f.snapshot()).sent.find(event => event.type === 'response.create');
+  assert.equal(openingRequest.response.tool_choice, 'none');
+  assert.deepEqual(openingRequest.response.output_modalities, ['audio']);
+  assert.equal((await f.snapshot()).tracks[0].enabled, false);
   check('Authorization and explicit acceptance gate microphone', 'No microphone request before authorized Accept; one mocked connection acknowledgement after data channel opens; translated generated question visible; audible status remains unverified.');
 
   await f.emit({ type: 'response.created', response: { id: 'r-intro' } });
@@ -203,6 +210,49 @@ try {
   assert(geometry.scrollWidth <= geometry.width);
   check('Mobile layout at 390 pixels', geometry);
 
+  const delayed = await setup({ status: 'pending', sessionCreated: false, remoteTrack: false, playPending: true });
+  await delayed.page.locator('#accept-call').click();
+  await delayed.page.waitForFunction(() => window.__mockRealtime.channel?.readyState === 'open');
+  await wait(150);
+  assert.equal(await delayed.responseCount(), 0);
+  assert.equal((await delayed.snapshot()).tracks[0].enabled, false);
+  await delayed.page.evaluate(() => window.__mockRealtime.emitSession());
+  await wait(100);
+  assert.equal(await delayed.responseCount(), 0);
+  await delayed.page.evaluate(() => window.__mockRealtime.attachRemoteTrack());
+  await delayed.responses(1);
+  await delayed.page.evaluate(() => { window.__mockRealtime.emitSession(); window.__mockRealtime.attachRemoteTrack(); });
+  await wait(100);
+  assert.equal(await delayed.responseCount(), 1);
+  assert.equal((await delayed.snapshot()).tracks[0].enabled, false);
+  check('Opening waits for session readiness and remote track exactly once', 'Mock data-channel open is insufficient; no opening before both session.created and remote track. A pending media play promise does not cause circular startup waiting; duplicate readiness events do not duplicate opening.');
+  await delayed.page.locator('#end-call').click();
+  await delayed.page.waitForFunction(() => window.__mockRealtime.tracks.every(t => t.stopped));
+
+  const silent = await setup({ status: 'pending', fastOpeningTimeout: true });
+  await silent.accept();
+  await silent.emit({ type: 'response.created', response: { id: 'silent-opening' } });
+  await silent.emit({ type: 'response.done', response: { id: 'silent-opening', status: 'completed', output: [] } });
+  assert.equal((await silent.snapshot()).tracks[0].enabled, false);
+  await silent.page.locator('#error').filter({ hasText: 'opening audio did not start' }).waitFor();
+  assert.equal((await silent.snapshot()).tracks[0].stopped, true);
+  assert.equal(await silent.responseCount(), 1);
+  check('Silent opening times out explicitly without overlap or claimed success', 'Synthetic clock accelerates the 12-second watchdog. A completed response with no output audio never unlocks the mic, stops the peer, and reports missing opening audio; no automatic overlapping retry.');
+
+  const blocked = await setup({ status: 'pending', playBlocked: true });
+  await blocked.accept();
+  await blocked.emit({ type: 'response.created', response: { id: 'blocked-opening' } });
+  await blocked.emit({ type: 'output_audio_buffer.started', response_id: 'blocked-opening' });
+  await blocked.emit({ type: 'response.done', response: { id: 'blocked-opening', status: 'completed', output: [] } });
+  await blocked.emit({ type: 'output_audio_buffer.stopped', response_id: 'blocked-opening' });
+  assert.equal((await blocked.snapshot()).tracks[0].enabled, false);
+  await blocked.page.locator('#play-audio').waitFor({ state: 'visible' });
+  await blocked.page.evaluate(() => { window.__mockRealtime.playBlocked = false; });
+  await blocked.page.locator('#play-audio').click();
+  await blocked.page.waitForFunction(() => window.__mockRealtime.tracks[0].enabled);
+  check('Autoplay refusal requires explicit playback before microphone can open', 'Synthetic playback rejection keeps the mic paused even after provider audio-stop; mocked successful Play incoming audio releases the opening gate. This is not proof of audible sound.');
+  await blocked.page.locator('#end-call').click();
+
   const denied = await setup({ status: 'pending', deny: true });
   await denied.page.locator('#accept-call').click();
   await denied.page.locator('#error').filter({ hasText: 'Microphone permission was denied' }).waitFor();
@@ -217,7 +267,7 @@ try {
   await failed.page.locator('#error').filter({ hasText: 'WebRTC failed' }).waitFor();
   assert.equal((await failed.snapshot()).peers[0].state, 'closed');
   check('Connection failure closes peer and releases microphone', 'Synthetic failed state stops all tracks and displays interrupted failure rather than successful completion.');
-  for (const flow of [f, denied, failed]) { assert.deepEqual(flow.errors, []); assert.deepEqual(flow.unexpected, []); }
+  for (const flow of [f, delayed, silent, blocked, denied, failed]) { assert.deepEqual(flow.errors, []); assert.deepEqual(flow.unexpected, []); }
   report.requestEvidence = f.requests.filter(r => r.method === 'POST');
   report.eventEvidence = (await f.snapshot()).sent;
   report.unexpectedNetwork = [];

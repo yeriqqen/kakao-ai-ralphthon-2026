@@ -199,7 +199,7 @@ function renderContext() {
 }
 function render() {
   document.documentElement.lang = language; document.title = t('title');
-  for (const [id, key] of Object.entries({ subtitle:'subtitle', 'new-chat':'newChat', 'simulation-label':'simulation', 'welcome-title':'welcome', 'welcome-intro':'intro', 'language-label':'chooseLanguage', starter:'starter', 'text-note':'textOnly', working:'thinking', 'dismiss-error':'closeError' })) $(id).textContent = t(key);
+  for (const [id, key] of Object.entries({ subtitle:'subtitle', 'new-chat':'newChat', 'simulation-label':'simulation', 'welcome-title':'welcome', 'welcome-intro':'intro', 'language-label':'chooseLanguage', starter:'starter', 'shop-starter':'shopStarter', 'text-note':'textOnly', working:'thinking', 'dismiss-error':'closeError' })) $(id).textContent = t(key);
   $('fixed-language').textContent = credentials ? t('selectedLanguage', { language: languageNames[language] }) : '';
   $('welcome').hidden = Boolean(credentials || pendingText);
   const picker = document.createDocumentFragment();
@@ -252,6 +252,7 @@ $('chat-form').addEventListener('submit', sendMessage);
 $('message-input').addEventListener('input', resizeComposer);
 $('message-input').addEventListener('keydown', (event) => { if (event.key === 'Enter' && !event.shiftKey && !event.isComposing) { event.preventDefault(); $('chat-form').requestSubmit(); } });
 $('starter').addEventListener('click', () => { $('message-input').value = t('starter'); resizeComposer(); $('message-input').focus(); });
+$('shop-starter').addEventListener('click', () => { $('message-input').value = t('shopStarter'); resizeComposer(); $('message-input').focus(); });
 $('new-chat').addEventListener('click', () => confirmAction('restart'));
 $('dismiss-error').addEventListener('click', () => { localError = ''; if (state?.error) state = { ...state, error: null }; render(); });
 $('confirm-dialog').addEventListener('close', () => { if ($('confirm-dialog').returnValue !== 'confirm') return; if (dialogAction === 'restart') restart(); else mutate('end', { reason: 'user_ended' }); });

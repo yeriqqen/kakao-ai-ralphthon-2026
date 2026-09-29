@@ -1,8 +1,14 @@
 {
-  "checkedAt": "2026-09-29T05:55:02.045Z",
-  "type": "real_local_http_without_upstream_or_audio",
-  "passed": 17,
-  "total": 17,
+  "checkedAt": "2026-09-29T06:08:12.109Z",
+  "type": "real_local_http_with_mocked_plan_setup",
+  "realHTTP": true,
+  "realOpenAI": false,
+  "realMicrophone": false,
+  "syntheticHttpTest": true,
+  "provenance": "Real isolated localhost HTTP routes. Plan generation and validation are synthetic setup fixtures; all upstream network is blocked. No actual business or audio evidence.",
+  "fixtureRoomId": "9739f88e-0573-4cce-8d22-98d96dd4a901",
+  "passed": 23,
+  "total": 23,
   "checks": [
     {
       "name": "/ is served",
@@ -70,6 +76,30 @@
     },
     {
       "name": "evidence export contains no credentials",
+      "passed": true
+    },
+    {
+      "name": "diagnostics setup uses an explicit mocked plan with real HTTP authorization",
+      "passed": true
+    },
+    {
+      "name": "customer role cannot submit voice diagnostics",
+      "passed": true
+    },
+    {
+      "name": "diagnostics reject a different call ID",
+      "passed": true
+    },
+    {
+      "name": "only whitelisted diagnostic events and sanitized fields survive export",
+      "passed": true
+    },
+    {
+      "name": "diagnostic batches above 30 events are rejected without partial writes",
+      "passed": true
+    },
+    {
+      "name": "30-event batches are accepted and only the newest 200 diagnostics are retained",
       "passed": true
     }
   ]

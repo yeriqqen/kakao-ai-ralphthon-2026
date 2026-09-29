@@ -1,11 +1,32 @@
-// Real local HTTP checks. No OpenAI calls or microphone/audio simulation.
+// Real local HTTP checks. Two synthetic AI responses only establish a setup
+// plan; all upstream network is blocked. No OpenAI or microphone/audio calls.
 import { spawn } from 'node:child_process';
 import assert from 'node:assert/strict';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 const port = Number(process.env.TEST_PORT || 4217);
 const base = `http://localhost:${port}`;
-const child = spawn(process.execPath, ['server-v2.mjs'], { cwd: new URL('../', import.meta.url), env: { ...process.env, PORT: String(port), HOST: '127.0.0.1' }, stdio: ['ignore', 'pipe', 'pipe'] });
+const setupBootstrap = `
+globalThis.fetch = async (url, options) => {
+  if (String(url) !== 'https://api.openai.com/v1/responses') throw new Error('Upstream network is blocked in this HTTP test.');
+  const body = JSON.parse(options.body);
+  const purpose = body.text.format.name;
+  let output;
+  if (purpose === 'customer_interview') output = {
+    reply: 'A fictional test plan is ready; stock is unknown. Shall we simulate the call?',
+    customerInfo: [], institutions: [{ id: 'mock-shop', name: 'Fictional HTTP Test Shop', reason: 'To ask whether the requested notebook is in stock.' }],
+    requiredQuestions: [{ id: 'stock', text: 'Is the blue notebook in stock?', korean: '파란색 공책 재고가 있나요?' }], readyToCall: true
+  };
+  else if (purpose === 'call_plan_validation') {
+    const message = JSON.parse(body.input).customerMessages.at(-1);
+    output = { approved: true, violations: [], customerFactEvidence: [], constraintCoverage: [{ constraint: 'blue notebook stock', sourceMessageId: message.id, questionIds: ['stock'] }], questionMeaningChecks: [{ questionId: 'stock', faithful: true, explanation: 'Synthetic setup fixture only.' }] };
+  } else throw new Error('Unexpected AI purpose in HTTP-only test: ' + purpose);
+  return new Response(JSON.stringify({ id: 'synthetic-http-setup-' + purpose, model: 'mock-no-openai', status: 'completed', output: [{ content: [{ type: 'output_text', text: JSON.stringify(output) }] }] }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+};
+await import(${JSON.stringify(new URL('../server-v2.mjs', import.meta.url).href)});
+`;
+const child = spawn(process.execPath, ['--input-type=module', '--eval', setupBootstrap], { cwd: new URL('../', import.meta.url), env: { ...process.env, PORT: String(port), HOST: '127.0.0.1', OPENAI_API_KEY: 'synthetic-http-test-key-not-a-credential' }, stdio: ['ignore', 'pipe', 'pipe'] });
 const checks = [];
+let fixtureRoomId = null;
 try {
   await new Promise((resolve, reject) => {
     const timer = setTimeout(() => reject(new Error('Server did not start')), 5000);
@@ -20,6 +41,7 @@ try {
   await check('unsupported language is rejected', async () => assert.equal((await create({ language: 'xx' })).status, 400));
   await check('cross-origin mutation is rejected', async () => assert.equal((await create({ language: 'en' }, { Origin: 'https://example.com' })).status, 403));
   const created = await create({ language: 'en' }).then(response => response.json());
+  fixtureRoomId = created.id;
   const request = (suffix, token, payload) => fetch(base + '/api/rooms/' + created.id + suffix, { method: payload === undefined ? 'GET' : 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }, body: payload === undefined ? undefined : JSON.stringify(payload) });
   await check('unauthorized room read is rejected', async () => assert.equal((await request('', 'wrong')).status, 403));
   await check('public state excludes both access tokens', async () => { const value = await request('', created.customerToken).then(response => response.json()); const serialized = JSON.stringify(value); assert.ok(!serialized.includes(created.customerToken) && !serialized.includes(created.businessToken)); assert.equal(value.call.status, 'idle'); });
@@ -30,8 +52,52 @@ try {
   await check('business cannot claim a premature connection', async () => assert.equal((await request('/connection', created.businessToken, { connected: true })).status, 409));
   await check('no transcript accepted before authorized acceptance', async () => assert.equal((await request('/transcript', created.businessToken, { id: 'fake', role: 'business', text: 'yes' })).status, 409));
   await check('evidence export contains no credentials', async () => { const exported = await request('/export', created.customerToken).then(response => response.json()); assert.equal(exported.simulation, true); assert.ok(!JSON.stringify(exported).includes(created.customerToken)); assert.equal(exported.apiEvidence.length, 0); });
-  const result = { checkedAt: new Date().toISOString(), type: 'real_local_http_without_upstream_or_audio', passed: checks.length, total: checks.length, checks };
+  await check('diagnostics setup uses an explicit mocked plan with real HTTP authorization', async () => {
+    const response = await request('/chat', created.customerToken, { message: 'Please check whether the blue notebook is in stock.' });
+    assert.equal(response.status, 200); assert.equal((await response.json()).planReady, true);
+    assert.equal((await request('/authorize', created.customerToken, { institutionId: 'mock-shop' })).status, 200);
+  });
+  const current = await request('', created.customerToken).then(response => response.json());
+  const callId = current.call.id;
+  const exportedDiagnostics = async () => (await request('/export', created.customerToken).then(response => response.json())).voiceDiagnostics;
+  await check('customer role cannot submit voice diagnostics', async () => assert.equal((await request('/diagnostics', created.customerToken, { callId, events: [{ type: 'opening.requested' }] })).status, 403));
+  await check('diagnostics reject a different call ID', async () => assert.equal((await request('/diagnostics', created.businessToken, { callId: 'wrong-call-id', events: [{ type: 'opening.requested' }] })).status, 400));
+  await check('only whitelisted diagnostic events and sanitized fields survive export', async () => {
+    const marker = 'SYNTHETIC_PRIVATE_PAYLOAD_MUST_NOT_BE_EXPORTED';
+    const response = await request('/diagnostics', created.businessToken, { callId, events: [
+      { type: 'opening.requested', at: '2026-09-29T07:00:00.000Z', responseId: 'resp-safe', status: 'completed', code: 'OK', callId: 'forged-event-call', text: marker, audio: marker, token: marker },
+      { type: 'unapproved.event', text: marker }, null,
+      { type: 'error', at: marker, responseId: 'contains spaces', status: 'failed\nprivate', code: 'SAFE_CODE', payload: marker },
+    ] });
+    assert.equal(response.status, 200);
+    const events = await exportedDiagnostics(); assert.equal(events.length, 2);
+    assert.deepEqual(Object.keys(events[0]).sort(), ['callId', 'type', 'receivedAt', 'at', 'responseId', 'status', 'code'].sort());
+    assert.equal(events[0].callId, callId); assert.equal(events[0].responseId, 'resp-safe'); assert.equal(events[0].at, '2026-09-29T07:00:00.000Z');
+    assert.deepEqual(Object.keys(events[1]).sort(), ['callId', 'type', 'receivedAt', 'code'].sort());
+    assert.equal(events[1].code, 'SAFE_CODE'); assert.ok(!JSON.stringify(events).includes(marker));
+  });
+  await check('diagnostic batches above 30 events are rejected without partial writes', async () => {
+    const before = await exportedDiagnostics();
+    assert.equal((await request('/diagnostics', created.businessToken, { callId, events: Array.from({ length: 31 }, () => ({ type: 'opening.requested' })) })).status, 400);
+    assert.deepEqual(await exportedDiagnostics(), before);
+  });
+  await check('30-event batches are accepted and only the newest 200 diagnostics are retained', async () => {
+    for (let batch = 0; batch < 7; batch++) {
+      const events = Array.from({ length: 30 }, (_, index) => ({ type: 'response.created', responseId: `diag-${batch * 30 + index}` }));
+      assert.equal((await request('/diagnostics', created.businessToken, { callId, events })).status, 200);
+    }
+    const events = await exportedDiagnostics(); assert.equal(events.length, 200);
+    assert.equal(events[0].responseId, 'diag-10'); assert.equal(events.at(-1).responseId, 'diag-209');
+    assert.deepEqual(events.map(event => event.responseId), Array.from({ length: 200 }, (_, index) => `diag-${index + 10}`));
+  });
+  const result = { checkedAt: new Date().toISOString(), type: 'real_local_http_with_mocked_plan_setup', realHTTP: true, realOpenAI: false, realMicrophone: false, syntheticHttpTest: true, provenance: 'Real isolated localhost HTTP routes. Plan generation and validation are synthetic setup fixtures; all upstream network is blocked. No actual business or audio evidence.', fixtureRoomId, passed: checks.length, total: checks.length, checks };
   await mkdir(new URL('../artifacts/v2/', import.meta.url), { recursive: true });
   await writeFile(new URL('../artifacts/v2/http-check.json', import.meta.url), JSON.stringify(result, null, 2) + '\n');
   console.log(`V2 real local HTTP: ${checks.length}/${checks.length} passed; no OpenAI or audio used.`);
-} finally { child.kill('SIGTERM'); }
+} finally {
+  child.kill('SIGTERM');
+  if (fixtureRoomId) {
+    const path = new URL(`../artifacts/v2/local-runs/${fixtureRoomId}.json`, import.meta.url);
+    try { const saved = JSON.parse(await readFile(path, 'utf8')); await writeFile(path, JSON.stringify({ ...saved, syntheticHttpTest: true, realAPI: false, realMicrophone: false, testProvenance: 'HTTP authorization and diagnostics fixture; AI setup responses and diagnostic events are synthetic. No live call or audio acceptance.' }, null, 2) + '\n'); } catch (error) { if (error.code !== 'ENOENT') throw error; }
+  }
+}

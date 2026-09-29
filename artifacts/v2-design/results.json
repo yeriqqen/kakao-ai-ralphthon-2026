@@ -1,0 +1,188 @@
+{
+  "generatedAt": "2026-09-29T06:14:38.785Z",
+  "mock": true,
+  "realAPI": false,
+  "realMicrophone": false,
+  "audibleKorean": false,
+  "method": "Isolated Playwright contexts. Static files served from disk; all API responses are synthetic fixtures. External requests blocked; microphone and WebRTC unavailable.",
+  "viewports": "320×844, 390×844, 390×480, 768×1000, 1440×1000",
+  "checks": [
+    {
+      "name": "Translation key parity across English, Russian, and Chinese",
+      "passed": true
+    },
+    {
+      "name": "en: home at 320, 390, 768, and 1440 pixels",
+      "passed": true
+    },
+    {
+      "name": "en: phone touch targets and readable input",
+      "passed": true
+    },
+    {
+      "name": "en: shop starter preserves the upstream rehearsal prompt",
+      "passed": true
+    },
+    {
+      "name": "en: clarification and plan preserve the room API",
+      "passed": true
+    },
+    {
+      "name": "en: narrow plan and explicit authorization",
+      "passed": true
+    },
+    {
+      "name": "en: business clarification reaches customer and returns as chat",
+      "passed": true
+    },
+    {
+      "name": "en: unresolved decision and grounded completion",
+      "passed": true
+    },
+    {
+      "name": "en: confirmation dialog focus, keyboard dismissal, and narrow layout",
+      "passed": true
+    },
+    {
+      "name": "ru: home at 320, 390, 768, and 1440 pixels",
+      "passed": true
+    },
+    {
+      "name": "ru: phone touch targets and readable input",
+      "passed": true
+    },
+    {
+      "name": "ru: shop starter preserves the upstream rehearsal prompt",
+      "passed": true
+    },
+    {
+      "name": "ru: clarification and plan preserve the room API",
+      "passed": true
+    },
+    {
+      "name": "ru: narrow plan and explicit authorization",
+      "passed": true
+    },
+    {
+      "name": "ru: business clarification reaches customer and returns as chat",
+      "passed": true
+    },
+    {
+      "name": "ru: unresolved decision and grounded completion",
+      "passed": true
+    },
+    {
+      "name": "ru: confirmation dialog focus, keyboard dismissal, and narrow layout",
+      "passed": true
+    },
+    {
+      "name": "zh: home at 320, 390, 768, and 1440 pixels",
+      "passed": true
+    },
+    {
+      "name": "zh: phone touch targets and readable input",
+      "passed": true
+    },
+    {
+      "name": "zh: shop starter preserves the upstream rehearsal prompt",
+      "passed": true
+    },
+    {
+      "name": "zh: clarification and plan preserve the room API",
+      "passed": true
+    },
+    {
+      "name": "zh: narrow plan and explicit authorization",
+      "passed": true
+    },
+    {
+      "name": "zh: business clarification reaches customer and returns as chat",
+      "passed": true
+    },
+    {
+      "name": "zh: unresolved decision and grounded completion",
+      "passed": true
+    },
+    {
+      "name": "zh: confirmation dialog focus, keyboard dismissal, and narrow layout",
+      "passed": true
+    },
+    {
+      "name": "Polling preserves the draft and its input focus",
+      "passed": true
+    },
+    {
+      "name": "Incoming text preserves a person’s reading position",
+      "passed": true
+    },
+    {
+      "name": "Short phone viewport keeps the composer reachable and above its note",
+      "passed": true
+    },
+    {
+      "name": "Reduced-motion preference suppresses decorative animation",
+      "passed": true
+    },
+    {
+      "name": "Self-hosted Inter font is loaded",
+      "passed": true
+    },
+    {
+      "name": "Business desk desktop and mobile layouts with explicit acceptance",
+      "passed": true
+    },
+    {
+      "name": "No page errors, unexpected network, or microphone attempts",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "en-home-320.png",
+    "en-home-390.png",
+    "en-home-1440.png",
+    "en-clarification-390.png",
+    "en-plan-390.png",
+    "en-plan-320.png",
+    "en-relay-390.png",
+    "en-summary-390.png",
+    "en-confirm-320.png",
+    "ru-home-320.png",
+    "ru-home-390.png",
+    "ru-home-1440.png",
+    "ru-clarification-390.png",
+    "ru-plan-390.png",
+    "ru-plan-320.png",
+    "ru-relay-390.png",
+    "ru-summary-390.png",
+    "ru-confirm-320.png",
+    "zh-home-320.png",
+    "zh-home-390.png",
+    "zh-home-1440.png",
+    "zh-clarification-390.png",
+    "zh-plan-390.png",
+    "zh-plan-320.png",
+    "zh-relay-390.png",
+    "zh-summary-390.png",
+    "zh-confirm-320.png",
+    "en-reading-position-390.png",
+    "en-short-phone-390.png",
+    "en-summary-1440.png",
+    "business-pending-1440.png",
+    "business-pending-390.png",
+    "business-pending-320.png"
+  ],
+  "errors": [],
+  "unexpectedNetwork": [],
+  "sources": {
+    "public/v2/customer.js": "9eed9c67756baaed663f5b6130162fbc27245559a163a910e6a1f1cce1855016",
+    "public/v2/index.html": "524744bc20c57aab077afd21aacaec8e12436a5bf2a2fd63e065e8b25db523eb",
+    "public/v2/styles.css": "be771531e07ea00b54d39026e3e13a60514cbf3af1d3eb1c109ea2f9cfbe1a2d",
+    "public/v2/theme.css": "7f55ea4111c1f8eb5b766cbd595aac4a07c31635ca87ce57ed757f280c16c642",
+    "public/v2/i18n.js": "2e6667c28362d37650623c807429ff2491242a38cf207e062ac88b6b5402f03a",
+    "public/v2/business.html": "5a91568ca6cf141b3002c6713823c71a47547fd9b2d48973058761d44f527f45",
+    "public/v2/business.css": "d178b773b17c0fa7722d628d4a288e7e78bf27931c37ad4b729396233c4d2584",
+    "scripts/v2-design-check.mjs": "99c59f9e5a5e2e5b277a3203c80a4e44c176519a72c638690cf0951791fd2730"
+  },
+  "passed": true,
+  "passedChecks": 32
+}

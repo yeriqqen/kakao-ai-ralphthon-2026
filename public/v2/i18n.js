@@ -115,6 +115,36 @@ export const translations = {
   },
 };
 
+// Presentation copy is shared by the new layout; the simulation vocabulary above
+// remains the source for permissions, relay states and evidence.
+Object.assign(translations.en, {
+  welcome: 'A little more local.', intro: 'Life in Korea, in your language.\nTell us what you need. We’ll take it from there.',
+  placeholder: 'What can I help you with?', newChat: 'New chat',
+  skip: 'Skip to conversation', chatHint: 'A conversation, in your language', latest: 'Latest update', startersLabel: 'Conversation starters',
+  clinicTitle: 'A visit to the clinic', clinicDetail: 'Care without the language barrier',
+  shopTitle: 'Before you go shopping', shopDetail: 'Ask about stock, sizes, or colors',
+  everydayTitle: 'The everyday things', everydayDetail: 'A haircut, a repair, a little help',
+  everydayPrompt: 'I would like to ask a hair salon about an appointment.',
+});
+Object.assign(translations.ru, {
+  welcome: 'Здесь чуть ближе.', intro: 'Жизнь в Корее на вашем языке.\nРасскажите, что нужно. Остальное — вместе.',
+  placeholder: 'Чем я могу помочь?', newChat: 'Новый чат',
+  skip: 'Перейти к разговору', chatHint: 'Разговор на вашем языке', latest: 'Последнее обновление', startersLabel: 'С чего начать разговор',
+  clinicTitle: 'Визит в клинику', clinicDetail: 'Помощь без языкового барьера',
+  shopTitle: 'Перед покупками', shopDetail: 'Наличие, размер или нужный цвет',
+  everydayTitle: 'Повседневные дела', everydayDetail: 'Стрижка, ремонт, немного помощи',
+  everydayPrompt: 'Я хочу узнать о записи на стрижку в парикмахерскую.',
+});
+Object.assign(translations.zh, {
+  welcome: '让生活更近一点。', intro: '用您的语言，安心生活在韩国。\n告诉我们您的需要，一起迈出下一步。',
+  placeholder: '有什么可以帮您？', newChat: '新对话',
+  skip: '跳转到对话', chatHint: '用您的语言轻松交流', latest: '最新消息', startersLabel: '开始对话',
+  clinicTitle: '去诊所看看', clinicDetail: '让语言不再成为就医的障碍',
+  shopTitle: '购物前先问问', shopDetail: '了解库存、尺码或颜色',
+  everydayTitle: '日常的小事', everydayDetail: '理发、维修，或一点帮助',
+  everydayPrompt: '我想向理发店询问预约时间。',
+});
+
 export function translate(language, key, values = {}) {
   let result = translations[language]?.[key] ?? translations.en[key] ?? translations.en.UNKNOWN;
   for (const [name, value] of Object.entries(values)) result = result.replaceAll(`{${name}}`, String(value));

@@ -2,33 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#fafaf7">
   <title>YOKOBU · Business voice simulation</title>
+  <link rel="preload" href="/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/v2/theme.css">
   <link rel="stylesheet" href="/v2/business.css">
   <script type="module" src="/v2/business.js"></script>
 </head>
 <body>
-  <main class="business-shell">
-    <header><a class="brand" href="/">yokobu<span>Business desk</span></a><span class="simulation">Simulated call · 가상 통화</span></header>
-    <div class="intro"><p class="eyebrow">LAPTOP BUSINESS TAB · 업체 역할</p><h1>A conversation,<br>without the language barrier.</h1><p>Play the business in this tab. The customer writes in their own chat; YOKOBU speaks Korean here through OpenAI Realtime.</p></div>
-    <section class="call-card" aria-labelledby="call-heading">
-      <div class="status-row"><span id="call-status" class="status">Waiting for customer · 고객 요청 대기</span><span id="connection-label" class="small">Not connected</span></div>
-      <h2 id="call-heading">No incoming call yet</h2><p id="call-detail">The customer must approve the proposed simulated call first. Your microphone is off.</p>
-      <div id="error" class="error" role="alert" hidden></div>
-      <div id="waiting-note" class="waiting-note" role="status" hidden></div>
-      <div class="actions"><button id="accept-call" class="primary" hidden>Accept call · 통화 수락</button><button id="mute-mic" class="secondary" hidden>Mute microphone · 마이크 끄기</button><button id="end-call" class="danger" hidden>Disconnect · 연결 종료</button></div>
-      <p id="microphone-status" class="small" aria-live="polite">Microphone inactive · 마이크 꺼짐</p>
-      <div id="audio-panel" hidden><label for="remote-audio">OpenAI Korean audio · 한국어 음성</label><audio id="remote-audio" autoplay playsinline controls></audio><button id="play-audio" class="secondary" hidden>Play incoming audio · 음성 재생</button></div>
-      <p class="disclosure">Accepting sends microphone audio to OpenAI for this simulated conversation. This app saves text evidence, not audio recordings. No real telephone call is placed.</p>
-    </section>
-    <div class="details-grid">
-      <section class="panel"><p class="eyebrow">GENERATED CALL PLAN</p><h2>Questions to resolve</h2><p class="small">Generated from the customer’s request. A vague answer stays unresolved.</p><ol id="required-questions"><li class="empty">The customer’s call plan will appear here.</li></ol></section>
-      <section class="panel operator"><p class="eyebrow">HOW TO PARTICIPATE</p><h2>You are the business</h2><ol><li>Keep the customer chat in a separate tab on this laptop.</li><li>After the customer authorizes the call, select <strong>Accept call</strong> and allow the microphone.</li><li>Listen until the Korean assistant finishes, then answer in Korean as the fictional business. Speak when the microphone is live. Use only fictional details.</li><li>For the chat relay, ask an unknown customer detail early. For a shop inquiry, if alternative-color acceptance is unknown, ask “다른 색상도 괜찮으세요?” (Would another color be okay?). For a clinic, ask about prior visits only if still unknown. The assistant should ask the customer through chat.</li><li>The microphone pauses during assistant playback and while checking with the customer. Wait until it is live again; do not invent a customer answer.</li></ol><p lang="ko" class="korean-note">안내가 끝나고 마이크가 켜지면 가상 업체 역할로 한국어로 답해 주세요. 고객에게 확인 중일 때는 잠시 기다려 주세요.</p></section>
-    </div>
-    <section class="panel transcript-panel"><div class="section-heading"><div><p class="eyebrow">LIVE TRANSCRIPT · 한국어 대화</p><h2>What was actually said</h2></div><span id="transcript-count" class="small">0 turns</span></div><p class="small">Recognition can be imperfect. Text is evidence of this simulation, not verified facts from a real business.</p><div id="transcript" role="log" aria-live="polite" aria-relevant="additions"><p class="empty">No speech has been received.</p></div></section>
-    <section class="panel observation"><h2>Human audio check</h2><p class="small">Connection and transcript events alone do not prove that the Korean speech was audible.</p><label for="device-label">Device description</label><input id="device-label" maxlength="100" value="This laptop · business tab"><label class="checkbox"><input id="heard-korean" type="checkbox" disabled><span>I personally heard intelligible Korean from OpenAI.<br><small lang="ko">OpenAI의 한국어 음성이 실제로 들렸습니다.</small></span></label><p id="observation-status" class="small" role="status">Audible Korean: Unverified</p></section>
-    <footer>YOKOBU v2 · Fictional institutions · OpenAI Realtime voice<br>Keep this tab open during the simulation. Closing it interrupts the call.</footer>
-  </main>
+  <a class="skip-link" href="#business-main">Skip to call controls</a>
+  <div class="business-shell">
+    <header class="business-header">
+      <a class="brand" href="/" aria-label="YOKOBU customer home"><svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M5.6 18.4 18.4 5.6"/></svg>yokobu<span class="brand-period">.</span><span class="brand-context">Business desk</span></a>
+      <span class="simulation">Simulated call <span lang="ko">· 가상 통화</span></span>
+    </header>
+    <main id="business-main" tabindex="-1">
+      <div class="intro">
+        <p class="eyebrow">BUSINESS DESK <span lang="ko">· 업체 역할</span></p>
+        <h1>A conversation,<br>without the language barrier.</h1>
+        <p>The customer writes in their language.<br class="mobile-break"> YOKOBU speaks Korean with you here.</p>
+      </div>
+      <section class="call-card" aria-labelledby="call-heading">
+        <div class="status-row"><span id="call-status" class="status" role="status">Waiting for customer · 고객 요청 대기</span><span id="connection-label" class="small">Not connected</span></div>
+        <div class="call-intro">
+          <div class="call-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10v4M8 6v12M12 3v18M16 7v10M20 10v4"/></svg></div>
+          <div><h2 id="call-heading">No incoming call yet</h2><p id="call-detail">The customer must approve the proposed simulated call first. Your microphone is off.</p></div>
+        </div>
+        <div id="error" class="error" role="alert" hidden></div>
+        <div id="waiting-note" class="waiting-note" role="status" hidden></div>
+        <div class="actions"><button id="accept-call" class="primary" hidden>Accept call · 통화 수락</button><button id="mute-mic" class="secondary" hidden>Mute microphone · 마이크 끄기</button><button id="end-call" class="danger" hidden>Disconnect · 연결 종료</button></div>
+        <p id="microphone-status" class="small microphone-status" aria-live="polite">Microphone inactive · 마이크 꺼짐</p>
+        <div id="audio-panel" hidden><label for="remote-audio">OpenAI Korean audio · 한국어 음성</label><audio id="remote-audio" autoplay playsinline controls></audio><button id="play-audio" class="secondary" hidden>Play incoming audio · 음성 재생</button></div>
+        <p class="disclosure">Accepting sends microphone audio to OpenAI for this simulated conversation. This app saves text evidence, not audio recordings. No real telephone call is placed.</p>
+      </section>
+      <div class="workspace-grid">
+        <section class="panel questions-panel" aria-labelledby="questions-heading">
+          <p class="eyebrow">CALL PLAN</p><h2 id="questions-heading">Questions to resolve</h2><p class="small panel-description">From the customer’s request. A vague answer stays unresolved.</p>
+          <ol id="required-questions"><li class="empty">The customer’s call plan will appear here.</li></ol>
+        </section>
+        <section class="panel transcript-panel" aria-labelledby="transcript-heading">
+          <div class="section-heading"><div><p class="eyebrow">LIVE TRANSCRIPT <span lang="ko">· 한국어 대화</span></p><h2 id="transcript-heading">What was actually said</h2></div><span id="transcript-count" class="small">0 turns</span></div>
+          <p class="small panel-description">Recognition can be imperfect. Text is evidence of this simulation, not verified facts from a real business.</p>
+          <div id="transcript" role="log" aria-label="Korean conversation transcript" aria-live="polite" aria-relevant="additions" tabindex="0"><p class="empty">No speech has been received.</p></div>
+        </section>
+      </div>
+      <div class="details-grid">
+        <details class="panel operator">
+          <summary><span><span class="eyebrow">HOW TO PARTICIPATE</span><span class="guide-title">You are the business</span></span><svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></summary>
+          <ol><li>Keep the customer chat in a separate tab on this laptop.</li><li>After the customer authorizes the call, select <strong>Accept call</strong> and allow the microphone.</li><li>Listen until the Korean assistant finishes, then answer in Korean as the fictional business. Speak when the microphone is live. Use only fictional details.</li><li>For the chat relay, ask an unknown customer detail early. For a shop inquiry, if alternative-color acceptance is unknown, ask <span lang="ko">“다른 색상도 괜찮으세요?”</span> (Would another color be okay?). For a clinic, ask about prior visits only if still unknown. The assistant should ask the customer through chat.</li><li>The microphone pauses during assistant playback and while checking with the customer. Wait until it is live again; do not invent a customer answer.</li></ol>
+          <p lang="ko" class="korean-note">안내가 끝나고 마이크가 켜지면 가상 업체 역할로 한국어로 답해 주세요. 고객에게 확인 중일 때는 잠시 기다려 주세요.</p>
+        </details>
+        <section class="panel observation" aria-labelledby="observation-heading">
+          <p class="eyebrow">AUDIO CHECK</p><h2 id="observation-heading">Did you hear Korean?</h2><p class="small panel-description">Connection and transcript events alone do not prove that the Korean speech was audible.</p>
+          <label for="device-label">Device description</label><input id="device-label" type="text" maxlength="100" value="This laptop · business tab">
+          <label class="checkbox"><input id="heard-korean" type="checkbox" disabled><span>I personally heard intelligible Korean from OpenAI.<br><small lang="ko">OpenAI의 한국어 음성이 실제로 들렸습니다.</small></span></label>
+          <p id="observation-status" class="small" role="status">Audible Korean: Unverified</p>
+        </section>
+      </div>
+    </main>
+    <footer><span>YOKOBU · Fictional institutions · OpenAI Realtime voice</span><span>Keep this tab open during the simulation. Closing it interrupts the call.</span></footer>
+  </div>
 </body>
 </html>

@@ -3,10 +3,11 @@
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
-import { resolve, dirname } from 'node:path';
+import { resolve, dirname, sep, relative } from 'node:path';
 import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const output = resolve(root, process.env.V2_ARTIFACT_DIR || 'artifacts/v2');
 const require = createRequire(import.meta.url);
 let playwright;
 for (const candidate of [process.env.PLAYWRIGHT_MODULE, 'playwright', '/Users/yeriqqen/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright'].filter(Boolean)) {
@@ -16,7 +17,6 @@ if (!playwright) throw new Error('Set PLAYWRIGHT_MODULE to an existing Playwrigh
 const browser = await playwright.chromium.launch({ executablePath: process.env.CHROME_EXECUTABLE || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: true });
 const report = { mock: true, realAPI: false, realMicrophone: false, audibleKorean: false, provenance: 'Synthetic browser events and mocked HTTP. Does not prove microphone capture, OpenAI connectivity, speech quality, or audible Korean.', generatedAt: new Date().toISOString(), checks: [], sources: {} };
 for (const file of ['public/v2/business.js', 'public/v2/business.html', 'public/v2/business.css', 'scripts/v2-business-ui-check.mjs']) report.sources[file] = createHash('sha256').update(await readFile(resolve(root, file))).digest('hex');
-const files = new Map(await Promise.all(['business.html', 'business.js', 'business.css'].map(async name => [name, await readFile(resolve(root, 'public/v2', name), 'utf8')])));
 const contexts = [];
 const check = (name, detail) => report.checks.push({ name, passed: true, mock: true, detail });
 const wait = ms => new Promise(done => setTimeout(done, ms));
@@ -67,8 +67,12 @@ async function setup({ status = 'idle', deny = false, sessionCreated = true, rem
   await context.route('**/*', async route => {
     const req = route.request(), url = new URL(req.url());
     if (url.origin !== 'http://localhost:4173') { unexpected.push(url.origin + url.pathname); return route.abort(); }
-    const file = url.pathname === '/business' ? 'business.html' : url.pathname.startsWith('/v2/') ? url.pathname.split('/').at(-1) : null;
-    if (files.has(file)) return route.fulfill({ status: 200, contentType: file.endsWith('.html') ? 'text/html' : file.endsWith('.js') ? 'text/javascript' : 'text/css', body: files.get(file) });
+    if (url.pathname === '/business' || url.pathname.startsWith('/v2/') || url.pathname.startsWith('/fonts/')) {
+      const relative = url.pathname === '/business' ? 'v2/business.html' : url.pathname.slice(1);
+      const file = resolve(root, 'public', relative);
+      assert.ok(file.startsWith(resolve(root, 'public') + sep), 'Static fixture must stay inside public/');
+      return route.fulfill({ status: 200, contentType: file.endsWith('.html') ? 'text/html' : file.endsWith('.js') ? 'text/javascript' : file.endsWith('.woff2') ? 'font/woff2' : file.endsWith('.svg') ? 'image/svg+xml' : 'text/css', body: await readFile(file) });
+    }
     if (url.pathname === '/favicon.ico') return route.fulfill({ status: 204 });
     if (!url.pathname.startsWith('/api/rooms/mock-room')) { unexpected.push(url.pathname); return route.abort(); }
     const operation = url.pathname.slice('/api/rooms/mock-room'.length);
@@ -276,7 +280,7 @@ try {
 finally {
   for (const context of contexts) await context.close();
   await browser.close();
-  await mkdir(resolve(root, 'artifacts/v2'), { recursive: true });
-  await writeFile(resolve(root, 'artifacts/v2/business-ui-check.json'), JSON.stringify(report, null, 2) + '\n');
-  console.log(JSON.stringify({ passed: report.passed, checks: report.checks.length, mock: true, realAPI: false, realMicrophone: false, artifact: 'artifacts/v2/business-ui-check.json', failure: report.failure?.message }, null, 2));
+  await mkdir(output, { recursive: true });
+  await writeFile(resolve(output, 'business-ui-check.json'), JSON.stringify(report, null, 2) + '\n');
+  console.log(JSON.stringify({ passed: report.passed, checks: report.checks.length, mock: true, realAPI: false, realMicrophone: false, artifact: relative(root, resolve(output, 'business-ui-check.json')), failure: report.failure?.message }, null, 2));
 }

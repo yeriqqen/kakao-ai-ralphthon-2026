@@ -3,8 +3,15 @@
 import { spawn } from 'node:child_process';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 const port = Number(process.env.TEST_PORT || 4217);
 const base = `http://localhost:${port}`;
+const root = fileURLToPath(new URL('../', import.meta.url));
+const output = path.resolve(root, process.env.V2_ARTIFACT_DIR || 'artifacts/v2');
+// A child-only dummy key keeps checks independent of local configuration.
+// Synthetic plan responses enable the diagnostic gates; fetch is replaced
+// completely so no HTTP test can contact an upstream service.
 const setupBootstrap = `
 globalThis.fetch = async (url, options) => {
   if (String(url) !== 'https://api.openai.com/v1/responses') throw new Error('Upstream network is blocked in this HTTP test.');
@@ -24,7 +31,7 @@ globalThis.fetch = async (url, options) => {
 };
 await import(${JSON.stringify(new URL('../server-v2.mjs', import.meta.url).href)});
 `;
-const child = spawn(process.execPath, ['--input-type=module', '--eval', setupBootstrap], { cwd: new URL('../', import.meta.url), env: { ...process.env, PORT: String(port), HOST: '127.0.0.1', OPENAI_API_KEY: 'synthetic-http-test-key-not-a-credential' }, stdio: ['ignore', 'pipe', 'pipe'] });
+const child = spawn(process.execPath, ['--input-type=module', '--eval', setupBootstrap], { cwd: root, env: { ...process.env, PORT: String(port), HOST: '127.0.0.1', OPENAI_API_KEY: 'synthetic-http-test-key-not-a-credential' }, stdio: ['ignore', 'pipe', 'pipe'] });
 const checks = [];
 let fixtureRoomId = null;
 try {
@@ -90,9 +97,9 @@ try {
     assert.equal(events[0].responseId, 'diag-10'); assert.equal(events.at(-1).responseId, 'diag-209');
     assert.deepEqual(events.map(event => event.responseId), Array.from({ length: 200 }, (_, index) => `diag-${index + 10}`));
   });
-  const result = { checkedAt: new Date().toISOString(), type: 'real_local_http_with_mocked_plan_setup', realHTTP: true, realOpenAI: false, realMicrophone: false, syntheticHttpTest: true, provenance: 'Real isolated localhost HTTP routes. Plan generation and validation are synthetic setup fixtures; all upstream network is blocked. No actual business or audio evidence.', fixtureRoomId, passed: checks.length, total: checks.length, checks };
-  await mkdir(new URL('../artifacts/v2/', import.meta.url), { recursive: true });
-  await writeFile(new URL('../artifacts/v2/http-check.json', import.meta.url), JSON.stringify(result, null, 2) + '\n');
+  const result = { checkedAt: new Date().toISOString(), type: 'real_local_http_with_mocked_plan_setup', realHTTP: true, realOpenAI: false, realMicrophone: false, syntheticHttpTest: true, childConfiguration: 'Dummy key; child fetch replaced with synthetic setup responses and upstream network blocked', provenance: 'Real isolated localhost HTTP routes. Plan generation and validation are synthetic setup fixtures; all upstream network is blocked. No actual business or audio evidence.', fixtureRoomId, passed: checks.length, total: checks.length, checks };
+  await mkdir(output, { recursive: true });
+  await writeFile(path.join(output, 'http-check.json'), JSON.stringify(result, null, 2) + '\n');
   console.log(`V2 real local HTTP: ${checks.length}/${checks.length} passed; no OpenAI or audio used.`);
 } finally {
   child.kill('SIGTERM');

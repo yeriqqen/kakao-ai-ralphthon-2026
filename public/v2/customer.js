@@ -7,7 +7,16 @@ const connectedStates = new Set(['active', 'waiting_customer', 'awaiting_decisio
 let language = 'en', credentials = null, state = null, config = null;
 let sending = false, polling = false, online = true, selectedInstitution = '', localError = '', pendingText = '';
 let lastMessagesSignature = '', lastContextSignature = '', generation = 0, dialogAction = null;
+let lastVisibleSignature = '';
+let lastPresentation = {};
 const t = (key, values) => translate(language, key, values);
+const motion = () => matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
+const nearLatest = () => window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 220;
+function goToLatest() { $('latest-message').hidden = true; window.scrollTo({ top: document.documentElement.scrollHeight, behavior: motion() }); }
+function icon(name) {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.classList.add('icon'); svg.setAttribute('aria-hidden', 'true');
+  const use = document.createElementNS(svg.namespaceURI, 'use'); use.setAttribute('href', `#i-${name}`); svg.append(use); return svg;
+}
 
 try {
   const saved = JSON.parse(sessionStorage.getItem(STORAGE));
@@ -108,7 +117,6 @@ function renderMessages() {
   const messages = state?.messages || [];
   const signature = JSON.stringify([messages, pendingText, language, state?.summary]);
   if (signature === lastMessagesSignature) return;
-  const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 220;
   lastMessagesSignature = signature; const fragment = document.createDocumentFragment();
   for (const message of messages) {
     if (!['user', 'assistant'].includes(message.role) || !message.text) continue;
@@ -116,11 +124,12 @@ function renderMessages() {
     // and reasoning below. Earlier call summaries remain in chat history.
     if (message.kind === 'summary' && state?.summary && message.text === [state.summary.text, state.summary.recommendation, state.summary.reasoning].join('\n\n')) continue;
     const article = node('article', `message ${message.role}`); article.dataset.messageId = message.id || '';
-    article.append(node('p', 'message-label', t(message.role === 'user' ? 'you' : 'assistant')), node('p', 'message-content', message.text)); fragment.append(article);
+    const label = node('p', 'message-label'); if (message.role === 'assistant') label.append(icon('spark'));
+    label.append(document.createTextNode(t(message.role === 'user' ? 'you' : 'assistant')));
+    article.append(label, node('p', 'message-content', message.text)); fragment.append(article);
   }
   if (pendingText) { const article = node('article', 'message user pending'); article.append(node('p', 'message-content', pendingText)); fragment.append(article); }
   $('messages').replaceChildren(fragment);
-  if (nearBottom || pendingText) requestAnimationFrame(() => $('scroll-anchor').scrollIntoView({ block: 'end', behavior: 'auto' }));
 }
 function questionDetails() {
   const questions = state?.requiredQuestions || [];
@@ -169,7 +178,7 @@ function renderContext() {
     const actions = node('div', 'button-row'); actions.append(button(t('continueCall'), () => mutate('decision', { action: 'continue' }), 'primary-button', sending || !online), button(t('stopCall'), () => mutate('decision', { action: 'end' }), 'secondary-button', sending || !online)); decision.append(actions); fragment.append(decision);
   }
   if (credentials?.businessToken) {
-    const business = section(t('businessTitle')); business.append(node('p', 'business-instructions', t('businessHelp')));
+    const business = section(t('businessTitle'), 'business-panel'); business.append(node('p', 'business-instructions', t('businessHelp')));
     const actions = node('div', 'button-row'); const link = businessLink();
     if (link) {
       const open = node('a', 'secondary-button link-button', t('openBusiness')); open.href = link; open.target = '_blank'; open.rel = 'noopener noreferrer'; actions.append(open);
@@ -180,7 +189,7 @@ function renderContext() {
     business.append(actions, node('p', 'muted', t('linkNotice'))); fragment.append(business);
   }
   if (state.summary) {
-    const result = section(t('result'));
+    const result = section(t('result'), 'result-card'); result.querySelector('h2').prepend(icon('note'));
     result.append(node('p', 'fictional-note', t('simulation')));
     if ((state.requiredQuestions || []).some((question) => question.status !== 'resolved')) result.append(node('p', 'fictional-note', t('unresolvedWarning')));
     if (state.summary.text && !state.messages?.some((message) => message.role === 'assistant' && message.text === state.summary.text)) result.append(node('p', 'summary-text', state.summary.text));
@@ -198,15 +207,36 @@ function renderContext() {
   $('context').replaceChildren(fragment);
 }
 function render() {
+  const shouldFollow = nearLatest();
+  const presentation = { messages: JSON.stringify([state?.messages, pendingText]), relay: state?.pendingRelay?.question, decision: state?.decisionPrompt, summary: JSON.stringify(state?.summary), plan: state?.planReady };
+  const arrival = presentation.relay && presentation.relay !== lastPresentation.relay ? '.relay'
+    : presentation.decision && presentation.decision !== lastPresentation.decision ? '.decision'
+    : state?.summary && presentation.summary !== lastPresentation.summary ? '.result-card'
+    : presentation.messages !== lastPresentation.messages ? '#messages > :last-child'
+    : presentation.plan && !lastPresentation.plan ? '.institution-options' : null;
+  lastPresentation = presentation;
+  const visibleSignature = JSON.stringify([state?.messages, pendingText, state?.summary, state?.pendingRelay, state?.decisionPrompt, state?.call?.status]);
+  const visibleChanged = visibleSignature !== lastVisibleSignature; lastVisibleSignature = visibleSignature;
+  const isConversation = Boolean(credentials || pendingText);
+  const changedView = document.body.dataset.view !== (isConversation ? 'conversation' : 'home');
+  document.body.dataset.view = isConversation ? 'conversation' : 'home';
+  $('home-starters').hidden = isConversation;
+  $('home-starters').setAttribute('aria-label', t('startersLabel'));
+  document.querySelectorAll('[data-ui]').forEach(element => element.textContent = t(element.dataset.ui));
   document.documentElement.lang = language; document.title = t('title');
-  for (const [id, key] of Object.entries({ subtitle:'subtitle', 'new-chat':'newChat', 'simulation-label':'simulation', 'welcome-title':'welcome', 'welcome-intro':'intro', 'language-label':'chooseLanguage', starter:'starter', 'shop-starter':'shopStarter', 'text-note':'textOnly', working:'thinking', 'dismiss-error':'closeError' })) $(id).textContent = t(key);
+  for (const [id, key] of Object.entries({ subtitle:'subtitle', 'new-chat-label':'newChat', 'simulation-label':'simulation', 'welcome-title':'welcome', 'welcome-intro':'intro', 'language-label':'chooseLanguage', 'text-note':'textOnly', working:'thinking', 'dismiss-error':'closeError' })) $(id).textContent = t(key);
+  $('new-chat').setAttribute('aria-label', t('newChat')); $('new-chat').title = t('newChat');
   $('fixed-language').textContent = credentials ? t('selectedLanguage', { language: languageNames[language] }) : '';
   $('welcome').hidden = Boolean(credentials || pendingText);
+  const focusedLanguage = document.activeElement?.closest('.language-button')?.lang;
   const picker = document.createDocumentFragment();
   for (const choice of languages) { const item = button(languageNames[choice], () => { if (!credentials) { language = choice; localError = ''; render(); } }, 'language-button'); item.setAttribute('aria-pressed', String(choice === language)); item.lang = choice; picker.append(item); }
   $('language-options').replaceChildren(picker);
+  if (focusedLanguage) [...$('language-options').children].find(item => item.lang === focusedLanguage)?.focus({ preventScroll: true });
   $('message-input').placeholder = t('placeholder'); $('message-input').setAttribute('aria-label', t('placeholder'));
-  $('send').textContent = t(sending ? 'sending' : 'send'); $('send').disabled = sending || Boolean(state?.busy);
+  $('send-label').textContent = t(sending ? 'sending' : 'send'); $('send').setAttribute('aria-label', t(sending ? 'sending' : 'send')); $('send').disabled = sending || Boolean(state?.busy);
+  $('send').classList.toggle('is-empty', !$('message-input').value.trim());
+  $('messages').setAttribute('aria-busy', String(sending || Boolean(state?.busy)));
   $('new-chat').disabled = sending;
   $('working').hidden = !(sending || state?.busy);
   $('configuration').hidden = Boolean(config?.configured);
@@ -225,11 +255,23 @@ function render() {
   const error = localError || state?.error?.code || (!online ? 'CONNECTION_FAILED' : '');
   $('error').hidden = !error; $('error-text').textContent = error ? t(error) : '';
   renderMessages(); renderContext();
+  if (changedView) { $('message-input').rows = isConversation ? 1 : 2; resizeComposer(); }
+  if (!isConversation) $('latest-message').hidden = true;
+  else if (visibleChanged) {
+    if (shouldFollow || pendingText) requestAnimationFrame(() => {
+      // Keep the beginning of a new reply or relay readable. The final context
+      // may contain a long call plan; jumping past it would hide the next action.
+      const target = arrival && document.querySelector(arrival);
+      target?.scrollIntoView({ block: pendingText ? 'end' : 'start', behavior: 'instant' });
+      $('latest-message').hidden = true;
+    });
+    else $('latest-message').hidden = false;
+  }
 }
 function confirmAction(action) {
   dialogAction = action; $('dialog-title').textContent = t(action === 'restart' ? 'restartTitle' : 'endTitle');
   $('dialog-body').textContent = t(action === 'restart' ? 'restartBody' : 'endBody');
-  $('dialog-confirm').textContent = t(action === 'restart' ? 'restartConfirm' : 'endConfirm'); $('dialog-cancel').textContent = t('cancel'); $('confirm-dialog').returnValue = ''; $('confirm-dialog').showModal();
+  $('dialog-confirm').textContent = t(action === 'restart' ? 'restartConfirm' : 'endConfirm'); $('dialog-cancel').textContent = t('cancel'); $('confirm-dialog').returnValue = ''; $('confirm-dialog').showModal(); $('dialog-title').focus({ preventScroll: true });
 }
 async function restart() {
   if (liveStates.has(state?.call?.status)) {
@@ -247,14 +289,37 @@ async function downloadEvidence() {
     const anchor = node('a'); anchor.href = url; anchor.download = `yokobu-simulation-${new Date().toISOString().slice(0, 10)}.json`; anchor.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
   } catch (error) { setError(error.code); }
 }
-function resizeComposer() { $('message-input').style.height = 'auto'; $('message-input').style.height = `${Math.min(170, $('message-input').scrollHeight)}px`; }
+function resizeComposer() { $('message-input').style.height = 'auto'; $('message-input').style.height = `${Math.min(170, $('message-input').scrollHeight)}px`; $('send').classList.toggle('is-empty', !$('message-input').value.trim()); }
 $('chat-form').addEventListener('submit', sendMessage);
 $('message-input').addEventListener('input', resizeComposer);
-$('message-input').addEventListener('keydown', (event) => { if (event.key === 'Enter' && !event.shiftKey && !event.isComposing) { event.preventDefault(); $('chat-form').requestSubmit(); } });
+$('message-input').addEventListener('keydown', (event) => { if (event.key === 'Enter' && !event.shiftKey && !event.isComposing && matchMedia('(min-width: 720px)').matches) { event.preventDefault(); $('chat-form').requestSubmit(); } });
 $('starter').addEventListener('click', () => { $('message-input').value = t('starter'); resizeComposer(); $('message-input').focus(); });
 $('shop-starter').addEventListener('click', () => { $('message-input').value = t('shopStarter'); resizeComposer(); $('message-input').focus(); });
+document.querySelectorAll('[data-prompt]').forEach(element => element.addEventListener('click', () => { $('message-input').value = t(element.dataset.prompt); resizeComposer(); $('message-input').focus(); }));
 $('new-chat').addEventListener('click', () => confirmAction('restart'));
 $('dismiss-error').addEventListener('click', () => { localError = ''; if (state?.error) state = { ...state, error: null }; render(); });
 $('confirm-dialog').addEventListener('close', () => { if ($('confirm-dialog').returnValue !== 'confirm') return; if (dialogAction === 'restart') restart(); else mutate('end', { reason: 'user_ended' }); });
 window.addEventListener('online', refreshRoom); document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshRoom(); });
+// Measure the dock instead of assuming a fixed height when drafts or languages wrap.
+new ResizeObserver(() => document.documentElement.style.setProperty('--composer-height', `${Math.ceil($('composer-dock').getBoundingClientRect().height)}px`)).observe($('composer-dock'));
+function syncViewport() {
+  const viewport = window.visualViewport;
+  const inset = viewport && viewport.scale === 1 ? Math.max(0, innerHeight - viewport.height - viewport.offsetTop) : 0;
+  document.documentElement.style.setProperty('--keyboard-inset', `${Math.round(inset)}px`);
+  document.documentElement.style.setProperty('--viewport-height', `${Math.round(viewport?.height || innerHeight)}px`);
+  document.body.classList.toggle('keyboard-open', Boolean(document.activeElement?.matches('input, textarea') && inset > 120));
+}
+window.visualViewport?.addEventListener('resize', syncViewport); window.visualViewport?.addEventListener('scroll', syncViewport);
+window.addEventListener('resize', syncViewport); document.addEventListener('focusin', syncViewport); document.addEventListener('focusout', () => requestAnimationFrame(syncViewport));
+window.addEventListener('scroll', () => { if (nearLatest()) $('latest-message').hidden = true; }, { passive: true });
+$('latest-message').addEventListener('click', goToLatest);
+const dialog = $('confirm-dialog');
+new MutationObserver(() => document.body.classList.toggle('has-modal', dialog.open)).observe(dialog, { attributes: true, attributeFilter: ['open'] });
+dialog.addEventListener('keydown', event => {
+  if (event.key !== 'Tab') return;
+  const first = $('dialog-cancel'); const last = $('dialog-confirm');
+  if (event.shiftKey && (document.activeElement === first || document.activeElement === $('dialog-title'))) { event.preventDefault(); last.focus(); }
+  else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+});
+syncViewport();
 render(); loadConfiguration(); refreshRoom(); setInterval(refreshRoom, 1000);

@@ -1,6 +1,6 @@
 {
   "type": "extracted_local_package_smoke_no_api_or_audio",
-  "archiveSha256": "435bc3f5eb1c0395da5ed0a8d00ef11c456c9f7f543fb9e1d36a1eeaca74cc65",
+  "archiveSha256": "7fe95ca5cb9ed5c2589439cb435821568ddea35128ecf330a16d566afe7385cb",
   "passed": 7,
   "total": 7,
   "checks": [

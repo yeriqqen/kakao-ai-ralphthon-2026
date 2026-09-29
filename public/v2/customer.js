@@ -106,12 +106,15 @@ function businessLink() {
 }
 function renderMessages() {
   const messages = state?.messages || [];
-  const signature = JSON.stringify([messages, pendingText, language]);
+  const signature = JSON.stringify([messages, pendingText, language, state?.summary]);
   if (signature === lastMessagesSignature) return;
   const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 220;
   lastMessagesSignature = signature; const fragment = document.createDocumentFragment();
   for (const message of messages) {
     if (!['user', 'assistant'].includes(message.role) || !message.text) continue;
+    // The current result is rendered once, with its separate recommendation
+    // and reasoning below. Earlier call summaries remain in chat history.
+    if (message.kind === 'summary' && state?.summary && message.text === [state.summary.text, state.summary.recommendation, state.summary.reasoning].join('\n\n')) continue;
     const article = node('article', `message ${message.role}`); article.dataset.messageId = message.id || '';
     article.append(node('p', 'message-label', t(message.role === 'user' ? 'you' : 'assistant')), node('p', 'message-content', message.text)); fragment.append(article);
   }

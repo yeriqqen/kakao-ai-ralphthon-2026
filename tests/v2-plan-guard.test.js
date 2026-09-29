@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { planReviewIssues, hydratePlanReview, summaryOutputIssues } from '../lib/v2-plan-guard.mjs';
 import { interview, summarize, reviewCallPlan } from '../lib/v2-ai.mjs';
+import { factualSummary, renderAdviceChoice } from '../lib/v2-summary.mjs';
 const messages = [{ id: 'u1', role: 'user', text: 'I need a haircut on Saturday. Please ask the cost.' }];
 const plan = { reply: 'A fictional simulation plan is ready. Details remain unconfirmed. Shall we proceed?', customerInfo: [{ key: 'need', value: 'haircut' }], institutions: [{ id: 'a', name: 'Fictional East Studio', reason: 'To ask whether it can meet your request.' }], requiredQuestions: [{ id: 'fit', text: 'Can you provide the requested haircut on Saturday?', korean: '토요일에 요청한 이발이 가능한가요?' }, { id: 'cost', text: 'What would it cost?', korean: '비용은 얼마인가요?' }], readyToCall: true };
 const review = { questionMeaningChecks: [{ questionId: 'fit', faithful: true, explanation: 'All requested clauses preserved.' }, { questionId: 'cost', faithful: true, explanation: 'Same cost question.' }], approved: true, violations: [], customerFactEvidence: [{ key: 'need', sourceMessageId: 'u1', sourceQuote: 'I need a haircut' }], constraintCoverage: [{ constraint: 'haircut and Saturday availability', sourceMessageId: 'u1', sourceQuote: 'I need a haircut on Saturday.', questionIds: ['fit'] }, { constraint: 'cost', sourceMessageId: 'u1', sourceQuote: 'Please ask the cost.', questionIds: ['cost'] }] };
@@ -31,19 +32,80 @@ test('persistent rejection exhausts two repairs and never returns rejected prose
 });
 
 const summaryRoom = () => ({ language: 'en', call: { id: 'call-a', status: 'interrupted', institutionId: 'a' }, institutions: plan.institutions, customerInfo: [], requiredQuestions: [], transcripts: [{ id: 'business-greeting', callId: 'call-a', role: 'business', text: '안녕하세요.' }, { id: 'assistant-question', callId: 'call-a', role: 'assistant', text: 'Can you provide the service?' }], apiEvidence: [] });
-test('summary rejects fabricated supporting transcript references even if reviewer approves', async () => {
-  const originalFetch = globalThis.fetch, originalKey = process.env.OPENAI_API_KEY; process.env.OPENAI_API_KEY = 'synthetic-test-key'; let requests = 0;
-  globalThis.fetch = async (_url, options) => { requests++; const purpose = JSON.parse(options.body).text.format.name; const output = purpose === 'summary_validation' ? { approved: true, violations: [], businessClaimEvidence: [{ claim: 'Service available', transcriptId: 'assistant-question', quote: 'Can you provide the service?' }] } : { text: 'Service available.', recommendation: 'Visit this fictional place.', reasoning: 'Available.' }; return { ok: true, json: async () => ({ id: 'synthetic-response', model: 'synthetic-model', status: 'completed', output: [{ content: [{ type: 'output_text', text: JSON.stringify(output) }] }] }) }; };
-  try { await assert.rejects(summarize(summaryRoom()), error => error.code === 'AI_ERROR'); assert.equal(requests, 4); }
+function pricedSummaryRoom() {
+  const room = summaryRoom();
+  room.customerInfo = [{ key: 'gender_preference', value: 'female doctor' }, { key: 'insurance_status', value: 'no Korean health insurance' }];
+  room.transcripts.push({ id: 'business-price', callId: 'call-a', role: 'business', text: '비용은 10만 원이 넘을 수도 있습니다.' });
+  room.requiredQuestions = [{ id: 'cost', text: 'What is the expected consultation cost?', status: 'resolved', answer: 'The cost may exceed 100,000 KRW.', evidence: [{ transcriptId: 'business-price', quote: '10만 원이 넘을 수도 있습니다.' }] }, { id: 'time', text: 'Is the requested time available?', status: 'unresolved', evidence: [] }];
+  return room;
+}
+const mockResponse = output => ({ ok: true, json: async () => ({ id: 'synthetic-response', model: 'synthetic-model', status: 'completed', output: [{ content: [{ type: 'output_text', text: JSON.stringify(output) }] }] }) });
+test('fact presentation retains exact validated qualifiers and interrupted outcome with clear customer labels', () => {
+  const facts = factualSummary(pricedSummaryRoom());
+  assert.match(facts.text, /Simulation ended incompletely/);
+  assert.match(facts.text, /The cost may exceed 100,000 KRW\./);
+  assert.match(facts.text, /Doctor preference: female doctor/);
+  assert.match(facts.text, /Insurance: no Korean health insurance/);
+  assert.deepEqual(facts.unresolved.map(item => item.id), ['time']);
+  assert.equal(/[가-힣]|business-price|gender_preference/.test(facts.text), false);
+});
+test('assistant evidence, previous-call evidence, invented quotes and untranslated answers never appear as business facts', () => {
+  for (const mutation of ['assistant', 'previous', 'invented', 'untranslated']) {
+    const room = pricedSummaryRoom();
+    if (mutation === 'assistant') room.transcripts.at(-1).role = 'assistant';
+    if (mutation === 'previous') room.transcripts.at(-1).callId = 'old-call';
+    if (mutation === 'invented') room.requiredQuestions[0].evidence[0].quote = 'invented';
+    if (mutation === 'untranslated') room.requiredQuestions[0].answer = '10만 원입니다.';
+    const facts = factualSummary(room);
+    assert.equal(facts.answers.length, 0); assert.equal(facts.unresolved.length, 2);
+    assert.doesNotMatch(facts.text, /100,000|10만|business-price/);
+  }
+});
+test('factual grouping uses Russian and Chinese labels without exposing metadata keys', () => {
+  for (const [language, completed, doctor] of [['ru', 'Симуляция завершена.', 'Предпочтение врача'], ['zh', '模拟已完成。', '医生偏好']]) {
+    const room = summaryRoom(); room.language = language; room.call.status = 'completed';
+    room.customerInfo = [{ key: 'gender_preference', value: language === 'ru' ? 'Предпочтительно женщина-врач' : '希望由女医生看诊' }];
+    const facts = factualSummary(room);
+    assert(facts.text.includes(completed)); assert(facts.text.includes(doctor)); assert(!facts.text.includes('gender_preference'));
+  }
+});
+test('recommendation failures preserve validated facts and explicitly label unavailable advice', async () => {
+  const originalFetch = globalThis.fetch, originalKey = process.env.OPENAI_API_KEY; process.env.OPENAI_API_KEY = 'synthetic-test-key';
+  const room = pricedSummaryRoom();
+  globalThis.fetch = async () => { throw new Error('Synthetic provider failure'); };
+  try { const result = await summarize(room); assert.equal(result.text, factualSummary(room).text); assert.match(result.recommendation, /unavailable/); assert.equal(room.apiEvidence.at(-1).purpose, 'recommendation_fallback'); assert.equal(room.apiEvidence.at(-1).accepted, false); }
   finally { globalThis.fetch = originalFetch; if (originalKey === undefined) delete process.env.OPENAI_API_KEY; else process.env.OPENAI_API_KEY = originalKey; }
 });
-test('summary repair cannot publish fictional contact advice without fresh approval', async () => {
+test('one real AI choice selects exact retained answers without generating or rephrasing facts', async () => {
   const originalFetch = globalThis.fetch, originalKey = process.env.OPENAI_API_KEY; process.env.OPENAI_API_KEY = 'synthetic-test-key';
-  const safe = { text: 'The simulation ended incompletely. No substantive business answers were obtained.', recommendation: 'Find and verify a real provider independently.', reasoning: 'The fictional place has no verified real contact details.' };
-  const responses = [{ text: 'A call was attempted.', recommendation: 'Email Fictional East Studio.', reasoning: 'Ask them.' }, { approved: false, violations: ['Recommends contacting an imaginary place.'], businessClaimEvidence: [] }, safe, { approved: true, violations: [], businessClaimEvidence: [] }];
-  globalThis.fetch = async () => ({ ok: true, json: async () => ({ id: 'synthetic-response', model: 'synthetic-model', status: 'completed', output: [{ content: [{ type: 'output_text', text: JSON.stringify(responses.shift()) }] }] }) });
-  try { assert.deepEqual(await summarize(summaryRoom()), safe); assert.equal(responses.length, 0); }
+  const room = pricedSummaryRoom(), purposes = [];
+  const decision = { action: 'clarify_selected_questions', reasonQuestionIds: ['cost'], clarificationQuestionIds: ['time'] };
+  globalThis.fetch = async (_url, options) => { const body = JSON.parse(options.body); purposes.push(body.text.format.name); assert.deepEqual(body.text.format.schema.properties.reasonQuestionIds.items.enum, ['cost']); assert.deepEqual(body.text.format.schema.properties.clarificationQuestionIds.items.enum, ['time']); assert(!('reasoning' in body.text.format.schema.properties)); return mockResponse(decision); };
+  try { const facts = factualSummary(room); assert.deepEqual(await summarize(room), { text: facts.text, ...renderAdviceChoice(facts, decision, room.language) }); assert.deepEqual(purposes, ['grounded_recommendation']); assert.equal(room.apiEvidence.at(-1).purpose, 'recommendation_choice_result'); }
   finally { globalThis.fetch = originalFetch; if (originalKey === undefined) delete process.env.OPENAI_API_KEY; else process.env.OPENAI_API_KEY = originalKey; }
+});
+test('invalid AI IDs or action consistency produce explicit unavailable advice with facts intact', async () => {
+  const originalFetch = globalThis.fetch, originalKey = process.env.OPENAI_API_KEY; process.env.OPENAI_API_KEY = 'synthetic-test-key';
+  try {
+    for (const decision of [{ action: 'review_recorded_answers', reasonQuestionIds: ['cost'], clarificationQuestionIds: [] }, { action: 'clarify_selected_questions', reasonQuestionIds: ['invented'], clarificationQuestionIds: ['time'] }]) {
+      const room = pricedSummaryRoom(); let requests = 0;
+      globalThis.fetch = async () => { requests++; return mockResponse(decision); };
+      const output = await summarize(room);
+      assert.equal(requests, 1); assert.equal(output.text, factualSummary(room).text); assert.match(output.recommendation, /unavailable/); assert.equal(room.apiEvidence.at(-1).accepted, false);
+    }
+  } finally { globalThis.fetch = originalFetch; if (originalKey === undefined) delete process.env.OPENAI_API_KEY; else process.env.OPENAI_API_KEY = originalKey; }
+});
+test('localized structured advice preserves chosen answer qualifiers and rejects unsupported choices', () => {
+  const facts = factualSummary(pricedSummaryRoom());
+  const decision = { action: 'clarify_selected_questions', reasonQuestionIds: ['cost'], clarificationQuestionIds: ['time'] };
+  for (const language of ['en', 'ru', 'zh']) {
+    const output = renderAdviceChoice(facts, decision, language);
+    assert(output.reasoning.includes('The cost may exceed 100,000 KRW.'));
+    assert(!output.reasoning.includes('business-price'));
+  }
+  for (const choice of [{ ...decision, reasonQuestionIds: ['cost', 'cost'] }, { ...decision, clarificationQuestionIds: [] }, { ...decision, action: 'reasons' }, { action: 'try_another_simulated_option', reasonQuestionIds: [], clarificationQuestionIds: [] }]) assert.throws(() => renderAdviceChoice(facts, choice, 'en'), error => error.code === 'INVALID_ADVICE_CHOICE');
+  const none = factualSummary(summaryRoom());
+  assert.match(renderAdviceChoice(none, { action: 'insufficient_information', reasonQuestionIds: [], clarificationQuestionIds: [] }, 'en').reasoning, /No validated/);
 });
 
 test('selected source IDs hydrate exact original text; fabricated references stay rejected', () => {

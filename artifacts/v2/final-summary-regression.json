@@ -1,0 +1,844 @@
+{
+  "startedAt": "2026-09-29T05:54:15.846Z",
+  "type": "real_OpenAI_summary_only_regression_with_deterministic_fact_sections",
+  "realAPI": true,
+  "newMicrophone": false,
+  "newRealtime": false,
+  "newAudio": false,
+  "actualLiveAcceptance": false,
+  "sources": {
+    "lib/v2-ai.mjs": "ea34c777e43de5a6632cb782ce0b3ae376e73392d51c5b166150ec33597e7181",
+    "lib/v2-state.mjs": "5069af13d83734176f7198bca1d1276568eb3f531a6dd618d789bcf274ac199a",
+    "lib/v2-summary.mjs": "278d80ac80c662a3ca6c15ba08933ba89bf72c6123f60418d0096bd79f185d82"
+  },
+  "runs": [
+    {
+      "name": "synthetic_business_text",
+      "sourceArtifact": "artifacts/v2/real-api-synthetic-business-rehearsal-recheck.json",
+      "originalSourceCallStatus": "completed",
+      "output": {
+        "text": "Fictional simulation only — no real call or booking.\n\nCall outcome: Simulation completed.\n\nValidated business answers in this simulation:\n- Can you see a patient with a mild itchy rash this afternoon around 3:30 pm?\n  Yes, you can see a patient with a mild itchy rash this afternoon around 3:30 pm.\n- Is a female doctor available to consult at that time?\n  Yes, a female doctor is available to consult at that time.\n- Is it necessary to have an appointment or can I come as a walk-in?\n  It is necessary to have an appointment before visiting.\n- What is the expected self-pay consultation cost for a patient without Korean health insurance?\n  The expected self-pay consultation cost for a patient without Korean health insurance is about 35,000 KRW, not including tests or medication.\n\nCustomer-provided information:\n- Age: 28\n- Symptoms: mild itchy rash on arm for two days\n- Urgency: no urgent symptoms\n- Location: Mapo, Seoul\n- Preferred time: this afternoon around 3:30 pm\n- Doctor preference: female doctor\n- Insurance: no Korean health insurance\n- Prior-visit information: Yes, this would be my first visit.\n\nStill unresolved:\nNo required questions remain unresolved.",
+        "recommendation": "Based on this fictional simulation, making an appointment at Fictional Mapo Dermatology Hospital for 3:30 pm today is a good fit for your needs.",
+        "reasoning": "The hospital can see you at your requested time and location, a female doctor is available, and the estimated self-pay consultation cost is about 35,000 KRW for first-time, uninsured visits. Advance booking is required, but all your stated preferences and requirements are addressed in this scenario."
+      },
+      "error": null,
+      "inputState": {
+        "id": "afce53bf-d51d-4646-bdcd-daf30d15e1fb",
+        "language": "en",
+        "version": 19,
+        "revision": 19,
+        "createdAt": "2026-09-29T05:43:41.702Z",
+        "updatedAt": "2026-09-29T05:43:49.219Z",
+        "messages": [
+          {
+            "id": "61205f04-3d1f-487a-94d6-a6b8cafe5f55",
+            "role": "user",
+            "text": "I want to go to a hospital",
+            "kind": "chat",
+            "createdAt": "2026-09-29T05:33:04.446Z"
+          },
+          {
+            "id": "76136ed8-a308-4cf9-b863-5fbf02b9bea3",
+            "role": "assistant",
+            "text": "Could you please tell me what kind of medical issue or symptom you have? Also, where are you located or where do you prefer to go to the hospital? This will help me find the most appropriate options for you.",
+            "kind": "chat",
+            "createdAt": "2026-09-29T05:33:07.612Z"
+          },
+          {
+            "id": "1496c722-54be-4cee-85d4-be8d4f11cea3",
+            "role": "user",
+            "text": "I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment.",
+            "kind": "chat",
+            "createdAt": "2026-09-29T05:33:25.461Z"
+          },
+          {
+            "id": "c265ec59-61be-4111-941d-70e5f3dbd8b1",
+            "role": "assistant",
+            "text": "Thank you for the detailed information. To assist you appropriately, I will simulate contacting some fictional hospitals in the Mapo area of Seoul that might handle your mild itchy rash visit this afternoon around 3:30 pm. I'll also inquire whether a female doctor is available, the need for an appointment, and the expected self-pay consultation cost given you do not have Korean health insurance. This will help us understand if these hospitals can meet your preferences and requirements. May I proceed with preparing this simulated inquiry call?",
+            "kind": "chat",
+            "createdAt": "2026-09-29T05:33:32.273Z"
+          },
+          {
+            "id": "77d45a0d-ac7d-45d4-8cf3-1beafabc5fa7",
+            "role": "user",
+            "text": "Yes, please prepare the simulated call plan.",
+            "kind": "chat",
+            "createdAt": "2026-09-29T05:33:56.147Z"
+          },
+          {
+            "id": "16343ed4-5b43-457e-a073-c361884ddcf3",
+            "role": "assistant",
+            "text": "I have prepared a plan to simulate inquiry calls to two fictional hospitals in Mapo, Seoul, regarding your mild itchy rash. I will ask about their ability to see you this afternoon around 3:30 pm, female doctor availability, the necessity of an appointment, and the expected self-pay consultation cost without Korean health insurance. Please note these details are unconfirmed and part of a simulation. Would you like me to proceed with this simulated call now?",
+            "kind": "chat",
+            "createdAt": "2026-09-29T05:34:04.217Z"
+          },
+          {
+            "id": "600af9ca-280a-4070-bc6c-e12f377466f1",
+            "role": "assistant",
+            "text": "Is this your first visit to our hospital?",
+            "kind": "relay",
+            "createdAt": "2026-09-29T05:43:44.116Z"
+          },
+          {
+            "id": "ccfc5829-9b5a-46e0-90d8-a7ee8259058b",
+            "role": "user",
+            "text": "Yes, this would be my first visit.",
+            "kind": "relay",
+            "createdAt": "2026-09-29T05:43:44.116Z"
+          }
+        ],
+        "transcripts": [
+          {
+            "id": "synthetic-age-question",
+            "role": "business",
+            "text": "환자분은 몇 살인가요?",
+            "callId": "f5a71843-d7f1-47c3-8751-ddc78d6db053",
+            "createdAt": "2026-09-29T05:43:41.705Z"
+          },
+          {
+            "id": "generated-known-age-answer",
+            "role": "assistant",
+            "text": "환자분은 28세입니다.",
+            "callId": "f5a71843-d7f1-47c3-8751-ddc78d6db053",
+            "createdAt": "2026-09-29T05:43:43.067Z"
+          },
+          {
+            "id": "synthetic-first-visit-question",
+            "role": "business",
+            "text": "처음 방문하시나요?",
+            "callId": "f5a71843-d7f1-47c3-8751-ddc78d6db053",
+            "createdAt": "2026-09-29T05:43:43.067Z"
+          },
+          {
+            "id": "generated-first-visit-answer",
+            "role": "assistant",
+            "text": "네, 이번이 처음 방문입니다.",
+            "callId": "f5a71843-d7f1-47c3-8751-ddc78d6db053",
+            "createdAt": "2026-09-29T05:43:45.073Z"
+          },
+          {
+            "id": "synthetic-generated-plan-questions",
+            "role": "assistant",
+            "text": "오늘 오후 3시 30분경에 가벼운 가려운 발진 환자를 진료할 수 있나요? 그 시간에 여성 의사 선생님이 진료 가능한가요? 예약이 필요한가요, 아니면 예약 없이 방문할 수 있나요? 한국 건강 보험이 없는 환자의 자비 진료 예상 비용은 얼마인가요?",
+            "callId": "f5a71843-d7f1-47c3-8751-ddc78d6db053",
+            "createdAt": "2026-09-29T05:43:45.073Z"
+          },
+          {
+            "id": "synthetic-business-answers",
+            "role": "business",
+            "text": "네, 오늘 오후 3시 30분경에 가벼운 가려운 팔 발진 환자를 진료할 수 있습니다. 그 시간에 여성 의사 선생님이 진료합니다. 방문 전에 예약이 필요합니다. 한국 건강보험이 없는 환자의 자비 진찰료는 약 3만 5천 원이고, 검사나 약값은 별도입니다. 아직 예약이 완료된 것은 아닙니다.",
+            "callId": "f5a71843-d7f1-47c3-8751-ddc78d6db053",
+            "createdAt": "2026-09-29T05:43:45.073Z"
+          },
+          {
+            "id": "synthetic-readback",
+            "role": "assistant",
+            "text": "확인하겠습니다. 오늘 오후 3시 30분경 여성 의사에게 가벼운 가려운 팔 발진 진료를 받을 수 있고, 방문 전에 예약이 필요합니다. 한국 건강보험 없이 자비 진찰료는 약 3만 5천 원이며 검사와 약값은 별도입니다. 아직 예약은 하지 않았습니다. 맞습니까?",
+            "callId": "f5a71843-d7f1-47c3-8751-ddc78d6db053",
+            "createdAt": "2026-09-29T05:43:47.334Z",
+            "resolvedQuestionSnapshot": [
+              {
+                "id": "q1",
+                "answer": "Yes, you can see a patient with a mild itchy rash this afternoon around 3:30 pm.",
+                "evidence": [
+                  {
+                    "transcriptId": "synthetic-business-answers",
+                    "quote": "네, 오늘 오후 3시 30분경에 가벼운 가려운 팔 발진 환자를 진료할 수 있습니다.",
+                    "role": "business"
+                  }
+                ]
+              },
+              {
+                "id": "q2",
+                "answer": "Yes, a female doctor is available to consult at that time.",
+                "evidence": [
+                  {
+                    "transcriptId": "synthetic-business-answers",
+                    "quote": "그 시간에 여성 의사 선생님이 진료합니다.",
+                    "role": "business"
+                  }
+                ]
+              },
+              {
+                "id": "q3",
+                "answer": "It is necessary to have an appointment before visiting.",
+                "evidence": [
+                  {
+                    "transcriptId": "synthetic-business-answers",
+                    "quote": "방문 전에 예약이 필요합니다.",
+                    "role": "business"
+                  }
+                ]
+              },
+              {
+                "id": "q4",
+                "answer": "The expected self-pay consultation cost for a patient without Korean health insurance is about 35,000 KRW, not including tests or medication.",
+                "evidence": [
+                  {
+                    "transcriptId": "synthetic-business-answers",
+                    "quote": "한국 건강보험이 없는 환자의 자비 진찰료는 약 3만 5천 원이고, 검사나 약값은 별도입니다.",
+                    "role": "business"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "synthetic-readback-confirmation",
+            "role": "business",
+            "text": "네, 모두 맞습니다. 말씀하신 진료 시간, 여성 의사, 사전 예약 필요, 진찰료 3만 5천 원과 검사·약값 별도 조건이 맞고 아직 예약은 완료되지 않았습니다.",
+            "callId": "f5a71843-d7f1-47c3-8751-ddc78d6db053",
+            "createdAt": "2026-09-29T05:43:47.334Z"
+          }
+        ],
+        "customerInfo": [
+          {
+            "key": "age",
+            "value": "28",
+            "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+          },
+          {
+            "key": "symptom",
+            "value": "mild itchy rash on arm for two days",
+            "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+          },
+          {
+            "key": "urgency",
+            "value": "no urgent symptoms",
+            "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+          },
+          {
+            "key": "location_preference",
+            "value": "Mapo, Seoul",
+            "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+          },
+          {
+            "key": "preferred_time",
+            "value": "this afternoon around 3:30 pm",
+            "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+          },
+          {
+            "key": "gender_preference",
+            "value": "female doctor",
+            "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+          },
+          {
+            "key": "insurance_status",
+            "value": "no Korean health insurance",
+            "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+          },
+          {
+            "key": "first_visit",
+            "value": "Yes, this would be my first visit.",
+            "sourceMessageId": "ccfc5829-9b5a-46e0-90d8-a7ee8259058b"
+          }
+        ],
+        "institutions": [
+          {
+            "id": "fictional_hospital_mapo_derma_001",
+            "name": "Fictional Mapo Dermatology Hospital",
+            "nameKo": "",
+            "description": "To confirm if they can provide consultation for mild itchy rash this afternoon, female doctor availability, appointment necessity, and self-pay costs without Korean insurance.",
+            "reason": "To confirm if they can provide consultation for mild itchy rash this afternoon, female doctor availability, appointment necessity, and self-pay costs without Korean insurance.",
+            "fictional": true
+          },
+          {
+            "id": "fictional_hospital_mapo_general_002",
+            "name": "Fictional Mapo General Hospital",
+            "nameKo": "",
+            "description": "To inquire about scheduling a visit this afternoon for your rash, female doctor availability, if an appointment is required, and consultation fees for uninsured patients.",
+            "reason": "To inquire about scheduling a visit this afternoon for your rash, female doctor availability, if an appointment is required, and consultation fees for uninsured patients.",
+            "fictional": true
+          }
+        ],
+        "requiredQuestions": [
+          {
+            "id": "q1",
+            "text": "Can you see a patient with a mild itchy rash this afternoon around 3:30 pm?",
+            "korean": "오늘 오후 3시 30분경에 가벼운 가려운 발진 환자를 진료할 수 있나요?",
+            "status": "resolved",
+            "resolutionReason": null,
+            "answer": "Yes, you can see a patient with a mild itchy rash this afternoon around 3:30 pm.",
+            "evidence": [
+              {
+                "transcriptId": "synthetic-business-answers",
+                "quote": "네, 오늘 오후 3시 30분경에 가벼운 가려운 팔 발진 환자를 진료할 수 있습니다.",
+                "role": "business"
+              }
+            ]
+          },
+          {
+            "id": "q2",
+            "text": "Is a female doctor available to consult at that time?",
+            "korean": "그 시간에 여성 의사 선생님이 진료 가능한가요?",
+            "status": "resolved",
+            "resolutionReason": null,
+            "answer": "Yes, a female doctor is available to consult at that time.",
+            "evidence": [
+              {
+                "transcriptId": "synthetic-business-answers",
+                "quote": "그 시간에 여성 의사 선생님이 진료합니다.",
+                "role": "business"
+              }
+            ]
+          },
+          {
+            "id": "q3",
+            "text": "Is it necessary to have an appointment or can I come as a walk-in?",
+            "korean": "예약이 필요한가요, 아니면 예약 없이 방문할 수 있나요?",
+            "status": "resolved",
+            "resolutionReason": null,
+            "answer": "It is necessary to have an appointment before visiting.",
+            "evidence": [
+              {
+                "transcriptId": "synthetic-business-answers",
+                "quote": "방문 전에 예약이 필요합니다.",
+                "role": "business"
+              }
+            ]
+          },
+          {
+            "id": "q4",
+            "text": "What is the expected self-pay consultation cost for a patient without Korean health insurance?",
+            "korean": "한국 건강 보험이 없는 환자의 자비 진료 예상 비용은 얼마인가요?",
+            "status": "resolved",
+            "resolutionReason": null,
+            "answer": "The expected self-pay consultation cost for a patient without Korean health insurance is about 35,000 KRW, not including tests or medication.",
+            "evidence": [
+              {
+                "transcriptId": "synthetic-business-answers",
+                "quote": "한국 건강보험이 없는 환자의 자비 진찰료는 약 3만 5천 원이고, 검사나 약값은 별도입니다.",
+                "role": "business"
+              }
+            ]
+          }
+        ],
+        "planReady": true,
+        "pendingRelay": null,
+        "decisionPrompt": null,
+        "summary": null,
+        "busy": false,
+        "error": null,
+        "voiceMessage": null,
+        "call": {
+          "id": "f5a71843-d7f1-47c3-8751-ddc78d6db053",
+          "status": "completed",
+          "institutionId": "fictional_hospital_mapo_derma_001",
+          "authorized": true,
+          "accepted": true,
+          "authorizedAt": "2026-09-29T05:43:41.703Z",
+          "acceptedAt": "2026-09-29T05:43:41.703Z",
+          "connected": false,
+          "confirmedKeyDetails": true,
+          "confirmationEvidence": [
+            {
+              "transcriptId": "synthetic-readback-confirmation",
+              "quote": "네, 모두 맞습니다. 말씀하신 진료 시간, 여성 의사, 사전 예약 필요, 진찰료 3만 5천 원과 검사·약값 별도 조건이 맞고 아직 예약은 완료되지 않았습니다.",
+              "role": "business"
+            }
+          ],
+          "readbackEvidence": [
+            {
+              "questionId": "q1",
+              "transcriptId": "synthetic-readback",
+              "quote": "오늘 오후 3시 30분경 여성 의사에게 가벼운 가려운 팔 발진 진료를 받을 수 있고",
+              "role": "assistant"
+            },
+            {
+              "questionId": "q2",
+              "transcriptId": "synthetic-readback",
+              "quote": "오늘 오후 3시 30분경 여성 의사에게 가벼운 가려운 팔 발진 진료를 받을 수 있고",
+              "role": "assistant"
+            },
+            {
+              "questionId": "q3",
+              "transcriptId": "synthetic-readback",
+              "quote": "방문 전에 예약이 필요합니다.",
+              "role": "assistant"
+            },
+            {
+              "questionId": "q4",
+              "transcriptId": "synthetic-readback",
+              "quote": "한국 건강보험 없이 자비 진찰료는 약 3만 5천 원이며 검사와 약값은 별도입니다.",
+              "role": "assistant"
+            }
+          ],
+          "endedAt": "2026-09-29T05:43:49.219Z",
+          "reason": "Synthetic backend QA finished with supplied fixture evidence.",
+          "success": true
+        }
+      },
+      "apiEvidence": [
+        {
+          "purpose": "grounded_recommendation",
+          "responseId": "resp_066f1246021bd9e4016abb52888c9887d0b48acf80f7f4c56d",
+          "model": "gpt-4.1-2025-04-14",
+          "usage": {
+            "input_tokens": 590,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 99,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 689
+          },
+          "at": "2026-09-29T05:54:17.770Z"
+        },
+        {
+          "purpose": "recommendation_validation",
+          "responseId": "resp_08f98e2be01cf6eb016abb5289fc6c87d088cefc34464e079c",
+          "model": "gpt-4.1-2025-04-14",
+          "usage": {
+            "input_tokens": 667,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 12,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 679
+          },
+          "at": "2026-09-29T05:54:18.643Z"
+        },
+        {
+          "purpose": "recommendation_validation_result",
+          "attempt": 1,
+          "accepted": true,
+          "structuralIssues": [],
+          "violations": [],
+          "at": "2026-09-29T05:54:18.643Z"
+        }
+      ],
+      "providerResponses": 2
+    },
+    {
+      "name": "recorded_actual_transcript_replay",
+      "sourceArtifact": "artifacts/v2/actual-third-readback-replay.json",
+      "originalSourceCallStatus": "active",
+      "output": {
+        "text": "Fictional simulation only — no real call or booking.\n\nCall outcome: Simulation completed.\n\nValidated business answers in this simulation:\n- Can you see a patient with a mild itchy rash this afternoon around 3:30 pm?\n  Yes, you can see a doctor for a mild itchy rash this afternoon around 3:30 pm.\n- Is a female doctor available to consult at that time?\n  Yes, a female doctor is available at that time.\n- Is it necessary to have an appointment or can I come as a walk-in?\n  You can visit without an appointment (walk-in is allowed).\n- What is the expected self-pay consultation cost for a patient without Korean health insurance?\n  The expected self-pay consultation cost for a patient without Korean health insurance may exceed 100,000 KRW.\n\nCustomer-provided information:\n- Age: 28\n- Symptoms: mild itchy rash on arm for two days\n- Urgency: no urgent symptoms\n- Location: Mapo, Seoul\n- Preferred time: this afternoon around 3:30 pm\n- Doctor preference: female doctor\n- Insurance: no Korean health insurance\n\nStill unresolved:\nNo required questions remain unresolved.",
+        "recommendation": "Based on this simulation, visiting the Fictional Mapo Dermatology Hospital this afternoon at 3:30 pm is a suitable option for your situation.",
+        "reasoning": "This fictional hospital can see you today at your preferred time, offers a female doctor as requested, accepts walk-ins, and is located in your preferred area. The expected cost for self-pay (over 100,000 KRW) matches their estimate but may be higher than public facilities. This is a simulation and you should verify real details with an actual provider before your visit."
+      },
+      "error": null,
+      "inputState": {
+        "id": "61d9289e-4f1b-4597-8fe8-2249209a67dc",
+        "language": "en",
+        "version": 20,
+        "revision": 20,
+        "createdAt": "2026-09-29T05:44:38.671Z",
+        "updatedAt": "2026-09-29T05:54:15.918Z",
+        "messages": [
+          {
+            "id": "61205f04-3d1f-487a-94d6-a6b8cafe5f55",
+            "role": "user",
+            "text": "I want to go to a hospital",
+            "kind": "chat",
+            "createdAt": "2026-09-29T05:33:04.446Z"
+          },
+          {
+            "id": "76136ed8-a308-4cf9-b863-5fbf02b9bea3",
+            "role": "assistant",
+            "text": "Could you please tell me what kind of medical issue or symptom you have? Also, where are you located or where do you prefer to go to the hospital? This will help me find the most appropriate options for you.",
+            "kind": "chat",
+            "createdAt": "2026-09-29T05:33:07.612Z"
+          },
+          {
+            "id": "1496c722-54be-4cee-85d4-be8d4f11cea3",
+            "role": "user",
+            "text": "I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment.",
+            "kind": "chat",
+            "createdAt": "2026-09-29T05:33:25.461Z"
+          },
+          {
+            "id": "c265ec59-61be-4111-941d-70e5f3dbd8b1",
+            "role": "assistant",
+            "text": "Thank you for the detailed information. To assist you appropriately, I will simulate contacting some fictional hospitals in the Mapo area of Seoul that might handle your mild itchy rash visit this afternoon around 3:30 pm. I'll also inquire whether a female doctor is available, the need for an appointment, and the expected self-pay consultation cost given you do not have Korean health insurance. This will help us understand if these hospitals can meet your preferences and requirements. May I proceed with preparing this simulated inquiry call?",
+            "kind": "chat",
+            "createdAt": "2026-09-29T05:33:32.273Z"
+          },
+          {
+            "id": "77d45a0d-ac7d-45d4-8cf3-1beafabc5fa7",
+            "role": "user",
+            "text": "Yes, please prepare the simulated call plan.",
+            "kind": "chat",
+            "createdAt": "2026-09-29T05:33:56.147Z"
+          },
+          {
+            "id": "16343ed4-5b43-457e-a073-c361884ddcf3",
+            "role": "assistant",
+            "text": "I have prepared a plan to simulate inquiry calls to two fictional hospitals in Mapo, Seoul, regarding your mild itchy rash. I will ask about their ability to see you this afternoon around 3:30 pm, female doctor availability, the necessity of an appointment, and the expected self-pay consultation cost without Korean health insurance. Please note these details are unconfirmed and part of a simulation. Would you like me to proceed with this simulated call now?",
+            "kind": "chat",
+            "createdAt": "2026-09-29T05:34:04.217Z"
+          }
+        ],
+        "transcripts": [
+          {
+            "id": "item_ETKp1fmrV1u3u2wYG9Ivz",
+            "role": "assistant",
+            "text": "안녕하세요. 지금 바로 여쭙겠습니다. 오늘 오후 3시 30분경에 가벼운 가려운 발진 환자를 진료할 수 있나요?",
+            "callId": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+            "createdAt": "2026-09-29T05:44:38.673Z"
+          },
+          {
+            "id": "item_ETKpA5S3giA8zXJ8v6asv",
+            "role": "business",
+            "text": "네, 진료가 가능하니까 해당 시간 맞춰서 방문을 해주시면 됩니다.",
+            "callId": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+            "createdAt": "2026-09-29T05:44:38.673Z"
+          },
+          {
+            "id": "item_ETKpJtnEzIvjEblWd8ozk",
+            "role": "assistant",
+            "text": "알겠습니다. 그럼 다음으로 여쭤보겠습니다. 그 시간에 여성 의사 선생님이 진료 가능한가요?",
+            "callId": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+            "createdAt": "2026-09-29T05:44:40.115Z"
+          },
+          {
+            "id": "item_ETKpSjILHe9UZDNk1n1hp",
+            "role": "business",
+            "text": "네, 가능합니다. 여성 의사 선생님이 있습니다.",
+            "callId": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+            "createdAt": "2026-09-29T05:44:40.115Z"
+          },
+          {
+            "id": "item_ETKpaDNrVT0kU7lXZXM1t",
+            "role": "assistant",
+            "text": "네, 확인했습니다. 이제 다음으로 여쭤보겠습니다. 예약이 필요한가요, 아니면 예약 없이 방문할 수 있나요?",
+            "callId": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+            "createdAt": "2026-09-29T05:44:41.134Z"
+          },
+          {
+            "id": "item_ETKpjEtUu3Z1FMKWtS5fF",
+            "role": "business",
+            "text": "예약 없이 방문할 수 있습니다.",
+            "callId": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+            "createdAt": "2026-09-29T05:44:41.134Z"
+          },
+          {
+            "id": "item_ETKprGsOXNLCP2pCYNWoH",
+            "role": "assistant",
+            "text": "알겠습니다. 마지막으로 여쭤보겠습니다. 한국 건강 보험이 없는 환자의 자비 진료 예상 비용은 얼마인가요?",
+            "callId": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+            "createdAt": "2026-09-29T05:44:42.293Z"
+          },
+          {
+            "id": "item_ETKq1VEa44D0InUnjNwU9",
+            "role": "business",
+            "text": "보험이 없는 경우에는 10만 원이 넘어갈 수도 있을 것 같습니다.",
+            "callId": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+            "createdAt": "2026-09-29T05:44:42.293Z"
+          },
+          {
+            "id": "item_ETKqAs01eClc1stSIkjAg",
+            "role": "assistant",
+            "text": "네, 감사합니다. 지금까지 내용을 정리해보겠습니다. 오늘 오후 3시 30분경에 가벼운 가려운 발진 환자 진료가 가능하고, 그 시간에 여성 의사 선생님도 진료 가능하며, 예약 없이 방문이 가능합니다. 그리고 한국 건강 보험이 없는 환자의 자비 진료 예상 비용은 10만 원이 넘어갈 수 있다고 하셨습니다. 이 내용이 맞는지 확인 부탁드립니다.",
+            "callId": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+            "createdAt": "2026-09-29T05:44:43.414Z",
+            "resolvedQuestionSnapshot": [
+              {
+                "id": "q1",
+                "answer": "Yes, you can see a doctor for a mild itchy rash this afternoon around 3:30 pm.",
+                "evidence": [
+                  {
+                    "transcriptId": "item_ETKpA5S3giA8zXJ8v6asv",
+                    "quote": "네, 진료가 가능하니까 해당 시간 맞춰서 방문을 해주시면 됩니다.",
+                    "role": "business"
+                  }
+                ]
+              },
+              {
+                "id": "q2",
+                "answer": "Yes, a female doctor is available at that time.",
+                "evidence": [
+                  {
+                    "transcriptId": "item_ETKpSjILHe9UZDNk1n1hp",
+                    "quote": "네, 가능합니다. 여성 의사 선생님이 있습니다.",
+                    "role": "business"
+                  }
+                ]
+              },
+              {
+                "id": "q3",
+                "answer": "You can visit without an appointment (walk-in is allowed).",
+                "evidence": [
+                  {
+                    "transcriptId": "item_ETKpjEtUu3Z1FMKWtS5fF",
+                    "quote": "예약 없이 방문할 수 있습니다.",
+                    "role": "business"
+                  }
+                ]
+              },
+              {
+                "id": "q4",
+                "answer": "The expected self-pay consultation cost for a patient without Korean health insurance may exceed 100,000 KRW.",
+                "evidence": [
+                  {
+                    "transcriptId": "item_ETKq1VEa44D0InUnjNwU9",
+                    "quote": "보험이 없는 경우에는 10만 원이 넘어갈 수도 있을 것 같습니다.",
+                    "role": "business"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "item_ETKqaoNZ5U3cEjeSNcwyR",
+            "role": "business",
+            "text": "네, 맞습니다.",
+            "callId": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+            "createdAt": "2026-09-29T05:44:43.414Z"
+          }
+        ],
+        "customerInfo": [
+          {
+            "key": "age",
+            "value": "28",
+            "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+          },
+          {
+            "key": "symptom",
+            "value": "mild itchy rash on arm for two days",
+            "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+          },
+          {
+            "key": "urgency",
+            "value": "no urgent symptoms",
+            "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+          },
+          {
+            "key": "location_preference",
+            "value": "Mapo, Seoul",
+            "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+          },
+          {
+            "key": "preferred_time",
+            "value": "this afternoon around 3:30 pm",
+            "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+          },
+          {
+            "key": "gender_preference",
+            "value": "female doctor",
+            "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+          },
+          {
+            "key": "insurance_status",
+            "value": "no Korean health insurance",
+            "sourceMessageId": "1496c722-54be-4cee-85d4-be8d4f11cea3"
+          }
+        ],
+        "institutions": [
+          {
+            "id": "fictional_hospital_mapo_derma_001",
+            "name": "Fictional Mapo Dermatology Hospital",
+            "nameKo": "",
+            "description": "To confirm if they can provide consultation for mild itchy rash this afternoon, female doctor availability, appointment necessity, and self-pay costs without Korean insurance.",
+            "reason": "To confirm if they can provide consultation for mild itchy rash this afternoon, female doctor availability, appointment necessity, and self-pay costs without Korean insurance.",
+            "fictional": true
+          },
+          {
+            "id": "fictional_hospital_mapo_general_002",
+            "name": "Fictional Mapo General Hospital",
+            "nameKo": "",
+            "description": "To inquire about scheduling a visit this afternoon for your rash, female doctor availability, if an appointment is required, and consultation fees for uninsured patients.",
+            "reason": "To inquire about scheduling a visit this afternoon for your rash, female doctor availability, if an appointment is required, and consultation fees for uninsured patients.",
+            "fictional": true
+          }
+        ],
+        "requiredQuestions": [
+          {
+            "id": "q1",
+            "text": "Can you see a patient with a mild itchy rash this afternoon around 3:30 pm?",
+            "korean": "오늘 오후 3시 30분경에 가벼운 가려운 발진 환자를 진료할 수 있나요?",
+            "status": "resolved",
+            "resolutionReason": null,
+            "answer": "Yes, you can see a doctor for a mild itchy rash this afternoon around 3:30 pm.",
+            "evidence": [
+              {
+                "transcriptId": "item_ETKpA5S3giA8zXJ8v6asv",
+                "quote": "네, 진료가 가능하니까 해당 시간 맞춰서 방문을 해주시면 됩니다.",
+                "role": "business"
+              }
+            ]
+          },
+          {
+            "id": "q2",
+            "text": "Is a female doctor available to consult at that time?",
+            "korean": "그 시간에 여성 의사 선생님이 진료 가능한가요?",
+            "status": "resolved",
+            "resolutionReason": null,
+            "answer": "Yes, a female doctor is available at that time.",
+            "evidence": [
+              {
+                "transcriptId": "item_ETKpSjILHe9UZDNk1n1hp",
+                "quote": "네, 가능합니다. 여성 의사 선생님이 있습니다.",
+                "role": "business"
+              }
+            ]
+          },
+          {
+            "id": "q3",
+            "text": "Is it necessary to have an appointment or can I come as a walk-in?",
+            "korean": "예약이 필요한가요, 아니면 예약 없이 방문할 수 있나요?",
+            "status": "resolved",
+            "resolutionReason": null,
+            "answer": "You can visit without an appointment (walk-in is allowed).",
+            "evidence": [
+              {
+                "transcriptId": "item_ETKpjEtUu3Z1FMKWtS5fF",
+                "quote": "예약 없이 방문할 수 있습니다.",
+                "role": "business"
+              }
+            ]
+          },
+          {
+            "id": "q4",
+            "text": "What is the expected self-pay consultation cost for a patient without Korean health insurance?",
+            "korean": "한국 건강 보험이 없는 환자의 자비 진료 예상 비용은 얼마인가요?",
+            "status": "resolved",
+            "resolutionReason": null,
+            "answer": "The expected self-pay consultation cost for a patient without Korean health insurance may exceed 100,000 KRW.",
+            "evidence": [
+              {
+                "transcriptId": "item_ETKq1VEa44D0InUnjNwU9",
+                "quote": "보험이 없는 경우에는 10만 원이 넘어갈 수도 있을 것 같습니다.",
+                "role": "business"
+              }
+            ]
+          }
+        ],
+        "planReady": true,
+        "pendingRelay": null,
+        "decisionPrompt": null,
+        "summary": null,
+        "busy": false,
+        "error": null,
+        "voiceMessage": null,
+        "call": {
+          "id": "9e5afc88-ccad-4091-a4e7-c6a6b9db93ae",
+          "status": "completed",
+          "institutionId": "fictional_hospital_mapo_derma_001",
+          "authorized": true,
+          "accepted": true,
+          "authorizedAt": "2026-09-29T05:44:38.672Z",
+          "acceptedAt": "2026-09-29T05:44:38.672Z",
+          "connected": false,
+          "confirmedKeyDetails": true,
+          "confirmationEvidence": [
+            {
+              "transcriptId": "item_ETKqaoNZ5U3cEjeSNcwyR",
+              "quote": "네, 맞습니다.",
+              "role": "business"
+            }
+          ],
+          "readbackEvidence": [
+            {
+              "questionId": "q1",
+              "transcriptId": "item_ETKqAs01eClc1stSIkjAg",
+              "quote": "오늘 오후 3시 30분경에 가벼운 가려운 발진 환자 진료가 가능하고",
+              "role": "assistant"
+            },
+            {
+              "questionId": "q2",
+              "transcriptId": "item_ETKqAs01eClc1stSIkjAg",
+              "quote": "그 시간에 여성 의사 선생님도 진료 가능하며",
+              "role": "assistant"
+            },
+            {
+              "questionId": "q3",
+              "transcriptId": "item_ETKqAs01eClc1stSIkjAg",
+              "quote": "예약 없이 방문이 가능합니다.",
+              "role": "assistant"
+            },
+            {
+              "questionId": "q4",
+              "transcriptId": "item_ETKqAs01eClc1stSIkjAg",
+              "quote": "한국 건강 보험이 없는 환자의 자비 진료 예상 비용은 10만 원이 넘어갈 수 있다고 하셨습니다.",
+              "role": "assistant"
+            }
+          ],
+          "endedAt": "2026-09-29T05:54:15.918Z",
+          "reason": "Isolated recorded-transcript regression reached confirmed readback. This is not a new live microphone completion.",
+          "success": true
+        }
+      },
+      "apiEvidence": [
+        {
+          "purpose": "grounded_recommendation",
+          "responseId": "resp_0ddfa078d3a4ba90016abb52888c6487d0a28e7b6f585529f2",
+          "model": "gpt-4.1-2025-04-14",
+          "usage": {
+            "input_tokens": 567,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 114,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 681
+          },
+          "at": "2026-09-29T05:54:17.828Z"
+        },
+        {
+          "purpose": "recommendation_validation",
+          "responseId": "resp_096eaa8bbdb21d17016abb528a091887d0a062f2d69bfa2e8e",
+          "model": "gpt-4.1-2025-04-14",
+          "usage": {
+            "input_tokens": 659,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 10,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 669
+          },
+          "at": "2026-09-29T05:54:18.544Z"
+        },
+        {
+          "purpose": "recommendation_validation_result",
+          "attempt": 1,
+          "accepted": true,
+          "structuralIssues": [],
+          "violations": [],
+          "at": "2026-09-29T05:54:18.545Z"
+        }
+      ],
+      "providerResponses": 2
+    }
+  ],
+  "manualAudit": {
+    "status": "partial_fact_sections_pass_recommendation_defects",
+    "providerResponses": 4,
+    "factSections": "Both outputs group already validated English business answers, customer facts and unresolved questions correctly. Neither rendered fact section contains Korean speech quotes or internal transcript/question IDs. Synthetic price stays about35,000 KRW excluding tests/medication; recorded-transcript price stays may exceed100,000 KRW.",
+    "recommendationAudit": {
+      "recorded_actual_transcript_replay": {
+        "status": "failed_qualifier_and_unsupported_comparison",
+        "defects": [
+          "Reasoning changes may exceed100,000 KRW into over100,000 KRW.",
+          "Reasoning adds may be higher than public facilities without supplied business evidence or other verified source."
+        ],
+        "modelReview": "The real validation response incorrectly approved this output."
+      },
+      "synthetic_business_text": {
+        "status": "partial_scope_wording",
+        "defects": [
+          "Reasoning generalizes no Korean health insurance to uninsured.",
+          "Reasoning combines the customer-supplied first-visit status with the quoted price as first-time pricing, without a separate first-visit tariff confirmation."
+        ],
+        "modelReview": "The real validation response approved the output; the fact section itself retains the original insurance scope."
+      }
+    },
+    "evidenceBoundary": "These are summary-only function calls on stored isolated replay states. The recorded actual-transcript room is cloned and marked completed only for this regression. No original native call was changed, and no new microphone, audible speech or Realtime evidence was produced."
+  },
+  "finishedAt": "2026-09-29T05:54:18.643Z"
+}

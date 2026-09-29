@@ -149,6 +149,24 @@ test('an unknown detail pauses and resolves only from the customer response', ()
   assert.equal(requestRelay(room, 'first_visit', 'Again?').value, 'Yes, first visit.');
 });
 
+test('a late relay answer clears the waiting decision and resumes without a separate Continue action', () => {
+  for (const prompt of ['The answer has not arrived. Keep waiting or end?', null]) {
+    const room = active(); requestRelay(room, 'first_visit', 'Is this your first visit?');
+    room.call.status = 'awaiting_decision'; room.decisionPrompt = prompt;
+    assert.throws(() => resolveRelay(room, '  '), { code: 'EMPTY_RELAY_ANSWER' });
+    assert.equal(room.call.status, 'awaiting_decision');
+    assert.ok(room.pendingRelay);
+    const answer = appendMessage(room, 'user', 'Yes, this is my first visit.', 'relay');
+    const result = resolveRelay(room, answer);
+    assert.equal(result.sourceMessageId, answer.id);
+    assert.equal(room.call.status, 'active');
+    assert.equal(room.decisionPrompt, null);
+    assert.equal(room.pendingRelay, null);
+    assert.equal(room.customerInfo.find(item => item.key === 'first_visit').value, answer.text);
+    assert.equal(room.messages.filter(message => message.id === answer.id).length, 1);
+  }
+});
+
 test('missing, fabricated and assistant-only evidence cannot confirm business answers', () => {
   for (const evidence of [[], [{ transcriptId: 'missing', quote: 'We are open.' }], [{ transcriptId: 'assistant', quote: 'We are open.' }], [{ transcriptId: 'business', quote: 'We are open.' }]]) {
     const room = active();

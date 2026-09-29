@@ -1,37 +1,37 @@
 {
   "purpose": "Local review bundle; not submitted. ZIP acceptance by organizers is Unconfirmed.",
   "archive": "yokobu-v2-submission-review.zip",
-  "sha256": "a87c55e1820391faab79c8e50271efcf8efa6635a11848f5aad83528b0c3edef",
+  "sha256": "a9c5af81ad3a9ae6d26e3fd4a068b707b500113dbbd58d0302233b804fea6211",
   "files": [
     {
       "name": "slides.pdf",
-      "bytes": 181390,
-      "sha256": "93cc1abbe02a18984af6600e43f680ffaa2431cc7d2a722a5d56708e46a1037a"
+      "bytes": 170700,
+      "sha256": "f313b35977d64a8486f0496d67f983a8fbbb3a245c443b855af470fca04b18e7"
     },
     {
       "name": "slides.pptx",
-      "bytes": 27335,
-      "sha256": "5c89ee8d34593adc940fa1e887100d685a55adc66e537494ace5206dc1b5cc8e"
+      "bytes": 27699,
+      "sha256": "b9a9b96c0497e06c4d36e56d37d7fc489069d041535ac19ee5c4030334d5d684"
     },
     {
       "name": "solution.md",
-      "bytes": 3965,
-      "sha256": "f1f3ab675deaf51c151c30d76a76b2b58c9abefb1c7916a42d3d6fbe2390ff79"
+      "bytes": 4911,
+      "sha256": "1315175b91a14b0aea360a83b035a4cfc65d3dedc7689ef52e905835e5da889f"
     },
     {
       "name": "codex-use.md",
-      "bytes": 1824,
-      "sha256": "1078b88bd064bd5fad1c0f0cbbd95501f8f720a667757559363308fc60470c45"
+      "bytes": 2262,
+      "sha256": "8a3ab6a97af47fc01a181ed786968f53c139449ce670ed8268eb0a9b17d0f540"
     },
     {
       "name": "verification.md",
-      "bytes": 4686,
-      "sha256": "11b171f5b918e4a5c366fe7e17264af75658defba0b478ec2534bfd5b6566173"
+      "bytes": 4966,
+      "sha256": "07d9cb772a094fabf57ccde24a636002aee711125e032538970f501bfa71b11d"
     },
     {
       "name": "README.md",
-      "bytes": 2193,
-      "sha256": "f247f87e522ae5a4c1f8b82a5e8b47d3038b5aa8ffe92e3e1d347af600cb7fe6"
+      "bytes": 2626,
+      "sha256": "b1f9b350b84377773f751df14b90e251233be00ac68021f3bd7f13a003f6493e"
     }
   ],
   "excluded": [

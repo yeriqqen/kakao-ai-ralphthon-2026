@@ -50,7 +50,7 @@ const base='Team-defined YOKOBU v2 scope, including the later instruction to use
 }
 {
  const s=page(3,'The laptop demonstration');
- text(s,'Planned acceptance run using real OpenAI services',74,143,1100,43,25,C.amber,true);
+ text(s,'Acceptance scenario · latest rehearsal incomplete',74,143,1100,43,25,C.amber,true);
  text(s,'CUSTOMER TAB',74,223,535,42,24,C.muted,true);
  text(s,'“I want to go to a hospital.”',74,277,572,58,34,C.ink,true);
  text(s,'Answer the AI’s questions.\nReview the plan and authorize.\nReply to unknown details in chat.',74,364,565,146,29);
@@ -59,19 +59,18 @@ const base='Team-defined YOKOBU v2 scope, including the later instruction to use
  text(s,'The teammate accepts the call.\nSpeak Korean through the laptop’s\nmicrophone and speaker.',714,387,492,134,28);
  text(s,'The teammate asks a detail the interview has not covered.\nThe AI asks the customer, waits, and relays the answer in Korean.',74,543,1129,78,27,C.muted);
  text(s,'Completion requires every required answer and a confirmed readback.',74,624,1129,29,21,C.muted);
- s.speakerNotes.textFrame.setText(base+'\n0:55–2:00. Open a separate business tab on the same laptop. It must remain inactive before customer authorization. Accept only when incoming. Use fictional customer details and business answers. Choose an unknown customer detail based on the actual interview, rather than assuming prior-visit status is unknown. If API credit is still blocked, show the explicit blocker and do not present synthetic fixtures as a live run.');
+ s.speakerNotes.textFrame.setText(base+'\n0:55–2:00. Open a separate business tab on the same laptop. It must remain inactive before customer authorization. Accept only when incoming. Use fictional customer details and business answers. Choose an unknown customer detail based on the actual interview, rather than assuming prior-visit status is unknown. The third actual rehearsal captured four business answers and a readback, but confirmation reset the answers and the teammate disconnected. Unknown-detail relay and a normal completed call remain unverified. Demonstrate these steps only if a new real run actually reaches them.');
 }
 {
- const s=page(4,'What is verified');
- text(s,'Customer interface and Codex checks',74,163,1120,45,31,C.ink,true);
- text(s,evidence.interface,74,211,1120,54,28);
- text(s,evidence.interfaceBoundary,74,266,1120,43,23,C.muted);
- text(s,'Live OpenAI conversation',74,335,1120,45,31,C.ink,true);
- text(s,evidence.api,74,386,1120,58,28,C.amber,true);
- text(s,'Korean microphone and audible Realtime speech',74,476,1120,45,31,C.ink,true);
- text(s,evidence.voice,74,526,1120,54,28,C.amber,true);
- text(s,'Codex built call-state rules and UI checks. We tested connection loss,\nunknown-detail relay, and incomplete endings against explicit expectations.',74,603,1130,54,22,C.muted);
- s.speakerNotes.textFrame.setText(base+'\n2:00–2:30. Evidence source: artifacts/v2/customer-ui-check.json and the integration checkpoint recorded in verification.md. Browser checks use mocked API routes, not real models or speech. State completion rules are an implementation boundary, not proof of a live successful call.');
+ const s=page(4,'Codex work and verification');
+ text(s,'Codex built the chat, call state, and test harnesses',74,157,1120,45,30,C.ink,true);
+ text(s,evidence.interface,74,205,1120,79,27);
+ text(s,evidence.interfaceBoundary,74,286,1120,33,21,C.muted);
+ text(s,'Actual Korean speech: Partial',74,349,1120,45,31,C.ink,true);
+ text(s,evidence.api,74,399,1120,80,27);
+ text(s,'Still unverified',74,526,1120,43,31,C.amber,true);
+ text(s,evidence.voice,74,576,1130,79,26,C.amber);
+ s.speakerNotes.textFrame.setText(base+'\n2:00–2:30. The current code checkpoint has 57 local tests, 17 local HTTP checks, 20 mocked customer browser checks, and 11 mocked business browser checks. These are different evidence classes. The third real laptop microphone run captured four actual Korean business answers and an assistant readback, including qualified cost uncertainty. Business confirmation incorrectly reset the resolved state; the human disconnected. Korean audibility was human-confirmed in the first attempt only. Unknown-detail relay was not exercised in the third attempt. Later readback fixes require another live rehearsal. Real Russian and Chinese interviews were exercised, but Korean question fidelity and unsupported first-visit wording remain limited. Sources: artifacts/v2/live-native-rehearsal-third-attempt.json; artifacts/v2/live-native-third-attempt-audit.json; artifacts/v2/customer-ui-check.json; docs/v2-verification.md. These local evidence files are not raw material for the official upload.');
 }
 {
  const s=page(5,'Value hypothesis and scope');

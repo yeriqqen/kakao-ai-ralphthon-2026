@@ -46,7 +46,7 @@ const pendingTranscripts = new Map();
 const terminal = new Set(['completed', 'interrupted', 'failed']);
 const statusText = {
   idle: ['Waiting for customer · 고객 요청 대기', 'No incoming call yet', 'The customer must approve the proposed simulated call first. Your microphone is off.'],
-  pending: ['Incoming simulated call · 수신 대기', 'The customer has authorized a call', 'Accept when you are ready to play the fictional business. This starts microphone access and connects to OpenAI.'],
+  pending: ['Incoming simulated call · 수신 대기', 'The customer has authorized a call', 'Accept when you are ready. For the relay rehearsal, ask one unknown customer detail after the assistant’s opening question, before answering the service questions.'],
   connecting: ['Connecting · 연결 중', 'Connecting to OpenAI Realtime', 'Allow the microphone when your browser asks. Connection has not been verified yet.'],
   active: ['Live simulated call · 가상 통화 중', 'You can speak in Korean', 'Answer naturally as the fictional business. Watch the generated questions and tell the assistant when a detail is unclear.'],
   waiting_customer: ['Waiting for customer · 고객 답변 대기', 'The customer is being asked in chat', 'Microphone input is paused. The assistant will relay the customer’s answer in Korean.'],

@@ -43,17 +43,17 @@
     {
       "path": "artifacts/v2/business-ui-check.json",
       "bytes": 4003,
-      "sha256": "d8ffb9855414e59c45a09092e221216220a8be6a8acb7e60200471d477a6db47"
+      "sha256": "0d1a263e58f0eb3d88d9d72e1f1310a40f45eaa63983e210b5efbee7ffb5229a"
     },
     {
       "path": "artifacts/v2/customer-ui-check.json",
       "bytes": 2741,
-      "sha256": "882385a02b1079407f7d03f98a9a93040486f69b910e2fa36e7a063c91ac4f9b"
+      "sha256": "d2edf2bd1fd086f9c5d05bbbc860f9f5da9f1157ac5bc292113e33e25fb3525f"
     },
     {
       "path": "artifacts/v2/http-check.json",
       "bytes": 1603,
-      "sha256": "d922a2c12f032e6dacaab07c6feee5261c88bfb92d6de3fdccbc14ae9dd35a07"
+      "sha256": "60df81171e5fb70d439c1d56cb93f5091b2d9cb02917369db6a4c5a36af13992"
     },
     {
       "path": "artifacts/v2/live-api-check.json",
@@ -102,18 +102,23 @@
     },
     {
       "path": "docs/v2-final-report.md",
-      "bytes": 10428,
-      "sha256": "d79c0e0a32ad60990595eebc6f1ad9ee26b23e09e131bce67f1c649330407924"
+      "bytes": 12352,
+      "sha256": "bd84ca6b7d345ab7776bc2f40893e17dd6e0ab82db90f61bc46ddfe42094067c"
+    },
+    {
+      "path": "docs/v2-handoff.md",
+      "bytes": 2186,
+      "sha256": "9a42ed3013c78258901c814c69fdc513f2183eba1661d6c74d7d250123444778"
     },
     {
       "path": "docs/v2-official-and-plan.md",
-      "bytes": 16997,
-      "sha256": "a9038bf5fad17718647f7cd7472285f336c1a3298f4a51d0771ea2c15d8c8ae6"
+      "bytes": 18463,
+      "sha256": "0d96e7896b3cce06a0b3d9ed3673d15459d9d47f05cd29b7acbd1be464b44b23"
     },
     {
       "path": "docs/v2-verification.md",
-      "bytes": 21845,
-      "sha256": "59a2ae367d1cbb8ae0037028a257e8ae08d0366ed371733bf1b416d103d8f4a7"
+      "bytes": 29909,
+      "sha256": "d9ffc2ad9249e9d30a0983860a3822e988d18a9fc8ae44acb8499c1085cc8776"
     },
     {
       "path": "docs/verification.md",
@@ -122,8 +127,8 @@
     },
     {
       "path": "lib/v2-ai.mjs",
-      "bytes": 29283,
-      "sha256": "4786ade2e8739b9d5e5a053ca05ea8d6b7f1e8b1e14e11ec2e420efc7ce87595"
+      "bytes": 31519,
+      "sha256": "01348fc4dda4d54f150048d0bbf00254466e0ebe252ecd952a4d193e64b33cbd"
     },
     {
       "path": "lib/v2-config.mjs",
@@ -132,13 +137,18 @@
     },
     {
       "path": "lib/v2-plan-guard.mjs",
-      "bytes": 3244,
-      "sha256": "047760fd959609295eea08a2420692761efe649629da1bae4c177bb43bfcb2b8"
+      "bytes": 3991,
+      "sha256": "d3cb7a9c84ac3f49df5ee82cf913d8a9d8ae705a165ecd5fac6356ca6c57ead2"
     },
     {
       "path": "lib/v2-state.mjs",
-      "bytes": 14984,
-      "sha256": "02c3ba3c50ba6b555adfa223cb84b7b02d0b0b2239636c12dd20c851a64cb92a"
+      "bytes": 17890,
+      "sha256": "5069af13d83734176f7198bca1d1276568eb3f531a6dd618d789bcf274ac199a"
+    },
+    {
+      "path": "lib/v2-summary.mjs",
+      "bytes": 11065,
+      "sha256": "2c72af63219e7fd029e6582278e0bd5a6d187ddc10a5140972de5c4e43d8d5f1"
     },
     {
       "path": "package.json",
@@ -172,18 +182,18 @@
     },
     {
       "path": "public/v2/business.html",
-      "bytes": 4851,
-      "sha256": "7cea87efa16485d960b8488cfb641805dd466c1c777a9ba3485825a95873f249"
+      "bytes": 4953,
+      "sha256": "2a438514d232afca6a17032db3498f1e5c23cc5f4175952b1994b7a46fae4865"
     },
     {
       "path": "public/v2/business.js",
-      "bytes": 29098,
-      "sha256": "98bad25fc56661cb17b1e190aafd79e8a5b98380524f13caf51e0f66dd1f392a"
+      "bytes": 29231,
+      "sha256": "6a19f282dc540d7890b4d5a6aa44093c4333350e20159ac0ae94d0a7be28b04d"
     },
     {
       "path": "public/v2/customer.js",
-      "bytes": 18771,
-      "sha256": "2b83349b688c75fc2f7facea99fbd97dd69be6ab5d324a45e1615ff50fae2453"
+      "bytes": 19112,
+      "sha256": "b77b0ba975ac038f0b71fc9a31ecb6edc0a306e6989cf3831d65c6bc868e1597"
     },
     {
       "path": "public/v2/i18n.js",
@@ -267,18 +277,18 @@
     },
     {
       "path": "tests/v2-plan-guard.test.js",
-      "bytes": 9865,
-      "sha256": "8998e12c414ce34fb58518b8a729d1495d68de67b27b261a95b913799283ad24"
+      "bytes": 16866,
+      "sha256": "659e5c7b3d34cf7b4f308cfe7144a952e6d923defcac257968166660623a12f9"
     },
     {
       "path": "tests/v2-state.test.js",
-      "bytes": 16812,
-      "sha256": "d7579b3ef0faf823adf76901fc23d20a6c2b9f73b4692abefc25f19c23a6285b"
+      "bytes": 24103,
+      "sha256": "895aa73a88ad8c0d63c9e99ba71897bb2e8538f8a52e09a84a18cb1d1a3dc3a1"
     }
   ],
   "archive": {
     "path": "artifacts/v2/yokobu-v2-runnable.zip",
-    "bytes": 172932,
-    "sha256": "435bc3f5eb1c0395da5ed0a8d00ef11c456c9f7f543fb9e1d36a1eeaca74cc65"
+    "bytes": 186655,
+    "sha256": "7fe95ca5cb9ed5c2589439cb435821568ddea35128ecf330a16d566afe7385cb"
   }
 }

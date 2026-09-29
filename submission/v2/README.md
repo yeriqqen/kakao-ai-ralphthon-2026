@@ -10,7 +10,9 @@ This directory preserves v2 separately from the earlier v1 submission.
 - `slides.source.mjs` and `slides.evidence.json`: editable presentation source and status wording.
 - `slides.export-pdf.mjs`: PDF conversion through the bundled LibreOffice runtime.
 
-The PDF uses selectable English text. All slides have simulation labels. A real English API interview turn succeeded at 14:06:39 KST on 2026-09-29. The editable evidence wording reflects that result; the PDF/PPTX from the earlier checkpoint still show the historical credit blocker and await the final rehearsal update before regeneration. Do not upload those earlier slide exports as the final current-status version. Live Korean microphone/speaker operation remains Unverified. Value remains Unverified until actual target-user feedback exists.
+The five-page PDF and editable PPTX reflect the current checkpoint after the third actual laptop rehearsal. The deck uses selectable English text and labels every page as a simulation. Four actual Korean business answers and a readback were captured, but confirmation reset the answers and the human disconnected. Actual voice is **Partial**; live unknown-detail relay and normal completion remain **Unverified**. Russian/Chinese checks exposed fidelity limits. User value remains **Unverified**.
+
+The local checks and the real rehearsal are separate evidence classes. Later code corrections are not presented as a successful new microphone run. The verification document identifies evidence paths; raw prompts and session logs are excluded from these submission materials.
 
 ## Rebuilding the deck
 

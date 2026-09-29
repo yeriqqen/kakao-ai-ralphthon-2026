@@ -3,15 +3,24 @@
 import { spawn } from 'node:child_process';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 const port = Number(process.env.TEST_PORT || 4217);
 const base = `http://localhost:${port}`;
+const root = fileURLToPath(new URL('../', import.meta.url));
+const output = path.resolve(root, process.env.V2_ARTIFACT_DIR || 'artifacts/v2');
+// A child-only dummy key keeps checks independent of local configuration.
+// Synthetic plan responses enable the diagnostic gates; fetch is replaced
+// completely so no HTTP test can contact an upstream service.
 const setupBootstrap = `
 globalThis.fetch = async (url, options) => {
   if (String(url) !== 'https://api.openai.com/v1/responses') throw new Error('Upstream network is blocked in this HTTP test.');
   const body = JSON.parse(options.body);
   const purpose = body.text.format.name;
   let output;
-  if (purpose === 'customer_interview') output = {
+  if (purpose === 'customer_interview' && JSON.parse(body.input).messages.at(-1).text === 'discovery-http') output = { reply:'Searching',customerInfo:[],institutions:[],requiredQuestions:[],readyToCall:false,discoveryQuery:'general clinics Hongdae Seoul' };
+  else if (purpose === 'place_discovery') output = {message:'Choose a place',places:[{name:'Sourced test clinic',address:'Test sourced address',url:'https://example.com/clinic',phone:'',detail:'Synthetic sourced listing'}]};
+  else if (purpose === 'customer_interview') output = {
     reply: 'A fictional test plan is ready; stock is unknown. Shall we simulate the call?',
     customerInfo: [], institutions: [{ id: 'mock-shop', name: 'Fictional HTTP Test Shop', reason: 'To ask whether the requested notebook is in stock.' }],
     requiredQuestions: [{ id: 'stock', text: 'Is the blue notebook in stock?', korean: '파란색 공책 재고가 있나요?' }], readyToCall: true
@@ -19,12 +28,28 @@ globalThis.fetch = async (url, options) => {
   else if (purpose === 'call_plan_validation') {
     const message = JSON.parse(body.input).customerMessages.at(-1);
     output = { approved: true, violations: [], customerFactEvidence: [], constraintCoverage: [{ constraint: 'blue notebook stock', sourceMessageId: message.id, questionIds: ['stock'] }], questionMeaningChecks: [{ questionId: 'stock', faithful: true, explanation: 'Synthetic setup fixture only.' }] };
-  } else throw new Error('Unexpected AI purpose in HTTP-only test: ' + purpose);
-  return new Response(JSON.stringify({ id: 'synthetic-http-setup-' + purpose, model: 'mock-no-openai', status: 'completed', output: [{ content: [{ type: 'output_text', text: JSON.stringify(output) }] }] }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+  } else if (purpose === 'business_evidence_review') {
+    const input = JSON.parse(body.input), quote = input.newestBusinessTranscript.text;
+    output = { utteranceKind: 'unclear', answers: [], confirmedKeyDetails: false, confirmationQuote: '', readbackEvidence: [], unavailable: false, explanation: '', customerQuestion: { asked: true, key: 'alternative_color', questionKorean: '다른 색상도 괜찮으세요?', evidenceQuote: quote === '인사만 합니다.' ? 'fabricated quotation' : quote } };
+    if (quote === '네, 재고가 있습니다.') {
+      output.customerQuestion.asked = false; output.utteranceKind = 'substantive_answer';
+      output.answers = [{ questionId: 'stock', status: 'resolved', answer: 'The black notebook is in stock.', evidenceQuote: quote, reason: '', changesPriorAnswer: false }];
+    } else if (quote === '네, 맞습니다.') {
+      const readback = input.recentConversation.filter(item => item.role === 'assistant').at(-1);
+      output.customerQuestion.asked = false; output.utteranceKind = 'readback_confirmation';
+      output.confirmedKeyDetails = true; output.confirmationQuote = quote;
+      output.readbackEvidence = [{ questionId: 'stock', transcriptId: readback.id, quote: readback.text }];
+    }
+  } else if (purpose === 'customer_relay') output = { known: false, key: 'alternative_color', question: 'Would another color be okay?', answerKorean: '' };
+  else if (purpose === 'relay_answer') output = { answerKorean: '검은색도 괜찮습니다.', acknowledgement: 'I will relay that black is okay.' };
+  else if (purpose === 'relay_plan_update') output = { updates: [{ questionId: 'stock', text: 'Is a black notebook in stock?', korean: '검은색 공책 재고가 있나요?', retainedAnswer: { applicable: false, answer: '', transcriptId: '', quote: '' } }] };
+  else if (purpose === 'grounded_recommendation') output = { action: 'review_recorded_answers', reasonQuestionIds: ['stock'], clarificationQuestionIds: [] };
+  else throw new Error('Unexpected AI purpose in HTTP-only test: ' + purpose);
+  return new Response(JSON.stringify({ id: 'synthetic-http-setup-' + purpose, model: 'mock-no-openai', status: 'completed', output: [...(purpose === 'place_discovery' ? [{type:'web_search_call',status:'completed',action:{sources:[{url:'https://example.com/clinic'}]}}] : []), { content: [{ type: 'output_text', text: JSON.stringify(output) }] }] }), { status: 200, headers: { 'Content-Type': 'application/json' } });
 };
 await import(${JSON.stringify(new URL('../server-v2.mjs', import.meta.url).href)});
 `;
-const child = spawn(process.execPath, ['--input-type=module', '--eval', setupBootstrap], { cwd: new URL('../', import.meta.url), env: { ...process.env, PORT: String(port), HOST: '127.0.0.1', OPENAI_API_KEY: 'synthetic-http-test-key-not-a-credential' }, stdio: ['ignore', 'pipe', 'pipe'] });
+const child = spawn(process.execPath, ['--input-type=module', '--eval', setupBootstrap], { cwd: root, env: { ...process.env, PORT: String(port), HOST: '127.0.0.1', OPENAI_API_KEY: 'synthetic-http-test-key-not-a-credential' }, stdio: ['ignore', 'pipe', 'pipe'] });
 const checks = [];
 let fixtureRoomId = null;
 try {
@@ -34,12 +59,22 @@ try {
     child.once('exit', () => { clearTimeout(timer); reject(new Error('Server exited before startup')); });
   });
   const check = async (name, action) => { await action(); checks.push({ name, passed: true }); };
-  for (const route of ['/', '/v2/', '/business', '/v2/customer.js', '/v2/business.js']) await check(`${route} is served`, async () => { assert.equal((await fetch(base + route)).status, 200); });
+  for (const route of ['/', '/v2/', '/business', '/debug', '/v2/debug.js', '/v2/debug.css', '/v2/customer.js', '/v2/business.js']) await check(`${route} is served`, async () => { assert.equal((await fetch(base + route)).status, 200); });
   const config = await fetch(base + '/api/config').then(response => response.json());
   await check('configuration exposes only public fields', () => { assert.deepEqual(Object.keys(config).sort(), ['chatModel', 'configured', 'publicBaseUrl', 'realtimeModel', 'simulation'].sort()); });
   const create = (data, headers = {}) => fetch(base + '/api/rooms', { method: 'POST', headers: { 'Content-Type': 'application/json', ...headers }, body: JSON.stringify(data) });
   await check('unsupported language is rejected', async () => assert.equal((await create({ language: 'xx' })).status, 400));
   await check('cross-origin mutation is rejected', async () => assert.equal((await create({ language: 'en' }, { Origin: 'https://example.com' })).status, 403));
+  await check('real-discovery route preserves selection, customer role and call authorization gates', async () => {
+    const room = await create({language:'en'}).then(r=>r.json());
+    const post = (op, token, data) => fetch(base+'/api/rooms/'+room.id+'/'+op,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify(data)});
+    const found = await post('chat',room.customerToken,{message:'discovery-http'}).then(r=>r.json());
+    assert.equal(found.places.length,1); assert.equal(found.planReady,false);
+    assert.equal((await post('select-place',room.businessToken,{placeId:found.places[0].id})).status,403);
+    assert.equal((await post('select-place',room.customerToken,{placeId:'invented'})).status,400);
+    const selected = await post('select-place',room.customerToken,{placeId:found.places[0].id}).then(r=>r.json());
+    assert.equal(selected.planReady,true); assert.equal(selected.call.authorized,false); assert.equal(selected.institutions[0].id,found.places[0].id); assert.equal(selected.requiredQuestions[0].status,'unresolved');
+  });
   const created = await create({ language: 'en' }).then(response => response.json());
   fixtureRoomId = created.id;
   const request = (suffix, token, payload) => fetch(base + '/api/rooms/' + created.id + suffix, { method: payload === undefined ? 'GET' : 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }, body: payload === undefined ? undefined : JSON.stringify(payload) });
@@ -90,9 +125,86 @@ try {
     assert.equal(events[0].responseId, 'diag-10'); assert.equal(events.at(-1).responseId, 'diag-209');
     assert.deepEqual(events.map(event => event.responseId), Array.from({ length: 200 }, (_, index) => `diag-${index + 10}`));
   });
-  const result = { checkedAt: new Date().toISOString(), type: 'real_local_http_with_mocked_plan_setup', realHTTP: true, realOpenAI: false, realMicrophone: false, syntheticHttpTest: true, provenance: 'Real isolated localhost HTTP routes. Plan generation and validation are synthetic setup fixtures; all upstream network is blocked. No actual business or audio evidence.', fixtureRoomId, passed: checks.length, total: checks.length, checks };
-  await mkdir(new URL('../artifacts/v2/', import.meta.url), { recursive: true });
-  await writeFile(new URL('../artifacts/v2/http-check.json', import.meta.url), JSON.stringify(result, null, 2) + '\n');
+  await check('reviewed business question opens the relay without a Realtime tool call', async () => {
+    assert.equal((await request('/accept', created.businessToken, {})).status, 200);
+    assert.equal((await request('/connection', created.businessToken, { connected: true })).status, 200);
+    const response = await request('/transcript', created.businessToken, { id: 'synthetic-color-question', role: 'business', text: '다른 색상도 괜찮으세요?' });
+    assert.equal(response.status, 200);
+    const room = await response.json();
+    assert.equal(room.call.status, 'waiting_customer');
+    assert.equal(room.pendingRelay.question, 'Would another color be okay?');
+    assert.equal(room.messages.filter(m => m.kind === 'relay').length, 1);
+    assert.equal(room.requiredQuestions[0].status, 'unresolved');
+  });
+  await check('a later voice tool reuses the pending relay without another question', async () => {
+    const result = await request('/tool', created.businessToken, { callId: 'synthetic-duplicate-question', name: 'request_customer_detail', arguments: { key: 'alternative_color', questionKorean: '다른 색상도 괜찮으세요?' } }).then(r => r.json());
+    assert.equal(result.pending, true);
+    const room = await request('', created.customerToken).then(r => r.json());
+    assert.equal(room.messages.filter(m => m.kind === 'relay').length, 1);
+  });
+  await check('customer text resolves the detected relay and returns a Korean voice message', async () => {
+    const response = await request('/chat', created.customerToken, { message: 'Black is okay.' });
+    assert.equal(response.status, 200);
+    const room = await response.json();
+    assert.equal(room.call.status, 'active'); assert.equal(room.pendingRelay, null);
+    assert.match(room.voiceMessage.text, /검은색도 괜찮습니다/);
+    assert.equal(room.requiredQuestions[0].text, 'Is a black notebook in stock?');
+    assert.equal(room.requiredQuestions[0].status, 'unresolved');
+    assert.equal(room.questionHistory[0].text, 'Is the blue notebook in stock?');
+    assert.match(room.voiceMessage.text, /Is a black notebook in stock/);
+  });
+  await check('an invented question quote cannot trigger a relay', async () => {
+    const response = await request('/transcript', created.businessToken, { id: 'synthetic-invalid-question', role: 'business', text: '인사만 합니다.' });
+    assert.equal(response.status, 200);
+    const room = await response.json(); assert.equal(room.pendingRelay, null); assert.equal(room.call.status, 'active');
+  });
+  await check('resolved answer alone cannot bypass readback confirmation through HTTP', async () => {
+    const response = await request('/transcript', created.businessToken, { id: 'synthetic-stock-answer', role: 'business', text: '네, 재고가 있습니다.' });
+    assert.equal(response.status, 200);
+    const room = await response.json(); assert.equal(room.requiredQuestions[0].status, 'resolved');
+    const result = await request('/tool', created.businessToken, { callId: 'synthetic-early-finish', name: 'complete_call', arguments: {} }).then(r => r.json());
+    assert.equal(result.allowComplete, false);
+  });
+  await check('HTTP review retains the saved transcript metadata and accepts a valid readback', async () => {
+    assert.equal((await request('/transcript', created.businessToken, { id: 'synthetic-readback', role: 'assistant', text: '검은색 공책 재고가 있다는 말씀이시죠?' })).status, 200);
+    const response = await request('/transcript', created.businessToken, { id: 'synthetic-confirmation', role: 'business', text: '네, 맞습니다.' });
+    assert.equal(response.status, 200);
+    const room = await response.json();
+    assert.equal(room.call.confirmedKeyDetails, true);
+    assert.equal(room.call.readbackEvidence[0].transcriptId, 'synthetic-readback');
+    assert.equal(room.call.confirmationEvidence[0].transcriptId, 'synthetic-confirmation');
+  });
+  await check('confirmed HTTP flow completes and generates its grounded summary', async () => {
+    const result = await request('/tool', created.businessToken, { callId: 'synthetic-valid-finish', name: 'complete_call', arguments: {} }).then(r => r.json());
+    assert.equal(result.allowComplete, true);
+    let room;
+    for (let i = 0; i < 20; i++) { room = await request('', created.customerToken).then(r => r.json()); if (room.summary) break; await new Promise(resolve => setTimeout(resolve, 20)); }
+    assert.equal(room.call.status, 'completed'); assert.equal(room.call.success, true);
+    assert.match(room.summary.text, /The black notebook is in stock/);
+    assert.match(room.summary.text, /Simulation completed/);
+    assert.match(room.summary.recommendation, /recorded answers/);
+  });
+  await check('debug endpoint is authenticated and does not expose room credentials', async () => {
+    assert.equal((await request('/debug', 'wrong-token')).status, 403);
+    const debug = await request('/debug', created.businessToken).then(r => r.json());
+    assert(Array.isArray(debug.transcripts)); assert(Array.isArray(debug.voiceDiagnostics));
+    assert(!JSON.stringify(debug).includes(created.businessToken));
+  });
+  await check('business decline ends only a pending call without acceptance or completion', async () => {
+    const next = await create({ language: 'en' }).then(r => r.json());
+    const call = (operation, token, body) => fetch(base + '/api/rooms/' + next.id + operation, { method: 'POST', headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    assert.equal((await call('/decline', next.businessToken, {})).status, 409);
+    await call('/chat', next.customerToken, { message: 'Please check whether the blue notebook is in stock.' });
+    await call('/authorize', next.customerToken, { institutionId: 'mock-shop' });
+    assert.equal((await call('/decline', next.customerToken, {})).status, 403);
+    const response = await call('/decline', next.businessToken, {}); assert.equal(response.status, 200);
+    const room = await response.json(); assert.equal(room.call.reason, 'declined'); assert.equal(room.call.accepted, false); assert.equal(room.call.connected, false); assert.equal(room.call.success, false);
+    assert(room.requiredQuestions.every(q => q.status === 'unresolved'));
+    assert.equal((await call('/accept', next.businessToken, {})).status, 409);
+  });
+  const result = { checkedAt: new Date().toISOString(), type: 'real_local_http_with_mocked_plan_setup', realHTTP: true, realOpenAI: false, realMicrophone: false, syntheticHttpTest: true, childConfiguration: 'Dummy key; child fetch replaced with synthetic setup responses and upstream network blocked', provenance: 'Real isolated localhost HTTP routes. Plan generation and validation are synthetic setup fixtures; all upstream network is blocked. No actual business or audio evidence.', fixtureRoomId, passed: checks.length, total: checks.length, checks };
+  await mkdir(output, { recursive: true });
+  await writeFile(path.join(output, 'http-check.json'), JSON.stringify(result, null, 2) + '\n');
   console.log(`V2 real local HTTP: ${checks.length}/${checks.length} passed; no OpenAI or audio used.`);
 } finally {
   child.kill('SIGTERM');

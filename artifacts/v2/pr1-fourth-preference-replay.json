@@ -1,0 +1,391 @@
+{
+  "provenance": "Bounded real OpenAI Responses replay of actual fourth PR microphone transcripts and actual customer relay reply. Reconstructed active state; no new microphone or audio. Tests the new evidence and preference-refinement repair.",
+  "checks": [
+    {
+      "name": "Offer without explicit question triggers customer clarification",
+      "passed": true
+    },
+    {
+      "name": "Stock-only utterance does not infer price or pickup",
+      "passed": true
+    },
+    {
+      "name": "Existing stock answer for other colors retained after customer accepts them",
+      "passed": true
+    },
+    {
+      "name": "All current questions include alternative target without losing waterproof/20L",
+      "passed": true
+    },
+    {
+      "name": "No inferred price/pickup or premature completion after refinement",
+      "passed": true
+    },
+    {
+      "name": "Actual all-color price retained, pickup still unresolved",
+      "passed": true
+    }
+  ],
+  "refinement": {
+    "updates": [
+      {
+        "questionId": "stock",
+        "text": "Is a waterproof daypack of about 20 liters in a color other than navy in stock?",
+        "korean": "남색이 아닌 색상의 방수 데이팩 약 20리터 제품이 재고로 있나요?",
+        "retainedAnswer": {
+          "applicable": true,
+          "answer": "The navy version is not in stock, but other colors are available.",
+          "transcriptId": "item_ETLwVcHbz9ixTmx0eZKHh",
+          "quote": "어 남색 방수 데이팩은 없고 다른 색상은 있습니다."
+        }
+      },
+      {
+        "questionId": "price",
+        "text": "What does a waterproof daypack of about 20 liters in a color other than navy cost?",
+        "korean": "남색이 아닌 색상의 방수 데이팩 약 20리터 제품의 가격은 얼마인가요?",
+        "retainedAnswer": {
+          "applicable": false,
+          "answer": "",
+          "transcriptId": "",
+          "quote": ""
+        }
+      },
+      {
+        "questionId": "pickup_time",
+        "text": "What is the latest pickup time this evening for a waterproof daypack of about 20 liters in a color other than navy?",
+        "korean": "남색이 아닌 색상의 방수 데이팩 약 20리터 제품을 오늘 저녁에 픽업할 수 있는 가장 늦은 시간은 언제인가요?",
+        "retainedAnswer": {
+          "applicable": false,
+          "answer": "",
+          "transcriptId": "",
+          "quote": ""
+        }
+      }
+    ]
+  },
+  "reviews": [
+    {
+      "customerQuestion": {
+        "asked": true,
+        "key": "other_color_acceptance",
+        "questionKorean": "다른 색상은 있습니다.",
+        "evidenceQuote": "다른 색상은 있습니다."
+      },
+      "utteranceKind": "substantive_answer",
+      "answers": [
+        {
+          "questionId": "stock",
+          "answerBasis": "explicit_answer",
+          "status": "resolved",
+          "answer": "The navy waterproof daypack of about 20 liters is not in stock.",
+          "evidenceQuote": "어 남색 방수 데이팩은 없고",
+          "reason": "The business explicitly stated that the navy color is not available.",
+          "changesPriorAnswer": false
+        }
+      ],
+      "confirmedKeyDetails": false,
+      "confirmationQuote": "",
+      "readbackEvidence": [],
+      "unavailable": false,
+      "explanation": ""
+    },
+    {
+      "customerQuestion": {
+        "asked": false,
+        "key": "",
+        "questionKorean": "",
+        "evidenceQuote": ""
+      },
+      "utteranceKind": "substantive_answer",
+      "answers": [
+        {
+          "questionId": "price",
+          "answerBasis": "explicit_answer",
+          "status": "resolved",
+          "answer": "All waterproof daypacks, regardless of color, cost 10,000 won.",
+          "evidenceQuote": "어 색상 상관없이 방수 대입팩은 모두 만 원입니다.",
+          "reason": "The business explicitly stated that all waterproof daypacks, regardless of color, are 10,000 won.",
+          "changesPriorAnswer": false
+        }
+      ],
+      "confirmedKeyDetails": false,
+      "confirmationQuote": "",
+      "readbackEvidence": [],
+      "unavailable": false,
+      "explanation": ""
+    }
+  ],
+  "room": {
+    "id": "dcdf2bbf-c3b0-4ee7-bf71-048e7b0b14f8",
+    "language": "en",
+    "version": 14,
+    "revision": 14,
+    "createdAt": "2026-09-29T07:00:07.901Z",
+    "updatedAt": "2026-09-29T07:00:13.585Z",
+    "messages": [
+      {
+        "id": "2c04a6d2-7700-425f-a227-a67c6a981273",
+        "role": "user",
+        "text": "For this fictional demo, please ask a bag shop in Mapo, Seoul whether a navy waterproof daypack of about 20 liters is in stock, what it costs, and the latest pickup time this evening. Prepare the simulated call plan now. Do not order or reserve anything.",
+        "kind": "chat",
+        "createdAt": "2026-09-29T06:46:50.406Z"
+      },
+      {
+        "id": "5e0cf2d2-1d57-445e-8705-ad55557dc204",
+        "role": "assistant",
+        "text": "The fictional call simulation plan is ready. The shop’s business details and answers are unconfirmed. Would you like me to run the simulation? No order or reservation will be made.",
+        "kind": "chat",
+        "createdAt": "2026-09-29T06:47:00.892Z"
+      },
+      {
+        "id": "73625918-646f-4b8e-8ad9-ecdb19aa40b4",
+        "role": "user",
+        "text": "yes, it is okay",
+        "kind": "relay",
+        "createdAt": "2026-09-29T07:00:12.190Z"
+      }
+    ],
+    "transcripts": [
+      {
+        "id": "item_ETLwM4DTZBR0wVOMWrJCW",
+        "role": "assistant",
+        "text": "안녕하세요, 모의 통화인 점 미리 알려드립니다. 지금 남색 방수 데이팩 약 20리터 제품이 재고로 있나요?",
+        "callId": "21052344-1af0-42d2-bf59-30a1da2c56aa",
+        "createdAt": "2026-09-29T07:00:07.902Z"
+      },
+      {
+        "id": "item_ETLwVcHbz9ixTmx0eZKHh",
+        "role": "business",
+        "text": "어 남색 방수 데이팩은 없고 다른 색상은 있습니다.",
+        "callId": "21052344-1af0-42d2-bf59-30a1da2c56aa",
+        "createdAt": "2026-09-29T07:00:07.902Z"
+      },
+      {
+        "id": "item_ETLxAxgjbrwAVx1F9I3Zn",
+        "role": "business",
+        "text": "남색은 없고 다른 색상은 괜찮으세요?",
+        "callId": "21052344-1af0-42d2-bf59-30a1da2c56aa",
+        "createdAt": "2026-09-29T07:00:09.754Z"
+      },
+      {
+        "id": "item_ETLy4TcwEPZwroxL1YAvY",
+        "role": "business",
+        "text": "어 색상 상관없이 방수 대입팩은 모두 만 원입니다.",
+        "callId": "21052344-1af0-42d2-bf59-30a1da2c56aa",
+        "createdAt": "2026-09-29T07:00:12.191Z"
+      }
+    ],
+    "customerInfo": [
+      {
+        "key": "location",
+        "value": "Mapo, Seoul",
+        "sourceMessageId": "2c04a6d2-7700-425f-a227-a67c6a981273",
+        "label": "Location"
+      },
+      {
+        "key": "item",
+        "value": "A navy waterproof daypack of about 20 liters",
+        "sourceMessageId": "2c04a6d2-7700-425f-a227-a67c6a981273",
+        "label": "Item"
+      },
+      {
+        "key": "price_question",
+        "value": "Wants to ask what the daypack costs",
+        "sourceMessageId": "2c04a6d2-7700-425f-a227-a67c6a981273",
+        "label": "Price inquiry"
+      },
+      {
+        "key": "pickup_time",
+        "value": "Wants to ask the latest pickup time this evening",
+        "sourceMessageId": "2c04a6d2-7700-425f-a227-a67c6a981273",
+        "label": "Pickup timing"
+      },
+      {
+        "key": "purchase_action",
+        "value": "Does not want to order or reserve anything",
+        "sourceMessageId": "2c04a6d2-7700-425f-a227-a67c6a981273",
+        "label": "Purchase preference"
+      },
+      {
+        "key": "other_color_acceptability",
+        "label": "Would you be okay with a different color? The business needs to know whether you would accept an alternative if the navy daypack is unavailable.",
+        "value": "yes, it is okay",
+        "sourceMessageId": "73625918-646f-4b8e-8ad9-ecdb19aa40b4"
+      }
+    ],
+    "institutions": [
+      {
+        "id": "fictional_mapo_bag_shop",
+        "name": "Fictional Mapo Bag Shop",
+        "nameKo": "",
+        "description": "To ask whether a navy waterproof daypack of about 20 liters is in stock, what it costs, and the latest pickup time this evening.",
+        "reason": "To ask whether a navy waterproof daypack of about 20 liters is in stock, what it costs, and the latest pickup time this evening.",
+        "fictional": true
+      }
+    ],
+    "requiredQuestions": [
+      {
+        "id": "stock",
+        "text": "Is a waterproof daypack of about 20 liters in a color other than navy in stock?",
+        "korean": "남색이 아닌 색상의 방수 데이팩 약 20리터 제품이 재고로 있나요?",
+        "status": "resolved",
+        "resolutionReason": null,
+        "answer": "The navy version is not in stock, but other colors are available.",
+        "evidence": [
+          {
+            "transcriptId": "item_ETLwVcHbz9ixTmx0eZKHh",
+            "quote": "어 남색 방수 데이팩은 없고 다른 색상은 있습니다.",
+            "role": "business"
+          }
+        ]
+      },
+      {
+        "id": "price",
+        "text": "What does a waterproof daypack of about 20 liters in a color other than navy cost?",
+        "korean": "남색이 아닌 색상의 방수 데이팩 약 20리터 제품의 가격은 얼마인가요?",
+        "status": "resolved",
+        "resolutionReason": null,
+        "answer": "All waterproof daypacks, regardless of color, cost 10,000 won.",
+        "evidence": [
+          {
+            "transcriptId": "item_ETLy4TcwEPZwroxL1YAvY",
+            "quote": "어 색상 상관없이 방수 대입팩은 모두 만 원입니다.",
+            "role": "business"
+          }
+        ]
+      },
+      {
+        "id": "pickup_time",
+        "text": "What is the latest pickup time this evening for a waterproof daypack of about 20 liters in a color other than navy?",
+        "korean": "남색이 아닌 색상의 방수 데이팩 약 20리터 제품을 오늘 저녁에 픽업할 수 있는 가장 늦은 시간은 언제인가요?",
+        "status": "unresolved",
+        "resolutionReason": null,
+        "answer": null,
+        "evidence": []
+      }
+    ],
+    "questionHistory": [
+      {
+        "id": "stock-before-73625918-646f-4b8e-8ad9-ecdb19aa40b4",
+        "text": "Is a navy waterproof daypack of about 20 liters in stock?",
+        "korean": "남색 방수 데이팩 약 20리터 제품이 재고로 있나요?",
+        "status": "resolved",
+        "resolutionReason": null,
+        "answer": "The navy waterproof daypack of about 20 liters is not in stock.",
+        "evidence": [
+          {
+            "transcriptId": "item_ETLwVcHbz9ixTmx0eZKHh",
+            "quote": "어 남색 방수 데이팩은 없고",
+            "role": "business"
+          }
+        ],
+        "originalQuestionId": "stock",
+        "callId": "21052344-1af0-42d2-bf59-30a1da2c56aa",
+        "supersededByCustomerMessageId": "73625918-646f-4b8e-8ad9-ecdb19aa40b4"
+      },
+      {
+        "id": "price-before-73625918-646f-4b8e-8ad9-ecdb19aa40b4",
+        "text": "What does the navy waterproof daypack of about 20 liters cost?",
+        "korean": "남색 방수 데이팩 약 20리터 제품의 가격은 얼마인가요?",
+        "status": "unresolved",
+        "resolutionReason": null,
+        "answer": null,
+        "evidence": [],
+        "originalQuestionId": "price",
+        "callId": "21052344-1af0-42d2-bf59-30a1da2c56aa",
+        "supersededByCustomerMessageId": "73625918-646f-4b8e-8ad9-ecdb19aa40b4"
+      },
+      {
+        "id": "pickup_time-before-73625918-646f-4b8e-8ad9-ecdb19aa40b4",
+        "text": "What is the latest pickup time this evening for the navy waterproof daypack of about 20 liters?",
+        "korean": "남색 방수 데이팩 약 20리터 제품을 오늘 저녁에 픽업할 수 있는 가장 늦은 시간은 언제인가요?",
+        "status": "unresolved",
+        "resolutionReason": null,
+        "answer": null,
+        "evidence": [],
+        "originalQuestionId": "pickup_time",
+        "callId": "21052344-1af0-42d2-bf59-30a1da2c56aa",
+        "supersededByCustomerMessageId": "73625918-646f-4b8e-8ad9-ecdb19aa40b4"
+      }
+    ],
+    "planReady": true,
+    "pendingRelay": null,
+    "decisionPrompt": null,
+    "summary": null,
+    "busy": false,
+    "error": null,
+    "voiceMessage": null,
+    "call": {
+      "id": "21052344-1af0-42d2-bf59-30a1da2c56aa",
+      "status": "active",
+      "institutionId": "fictional_mapo_bag_shop",
+      "authorized": true,
+      "accepted": true,
+      "authorizedAt": "2026-09-29T07:00:07.902Z",
+      "acceptedAt": "2026-09-29T07:00:07.902Z",
+      "connected": true,
+      "confirmedKeyDetails": false,
+      "confirmationEvidence": [],
+      "readbackEvidence": [],
+      "endedAt": null,
+      "reason": null,
+      "success": false
+    }
+  },
+  "apiEvidence": [
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "resp_01e340096006844c016abb61f8425487d080df917e331a4349",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 2174,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 200,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2374
+      },
+      "at": "2026-09-29T07:00:09.754Z"
+    },
+    {
+      "purpose": "relay_plan_update",
+      "responseId": "resp_032e2361184395f0016abb61f9e26887d0ba236405436e726c",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1302,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 298,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1600
+      },
+      "at": "2026-09-29T07:00:12.190Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "resp_04132655629d071d016abb61fc69ac87d0ac786601b2386206",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 2502,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 141,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2643
+      },
+      "at": "2026-09-29T07:00:13.585Z"
+    }
+  ]
+}

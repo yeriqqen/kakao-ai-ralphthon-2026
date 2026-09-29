@@ -1,8 +1,8 @@
 {
   "type": "extracted_local_package_smoke_no_api_or_audio",
-  "archiveSha256": "6eebfa84a4a2198d6891491856a89ea1bb182c65ff8299e0c7cec94e323d025a",
-  "passed": 7,
-  "total": 7,
+  "archiveSha256": "b218c4a4e808aba2d95317856c9b58fad841884784393e29e6dc7bd9c117b1af",
+  "passed": 10,
+  "total": 10,
   "checks": [
     {
       "name": "archive excludes .env, git and local-runs",
@@ -21,6 +21,14 @@
       "passed": true
     },
     {
+      "name": "extracted server serves /debug",
+      "passed": true
+    },
+    {
+      "name": "extracted server serves /v2/debug.js",
+      "passed": true
+    },
+    {
       "name": "extracted server serves /legacy",
       "passed": true
     },
@@ -30,6 +38,10 @@
     },
     {
       "name": "extracted server serves /v2/business.js",
+      "passed": true
+    },
+    {
+      "name": "extracted server serves /fonts/InterVariable.woff2",
       "passed": true
     }
   ]

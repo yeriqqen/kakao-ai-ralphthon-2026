@@ -1,0 +1,460 @@
+{
+  "startedAt": "2026-09-29T06:13:20.729Z",
+  "type": "real_api_synthetic_shop_relay_translation",
+  "realAPI": true,
+  "mock": false,
+  "businessInputSynthetic": true,
+  "customerInputSynthetic": true,
+  "realMicrophone": false,
+  "realtime": false,
+  "audibleKorean": false,
+  "liveAcceptance": false,
+  "providerCallLimitPerLanguage": 2,
+  "method": "Fresh isolated Node process using exported relayQuestion and translateRelay. Synthetic customer context and business question only; no interview, server/UI interaction, call authorization, or business-answer review. Pending question is assigned in-memory solely as translateRelay input, not an accepted call.",
+  "priorEvidenceReviewed": [
+    "artifacts/v2/live-language-source-guard-check.json",
+    "artifacts/v2/live-zh-insurance-scope-check-three-turn.json",
+    "artifacts/v2/live-shop-plan-check.json"
+  ],
+  "sources": {
+    "lib/v2-ai.mjs": "1f16800cc534903f3951a7540e2f96d05c5162d1cb40780a17d8a4dd758ec330",
+    "lib/v2-state.mjs": "5069af13d83734176f7198bca1d1276568eb3f531a6dd618d789bcf274ac199a",
+    "lib/v2-summary.mjs": "2c72af63219e7fd029e6582278e0bd5a6d187ddc10a5140972de5c4e43d8d5f1"
+  },
+  "runs": [
+    {
+      "language": "ru",
+      "exactInputs": {
+        "customerContext": "Это вымышленная симуляция звонка в магазин. Я ищу водонепроницаемый повседневный рюкзак тёмно-синего цвета объёмом около 20 литров, бренд не важен. Нужен магазин в Мапхо, Сеул, чтобы забрать рюкзак сегодня вечером. Узнайте наличие, цену и время закрытия или последний срок получения сегодня.",
+        "customerInfo": [
+          {
+            "key": "product",
+            "value": "водонепроницаемый повседневный рюкзак объёмом около 20 литров",
+            "sourceMessageId": "e2cf1805-8d29-4453-ad96-6339463cd2af"
+          },
+          {
+            "key": "color",
+            "value": "тёмно-синий цвет",
+            "sourceMessageId": "e2cf1805-8d29-4453-ad96-6339463cd2af"
+          },
+          {
+            "key": "brand_preference",
+            "value": "бренд не важен",
+            "sourceMessageId": "e2cf1805-8d29-4453-ad96-6339463cd2af"
+          },
+          {
+            "key": "location",
+            "value": "Мапхо, Сеул",
+            "sourceMessageId": "e2cf1805-8d29-4453-ad96-6339463cd2af"
+          },
+          {
+            "key": "pickup_time",
+            "value": "сегодня вечером",
+            "sourceMessageId": "e2cf1805-8d29-4453-ad96-6339463cd2af"
+          }
+        ],
+        "unknownKey": "alternative_color_acceptance",
+        "businessQuestionKorean": "혹시 네이비색이 없으면 검은색도 괜찮으실까요?",
+        "customerReply": "Да, чёрный цвет мне подходит, но только если рюкзак по-прежнему водонепроницаемый, объём около 20 литров и цена такая же. Если цена выше, сначала уточните у меня."
+      },
+      "outputs": {
+        "relayQuestion": {
+          "known": false,
+          "key": "alternative_color_acceptance",
+          "question": "Если темно-синего цвета нет в наличии, подойдет ли вам черный цвет?",
+          "answerKorean": ""
+        },
+        "translateRelay": {
+          "answerKorean": "네, 검은색도 괜찮습니다. 다만, 가방이 여전히 방수 기능이 있고 약 20리터 용량이며 가격이 동일할 경우에만 가능합니다. 만약 가격이 높아진다면 먼저 저에게 확인해 주세요.",
+          "acknowledgement": "Ответ будет передан."
+        }
+      },
+      "apiEvidence": [
+        {
+          "purpose": "customer_relay",
+          "responseId": "resp_05a9a06b467efdd2016abb57011e4487d092bd2fd8c5b0e23d",
+          "model": "gpt-4.1-mini-2025-04-14",
+          "usage": {
+            "input_tokens": 497,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 40,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 537
+          },
+          "at": "2026-09-29T06:13:31.347Z"
+        },
+        {
+          "purpose": "relay_answer",
+          "responseId": "resp_0707acb4837afefb016abb570b7c4c87d0ba29d23ce3cdf250",
+          "model": "gpt-4.1-mini-2025-04-14",
+          "usage": {
+            "input_tokens": 199,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 73,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 272
+          },
+          "at": "2026-09-29T06:13:32.577Z"
+        }
+      ],
+      "providerResponses": 2,
+      "publicState": {
+        "id": "1e198095-72c7-42b6-9e07-319d0e050370",
+        "language": "ru",
+        "version": 2,
+        "revision": 2,
+        "createdAt": "2026-09-29T06:13:20.737Z",
+        "updatedAt": "2026-09-29T06:13:31.347Z",
+        "messages": [
+          {
+            "id": "e2cf1805-8d29-4453-ad96-6339463cd2af",
+            "role": "user",
+            "text": "Это вымышленная симуляция звонка в магазин. Я ищу водонепроницаемый повседневный рюкзак тёмно-синего цвета объёмом около 20 литров, бренд не важен. Нужен магазин в Мапхо, Сеул, чтобы забрать рюкзак сегодня вечером. Узнайте наличие, цену и время закрытия или последний срок получения сегодня.",
+            "kind": "chat",
+            "createdAt": "2026-09-29T06:13:20.738Z"
+          },
+          {
+            "id": "4743afa6-69f9-47b5-8752-b1698b3f8db9",
+            "role": "user",
+            "text": "Да, чёрный цвет мне подходит, но только если рюкзак по-прежнему водонепроницаемый, объём около 20 литров и цена такая же. Если цена выше, сначала уточните у меня.",
+            "kind": "synthetic_relay",
+            "createdAt": "2026-09-29T06:13:31.347Z"
+          }
+        ],
+        "transcripts": [],
+        "customerInfo": [
+          {
+            "key": "product",
+            "value": "водонепроницаемый повседневный рюкзак объёмом около 20 литров",
+            "sourceMessageId": "e2cf1805-8d29-4453-ad96-6339463cd2af"
+          },
+          {
+            "key": "color",
+            "value": "тёмно-синий цвет",
+            "sourceMessageId": "e2cf1805-8d29-4453-ad96-6339463cd2af"
+          },
+          {
+            "key": "brand_preference",
+            "value": "бренд не важен",
+            "sourceMessageId": "e2cf1805-8d29-4453-ad96-6339463cd2af"
+          },
+          {
+            "key": "location",
+            "value": "Мапхо, Сеул",
+            "sourceMessageId": "e2cf1805-8d29-4453-ad96-6339463cd2af"
+          },
+          {
+            "key": "pickup_time",
+            "value": "сегодня вечером",
+            "sourceMessageId": "e2cf1805-8d29-4453-ad96-6339463cd2af"
+          }
+        ],
+        "institutions": [],
+        "requiredQuestions": [],
+        "planReady": false,
+        "pendingRelay": {
+          "key": "alternative_color_acceptance",
+          "question": "Если темно-синего цвета нет в наличии, подойдет ли вам черный цвет?",
+          "questionKorean": "혹시 네이비색이 없으면 검은색도 괜찮으실까요?",
+          "status": "synthetic_translation_input_only"
+        },
+        "decisionPrompt": null,
+        "summary": null,
+        "busy": false,
+        "error": null,
+        "voiceMessage": null,
+        "call": {
+          "id": null,
+          "status": "idle",
+          "institutionId": null,
+          "authorized": false,
+          "accepted": false,
+          "authorizedAt": null,
+          "acceptedAt": null,
+          "connected": false,
+          "confirmedKeyDetails": false,
+          "confirmationEvidence": [],
+          "readbackEvidence": [],
+          "endedAt": null,
+          "reason": null,
+          "success": false
+        }
+      },
+      "finishedAt": "2026-09-29T06:13:32.577Z",
+      "checks": [
+        {
+          "name": "Exactly two actual provider responses within budget",
+          "passed": true
+        },
+        {
+          "name": "Alternative-color acceptance remains unknown before customer reply",
+          "passed": true
+        },
+        {
+          "name": "Customer question and acknowledgement are localized without Korean leakage",
+          "passed": true
+        },
+        {
+          "name": "Conditional navy-unavailable question asks black acceptance",
+          "passed": true
+        },
+        {
+          "name": "Korean preserves black, waterproof, approximately20L, same price and customer consultation if more expensive",
+          "passed": true
+        },
+        {
+          "name": "Call remains idle, unauthorized, disconnected and without business transcripts",
+          "passed": true
+        }
+      ],
+      "passed": 6,
+      "total": 6,
+      "manualAudit": {
+        "status": "observed_text_translation_pass",
+        "questionFidelity": "The selected-language question faithfully asks whether black is acceptable if navy is unavailable. It does not assert that navy stock is absent.",
+        "answerFidelity": "Natural Korean preserves conditional black acceptance, waterproof specification, approximate20litre capacity, same price, and consultation with the customer before accepting a higher price. No numerical price, inventory answer, purchase authorization, or extra preference is invented.",
+        "localization": "Customer question and acknowledgement use the selected language. The business response is Korean.",
+        "scope": "Synthetic text translated by the actual API; not microphone, audible Korean, or live relay acceptance."
+      }
+    },
+    {
+      "language": "zh",
+      "exactInputs": {
+        "customerContext": "这是一次虚构的商店通话模拟。我想买一个海军蓝色、防水、容量约20升的日用背包，品牌不限。我想在首尔麻浦找一家店，今天晚上取货。请询问是否有货、价格，以及今天的关门时间或最晚取货时间。",
+        "customerInfo": [
+          {
+            "key": "product",
+            "value": "防水、容量约20升的日用背包",
+            "sourceMessageId": "5ea614ea-7dd0-49d9-a509-f745ce8a8d63"
+          },
+          {
+            "key": "color",
+            "value": "海军蓝色",
+            "sourceMessageId": "5ea614ea-7dd0-49d9-a509-f745ce8a8d63"
+          },
+          {
+            "key": "brand_preference",
+            "value": "品牌不限",
+            "sourceMessageId": "5ea614ea-7dd0-49d9-a509-f745ce8a8d63"
+          },
+          {
+            "key": "location",
+            "value": "首尔麻浦",
+            "sourceMessageId": "5ea614ea-7dd0-49d9-a509-f745ce8a8d63"
+          },
+          {
+            "key": "pickup_time",
+            "value": "今天晚上取货",
+            "sourceMessageId": "5ea614ea-7dd0-49d9-a509-f745ce8a8d63"
+          }
+        ],
+        "unknownKey": "alternative_color_acceptance",
+        "businessQuestionKorean": "혹시 네이비색이 없으면 검은색도 괜찮으실까요?",
+        "customerReply": "可以接受黑色，但必须仍然防水、容量约20升，而且价格相同。如果更贵，请先问我。"
+      },
+      "outputs": {
+        "relayQuestion": {
+          "known": false,
+          "key": "alternative_color_acceptance",
+          "question": "如果没有海军蓝色，您是否接受黑色作为替代颜色？",
+          "answerKorean": ""
+        },
+        "translateRelay": {
+          "answerKorean": "검은색도 괜찮습니다만, 여전히 방수가 되어야 하고, 용량이 약 20리터여야 하며, 가격이 동일해야 합니다. 만약 더 비싸다면 먼저 저에게 문의해 주세요.",
+          "acknowledgement": "收到，正在转述回复。"
+        }
+      },
+      "apiEvidence": [
+        {
+          "purpose": "customer_relay",
+          "responseId": "resp_024496031d6f0d0d016abb57011b7487d0aebb89875387d8e7",
+          "model": "gpt-4.1-mini-2025-04-14",
+          "usage": {
+            "input_tokens": 470,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 39,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 509
+          },
+          "at": "2026-09-29T06:13:32.485Z"
+        },
+        {
+          "purpose": "relay_answer",
+          "responseId": "resp_0bb1dcabe63fe09b016abb570ca11887d091d03beab579d025",
+          "model": "gpt-4.1-mini-2025-04-14",
+          "usage": {
+            "input_tokens": 179,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 69,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 248
+          },
+          "at": "2026-09-29T06:13:54.185Z"
+        }
+      ],
+      "providerResponses": 2,
+      "publicState": {
+        "id": "a65972d1-2a51-4d56-906e-44e283b3cbe6",
+        "language": "zh",
+        "version": 2,
+        "revision": 2,
+        "createdAt": "2026-09-29T06:13:20.778Z",
+        "updatedAt": "2026-09-29T06:13:32.485Z",
+        "messages": [
+          {
+            "id": "5ea614ea-7dd0-49d9-a509-f745ce8a8d63",
+            "role": "user",
+            "text": "这是一次虚构的商店通话模拟。我想买一个海军蓝色、防水、容量约20升的日用背包，品牌不限。我想在首尔麻浦找一家店，今天晚上取货。请询问是否有货、价格，以及今天的关门时间或最晚取货时间。",
+            "kind": "chat",
+            "createdAt": "2026-09-29T06:13:20.778Z"
+          },
+          {
+            "id": "7ee69cef-2aa7-43a1-8882-dd0a1ac80529",
+            "role": "user",
+            "text": "可以接受黑色，但必须仍然防水、容量约20升，而且价格相同。如果更贵，请先问我。",
+            "kind": "synthetic_relay",
+            "createdAt": "2026-09-29T06:13:32.485Z"
+          }
+        ],
+        "transcripts": [],
+        "customerInfo": [
+          {
+            "key": "product",
+            "value": "防水、容量约20升的日用背包",
+            "sourceMessageId": "5ea614ea-7dd0-49d9-a509-f745ce8a8d63"
+          },
+          {
+            "key": "color",
+            "value": "海军蓝色",
+            "sourceMessageId": "5ea614ea-7dd0-49d9-a509-f745ce8a8d63"
+          },
+          {
+            "key": "brand_preference",
+            "value": "品牌不限",
+            "sourceMessageId": "5ea614ea-7dd0-49d9-a509-f745ce8a8d63"
+          },
+          {
+            "key": "location",
+            "value": "首尔麻浦",
+            "sourceMessageId": "5ea614ea-7dd0-49d9-a509-f745ce8a8d63"
+          },
+          {
+            "key": "pickup_time",
+            "value": "今天晚上取货",
+            "sourceMessageId": "5ea614ea-7dd0-49d9-a509-f745ce8a8d63"
+          }
+        ],
+        "institutions": [],
+        "requiredQuestions": [],
+        "planReady": false,
+        "pendingRelay": {
+          "key": "alternative_color_acceptance",
+          "question": "如果没有海军蓝色，您是否接受黑色作为替代颜色？",
+          "questionKorean": "혹시 네이비색이 없으면 검은색도 괜찮으실까요?",
+          "status": "synthetic_translation_input_only"
+        },
+        "decisionPrompt": null,
+        "summary": null,
+        "busy": false,
+        "error": null,
+        "voiceMessage": null,
+        "call": {
+          "id": null,
+          "status": "idle",
+          "institutionId": null,
+          "authorized": false,
+          "accepted": false,
+          "authorizedAt": null,
+          "acceptedAt": null,
+          "connected": false,
+          "confirmedKeyDetails": false,
+          "confirmationEvidence": [],
+          "readbackEvidence": [],
+          "endedAt": null,
+          "reason": null,
+          "success": false
+        }
+      },
+      "finishedAt": "2026-09-29T06:13:54.185Z",
+      "checks": [
+        {
+          "name": "Exactly two actual provider responses within budget",
+          "passed": true
+        },
+        {
+          "name": "Alternative-color acceptance remains unknown before customer reply",
+          "passed": true
+        },
+        {
+          "name": "Customer question and acknowledgement are localized without Korean leakage",
+          "passed": true
+        },
+        {
+          "name": "Conditional navy-unavailable question asks black acceptance",
+          "passed": true
+        },
+        {
+          "name": "Korean preserves black, waterproof, approximately20L, same price and customer consultation if more expensive",
+          "passed": true
+        },
+        {
+          "name": "Call remains idle, unauthorized, disconnected and without business transcripts",
+          "passed": true
+        }
+      ],
+      "passed": 6,
+      "total": 6,
+      "manualAudit": {
+        "status": "observed_text_translation_pass",
+        "questionFidelity": "The selected-language question faithfully asks whether black is acceptable if navy is unavailable. It does not assert that navy stock is absent.",
+        "answerFidelity": "Natural Korean preserves conditional black acceptance, waterproof specification, approximate20litre capacity, same price, and consultation with the customer before accepting a higher price. No numerical price, inventory answer, purchase authorization, or extra preference is invented.",
+        "localization": "Customer question and acknowledgement use the selected language. The business response is Korean.",
+        "scope": "Synthetic text translated by the actual API; not microphone, audible Korean, or live relay acceptance."
+      }
+    }
+  ],
+  "manualAudit": {
+    "status": "passed_synthetic_text_translation_only",
+    "languages": [
+      "ru",
+      "zh"
+    ],
+    "realProviderResponses": 4,
+    "passedChecks": 12,
+    "totalChecks": 12,
+    "summary": "Both languages preserve the unknown preference and every condition in the supplied customer reply. No unsupported business stock, price or hours answer is introduced.",
+    "notVerified": [
+      "Microphone recognition in either language",
+      "Audible Korean output",
+      "Live UI relay round trip",
+      "Completed shop call",
+      "General translation reliability beyond these exact examples"
+    ],
+    "summaryScope": "Summary functions and previous language evidence were inspected. No new RU/ZH summary/advice acceptance claim is made.",
+    "changes": "Only this separate evidence artifact and ignored runtime drivers were written. No server, UI, interview prompts or source modules changed."
+  },
+  "providerResponses": 4,
+  "finishedAt": "2026-09-29T06:13:54.185Z",
+  "passed": 12,
+  "total": 12
+}

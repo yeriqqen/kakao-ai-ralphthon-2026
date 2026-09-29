@@ -39,6 +39,14 @@ node scripts/check-v2-http.mjs
 
 ## Preserved work and handoff
 
+### Integrated interface
+
+The mobile design is integrated into the v2 customer and business screens. Both use a shared warm-white/olive theme and locally bundled Inter. The customer view keeps v2's English/Russian/Chinese sessions, room access tokens, call authorization, text relay, and evidence-based results. The business view keeps its acceptance and microphone controls. See [the UI integration handoff](docs/v2-design-integration.md).
+
+Run `npm run test:ui` for the responsive design checks, `npm run test:customer` and `npm run test:business` for the original browser flows, and `npm run test:http` for local API boundaries. Browser checks require an existing Playwright/Chrome installation and support `PLAYWRIGHT_MODULE` and `CHROME_EXECUTABLE`. Their AI, room, and audio responses are synthetic. Design evidence is saved separately under `artifacts/v2-design/`; it does not establish live voice acceptance. Set `V2_ARTIFACT_DIR=artifacts/v2-design/functional` when running the HTTP and original browser checks to preserve older evidence.
+
+Inter is distributed under the [SIL Open Font License](public/fonts/OFL.txt); it loads locally without a third-party font request.
+
 V1 remains available through `npm run start:v1`. Its original interface, rules, tests, Korean sheets, evidence, and submission files are preserved. The former README is [docs/v1-readme.md](docs/v1-readme.md). V1 is a limited rule-based prototype and does not establish v2 live acceptance.
 
 - [V2 official requirements and acceptance plan](docs/v2-official-and-plan.md)

@@ -1,14 +1,15 @@
 {
-  "checkedAt": "2026-09-29T06:08:12.109Z",
+  "checkedAt": "2026-09-29T07:26:09.395Z",
   "type": "real_local_http_with_mocked_plan_setup",
   "realHTTP": true,
   "realOpenAI": false,
   "realMicrophone": false,
   "syntheticHttpTest": true,
+  "childConfiguration": "Dummy key; child fetch replaced with synthetic setup responses and upstream network blocked",
   "provenance": "Real isolated localhost HTTP routes. Plan generation and validation are synthetic setup fixtures; all upstream network is blocked. No actual business or audio evidence.",
-  "fixtureRoomId": "9739f88e-0573-4cce-8d22-98d96dd4a901",
-  "passed": 23,
-  "total": 23,
+  "fixtureRoomId": "4c17d87f-8971-43d6-9924-33c9590bccf3",
+  "passed": 36,
+  "total": 36,
   "checks": [
     {
       "name": "/ is served",
@@ -20,6 +21,18 @@
     },
     {
       "name": "/business is served",
+      "passed": true
+    },
+    {
+      "name": "/debug is served",
+      "passed": true
+    },
+    {
+      "name": "/v2/debug.js is served",
+      "passed": true
+    },
+    {
+      "name": "/v2/debug.css is served",
       "passed": true
     },
     {
@@ -40,6 +53,10 @@
     },
     {
       "name": "cross-origin mutation is rejected",
+      "passed": true
+    },
+    {
+      "name": "real-discovery route preserves selection, customer role and call authorization gates",
       "passed": true
     },
     {
@@ -100,6 +117,42 @@
     },
     {
       "name": "30-event batches are accepted and only the newest 200 diagnostics are retained",
+      "passed": true
+    },
+    {
+      "name": "reviewed business question opens the relay without a Realtime tool call",
+      "passed": true
+    },
+    {
+      "name": "a later voice tool reuses the pending relay without another question",
+      "passed": true
+    },
+    {
+      "name": "customer text resolves the detected relay and returns a Korean voice message",
+      "passed": true
+    },
+    {
+      "name": "an invented question quote cannot trigger a relay",
+      "passed": true
+    },
+    {
+      "name": "resolved answer alone cannot bypass readback confirmation through HTTP",
+      "passed": true
+    },
+    {
+      "name": "HTTP review retains the saved transcript metadata and accepts a valid readback",
+      "passed": true
+    },
+    {
+      "name": "confirmed HTTP flow completes and generates its grounded summary",
+      "passed": true
+    },
+    {
+      "name": "debug endpoint is authenticated and does not expose room credentials",
+      "passed": true
+    },
+    {
+      "name": "business decline ends only a pending call without acceptance or completion",
       "passed": true
     }
   ]

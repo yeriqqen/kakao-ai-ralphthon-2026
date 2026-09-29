@@ -7,7 +7,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { translations } from '../public/v2/i18n.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const output = path.join(root, 'artifacts/v2');
+const output = path.resolve(root, process.env.V2_ARTIFACT_DIR || 'artifacts/v2');
 const require = createRequire(import.meta.url);
 const report = { title: 'V2 customer UI checks with synthetic API routes', timestamp: new Date().toISOString(), mock: true, simulation: true,
   method: 'Isolated browser. All API responses are synthetic fixtures. External requests are blocked. No OpenAI request, microphone capture or audio playback.',
@@ -48,10 +48,12 @@ await context.route('**/*', async route => {
     if (url.pathname.endsWith('/authorize')) { assert.equal(request.postDataJSON().institutionId, 'fictional'); current.version = ++revision; current.call = { status: 'pending', connected: false }; }
     return json(current);
   }
-  if (url.pathname.startsWith('/v2')) {
-    const file = url.pathname === '/v2/' ? 'index.html' : url.pathname.split('/').at(-1);
-    const bytes = await fs.readFile(path.join(root, 'public/v2', file));
-    return route.fulfill({ body: bytes, contentType: file.endsWith('.js') ? 'text/javascript' : file.endsWith('.css') ? 'text/css' : 'text/html' });
+  if (url.pathname.startsWith('/v2/') || url.pathname.startsWith('/fonts/')) {
+    const relative = url.pathname === '/v2/' ? 'v2/index.html' : url.pathname.slice(1);
+    const file = path.resolve(root, 'public', relative);
+    assert.ok(file.startsWith(path.resolve(root, 'public') + path.sep), 'Static fixture must stay inside public/');
+    const bytes = await fs.readFile(file);
+    return route.fulfill({ body: bytes, contentType: file.endsWith('.js') ? 'text/javascript' : file.endsWith('.css') ? 'text/css' : file.endsWith('.woff2') ? 'font/woff2' : file.endsWith('.svg') ? 'image/svg+xml' : 'text/html' });
   }
   return route.fulfill({ status: 404, body: 'not found' });
 });
@@ -66,7 +68,7 @@ try {
   await check('selected-language-room-creation', () => assert.equal(createdLanguage, 'ru'));
   await check('server-content-displayed', async () => assert.match(await page.locator('#messages').innerText(), /Синтетический вопрос/));
   await check('no-internal-customer-key-in-UI', async () => assert.doesNotMatch(await page.locator('#context').innerText(), /private_prior_visit_status/));
-  await check('business-tab-before-authorization-with-fragment-token', async () => { const link = await page.getByRole('link', { name: 'Открыть вкладку организации', exact: true }).getAttribute('href'); assert.equal(link, 'http://localhost:4199/business?room=test-room#token=synthetic-business-token'); assert.equal(current.call.status, 'idle'); });
+  await check('business-tab-before-authorization-with-fragment-token', async () => { const link = await page.locator('#phone-link').getAttribute('href'); assert.equal(link, 'http://localhost:4199/business?room=test-room#token=synthetic-business-token'); assert.equal(current.call.status, 'idle'); });
   await check('explicit-authorization-pending-not-green', async () => { await page.getByRole('button', { name: 'Да', exact: true }).click(); await page.waitForTimeout(100); assert.equal(current.call.status, 'pending'); assert.equal(await page.locator('#call-state.is-active').count(), 0); });
   current.call = { status: 'active', connected: false }; current.version = ++revision; await page.waitForTimeout(1200);
   await check('unconnected-active-not-green', async () => assert.equal(await page.locator('#call-state.is-active').count(), 0));
@@ -80,7 +82,7 @@ try {
   await check('poll-failure-removes-green', async () => { assert.equal(await page.locator('#call-state.is-active').count(), 0); assert.match(await page.locator('#call-state').innerText(), /Соединение потеряно/); });
   failure = false; current.call = { status: 'completed', connected: false }; current.pendingRelay = null; current.summary = { text: 'Синтетический итог', recommendation: 'Синтетическая рекомендация', reasoning: 'Синтетическое объяснение' }; current.version = ++revision; await page.waitForTimeout(1200);
   await check('incomplete-completion-stays-unresolved', async () => { assert.match(await page.locator('#call-state').innerText(), /нельзя считать полностью завершённым/); assert.equal(await page.locator('#call-state.is-active').count(), 0); });
-  await check('summary-recommendation-reasoning', async () => { const content = await page.locator('#context').innerText(); for (const value of Object.values(current.summary)) assert.ok(content.includes(value)); });
+  await check('summary-recommendation-reasoning', async () => { await page.locator('.result-details > summary').click(); const content = await page.locator('#context').innerText(); for (const value of Object.values(current.summary)) assert.ok(content.includes(value)); });
   quota = true; await page.locator('#message-input').fill('Синтетическая проверка ошибки'); await page.locator('#send').click(); await page.waitForTimeout(200);
   await check('API-credit-error-localized-without-provider-message', async () => { const content = await page.locator('#error').innerText(); assert.match(content, /доступных средств/); assert.doesNotMatch(content, /untranslated provider/); });
   const chinese = await context.newPage(); chinese.on('pageerror', error => pageErrors.push(error.message)); await chinese.goto('http://localhost:4199/v2/'); await chinese.getByRole('button', { name: '中文', exact: true }).click();
@@ -89,4 +91,4 @@ try {
   report.status = 'passed';
 } catch (error) { report.status = 'failed'; report.errors.push(error.message); process.exitCode = 1; }
 finally { await browser.close(); await fs.writeFile(path.join(output, 'customer-ui-check.json'), JSON.stringify(report, null, 2) + '\n'); }
-console.log(JSON.stringify({ status: report.status, mock: true, passed: report.checks.length, report: 'artifacts/v2/customer-ui-check.json', errors: report.errors }));
+console.log(JSON.stringify({ status: report.status, mock: true, passed: report.checks.length, report: path.relative(root, path.join(output, 'customer-ui-check.json')), errors: report.errors }));

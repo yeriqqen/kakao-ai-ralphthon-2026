@@ -1,5 +1,7 @@
 # YOKOBU v2 — verification record
 
+> Latest PR #1 checkpoint: [v2-pr1-review.md](v2-pr1-review.md) records the fifth shop rehearsal completing the real laptop flow, with human-confirmed Korean audio and microphone shutdown, after four preserved failures. It also identifies the later teammate merge and current regression checks. Earlier sections below remain historical.
+
 All institutions, customer details, and calls used for this product demonstration are fictional. No real business or telephone call is verified by these records. Do not combine synthetic tests with live evidence under a single “passed” claim.
 
 ## Current checkpoint
@@ -7,6 +9,12 @@ All institutions, customer details, and calls used for this product demonstratio
 The real OpenAI API attempt reported **HTTP 429 / `credit_balance_exhausted` at 2026-09-29 13:49:58 KST**. A later actual English hospital request succeeded through the local backend at **14:06:39 KST**, preserved in [live-api-recheck.json](../artifacts/v2/live-api-recheck.json). Subsequent actual Russian and Chinese interviews also succeeded. The earlier failure remains historical evidence rather than the current access verdict.
 
 Current verdict: **Partial real acceptance**, updated after the 15:08 KST local checks. Actual chat access is demonstrated. The newest bounded Russian and Chinese runs both reached plan readiness within two customer turns, with valid source references and Korean question meanings. Russian required a service-question repair. A later targeted Chinese correction preserves “no Korean health insurance” in customer facts, reply and cost question and reaches a plan after a third preparation turn. Chinese remains **Partial** because the Korean service question drops “rash,” and the cost question assumes an initial consultation while prior-visit status is unknown. A real first English call produced a transcribed human Korean greeting and human-confirmed audible Korean but stalled; the second reached the full service question and repeated speech turns, then stopped on a missing-transcript timeout. The third real attempt obtained four substantive answers and a genuine readback confirmation, but a review/state defect erased the answers and caused repeated questions before disconnection. The fixed backend preserves them in an isolated replay. A real unknown-detail relay and successfully completed microphone flow remain Unverified. A fresh actual Chrome shop interview has been prepared and authorized, but the business tab is still pending teammate acceptance and audibility observation at this checkpoint. Preparation is not voice verification.
+
+## Additional shop language checkpoint — 15:14 KST
+
+The bounded Russian/Chinese shop relay check passed **12/12 checks with four real API requests**, two per language. Both localized questions preserved the unknown alternative-color preference, and the Korean answers preserved the customer's waterproof/~20L/same-price conditions and request to ask first if the price is higher. Exact synthetic inputs and real outputs are retained in [real-api-shop-language-relay-check.json](../artifacts/v2/real-api-shop-language-relay-check.json). These isolated rooms stayed idle and unauthorized; this is text translation evidence, not a live microphone relay.
+
+Chinese summary labels now use general preferred-time and prior-visit wording for shop inquiries. A generic gender preference no longer receives a doctor-specific label; explicitly doctor-related keys still do. The existing 17 plan/summary guard tests pass, including a shop-label regression. The running English shop rehearsal is unchanged; the label-only server update takes effect at the next restart.
 
 ## Evidence ledger
 

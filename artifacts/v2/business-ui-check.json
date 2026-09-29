@@ -4,13 +4,19 @@
   "realMicrophone": false,
   "audibleKorean": false,
   "provenance": "Synthetic browser events and mocked HTTP. Does not prove microphone capture, OpenAI connectivity, speech quality, or audible Korean.",
-  "generatedAt": "2026-09-29T06:08:14.349Z",
+  "generatedAt": "2026-09-29T07:24:36.521Z",
   "checks": [
+    {
+      "name": "Phone decline never activates microphone and diagnostics stay off the call screen",
+      "passed": true,
+      "mock": true,
+      "detail": "A pending call can be declined without Accept, WebRTC, or microphone access."
+    },
     {
       "name": "Authorization and explicit acceptance gate microphone",
       "passed": true,
       "mock": true,
-      "detail": "No microphone request before authorized Accept; one mocked connection acknowledgement after data channel opens; translated generated question visible; audible status remains unverified."
+      "detail": "No microphone request before authorized Accept; one mocked connection acknowledgement after data channel opens; generated questions retained for state; the phone surface hides diagnostics; audible status remains unverified."
     },
     {
       "name": "Laptop turn taking follows actual playback",
@@ -43,10 +49,22 @@
       "detail": "Application context is injected once by voiceMessage.id; response.create has no instructions override."
     },
     {
+      "name": "Confirmed readback requests completion instead of another question",
+      "passed": true,
+      "mock": true,
+      "detail": "Forced function choice still requires server allowComplete; no client-only success."
+    },
+    {
       "name": "Tool deduplication and response completion ordering",
       "passed": true,
       "mock": true,
       "detail": "Three event representations call mocked server once; continuation waits for originating response.done. Denied completion leaves call active."
+    },
+    {
+      "name": "Local shutdown is independent of stalled farewell saving",
+      "passed": true,
+      "mock": true,
+      "detail": "Matching playback-stop releases microphone while optional farewell HTTP request is still held."
     },
     {
       "name": "Authoritative completion waits for final audio playback event",
@@ -60,8 +78,20 @@
       "mock": true,
       "detail": {
         "width": 390,
-        "scrollWidth": 390
+        "scrollWidth": 375
       }
+    },
+    {
+      "name": "Consecutive fragments coalesce and audio drains before the next response",
+      "passed": true,
+      "mock": true,
+      "detail": "Review returning during a second utterance preserves microphone capture and waits for both transcripts before one continuation; response.done audio reserves playback before started; queued update waits for matching drain, stale stop cannot unlock newer playback, and microphone reopens after final drain. Synthetic regression of the real shop stall."
+    },
+    {
+      "name": "Server-detected known detail produces one Korean continuation",
+      "passed": true,
+      "mock": true,
+      "detail": "A synthetic transcript review supplies an existing customer fact through voiceMessage; the client relays it once without scheduling a duplicate generic follow-up."
     },
     {
       "name": "Opening waits for session readiness and remote track exactly once",
@@ -82,6 +112,12 @@
       "detail": "Synthetic playback rejection keeps the mic paused even after provider audio-stop; mocked successful Play incoming audio releases the opening gate. This is not proof of audible sound."
     },
     {
+      "name": "Missing goodbye events cannot keep completed call open",
+      "passed": true,
+      "mock": true,
+      "detail": "Accelerated eight-second watchdog releases the peer and microphone when no final playback event arrives."
+    },
+    {
       "name": "Denied microphone fails without voice connection",
       "passed": true,
       "mock": true,
@@ -95,10 +131,10 @@
     }
   ],
   "sources": {
-    "public/v2/business.js": "ac519a4aee9832d300c37766309c43cafd133071addebd20648f7a393e40a91c",
-    "public/v2/business.html": "9ed7c7f88bcbc9388fa416cd2907234ecf25caaf454e0de96821099c40242233",
-    "public/v2/business.css": "25db259f009f530f498d4a6f2b9a55e87ea4b0d1c933c589ddc74289eff7b761",
-    "scripts/v2-business-ui-check.mjs": "c3da705107689ccac51ad7b68a1ae7849395aa58423b0b216fce1d3ae0e32022"
+    "public/v2/business.js": "e23a85470b6ffe3b4306041a43414b92729a7f5b318b28b4c7da1583c3fb1d73",
+    "public/v2/business.html": "39893a904b80be3ddb00ec13d81ee25e9f0bab1ead3de8e1f82cbc5977987720",
+    "public/v2/business.css": "31a60413e8a9c6f9b4a153d698e8e0b38da25b768c3e2e8c717f9702c63e7ca9",
+    "scripts/v2-business-ui-check.mjs": "86e93639ff03bc2dd9eca65b53fa71e1cb201676727c693518be16b2a4cc0682"
   },
   "requestEvidence": [
     {
@@ -144,83 +180,83 @@
         "events": [
           {
             "type": "call.accepted",
-            "at": "2026-09-29T06:08:16.919Z"
+            "at": "2026-09-29T07:24:38.856Z"
           },
           {
             "type": "remote.track",
-            "at": "2026-09-29T06:08:16.927Z"
+            "at": "2026-09-29T07:24:38.861Z"
           },
           {
             "type": "session.created",
-            "at": "2026-09-29T06:08:16.927Z"
+            "at": "2026-09-29T07:24:38.862Z"
           },
           {
             "type": "playback.allowed",
-            "at": "2026-09-29T06:08:16.928Z"
+            "at": "2026-09-29T07:24:38.862Z"
           },
           {
             "type": "connection.registered",
-            "at": "2026-09-29T06:08:16.934Z"
+            "at": "2026-09-29T07:24:38.869Z"
           },
           {
             "type": "opening.requested",
-            "at": "2026-09-29T06:08:16.938Z"
+            "at": "2026-09-29T07:24:38.875Z"
           },
           {
             "type": "response.created",
-            "at": "2026-09-29T06:08:16.971Z",
+            "at": "2026-09-29T07:24:38.900Z",
             "responseId": "r-intro"
           },
           {
             "type": "output_audio_buffer.started",
-            "at": "2026-09-29T06:08:16.971Z",
+            "at": "2026-09-29T07:24:38.901Z",
             "responseId": "r-intro"
           },
           {
             "type": "output_audio_buffer.stopped",
-            "at": "2026-09-29T06:08:16.974Z",
+            "at": "2026-09-29T07:24:38.902Z",
             "responseId": "older-audio"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:08:16.978Z",
+            "at": "2026-09-29T07:24:38.903Z",
             "responseId": "r-intro",
             "status": "completed"
           },
           {
             "type": "output_audio_buffer.stopped",
-            "at": "2026-09-29T06:08:16.980Z",
+            "at": "2026-09-29T07:24:38.906Z",
             "responseId": "r-intro"
           },
           {
             "type": "opening.finished",
-            "at": "2026-09-29T06:08:16.980Z"
+            "at": "2026-09-29T07:24:38.906Z"
           },
           {
             "type": "response.created",
-            "at": "2026-09-29T06:08:17.108Z",
+            "at": "2026-09-29T07:24:39.022Z",
             "responseId": "r-question"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:08:17.148Z",
+            "at": "2026-09-29T07:24:39.046Z",
             "responseId": "r-question",
             "status": "cancelled"
           },
           {
             "type": "response.created",
-            "at": "2026-09-29T06:08:17.154Z",
+            "at": "2026-09-29T07:24:39.050Z",
             "responseId": "r-wait"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:08:17.155Z",
+            "at": "2026-09-29T07:24:39.050Z",
             "responseId": "r-question",
             "status": "cancelled"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:08:17.158Z",
+            "at": "2026-09-29T07:24:39.051Z",
             "responseId": "r-wait",
             "status": "completed"
           }
@@ -235,12 +271,12 @@
         "events": [
           {
             "type": "response.created",
-            "at": "2026-09-29T06:08:18.442Z",
+            "at": "2026-09-29T07:24:40.473Z",
             "responseId": "r-resume"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:08:18.444Z",
+            "at": "2026-09-29T07:24:40.475Z",
             "responseId": "r-resume",
             "status": "completed"
           }
@@ -291,45 +327,45 @@
         "events": [
           {
             "type": "response.created",
-            "at": "2026-09-29T06:08:19.625Z",
+            "at": "2026-09-29T07:24:41.655Z",
             "responseId": "r-tool"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:08:19.633Z",
+            "at": "2026-09-29T07:24:41.662Z",
             "responseId": "r-tool",
             "status": "completed"
           },
           {
             "type": "response.created",
-            "at": "2026-09-29T06:08:19.635Z",
+            "at": "2026-09-29T07:24:41.665Z",
             "responseId": "r-finish-request"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:08:19.645Z",
+            "at": "2026-09-29T07:24:41.676Z",
             "responseId": "r-finish-request",
             "status": "completed"
           },
           {
             "type": "response.created",
-            "at": "2026-09-29T06:08:19.647Z",
+            "at": "2026-09-29T07:24:41.678Z",
             "responseId": "r-goodbye"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:08:19.651Z",
+            "at": "2026-09-29T07:24:41.681Z",
             "responseId": "r-goodbye",
             "status": "completed"
           },
           {
             "type": "output_audio_buffer.stopped",
-            "at": "2026-09-29T06:08:19.654Z",
+            "at": "2026-09-29T07:24:41.684Z",
             "responseId": "r-finish-request"
           },
           {
             "type": "output_audio_buffer.stopped",
-            "at": "2026-09-29T06:08:19.655Z",
+            "at": "2026-09-29T07:24:41.686Z",
             "responseId": "r-goodbye"
           }
         ]
@@ -375,7 +411,7 @@
         "content": [
           {
             "type": "input_text",
-            "text": "APPLICATION CALL CONTROL: Continue the assigned simulated business call in Korean. After acknowledging a greeting or an answer, ask one next unresolved required question; do not stop at a greeting. If the business asked for unknown customer information, use request_customer_detail instead. If all questions are resolved, read back key facts and obtain confirmation before complete_call.\n{\"requiredQuestions\":[{\"id\":\"availability\",\"korean\":\"오늘 진료하나요?\",\"text\":\"Are consultations available today?\",\"status\":\"unresolved\",\"evidence\":[]}]}"
+            "text": "APPLICATION CALL CONTROL: Continue in Korean using the application state below as authoritative, even if earlier audio sounded different. Only this next question remains the current target: 오늘 진료하나요?. Do not re-ask questions marked resolved. If the business already attempted to answer this question but the transcript did not resolve it, briefly apologize for not catching that detail and ask one precise clarification. Do not claim it was confirmed, invent a number from unclear speech, or read back a complete result while any required question is unresolved. If the latest business utterance asks for unknown customer information, address it through request_customer_detail before continuing the checklist.\n{\"requiredQuestions\":[{\"id\":\"availability\",\"korean\":\"오늘 진료하나요?\",\"text\":\"Are consultations available today?\",\"status\":\"unresolved\",\"evidence\":[]}]}"
           }
         ]
       }
@@ -436,13 +472,19 @@
         "content": [
           {
             "type": "input_text",
-            "text": "APPLICATION CALL CONTROL: Continue the assigned simulated business call in Korean. After acknowledging a greeting or an answer, ask one next unresolved required question; do not stop at a greeting. If the business asked for unknown customer information, use request_customer_detail instead. If all questions are resolved, read back key facts and obtain confirmation before complete_call.\n{\"requiredQuestions\":[{\"id\":\"availability\",\"korean\":\"오늘 진료하나요?\",\"text\":\"Are consultations available today?\",\"status\":\"unresolved\",\"evidence\":[]}]}"
+            "text": "APPLICATION CALL CONTROL: Continue in Korean using the application state below as authoritative, even if earlier audio sounded different. The server has retained every answer and validated the business confirmation of the full readback. Call complete_call now. Do not ask or read back the questions again. If the latest business utterance asks for unknown customer information, address it through request_customer_detail before continuing the checklist.\n{\"requiredQuestions\":[{\"id\":\"availability\",\"korean\":\"오늘 진료하나요?\",\"text\":\"Are consultations available today?\",\"status\":\"resolved\",\"evidence\":[]}],\"confirmedKeyDetails\":true}"
           }
         ]
       }
     },
     {
-      "type": "response.create"
+      "type": "response.create",
+      "response": {
+        "tool_choice": {
+          "type": "function",
+          "name": "complete_call"
+        }
+      }
     },
     {
       "type": "conversation.item.create",

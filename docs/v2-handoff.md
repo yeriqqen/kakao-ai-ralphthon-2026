@@ -1,17 +1,15 @@
-# V2 integration checkpoint — 2026-09-29
+> Latest presentation update: [three-view UI and real place discovery](v2-presentation-ui.md). Use the header Chat / Debug / Call links. The older checkpoint below describes the successful voice rehearsal.
 
-This checkpoint is being pushed before the teammate UI changes are integrated.
+# V2 PR #1 handoff — 2026-09-29, 16:10 KST
 
-- Run `npm start`, then open http://localhost:4173. The configured `.env` is local and excluded from Git; use `.env.example` on another computer.
-- Current application: `public/v2/`, `server-v2.mjs`, and `lib/v2-*.mjs`. Historical v1 remains in `public/` and `server.mjs`.
-- Preserve customer authorization, business acceptance, server-only API credentials, English/Russian/Chinese controls, required-question status, and the text relay while integrating the UI.
-- Latest checks: **63/63 unit tests**, build passed, **23/23 local HTTP checks** (synthetic plan setup, upstream blocked), **20/20 mocked customer UI checks**, and **14/14 mocked business UI checks**. Mocked checks are not voice verification.
-- Actual microphone rehearsals reached Korean conversation, four business answers, and readback. The last actual run was interrupted after a confirmation-state defect; its evidence is preserved. The fixed state logic passed an 11-check replay of that recorded conversation, without new microphone input.
-- Late relay answers now clear the timeout decision and resume the conversation.
-- Final facts are grouped from already AI-extracted, evidence-backed answers. The recommendation path asks the real AI to choose a structured next action and supporting question IDs; localized rendering reuses the exact saved answers. A new recorded-text regression passed **9/9 checks with one real API response**, preserving the original interrupted outcome and price uncertainty. This does not establish live normal completion. Earlier free-text recommendation failures remain in the evidence.
-- The opening now waits for session creation, the remote audio track, and registered connection. It explicitly requests audio without tools and keeps the microphone paused until opening playback finishes. A 12-second missing-audio watchdog stops with retry guidance; bounded event diagnostics are exported. Automatic voice interruption is disabled for this half-duplex flow. The user's latest silent-opening report still requires a fresh human audibility check.
-- The customer now has a localized shop-stock starter as well as the hospital starter. Real API interview checks produced stock, price and pickup-time questions; use [v2-shop-demo.md](v2-shop-demo.md) for editable placeholders. A fresh Chrome shop room has been prepared and authorized, awaiting teammate acceptance; no shop voice success is claimed.
-- Remaining acceptance work: audible opening, real unknown-detail chat relay, Korean return message, final confirmation/completion, and the latest recommendation result. For the shop, ask whether another color is acceptable while that preference remains unknown.
-- PDF/PPTX are honest partial-live checkpoint exports; refresh their evidence and packaged artifacts after the next verified run. No official submission or public deployment has occurred.
+Use `feat/v2-design-integration`. Newer local work remains preserved at `codex/pre-pr1-checkpoint` (`eb4e5ce`); it was carried onto this branch as `ea7d30f`. Preference repairs are in `8ce4526`, integrated with teammate updates through `92cedd6` by merge `da81743`. The local `.env` is ignored. V1 remains available.
 
-Continue the shop rehearsal from the fresh customer/business tabs. This checkpoint includes the startup changes; the teammate UI branch has not yet been selected for integration.
+Run `npm start`, open http://localhost:4173, and use the generated business link in a separate Chrome tab on this laptop. The customer authorizes; the teammate accepts. No real telephone call is made.
+
+**The fifth shop microphone rehearsal completed successfully at 16:04 KST.** The shop said navy was unavailable and black available, without asking a question. YOKOBU asked the customer whether black was acceptable, returned the human reply in Korean, retained black availability, collected ₩10,000 and pickup by 19:00, confirmed the readback, generated the matching summary/recommendation, and closed the connection. The user confirmed audible opening, relay return, goodbye and microphone shutdown. One truncated price utterance required a legitimate clarification.
+
+See [the PR review](v2-pr1-review.md), `artifacts/v2/pr1-live-shop-fifth-completed.json` and its result screenshot. Four earlier failures remain preserved. The successful run used the preference repair before the later teammate merge; the combined source passed 67 unit, 30 HTTP, 20 customer UI, 19 business UI and 32 design checks, plus build and eight extracted-package checks. Automated checks use mocked provider/media events. They do not expand the single live run into a reliability claim.
+
+The current runnable ZIP is `artifacts/v2/yokobu-v2-runnable.zip`. English submission materials in `submission/v2/` describe this successful shop run and the remaining limitations. The teammate’s Korean clinic deck and notes are preserved separately in `submission/final-ko/`; that deck uses labeled prepared screenshots and is not evidence of a completed clinic rehearsal. Use [editable shop placeholders](v2-shop-demo.md) for the demonstrated scenario.
+
+Actual two-phone connectivity and target-user value remain Unverified. Russian/Chinese interfaces have automated coverage and recorded API checks, with disclosed model-fidelity limits. No official submission, public deployment or PR merge to main occurred.

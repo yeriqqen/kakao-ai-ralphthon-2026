@@ -9,6 +9,10 @@
     "start:v1": "node server.mjs",
     "build": "node scripts/build.mjs",
     "test": "node --test tests/*.test.js",
+    "test:http": "node scripts/check-v2-http.mjs",
+    "test:customer": "node scripts/v2-customer-ui-check.mjs",
+    "test:business": "node scripts/v2-business-ui-check.mjs",
+    "test:ui": "node scripts/v2-design-check.mjs",
     "verify": "node scripts/run-example.mjs"
   },
   "engines": { "node": ">=20" }

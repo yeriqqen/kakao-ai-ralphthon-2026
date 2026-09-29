@@ -1,0 +1,145 @@
+{
+  "provenance": "Isolated replay of actual saved shop greeting/apology. Lifecycle reconstructed active solely for testing; no new live call/microphone. One earlier provider review was discarded by a local harness error (connected was false); this artifact records the corrected two-call replay.",
+  "realAPI": true,
+  "realMicrophone": false,
+  "source": "artifacts/v2/live-shop-first-attempt.json",
+  "results": [
+    {
+      "transcript": {
+        "id": "item_ETLMgM6BFeYhWQ4L1iUZT",
+        "role": "business",
+        "text": "네, 안녕하세요.",
+        "callId": "1921e8b5-723a-49ea-8efa-8801589eecf1",
+        "createdAt": "2026-09-29T06:12:29.537Z"
+      },
+      "review": {
+        "utteranceKind": "social_only",
+        "answers": [],
+        "confirmedKeyDetails": false,
+        "confirmationQuote": "",
+        "readbackEvidence": [],
+        "unavailable": false,
+        "explanation": "The business only responded with a greeting ('네, 안녕하세요.') and did not provide any information regarding stock, price, or closing time. Please ask the business directly about the product's availability, price, or closing time to receive a meaningful answer."
+      },
+      "questions": [
+        {
+          "id": "stock_check_question",
+          "text": "Do you currently have a navy waterproof daypack with a capacity of about 20 liters in stock?",
+          "korean": "현재 약 20리터 용량의 네이비 방수 데이팩이 재고로 있나요?",
+          "status": "unresolved",
+          "resolutionReason": null,
+          "answer": null,
+          "evidence": []
+        },
+        {
+          "id": "price_question",
+          "text": "If available, what is the price of this navy waterproof daypack?",
+          "korean": "해당 네이비 방수 데이팩의 가격이 어떻게 되나요?",
+          "status": "unresolved",
+          "resolutionReason": null,
+          "answer": null,
+          "evidence": []
+        },
+        {
+          "id": "closing_time_question",
+          "text": "What time does your shop close today, or what is the latest time for same-day pickup?",
+          "korean": "오늘 가게 영업 종료 시간 또는 오늘 픽업이 가능한 마지막 시간이 언제인가요?",
+          "status": "unresolved",
+          "resolutionReason": null,
+          "answer": null,
+          "evidence": []
+        }
+      ],
+      "passed": true
+    },
+    {
+      "transcript": {
+        "id": "item_ETLMjKJ1GfQjbF4a2xJwq",
+        "role": "business",
+        "text": "네, 죄송합니다.",
+        "callId": "1921e8b5-723a-49ea-8efa-8801589eecf1",
+        "createdAt": "2026-09-29T06:12:32.836Z"
+      },
+      "review": {
+        "utteranceKind": "social_only",
+        "answers": [],
+        "confirmedKeyDetails": false,
+        "confirmationQuote": "",
+        "readbackEvidence": [],
+        "unavailable": false,
+        "explanation": "The business's response '네, 죄송합니다.' is only a polite apology and does not provide any substantive answer or information about stock, price, or closing time. Please clarify your question or request more specific information from the business."
+      },
+      "questions": [
+        {
+          "id": "stock_check_question",
+          "text": "Do you currently have a navy waterproof daypack with a capacity of about 20 liters in stock?",
+          "korean": "현재 약 20리터 용량의 네이비 방수 데이팩이 재고로 있나요?",
+          "status": "unresolved",
+          "resolutionReason": null,
+          "answer": null,
+          "evidence": []
+        },
+        {
+          "id": "price_question",
+          "text": "If available, what is the price of this navy waterproof daypack?",
+          "korean": "해당 네이비 방수 데이팩의 가격이 어떻게 되나요?",
+          "status": "unresolved",
+          "resolutionReason": null,
+          "answer": null,
+          "evidence": []
+        },
+        {
+          "id": "closing_time_question",
+          "text": "What time does your shop close today, or what is the latest time for same-day pickup?",
+          "korean": "오늘 가게 영업 종료 시간 또는 오늘 픽업이 가능한 마지막 시간이 언제인가요?",
+          "status": "unresolved",
+          "resolutionReason": null,
+          "answer": null,
+          "evidence": []
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "apiEvidence": [
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "resp_037f73db7773c4cc016abb58f1597087d08bc1b3b619810494",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1394,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 1280
+        },
+        "output_tokens": 85,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1479
+      },
+      "at": "2026-09-29T06:21:39.067Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "resp_061dadd837b8fa68016abb58f335d887d09b1f6d10057eab11",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1478,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 83,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1561
+      },
+      "at": "2026-09-29T06:21:40.302Z"
+    }
+  ],
+  "passed": 2,
+  "total": 2,
+  "finishedAt": "2026-09-29T06:21:40.303Z"
+}

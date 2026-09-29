@@ -50,27 +50,27 @@ const base='Team-defined YOKOBU v2 scope, including the later instruction to use
 }
 {
  const s=page(3,'The laptop demonstration');
- text(s,'Acceptance scenario · latest rehearsal incomplete',74,143,1100,43,25,C.amber,true);
+ text(s,'A real shop rehearsal completed on this laptop',74,143,1100,43,25,C.amber,true);
  text(s,'CUSTOMER TAB',74,223,535,42,24,C.muted,true);
- text(s,'“I want to go to a hospital.”',74,277,572,58,34,C.ink,true);
- text(s,'Answer the AI’s questions.\nReview the plan and authorize.\nReply to unknown details in chat.',74,364,565,146,29);
+ text(s,'“Can you help me check whether\na shop has an item in stock?”',74,277,572,94,32,C.ink,true);
+ text(s,'Answer the AI’s questions.\nReview the plan and authorize.\nReply to unknown details in chat.',74,383,565,127,29);
  text(s,'BUSINESS TAB',714,223,493,42,24,C.muted,true);
  text(s,'Inactive until authorized\nand accepted',714,277,492,92,34,C.ink,true);
  text(s,'The teammate accepts the call.\nSpeak Korean through the laptop’s\nmicrophone and speaker.',714,387,492,134,28);
- text(s,'The teammate asks a detail the interview has not covered.\nThe AI asks the customer, waits, and relays the answer in Korean.',74,543,1129,78,27,C.muted);
+ text(s,'Navy is known. Whether black is acceptable is still unknown.\nThe live relay returned the answer in Korean and the call completed.',74,543,1129,78,27,C.muted);
  text(s,'Completion requires every required answer and a confirmed readback.',74,624,1129,29,21,C.muted);
- s.speakerNotes.textFrame.setText(base+'\n0:55–2:00. Open a separate business tab on the same laptop. It must remain inactive before customer authorization. Accept only when incoming. Use fictional customer details and business answers. Choose an unknown customer detail based on the actual interview, rather than assuming prior-visit status is unknown. The third actual rehearsal captured four business answers and a readback, but confirmation reset the answers and the teammate disconnected. Unknown-detail relay and a normal completed call remain unverified. Demonstrate these steps only if a new real run actually reaches them.');
+ s.speakerNotes.textFrame.setText(base+"\n0:55–2:00. The fifth PR rehearsal completed at 16:04 KST on this laptop. The customer requested navy waterproof daypack stock, price and latest evening pickup. After authorization and acceptance, the Korean-speaking teammate said navy was unavailable and black available without explicitly asking a question. YOKOBU proactively asked the customer whether black was acceptable. The human customer replied yes; YOKOBU returned that choice in Korean and updated the current questions. The earlier stock answer was retained. The teammate gave 10,000 won and pickup until 7 PM. A full readback was confirmed and the call completed normally. One price utterance was transcribed only as an incomplete fragment and required clarification. The user confirmed the Korean opening, return, goodbye and microphone shutdown. Source: artifacts/v2/pr1-live-shop-fifth-completed.json and docs/v2-pr1-review.md. All information is fictional; no order or reservation occurred.");
 }
 {
  const s=page(4,'Codex work and verification');
  text(s,'Codex built the chat, call state, and test harnesses',74,157,1120,45,30,C.ink,true);
  text(s,evidence.interface,74,205,1120,79,27);
  text(s,evidence.interfaceBoundary,74,286,1120,33,21,C.muted);
- text(s,'Actual Korean speech: Partial',74,349,1120,45,31,C.ink,true);
+ text(s,'Latest shop voice attempt: Completed',74,349,1120,45,31,C.ink,true);
  text(s,evidence.api,74,399,1120,80,27);
- text(s,'Still unverified',74,526,1120,43,31,C.amber,true);
+ text(s,'Real microphone flow observed',74,526,1120,43,31,C.amber,true);
  text(s,evidence.voice,74,576,1130,79,26,C.amber);
- s.speakerNotes.textFrame.setText(base+'\n2:00–2:30. The current code checkpoint has 57 local tests, 17 local HTTP checks, 20 mocked customer browser checks, and 11 mocked business browser checks. These are different evidence classes. The third real laptop microphone run captured four actual Korean business answers and an assistant readback, including qualified cost uncertainty. Business confirmation incorrectly reset the resolved state; the human disconnected. Korean audibility was human-confirmed in the first attempt only. Unknown-detail relay was not exercised in the third attempt. Later readback fixes require another live rehearsal. Real Russian and Chinese interviews were exercised, but Korean question fidelity and unsupported first-visit wording remain limited. Sources: artifacts/v2/live-native-rehearsal-third-attempt.json; artifacts/v2/live-native-third-attempt-audit.json; artifacts/v2/customer-ui-check.json; docs/v2-verification.md. These local evidence files are not raw material for the official upload.');
+ s.speakerNotes.textFrame.setText(base+"\n2:00–2:30. Codex used actual failed rehearsals to diagnose ignored business questions, repeated readbacks, unavailable-stock inferences and unchanged question targets after a customer decision. It fixed saved transcript identity at the HTTP boundary, added detection of questions and offered alternatives, preserved supported answers, and refined current targets after real customer replies. The fifth live run completed the core flow. Earlier failures remain preserved. Its source was committed as 8ce4526; teammate concise-result and shutdown changes through 92cedd6 were then integrated and regression-tested. Combined checks: 67 unit, 30 localhost HTTP with mocked AI, 20 customer UI, 19 business UI, 32 design and eight extracted-package checks; build passed. These tests do not establish another live run or broad reliability. English, Russian and Chinese interfaces are covered; real multilingual model fidelity has recorded limits. Target-user value and physical two-phone connectivity remain unverified. Sources: docs/v2-pr1-review.md and artifacts/v2/pr1-live-shop-fifth-completed.json.");
 }
 {
  const s=page(5,'Value hypothesis and scope');

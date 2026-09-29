@@ -32,6 +32,9 @@ let goodbyeResponse = null;
 let responseBusy = false;
 let assistantSpeaking = false;
 let speakingResponseId = null;
+const pendingPlayback = new Set();
+const drainedPlayback = new Set();
+let continuationNeeded = false;
 let activeResponseId = null;
 let requestedResponseKind = null;
 let activeResponseKind = null;
@@ -54,27 +57,28 @@ const seenVoiceMessages = new Set();
 const savedTranscripts = new Set();
 const turns = new Map();
 const pendingTranscripts = new Map();
+let businessSpeaking = false;
 const terminal = new Set(['completed', 'interrupted', 'failed']);
 const statusText = {
-  idle: ['Waiting for customer · 고객 요청 대기', 'No incoming call yet', 'The customer must approve the proposed simulated call first. Your microphone is off.'],
-  pending: ['Incoming simulated call · 수신 대기', 'The customer has authorized a call', 'Accept when you are ready. For the relay rehearsal, ask one unknown customer detail after the assistant’s opening question, before answering the service questions.'],
-  connecting: ['Connecting · 연결 중', 'Connecting to OpenAI Realtime', 'Allow the microphone when your browser asks. Connection has not been verified yet.'],
-  active: ['Live simulated call · 가상 통화 중', 'You can speak in Korean', 'Answer naturally as the fictional business. Watch the generated questions and tell the assistant when a detail is unclear.'],
-  waiting_customer: ['Waiting for customer · 고객 답변 대기', 'The customer is being asked in chat', 'Microphone input is paused. The assistant will relay the customer’s answer in Korean.'],
-  awaiting_decision: ['Customer decision needed · 고객 결정 대기', 'The conversation needs a decision', 'Microphone input is paused while the customer decides how to proceed. Unresolved questions remain unresolved.'],
-  completed: ['Simulation completed · 완료', 'The simulated conversation has ended', 'The customer receives a conversation-grounded summary. This is not verification by a real business.'],
-  interrupted: ['Call interrupted · 통화 중단', 'This was not a successful completion', 'Unresolved questions must remain visible in the customer’s chat.'],
-  failed: ['Connection failed · 연결 실패', 'The voice connection could not continue', 'No successful call is claimed. Return to the customer chat to decide how to proceed.'],
+  idle: ['Ready for a call', 'Ready when you are', 'Your next call will appear here.'],
+  pending: ['Incoming call', 'YOKOBU is calling', 'Korean voice assistant'],
+  connecting: ['Connecting', 'Connecting your call', 'Allow microphone access to continue.'],
+  active: ['Connected', 'You’re connected', 'Speak naturally in Korean.'],
+  waiting_customer: ['On hold', 'Checking with the customer', 'We’ll be right back.'],
+  awaiting_decision: ['On hold', 'Waiting for a decision', 'The customer is choosing how to proceed.'],
+  completed: ['Call completed', 'All taken care of', 'The customer has received your answers.'],
+  interrupted: ['Call ended', 'Until next time', 'The conversation has ended.'],
+  failed: ['Unable to connect', 'Call unavailable', 'Please try again from Chat.'],
 };
 
 function showError(message) { $('error').textContent = message; $('error').hidden = !message; }
 function currentStatus() { return state?.call?.status || 'idle'; }
 function live() { return peer?.connectionState === 'connected' && channel?.readyState === 'open' && connectionAnnounced; }
 function syncMicrophone() {
-  const enabled = live() && currentStatus() === 'active' && !openingPending && playbackAllowed && !responseBusy && !assistantSpeaking && !waitingTool && !state?.pendingRelay && !muted && !endingAudio && pendingToolCount === 0 && pendingTranscripts.size === 0;
+  const enabled = live() && currentStatus() === 'active' && !openingPending && playbackAllowed && !responseBusy && !assistantSpeaking && pendingPlayback.size === 0 && !waitingTool && !state?.pendingRelay && !muted && !endingAudio && pendingToolCount === 0 && (businessSpeaking || pendingTranscripts.size === 0);
   microphone?.getAudioTracks().forEach(track => { track.enabled = enabled; });
-  $('microphone-status').textContent = enabled ? 'Microphone live · 마이크 사용 중' : microphone ? 'Microphone paused · 마이크 일시 정지' : 'Microphone inactive · 마이크 꺼짐';
-  $('mute-mic').textContent = muted ? 'Unmute microphone · 마이크 켜기' : 'Mute microphone · 마이크 끄기';
+  $('microphone-status').textContent = enabled ? 'Microphone on' : microphone ? 'Listening paused' : 'Microphone off';
+  $('mute-mic').textContent = muted ? 'Unmute' : 'Mute';
 }
 async function api(path = '', { method = 'GET', body, sdp = false, keepalive = false } = {}) {
   const headers = { Authorization: `Bearer ${token}` };
@@ -148,13 +152,19 @@ function renderQuestions() {
 function render() {
   const status = localFailure ? 'failed' : currentStatus();
   const text = statusText[status] || statusText.idle;
-  $('call-status').textContent = text[0];
+  $('call-status').textContent = state?.call?.reason === 'declined' ? 'Declined' : text[0];
   $('call-status').className = 'status' + (status === 'active' && live() ? ' active' : ['pending', 'connecting', 'waiting_customer', 'awaiting_decision'].includes(status) ? ' waiting' : ['failed', 'interrupted'].includes(status) ? ' failed' : '');
-  $('call-heading').textContent = text[1]; $('call-detail').textContent = text[2];
+  $('call-heading').textContent = state?.call?.reason === 'declined' ? 'Call declined' : text[1]; $('call-detail').textContent = state?.call?.reason === 'declined' ? 'The caller has been notified.' : text[2];
+  document.body.dataset.callState = status;
+  const institution = state?.institutions?.find(item => item.id === state.call.institutionId);
+  $('business-name').textContent = institution?.name?.replace(/^(?:Fictional\s+|Вымышленн[а-я]+\s+|虚构\s*)/iu, '') || '';
+  const elapsed = state?.call?.acceptedAt ? Math.max(0, Math.floor(((state.call.endedAt ? Date.parse(state.call.endedAt) : Date.now()) - Date.parse(state.call.acceptedAt)) / 1000)) : 0;
+  $('call-timer').textContent = state?.call?.accepted ? `${String(Math.floor(elapsed / 60)).padStart(2, '0')}:${String(elapsed % 60).padStart(2, '0')}` : '';
+  $('decline-call').hidden = status !== 'pending' || accepting || !!peer;
   $('connection-label').textContent = live() ? 'OpenAI connection established' : accepting ? 'Connection not yet verified' : 'Not connected';
   if (openingPending && live()) {
-    $('call-heading').textContent = 'Preparing the Korean opening';
-    $('call-detail').textContent = 'Listen for the greeting and first question. Your microphone stays paused until the assistant finishes.';
+    $('call-heading').textContent = 'You’re connected';
+    $('call-detail').textContent = 'Your assistant is speaking…';
     $('connection-label').textContent = openingAudioStarted ? 'Opening audio received · Listen, then reply' : 'Waiting for the assistant’s opening audio';
   }
   $('accept-call').hidden = status !== 'pending' || accepting || !!peer;
@@ -163,7 +173,7 @@ function render() {
   $('mute-mic').hidden = !live() || terminal.has(status);
   const waiting = ['waiting_customer', 'awaiting_decision'].includes(status) || waitingTool;
   $('waiting-note').hidden = !waiting;
-  $('waiting-note').textContent = status === 'awaiting_decision' ? 'The assistant cannot proceed yet. Waiting for the customer’s decision. · 고객의 결정을 기다리고 있습니다.' : 'Please wait while the assistant checks with the customer. Microphone input is paused. · 고객에게 확인 중입니다.';
+  $('waiting-note').textContent = status === 'awaiting_decision' ? 'Waiting for the customer’s decision.' : 'Checking with the customer…';
   renderQuestions(); syncMicrophone();
 }
 function addTranscript(id, role, text) {
@@ -180,7 +190,7 @@ function addTranscript(id, role, text) {
 function send(event) { if (channel?.readyState !== 'open') throw new Error('Realtime event channel is not connected.'); channel.send(JSON.stringify(event)); }
 function isWaiting() { return waitingTool || ['waiting_customer', 'awaiting_decision'].includes(currentStatus()) || !!state?.pendingRelay; }
 function pumpResponse() {
-  if (responseBusy || pendingToolCount || channel?.readyState !== 'open' || !responseQueue.length) return;
+  if (responseBusy || assistantSpeaking || businessSpeaking || pendingPlayback.size || pendingTranscripts.size || pendingToolCount || channel?.readyState !== 'open' || !responseQueue.length) return;
   // A queued question must not resume after the server has decided to wait or end.
   responseQueue = responseQueue.filter(task => isWaiting() ? task.kind === 'wait' : currentStatus() === 'completed' ? task.kind === 'goodbye' : !terminal.has(currentStatus()) && task.kind !== 'wait');
   if (!responseQueue.length) return;
@@ -190,22 +200,36 @@ function pumpResponse() {
   responseBusy = true; requestedResponseKind = task.kind; activeResponseId = null;
   syncMicrophone();
   // Keep the server's full system instructions. Control messages do not replace them.
-  send({ type: 'response.create', ...(['opening', 'wait', 'goodbye'].includes(task.kind) ? { response: { tool_choice: 'none', output_modalities: ['audio'] } } : {}) });
+  send({ type: 'response.create', ...(['opening', 'wait', 'goodbye'].includes(task.kind) ? { response: { tool_choice: 'none', output_modalities: ['audio'] } } : task.kind === 'complete' ? { response: { tool_choice: { type: 'function', name: 'complete_call' } } } : {}) });
 }
 function respond(instructions = '', text = '', kind = 'normal') {
-  if (kind === 'normal' && (isWaiting() || terminal.has(currentStatus()))) return;
+  if (['normal', 'continuation', 'complete'].includes(kind) && (isWaiting() || terminal.has(currentStatus()))) return;
+  // Consecutive reviewed fragments update one pending reply with the latest state.
+  // Tool results, customer relay updates and control responses remain separate.
+  if (['continuation', 'complete'].includes(kind)) responseQueue = responseQueue.filter(task => !['continuation', 'complete'].includes(task.kind));
   responseQueue.push({ instructions, text, kind }); pumpResponse();
+}
+function continueAfterBusinessReview() {
+  if (!continuationNeeded || businessSpeaking || pendingTranscripts.size || pendingToolCount || currentStatus() !== 'active' || isWaiting()) return;
+  continuationNeeded = false;
+  const unresolved = state.requiredQuestions.filter(question => question.status !== 'resolved');
+  const action = unresolved.length
+    ? `Only this next question remains the current target: ${unresolved[0].korean}. Do not re-ask questions marked resolved. If the business already attempted to answer this question but the transcript did not resolve it, briefly apologize for not catching that detail and ask one precise clarification. Do not claim it was confirmed, invent a number from unclear speech, or read back a complete result while any required question is unresolved.`
+    : state.call.confirmedKeyDetails
+      ? 'The server has retained every answer and validated the business confirmation of the full readback. Call complete_call now. Do not ask or read back the questions again.'
+      : 'Every required question has a retained answer. Read back only those recorded facts once, ask whether they are correct, and wait. Do not collect the answers again or add facts beyond the retained answers.';
+  respond(`Continue in Korean using the application state below as authoritative, even if earlier audio sounded different. ${action} If the latest business utterance asks for unknown customer information, address it through request_customer_detail before continuing the checklist.`, JSON.stringify({ requiredQuestions: state.requiredQuestions, confirmedKeyDetails: state.call.confirmedKeyDetails }), !unresolved.length && state.call.confirmedKeyDetails ? 'complete' : 'continuation');
 }
 function ensureWaitNotice() {
   if (waitNoticeActive || channel?.readyState !== 'open') return;
   waitNoticeActive = true;
-  responseQueue = [];
+  responseQueue = []; continuationNeeded = false;
   if (responseBusy && activeResponseKind !== 'wait') {
     cancellationPending = true;
     if (activeResponseId) cancelledResponses.add(activeResponseId);
     send({ type: 'response.cancel', ...(activeResponseId ? { response_id: activeResponseId } : {}) });
-    send({ type: 'output_audio_buffer.clear' });
   }
+  if (responseBusy || assistantSpeaking || pendingPlayback.size) send({ type: 'output_audio_buffer.clear' });
   respond('The application is waiting for customer information or a customer decision. Say once, briefly and politely in Korean, that you are checking with the customer and ask the business to wait. Then remain silent. Do not ask a business question or infer any customer answer.', '', 'wait');
 }
 
@@ -219,6 +243,8 @@ function releasePeer() {
   $('remote-audio').pause(); $('remote-audio').srcObject = null;
   accepting = false; connectionAnnounced = false; waitingTool = false; responseBusy = false; assistantSpeaking = false; speakingResponseId = null; endingAudio = false; completingTool = false;
   responseQueue = []; activeResponseId = null; requestedResponseKind = null; activeResponseKind = null; cancellationPending = false;
+  pendingPlayback.clear(); drainedPlayback.clear(); continuationNeeded = false;
+  businessSpeaking = false;
   waitNoticeActive = false; finishClosing = false;
   sessionReady = false; remoteTrackReady = false; playbackAllowed = false; openingPending = false; openingSent = false; openingResponseId = null; openingAudioStarted = false; openingAudioStopped = false;
   for (const item of pendingTranscripts.values()) item.resolve();
@@ -235,8 +261,8 @@ async function disconnect(reason, failed = true) {
 async function finishPlayback() {
   if (!endingAudio || finishClosing) return;
   finishClosing = true;
-  await transcriptQueue;
-  if (!endingAudio) return;
+  // The server has already validated the call evidence. Saving the optional
+  // farewell must never hold the microphone or peer open after playback.
   releasePeer();
   post('/connection', { connected: false, reason: 'completed_audio_finished' }).catch(() => {});
 }
@@ -244,7 +270,7 @@ function planGoodbye() {
   if (endingAudio) return;
   endingAudio = true; goodbyeResponse = null; responseQueue = []; syncMicrophone();
   respond('The application has authorized completion. Briefly thank the fictional business in Korean and end. Do not ask another question or call another tool.', '', 'goodbye');
-  finishTimer = setTimeout(finishPlayback, 20000);
+  finishTimer = setTimeout(finishPlayback, 8000);
 }
 
 function trackPendingTranscript(id) {
@@ -258,7 +284,7 @@ function persistTranscript(id, role, text) {
   // Silence/noise may commit an audio item with an empty completed transcript.
   // It supplies no evidence, but it is not a missing transcription event.
   if (!text?.trim()) {
-    if (role === 'business') { pendingTranscripts.get(id)?.resolve(); pendingTranscripts.delete(id); syncMicrophone(); }
+    if (role === 'business') { pendingTranscripts.get(id)?.resolve(); pendingTranscripts.delete(id); continueAfterBusinessReview(); pumpResponse(); syncMicrophone(); }
     return;
   }
   const key = `${role}:${id}`;
@@ -274,10 +300,10 @@ function persistTranscript(id, role, text) {
     applyState(next);
     // Server semantic review is authoritative. Automatic VAD responses are disabled.
     // A pending function already owns the next reply and will return its tool result.
-    if (role === 'business' && currentStatus() === 'active' && !isWaiting() && pendingToolCount === 0) {
-      respond('Continue the assigned simulated business call in Korean. After acknowledging a greeting or an answer, ask one next unresolved required question; do not stop at a greeting. If the business asked for unknown customer information, use request_customer_detail instead. If all questions are resolved, read back key facts and obtain confirmation before complete_call.', JSON.stringify({ requiredQuestions: state.requiredQuestions, confirmedKeyDetails: state.call.confirmedKeyDetails }));
+    if (role === 'business' && currentStatus() === 'active' && !isWaiting() && pendingToolCount === 0 && state.voiceMessage?.sourceTranscriptId !== id) {
+      continuationNeeded = true; continueAfterBusinessReview();
     }
-    syncMicrophone();
+    pumpResponse(); syncMicrophone();
   }).catch(async () => {
     if (eventGeneration === generation) await disconnect('Text evidence could not be saved. Voice stopped so the summary cannot silently omit this conversation.');
   });
@@ -328,6 +354,10 @@ function handleEvent(event) {
   }
   if (event.type === 'response.done') {
     const response = event.response || {};
+    // Generation can finish before WebRTC announces playback. Reserve that
+    // response until its own output-buffer drain event, including this ordering.
+    const hasAudio = response.output?.some(item => item.content?.some(part => ['audio', 'output_audio'].includes(part.type)));
+    if (response.id && hasAudio && response.status === 'completed' && !cancelledResponses.has(response.id) && !drainedPlayback.has(response.id)) pendingPlayback.add(response.id);
     if (response.status === 'completed' && !cancelledResponses.has(response.id)) {
       for (const item of response.output || []) if (item.type === 'function_call') enqueueTool({ ...item, response_id: response.id });
     }
@@ -339,6 +369,12 @@ function handleEvent(event) {
       syncMicrophone();
     }
   }
+  // A second utterance may start before review of the first one returns. Keep
+  // capturing it, and do not respond until its transcript has also been reviewed.
+  if (event.type === 'input_audio_buffer.speech_started') { businessSpeaking = true; syncMicrophone(); }
+  if (event.type === 'input_audio_buffer.speech_stopped') {
+    trackPendingTranscript(event.item_id); businessSpeaking = false; syncMicrophone();
+  }
   if (event.type === 'input_audio_buffer.committed') trackPendingTranscript(event.item_id);
   if (event.type === 'conversation.item.input_audio_transcription.completed') persistTranscript(event.item_id || event.event_id, 'business', event.transcript);
   if (event.type === 'response.output_audio_transcript.done') persistTranscript(event.item_id || event.event_id, 'assistant', event.transcript);
@@ -349,14 +385,20 @@ function handleEvent(event) {
   if (event.type === 'response.function_call_arguments.done') enqueueTool(event);
   if (event.type === 'response.output_item.done' && event.item?.type === 'function_call') enqueueTool({ ...event.item, response_id: event.response_id });
   if (event.type === 'output_audio_buffer.started') {
+    if (event.response_id && drainedPlayback.has(event.response_id)) return;
+    if (event.response_id) pendingPlayback.add(event.response_id);
     if (openingPending && event.response_id === openingResponseId) { openingAudioStarted = true; clearTimeout(openingTimer); }
     assistantSpeaking = true; speakingResponseId = event.response_id || null; syncMicrophone();
     $('connection-label').textContent = 'OpenAI audio is playing · Listen, then reply'; $('heard-korean').disabled = false;
   }
-  if (event.type === 'output_audio_buffer.cleared' && (!event.response_id || !speakingResponseId || event.response_id === speakingResponseId)) { assistantSpeaking = false; speakingResponseId = null; syncMicrophone(); }
+  if (['output_audio_buffer.stopped', 'output_audio_buffer.cleared'].includes(event.type)) {
+    if (event.response_id) { pendingPlayback.delete(event.response_id); drainedPlayback.add(event.response_id); }
+    else if (event.type === 'output_audio_buffer.cleared') { for (const id of pendingPlayback) drainedPlayback.add(id); pendingPlayback.clear(); }
+    if (!event.response_id || event.response_id === speakingResponseId) { assistantSpeaking = false; speakingResponseId = null; }
+    pumpResponse(); syncMicrophone();
+  }
   if (event.type === 'output_audio_buffer.stopped') {
     if (openingPending && openingAudioStarted && event.response_id === openingResponseId) { openingAudioStopped = true; finishOpening(); }
-    if (!event.response_id || !speakingResponseId || event.response_id === speakingResponseId) { assistantSpeaking = false; speakingResponseId = null; syncMicrophone(); }
     if (endingAudio && goodbyeResponse && event.response_id === goodbyeResponse) finishPlayback();
     else render();
   }
@@ -371,6 +413,7 @@ function handleEvent(event) {
 function enqueueTool(event) {
   if (!event.call_id || toolCalls.has(event.call_id) || cancelledResponses.has(event.response_id)) return;
   toolCalls.add(event.call_id);
+  continuationNeeded = false; responseQueue = responseQueue.filter(task => !['continuation', 'complete'].includes(task.kind));
   const eventGeneration = generation;
   pendingToolCount++; syncMicrophone();
   toolQueue = toolQueue.then(() => runTool(event, eventGeneration)).catch(() => {
@@ -392,6 +435,7 @@ function applyState(next) {
   if (isWaiting()) ensureWaitNotice();
   if (newVoiceMessage && channel?.readyState === 'open' && status === 'active' && !isWaiting()) {
     seenVoiceMessages.add(voice.id);
+    continuationNeeded = false; responseQueue = responseQueue.filter(task => !['continuation', 'complete'].includes(task.kind));
     respond('Relay this application-provided update naturally in polite Korean. Reuse the supplied customer information, then continue only the unresolved required questions.', `Application update from the customer chat:\n${voice.text}`);
   }
   if (status === 'completed' && peer && !completingTool && !endingAudio) planGoodbye();
@@ -457,7 +501,7 @@ async function acceptCall() {
         openingTimer = setTimeout(() => {
           if (attempt === generation && !openingAudioStarted) {
             diagnostic('opening.timeout');
-            disconnect('The assistant’s opening audio did not start within 12 seconds. Return to the customer chat and select Retry this simulation.');
+            disconnect('The assistant’s opening audio did not start within 12 seconds. Return to the customer chat and select Try again.');
           }
         }, 12000);
         await pollOnce();
@@ -480,6 +524,8 @@ async function acceptCall() {
   }
 }
 $('accept-call').addEventListener('click', acceptCall);
+$('decline-call').addEventListener('click', async () => { $('decline-call').disabled = true; try { applyState(await post('/decline', {})); } catch { showError('The call could not be declined. Please try again.'); } finally { $('decline-call').disabled = false; } });
+const debugLink = new URL('/debug', location.origin); debugLink.searchParams.set('room', roomId || ''); debugLink.hash = `token=${encodeURIComponent(token || '')}`; if (roomId && token) { $('debug-link').href = debugLink.href; window.name = `yokobu-call-${roomId}`; $('debug-link').target = `yokobu-debug-${roomId}`; $('chat-link').target = `yokobu-chat-${roomId}`; }
 $('end-call').addEventListener('click', () => disconnect('The business operator disconnected the simulated call.', false));
 $('mute-mic').addEventListener('click', () => { muted = !muted; syncMicrophone(); });
 $('play-audio').addEventListener('click', playRemoteAudio);
@@ -494,6 +540,6 @@ window.addEventListener('pagehide', () => {
   releasePeer();
   if (wasConnected) api('/connection', { method: 'POST', body: { connected: false, reason: 'Business tab closed or navigated away.' }, keepalive: true }).catch(() => {});
 });
-if (!roomId || !token) { stopped = true; showError('Open the business link from the customer chat. This page needs its room and access token; no microphone has been activated.'); }
+if (!roomId || !token) { stopped = true; showError('Start a conversation in Chat, then open Call from its top bar.'); }
 else if (!/^[A-Za-z0-9_-]{1,160}$/.test(roomId) || token.length > 2048) { stopped = true; showError('This business room link is invalid. Open a new link from the customer chat.'); }
 else { if (!isSecureContext) showError('Microphone access needs localhost or HTTPS.'); pollLoop(); }

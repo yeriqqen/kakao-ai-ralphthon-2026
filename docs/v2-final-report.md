@@ -1,5 +1,7 @@
 # YOKOBU v2 — checkpoint report
 
+> Latest PR #1 checkpoint: [v2-pr1-review.md](v2-pr1-review.md) records the fifth shop rehearsal completing the real laptop flow, with human-confirmed Korean audio and microphone shutdown, after four preserved failures. It also identifies the later teammate merge and current regression checks. Earlier sections below remain historical.
+
 **Partial live acceptance.** API access was restored at **2026-09-29 14:06:39 KST**. Real multilingual chat generation has been exercised. The latest real RU/ZH runs reach readiness with source references and Korean meanings preserved; a targeted Chinese scope fix preserves Korean insurance but its final plan remains Partial because Korean wording omits rash and the price question presumes an initial consultation. The first real English laptop call transcribed a human Korean greeting and produced human-confirmed audible Korean but stalled. The second interrupted on a missing-transcript timeout. The third obtained four answers and readback confirmation, but a fact-reset defect caused repeated questions before disconnection. The complete voice/relay/result flow remains Unverified. A fresh actual Chrome shop interview is authorized and pending teammate acceptance/audibility at this checkpoint; the revised opening is not audibly verified. Historical failures are preserved.
 
 ## Built

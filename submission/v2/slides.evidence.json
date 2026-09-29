@@ -1,7 +1,7 @@
 {
-  "checkpoint": "2026-09-29, after the third actual laptop rehearsal",
-  "interface": "57 code + 17 HTTP checks passed. Mocked browser checks:\n20 customer + 11 business checks passed.",
-  "interfaceBoundary": "These checks do not establish real speech quality or user value.",
-  "api": "Four spoken answers and a Korean readback were captured.\nConfirmation reset the answers; the teammate ended the run.",
-  "voice": "Live unknown-detail relay and normal completion: Unverified.\nRussian/Chinese interviews exercised; fidelity limits remain."
+  "checkpoint": "2026-09-29 16:10 KST; fifth actual shop microphone run completed; teammate merge regression-tested",
+  "interface": "67 unit and 30 HTTP checks passed. Mocked browser checks:\n20 customer, 19 business and 32 design checks passed.",
+  "interfaceBoundary": "Automated checks are separate from the actual microphone rehearsal.",
+  "api": "Offered black instead of navy \u2192 customer accepted in chat.\nKorean return \u2192 \u20a910,000 \u2192 pickup by 7 PM \u2192 confirmed ending.",
+  "voice": "The teammate confirmed Korean audio and microphone shutdown.\nOne price fragment needed clarification. User value is unverified."
 }

@@ -1,0 +1,784 @@
+{
+  "provenance": "Actual third PR Chrome microphone rehearsal. The business explicitly asked whether another color was acceptable; Realtime skipped the relay. Further pickup utterances were transcribed ambiguously; the operator ended the run before valid completion. Original state is preserved, no injected business speech. Human audibility remains unconfirmed.",
+  "simulation": true,
+  "id": "8dcfa668-4a55-4266-bd92-ce87a4b6529d",
+  "language": "en",
+  "version": 28,
+  "revision": 28,
+  "createdAt": "2026-09-29T06:35:20.914Z",
+  "updatedAt": "2026-09-29T06:37:45.998Z",
+  "messages": [
+    {
+      "id": "0a393a0b-e82c-4462-b89f-63616815bea3",
+      "role": "user",
+      "text": "For this fictional demo, please ask a bag shop in Mapo, Seoul whether a navy waterproof daypack of about 20 liters is in stock, what it costs, and the latest pickup time this evening. Prepare the simulated call plan now. Do not order or reserve anything.",
+      "kind": "chat",
+      "createdAt": "2026-09-29T06:35:20.931Z"
+    },
+    {
+      "id": "cf051de1-4d2d-4287-8407-f1fdea93a7dc",
+      "role": "assistant",
+      "text": "The simulated call plan is ready. The shop’s stock, price, and pickup details are unconfirmed; this simulation will not place an order or make a reservation.",
+      "kind": "chat",
+      "createdAt": "2026-09-29T06:35:36.252Z"
+    },
+    {
+      "id": "9f9c9ae0-f7a9-4b2f-b09b-cc940ca68b3e",
+      "role": "assistant",
+      "text": "Fictional simulation only — no real call or booking.\n\nCall outcome: Simulation ended incompletely.\n\nValidated business answers in this simulation:\n- What is the price of that daypack?\n  The price of the daypack is 10,000 won regardless of color.\n\nCustomer-provided information:\n- Shop location: Mapo, Seoul\n- Bag type: Daypack\n- Color: Navy\n- Waterproofing: Waterproof\n- Capacity: About 20 liters\n- Pickup timing: This evening; wants to know the latest pickup time\n- Purchase instructions: Do not order or reserve anything\n\nStill unresolved:\n- Is a navy, waterproof daypack with a capacity of about 20 liters in stock?\n- What is the latest time I could pick up the daypack this evening?\n\nClarify the selected questions before choosing a simulated option.\n\nSelected recorded answers:\n- What is the price of that daypack?\n  The price of the daypack is 10,000 won regardless of color.\n\nQuestions to clarify:\n- Is a navy, waterproof daypack with a capacity of about 20 liters in stock?\n- What is the latest time I could pick up the daypack this evening?",
+      "kind": "summary",
+      "createdAt": "2026-09-29T06:37:45.998Z"
+    }
+  ],
+  "transcripts": [
+    {
+      "id": "item_ETLjiJALYHzW8wKAHUFaK",
+      "role": "assistant",
+      "text": "안녕하세요, 모의 통화 연결입니다. 남색 방수 데이팩(용량 약 20리터)이 재고로 있나요?",
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "createdAt": "2026-09-29T06:36:16.443Z"
+    },
+    {
+      "id": "item_ETLjso11SwlsDTXlbFqxO",
+      "role": "business",
+      "text": "어 남색은 없고 다른 색상도 괜찮세요?",
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "createdAt": "2026-09-29T06:36:29.456Z"
+    },
+    {
+      "id": "item_ETLjyhMk3qBmvJK7tG2gm",
+      "role": "assistant",
+      "text": "알겠습니다. 그럼 해당 데이팩의 가격은 얼마인가요?",
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "createdAt": "2026-09-29T06:36:32.179Z"
+    },
+    {
+      "id": "item_ETLk5osbQM8E9oMR7CwLw",
+      "role": "business",
+      "text": "색깔 상관없이 만 원입니다.",
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "createdAt": "2026-09-29T06:36:41.306Z"
+    },
+    {
+      "id": "item_ETLkE1cGDNTM33CIVIm83",
+      "role": "assistant",
+      "text": "네, 가격은 만 원이군요. 그럼 오늘 저녁 해당 데이팩을 가장 늦게 몇 시까지 픽업할 수 있나요?",
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "createdAt": "2026-09-29T06:36:48.718Z"
+    },
+    {
+      "id": "item_ETLkP1Riqyzw365TEAvxB",
+      "role": "business",
+      "text": "7시까지 무슨 일이 있나?",
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "createdAt": "2026-09-29T06:36:59.673Z"
+    },
+    {
+      "id": "item_ETLkUCZZI2FPfio1NI8lh",
+      "role": "assistant",
+      "text": "네, 7시까지 오면 된다는 말씀이시죠?\n\n지금까지 내용 정리해보겠습니다. 남색 방수 데이팩(약 20리터)은 현재 재고가 없지만, 다른 색상은 가능하고, 가격은 색상 상관없이 만 원이고, 오늘 저녁 픽업 마감 시간은 7시라고 하셨습니다. 맞나요?",
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "createdAt": "2026-09-29T06:37:06.998Z"
+    },
+    {
+      "id": "item_ETLkpRzsysMc7S5aOdMEc",
+      "role": "business",
+      "text": "네, 맞습니다.",
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "createdAt": "2026-09-29T06:37:25.876Z"
+    },
+    {
+      "id": "item_ETLktobBskVDoZD3pN3i5",
+      "role": "assistant",
+      "text": "감사합니다. 그럼 오늘 저녁 해당 데이팩을 가장 늦게 몇 시까지 픽업할 수 있나요?",
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "createdAt": "2026-09-29T06:37:29.166Z"
+    },
+    {
+      "id": "item_ETLl3rzeJIrZPcwPlmWSp",
+      "role": "business",
+      "text": "연구실까지.",
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "createdAt": "2026-09-29T06:37:38.401Z"
+    },
+    {
+      "id": "item_ETLl5TVNqlyTcYmZnnJBk",
+      "role": "assistant",
+      "text": "네, 7시까지 픽업 가능하시군요. \n\n이제 정리해보겠습니다. 남색 방수 데이팩(약 20리터)은 재고가 없고, 다른 색상은 가능하며 가격은 만 원입니다. 그리고 오늘 저녁 가장 늦게 픽업할 수 있는 시간은 7시까지라고 하셨습니다. 맞는지 확인 부탁드립니다.",
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "createdAt": "2026-09-29T06:37:43.652Z"
+    }
+  ],
+  "customerInfo": [
+    {
+      "key": "store_location",
+      "value": "Mapo, Seoul",
+      "sourceMessageId": "0a393a0b-e82c-4462-b89f-63616815bea3",
+      "label": "Shop location"
+    },
+    {
+      "key": "bag_type",
+      "value": "Daypack",
+      "sourceMessageId": "0a393a0b-e82c-4462-b89f-63616815bea3",
+      "label": "Bag type"
+    },
+    {
+      "key": "bag_color",
+      "value": "Navy",
+      "sourceMessageId": "0a393a0b-e82c-4462-b89f-63616815bea3",
+      "label": "Color"
+    },
+    {
+      "key": "waterproof_preference",
+      "value": "Waterproof",
+      "sourceMessageId": "0a393a0b-e82c-4462-b89f-63616815bea3",
+      "label": "Waterproofing"
+    },
+    {
+      "key": "bag_capacity",
+      "value": "About 20 liters",
+      "sourceMessageId": "0a393a0b-e82c-4462-b89f-63616815bea3",
+      "label": "Capacity"
+    },
+    {
+      "key": "pickup_timing",
+      "value": "This evening; wants to know the latest pickup time",
+      "sourceMessageId": "0a393a0b-e82c-4462-b89f-63616815bea3",
+      "label": "Pickup timing"
+    },
+    {
+      "key": "purchase_action",
+      "value": "Do not order or reserve anything",
+      "sourceMessageId": "0a393a0b-e82c-4462-b89f-63616815bea3",
+      "label": "Purchase instructions"
+    }
+  ],
+  "institutions": [
+    {
+      "id": "fictional_mapo_retail_contact",
+      "name": "Fictional Mapo Retail Contact",
+      "nameKo": "",
+      "description": "Ask this hypothetical contact to establish whether the specified daypack is in stock, its price, and the latest pickup time available this evening.",
+      "reason": "Ask this hypothetical contact to establish whether the specified daypack is in stock, its price, and the latest pickup time available this evening.",
+      "fictional": true
+    }
+  ],
+  "requiredQuestions": [
+    {
+      "id": "check_stock",
+      "text": "Is a navy, waterproof daypack with a capacity of about 20 liters in stock?",
+      "korean": "남색 방수 데이팩(용량 약 20리터)이 재고로 있나요?",
+      "status": "resolved",
+      "resolutionReason": null,
+      "answer": "No, the navy (남색) waterproof daypack is not in stock.",
+      "evidence": [
+        {
+          "transcriptId": "item_ETLjso11SwlsDTXlbFqxO",
+          "quote": "어 남색은 없고",
+          "role": "business"
+        }
+      ]
+    },
+    {
+      "id": "ask_price",
+      "text": "What is the price of that daypack?",
+      "korean": "해당 데이팩의 가격은 얼마인가요?",
+      "status": "resolved",
+      "resolutionReason": null,
+      "answer": "The price of the daypack is 10,000 won regardless of color.",
+      "evidence": [
+        {
+          "transcriptId": "item_ETLk5osbQM8E9oMR7CwLw",
+          "quote": "색깔 상관없이 만 원입니다.",
+          "role": "business"
+        }
+      ]
+    },
+    {
+      "id": "latest_pickup",
+      "text": "What is the latest time I could pick up the daypack this evening?",
+      "korean": "오늘 저녁 해당 데이팩을 가장 늦게 몇 시까지 픽업할 수 있나요?",
+      "status": "unresolved",
+      "resolutionReason": null,
+      "answer": null,
+      "evidence": []
+    }
+  ],
+  "planReady": true,
+  "pendingRelay": null,
+  "decisionPrompt": null,
+  "summary": {
+    "text": "Fictional simulation only — no real call or booking.\n\nCall outcome: Simulation ended incompletely.\n\nValidated business answers in this simulation:\n- What is the price of that daypack?\n  The price of the daypack is 10,000 won regardless of color.\n\nCustomer-provided information:\n- Shop location: Mapo, Seoul\n- Bag type: Daypack\n- Color: Navy\n- Waterproofing: Waterproof\n- Capacity: About 20 liters\n- Pickup timing: This evening; wants to know the latest pickup time\n- Purchase instructions: Do not order or reserve anything\n\nStill unresolved:\n- Is a navy, waterproof daypack with a capacity of about 20 liters in stock?\n- What is the latest time I could pick up the daypack this evening?",
+    "recommendation": "Clarify the selected questions before choosing a simulated option.",
+    "reasoning": "Selected recorded answers:\n- What is the price of that daypack?\n  The price of the daypack is 10,000 won regardless of color.\n\nQuestions to clarify:\n- Is a navy, waterproof daypack with a capacity of about 20 liters in stock?\n- What is the latest time I could pick up the daypack this evening?"
+  },
+  "busy": false,
+  "error": null,
+  "voiceMessage": null,
+  "call": {
+    "id": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+    "status": "interrupted",
+    "institutionId": "fictional_mapo_retail_contact",
+    "authorized": true,
+    "accepted": true,
+    "authorizedAt": "2026-09-29T06:35:46.543Z",
+    "acceptedAt": "2026-09-29T06:36:10.381Z",
+    "connected": false,
+    "confirmedKeyDetails": false,
+    "confirmationEvidence": [],
+    "readbackEvidence": [],
+    "endedAt": "2026-09-29T06:37:44.996Z",
+    "reason": "The business operator disconnected the simulated call.",
+    "success": false
+  },
+  "apiEvidence": [
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_0491e528ec6af8b6016abb5c29361c87d08ffbbdaace80dc9d",
+      "model": "gpt-6-luna",
+      "usage": {
+        "input_tokens": 1056,
+        "input_tokens_details": {
+          "cache_write_tokens": 1053,
+          "cached_tokens": 0
+        },
+        "output_tokens": 941,
+        "output_tokens_details": {
+          "reasoning_tokens": 564
+        },
+        "total_tokens": 1997
+      },
+      "at": "2026-09-29T06:35:31.302Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_09388a74cc4a0d06016abb5c3373cc87d099451dba6440f30a",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1861,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 778,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2639
+      },
+      "at": "2026-09-29T06:35:36.251Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "customerFactEvidence": [
+        {
+          "key": "store_location",
+          "sourceMessageId": "0a393a0b-e82c-4462-b89f-63616815bea3",
+          "supportReason": "The user specified wanting to contact a bag shop in Mapo, Seoul.",
+          "sourceQuote": "For this fictional demo, please ask a bag shop in Mapo, Seoul whether a navy waterproof daypack of about 20 liters is in stock, what it costs, and the latest pickup time this evening. Prepare the simulated call plan now. Do not order or reserve anything."
+        },
+        {
+          "key": "bag_type",
+          "sourceMessageId": "0a393a0b-e82c-4462-b89f-63616815bea3",
+          "supportReason": "The user asked about a 'daypack'.",
+          "sourceQuote": "For this fictional demo, please ask a bag shop in Mapo, Seoul whether a navy waterproof daypack of about 20 liters is in stock, what it costs, and the latest pickup time this evening. Prepare the simulated call plan now. Do not order or reserve anything."
+        },
+        {
+          "key": "bag_color",
+          "sourceMessageId": "0a393a0b-e82c-4462-b89f-63616815bea3",
+          "supportReason": "'Navy' is specified as the color preference for the daypack.",
+          "sourceQuote": "For this fictional demo, please ask a bag shop in Mapo, Seoul whether a navy waterproof daypack of about 20 liters is in stock, what it costs, and the latest pickup time this evening. Prepare the simulated call plan now. Do not order or reserve anything."
+        },
+        {
+          "key": "waterproof_preference",
+          "sourceMessageId": "0a393a0b-e82c-4462-b89f-63616815bea3",
+          "supportReason": "'Waterproof' is specified as a required feature for the bag.",
+          "sourceQuote": "For this fictional demo, please ask a bag shop in Mapo, Seoul whether a navy waterproof daypack of about 20 liters is in stock, what it costs, and the latest pickup time this evening. Prepare the simulated call plan now. Do not order or reserve anything."
+        },
+        {
+          "key": "bag_capacity",
+          "sourceMessageId": "0a393a0b-e82c-4462-b89f-63616815bea3",
+          "supportReason": "The daypack's capacity is specified as 'about 20 liters.'",
+          "sourceQuote": "For this fictional demo, please ask a bag shop in Mapo, Seoul whether a navy waterproof daypack of about 20 liters is in stock, what it costs, and the latest pickup time this evening. Prepare the simulated call plan now. Do not order or reserve anything."
+        },
+        {
+          "key": "pickup_timing",
+          "sourceMessageId": "0a393a0b-e82c-4462-b89f-63616815bea3",
+          "supportReason": "The user asked for the latest possible pickup time this evening.",
+          "sourceQuote": "For this fictional demo, please ask a bag shop in Mapo, Seoul whether a navy waterproof daypack of about 20 liters is in stock, what it costs, and the latest pickup time this evening. Prepare the simulated call plan now. Do not order or reserve anything."
+        },
+        {
+          "key": "purchase_action",
+          "sourceMessageId": "0a393a0b-e82c-4462-b89f-63616815bea3",
+          "supportReason": "The user specifically instructed not to order or reserve anything.",
+          "sourceQuote": "For this fictional demo, please ask a bag shop in Mapo, Seoul whether a navy waterproof daypack of about 20 liters is in stock, what it costs, and the latest pickup time this evening. Prepare the simulated call plan now. Do not order or reserve anything."
+        }
+      ],
+      "constraintCoverage": [
+        {
+          "constraint": "stock status of navy, waterproof daypack about 20L",
+          "sourceMessageId": "0a393a0b-e82c-4462-b89f-63616815bea3",
+          "questionIds": [
+            "check_stock"
+          ],
+          "sourceQuote": "For this fictional demo, please ask a bag shop in Mapo, Seoul whether a navy waterproof daypack of about 20 liters is in stock, what it costs, and the latest pickup time this evening. Prepare the simulated call plan now. Do not order or reserve anything."
+        },
+        {
+          "constraint": "price of the navy, waterproof daypack about 20L",
+          "sourceMessageId": "0a393a0b-e82c-4462-b89f-63616815bea3",
+          "questionIds": [
+            "ask_price"
+          ],
+          "sourceQuote": "For this fictional demo, please ask a bag shop in Mapo, Seoul whether a navy waterproof daypack of about 20 liters is in stock, what it costs, and the latest pickup time this evening. Prepare the simulated call plan now. Do not order or reserve anything."
+        },
+        {
+          "constraint": "the latest possible pickup time this evening",
+          "sourceMessageId": "0a393a0b-e82c-4462-b89f-63616815bea3",
+          "questionIds": [
+            "latest_pickup"
+          ],
+          "sourceQuote": "For this fictional demo, please ask a bag shop in Mapo, Seoul whether a navy waterproof daypack of about 20 liters is in stock, what it costs, and the latest pickup time this evening. Prepare the simulated call plan now. Do not order or reserve anything."
+        }
+      ],
+      "questionMeaningChecks": [
+        {
+          "questionId": "check_stock",
+          "faithful": true,
+          "explanation": "The Korean translation faithfully captures the question about stock status for a navy, waterproof daypack of about 20 liters."
+        },
+        {
+          "questionId": "ask_price",
+          "faithful": true,
+          "explanation": "The Korean translation asks for the price of the specified daypack, matching the original meaning."
+        },
+        {
+          "questionId": "latest_pickup",
+          "faithful": true,
+          "explanation": "The Korean translation faithfully asks for the latest possible pickup time this evening for the specified daypack."
+        }
+      ],
+      "at": "2026-09-29T06:35:36.252Z"
+    },
+    {
+      "purpose": "realtime_connect",
+      "status": 201,
+      "model": "gpt-realtime",
+      "at": "2026-09-29T06:36:12.599Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "resp_07b4b28724508515016abb5c6de1cc87d0afa21a0cc6eb7c6b",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1427,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 99,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1526
+      },
+      "at": "2026-09-29T06:36:30.887Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "resp_0fe4189fbc1e4399016abb5c797e0087d0949f9b68042d70a0",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1655,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 111,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1766
+      },
+      "at": "2026-09-29T06:36:46.828Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "resp_04d728879967590e016abb5c8bea9087d0a96deb6566d00617",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1903,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 79,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1982
+      },
+      "at": "2026-09-29T06:37:01.171Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "resp_075c72e2a82045a4016abb5ca6191487d0a4b605c9c4c2a862",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 2143,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 182,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2325
+      },
+      "at": "2026-09-29T06:37:27.493Z"
+    },
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "resp_05ebc526a5ed6546016abb5cb2d11087d0a5a4444322258279",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 2332,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 88,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2420
+      },
+      "at": "2026-09-29T06:37:39.740Z"
+    },
+    {
+      "purpose": "grounded_recommendation",
+      "responseId": "resp_007a5a15ecd760ee016abb5cb95dc087d09cbf58ea5705ea4b",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 597,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 30,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 627
+      },
+      "at": "2026-09-29T06:37:45.997Z"
+    },
+    {
+      "purpose": "recommendation_choice_result",
+      "accepted": true,
+      "action": "clarify_selected_questions",
+      "reasonQuestionIds": [
+        "ask_price"
+      ],
+      "clarificationQuestionIds": [
+        "check_stock",
+        "latest_pickup"
+      ],
+      "at": "2026-09-29T06:37:45.998Z"
+    }
+  ],
+  "observations": [],
+  "voiceDiagnostics": [
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "call.accepted",
+      "receivedAt": "2026-09-29T06:36:10.642Z",
+      "at": "2026-09-29T06:36:10.385Z"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "remote.track",
+      "receivedAt": "2026-09-29T06:36:15.022Z",
+      "at": "2026-09-29T06:36:12.611Z"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "session.created",
+      "receivedAt": "2026-09-29T06:36:15.022Z",
+      "at": "2026-09-29T06:36:14.594Z"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "playback.allowed",
+      "receivedAt": "2026-09-29T06:36:15.022Z",
+      "at": "2026-09-29T06:36:14.595Z"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "connection.registered",
+      "receivedAt": "2026-09-29T06:36:15.022Z",
+      "at": "2026-09-29T06:36:14.615Z"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "opening.requested",
+      "receivedAt": "2026-09-29T06:36:15.022Z",
+      "at": "2026-09-29T06:36:14.619Z"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:36:15.022Z",
+      "at": "2026-09-29T06:36:14.768Z",
+      "responseId": "resp_ETLjiHs5UCYaP7bEop0jS",
+      "status": "in_progress"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "output_audio_buffer.started",
+      "receivedAt": "2026-09-29T06:36:15.310Z",
+      "at": "2026-09-29T06:36:15.053Z",
+      "responseId": "resp_ETLjiHs5UCYaP7bEop0jS"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "response.done",
+      "receivedAt": "2026-09-29T06:36:16.692Z",
+      "at": "2026-09-29T06:36:16.439Z",
+      "responseId": "resp_ETLjiHs5UCYaP7bEop0jS",
+      "status": "completed"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "output_audio_buffer.stopped",
+      "receivedAt": "2026-09-29T06:36:22.157Z",
+      "at": "2026-09-29T06:36:21.901Z",
+      "responseId": "resp_ETLjiHs5UCYaP7bEop0jS"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "opening.finished",
+      "receivedAt": "2026-09-29T06:36:22.157Z",
+      "at": "2026-09-29T06:36:21.902Z"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "input_audio_buffer.speech_started",
+      "receivedAt": "2026-09-29T06:36:24.722Z",
+      "at": "2026-09-29T06:36:24.467Z"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "input_audio_buffer.speech_stopped",
+      "receivedAt": "2026-09-29T06:36:29.161Z",
+      "at": "2026-09-29T06:36:28.899Z"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:36:31.304Z",
+      "at": "2026-09-29T06:36:31.045Z",
+      "responseId": "resp_ETLjyyL0kSiN5VtzQWMfJ",
+      "status": "in_progress"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "output_audio_buffer.started",
+      "receivedAt": "2026-09-29T06:36:31.617Z",
+      "at": "2026-09-29T06:36:31.360Z",
+      "responseId": "resp_ETLjyyL0kSiN5VtzQWMfJ"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "response.done",
+      "receivedAt": "2026-09-29T06:36:32.444Z",
+      "at": "2026-09-29T06:36:32.186Z",
+      "responseId": "resp_ETLjyyL0kSiN5VtzQWMfJ",
+      "status": "completed"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "output_audio_buffer.stopped",
+      "receivedAt": "2026-09-29T06:36:35.759Z",
+      "at": "2026-09-29T06:36:35.500Z",
+      "responseId": "resp_ETLjyyL0kSiN5VtzQWMfJ"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "input_audio_buffer.speech_started",
+      "receivedAt": "2026-09-29T06:36:38.359Z",
+      "at": "2026-09-29T06:36:38.099Z"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "input_audio_buffer.speech_stopped",
+      "receivedAt": "2026-09-29T06:36:41.075Z",
+      "at": "2026-09-29T06:36:40.817Z"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:36:47.266Z",
+      "at": "2026-09-29T06:36:47.012Z",
+      "responseId": "resp_ETLkECBMSepbbVDmYeVLf",
+      "status": "in_progress"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "output_audio_buffer.started",
+      "receivedAt": "2026-09-29T06:36:47.551Z",
+      "at": "2026-09-29T06:36:47.294Z",
+      "responseId": "resp_ETLkECBMSepbbVDmYeVLf"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "response.done",
+      "receivedAt": "2026-09-29T06:36:48.971Z",
+      "at": "2026-09-29T06:36:48.718Z",
+      "responseId": "resp_ETLkECBMSepbbVDmYeVLf",
+      "status": "completed"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "output_audio_buffer.stopped",
+      "receivedAt": "2026-09-29T06:36:54.947Z",
+      "at": "2026-09-29T06:36:54.680Z",
+      "responseId": "resp_ETLkECBMSepbbVDmYeVLf"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "input_audio_buffer.speech_started",
+      "receivedAt": "2026-09-29T06:36:57.383Z",
+      "at": "2026-09-29T06:36:57.122Z"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "input_audio_buffer.speech_stopped",
+      "receivedAt": "2026-09-29T06:36:59.523Z",
+      "at": "2026-09-29T06:36:59.165Z"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "input_audio_buffer.speech_started",
+      "receivedAt": "2026-09-29T06:36:59.523Z",
+      "at": "2026-09-29T06:36:59.261Z"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "input_audio_buffer.speech_stopped",
+      "receivedAt": "2026-09-29T06:37:02.575Z",
+      "at": "2026-09-29T06:37:02.312Z"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:37:03.295Z",
+      "at": "2026-09-29T06:37:03.038Z",
+      "responseId": "resp_ETLkUNVz20USMQ5FMMHEX",
+      "status": "in_progress"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "output_audio_buffer.started",
+      "receivedAt": "2026-09-29T06:37:03.647Z",
+      "at": "2026-09-29T06:37:03.392Z",
+      "responseId": "resp_ETLkUNVz20USMQ5FMMHEX"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "response.done",
+      "receivedAt": "2026-09-29T06:37:07.247Z",
+      "at": "2026-09-29T06:37:06.992Z",
+      "responseId": "resp_ETLkUNVz20USMQ5FMMHEX",
+      "status": "completed"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "output_audio_buffer.stopped",
+      "receivedAt": "2026-09-29T06:37:21.903Z",
+      "at": "2026-09-29T06:37:21.642Z",
+      "responseId": "resp_ETLkUNVz20USMQ5FMMHEX"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "input_audio_buffer.speech_started",
+      "receivedAt": "2026-09-29T06:37:23.979Z",
+      "at": "2026-09-29T06:37:23.724Z"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "input_audio_buffer.speech_stopped",
+      "receivedAt": "2026-09-29T06:37:25.558Z",
+      "at": "2026-09-29T06:37:25.301Z"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:37:27.928Z",
+      "at": "2026-09-29T06:37:27.672Z",
+      "responseId": "resp_ETLktSCAR1RPzRwYczJtt",
+      "status": "in_progress"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "output_audio_buffer.started",
+      "receivedAt": "2026-09-29T06:37:28.263Z",
+      "at": "2026-09-29T06:37:28.007Z",
+      "responseId": "resp_ETLktSCAR1RPzRwYczJtt"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "response.done",
+      "receivedAt": "2026-09-29T06:37:29.415Z",
+      "at": "2026-09-29T06:37:29.161Z",
+      "responseId": "resp_ETLktSCAR1RPzRwYczJtt",
+      "status": "completed"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "output_audio_buffer.stopped",
+      "receivedAt": "2026-09-29T06:37:34.023Z",
+      "at": "2026-09-29T06:37:33.767Z",
+      "responseId": "resp_ETLktSCAR1RPzRwYczJtt"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "input_audio_buffer.speech_started",
+      "receivedAt": "2026-09-29T06:37:37.358Z",
+      "at": "2026-09-29T06:37:37.102Z"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "input_audio_buffer.speech_stopped",
+      "receivedAt": "2026-09-29T06:37:38.167Z",
+      "at": "2026-09-29T06:37:37.913Z"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "response.created",
+      "receivedAt": "2026-09-29T06:37:40.241Z",
+      "at": "2026-09-29T06:37:39.983Z",
+      "responseId": "resp_ETLl5ohnI3vFg76LUIEff",
+      "status": "in_progress"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "output_audio_buffer.started",
+      "receivedAt": "2026-09-29T06:37:40.519Z",
+      "at": "2026-09-29T06:37:40.263Z",
+      "responseId": "resp_ETLl5ohnI3vFg76LUIEff"
+    },
+    {
+      "callId": "743a103d-7dfa-435e-a7ce-a2a22aedfda5",
+      "type": "response.done",
+      "receivedAt": "2026-09-29T06:37:43.909Z",
+      "at": "2026-09-29T06:37:43.649Z",
+      "responseId": "resp_ETLl5ohnI3vFg76LUIEff",
+      "status": "completed"
+    }
+  ]
+}

@@ -57,6 +57,21 @@ async function askDecision(room, reasonKorean) {
   room.decisionPrompt = result.message;
   state.appendMessage(room, 'assistant', result.message, 'decision'); touch(room);
 }
+async function resolveCustomerDetail(room, key, questionKorean) {
+  if (room.pendingRelay) return { ok: true, pending: true, message: 'Wait for the customer to answer the existing question.' };
+  const callId = room.call.id;
+  const answer = await ai.relayQuestion(room, key, questionKorean);
+  if (room.call.id !== callId || terminal.has(room.call.status)) throw apiError('INVALID_STATE', 409);
+  if (answer.known) return { ok: true, known: true, pending: false, answerKorean: answer.answerKorean };
+  const relay = state.requestRelay(room, answer.key, answer.question);
+  if (relay.known) {
+    const known = await ai.knownCustomerAnswer(room, relay.key, relay.value, questionKorean);
+    return { ok: true, known: true, pending: false, answerKorean: known.answerKorean };
+  }
+  room.pendingRelay.questionKorean = questionKorean;
+  state.appendMessage(room, 'assistant', answer.question, 'relay');
+  return { ok: true, known: false, pending: true, message: 'Customer asked in chat. Wait without guessing.' };
+}
 
 const handler = async (req, res) => {
   try {
@@ -75,14 +90,14 @@ const handler = async (req, res) => {
       rooms.set(room.id, room);
       return json(res, 201, { id: room.id, customerToken: room.customerToken, businessToken: room.businessToken, state: pub(room) });
     }
-    const match = url.pathname.match(/^\/api\/rooms\/([\w-]+)(?:\/(\w+))?$/);
+    const match = url.pathname.match(/^\/api\/rooms\/([\w-]+)(?:\/([\w-]+))?$/);
     if (match) {
       const room = rooms.get(match[1]); if (!room) throw apiError('NOT_FOUND', 404);
       const token = req.headers.authorization?.replace(/^Bearer /, '');
       const role = matches(token, room.customerToken) ? 'customer' : matches(token, room.businessToken) ? 'business' : null;
       if (!role) throw apiError('UNAUTHORIZED', 403);
       const operation = match[2] || '';
-      if (role === 'business') room.lastBusinessSeen = Date.now();
+      if (role === 'business' && operation !== 'debug') room.lastBusinessSeen = Date.now();
       if (room.call.connected && room.lastBusinessSeen && Date.now() - room.lastBusinessSeen > 18000 && !terminal.has(room.call.status)) {
         state.setConnection(room, false, 'Business connection heartbeat expired.'); void finalSummary(room);
       }
@@ -91,24 +106,32 @@ const handler = async (req, res) => {
         void askDecision(room, '고객 답변이 1분 이상 도착하지 않았습니다. 더 기다릴지 미완료 상태로 종료할지 결정이 필요합니다.').catch(error => { room.error = { code: error.code || 'AI_ERROR' }; }).finally(() => { room.decisionPending = false; });
       }
       if (req.method === 'GET') {
+        if (operation === 'debug') return json(res, 200, { ...pub(room), apiEvidence: room.apiEvidence, observations: room.observations, voiceDiagnostics: room.voiceDiagnostics });
         if (operation === 'export') { await saveEvidence(room); return json(res, 200, { simulation: true, ...pub(room), apiEvidence: room.apiEvidence, observations: room.observations, voiceDiagnostics: room.voiceDiagnostics }); }
         if (!operation) return json(res, 200, pub(room));
         throw apiError('NOT_FOUND', 404);
       }
       if (req.method !== 'POST') throw apiError('INVALID_INPUT', 405);
       const input = await body(req, operation === 'realtime');
-      if (operation === 'chat') {
+      if (operation === 'decline') {
+        requireRole(role, 'business');
+        if (room.call.status !== 'pending') throw apiError('INVALID_STATE', 409);
+        state.finishCall(room, { reason: 'declined', success: false });
+        void finalSummary(room);
+      } else if (operation === 'chat') {
         requireRole(role, 'customer');
         const text = messageText(input.message);
         await exclusive(room, async () => {
           if (room.pendingRelay) {
             const relayId = room.pendingRelay.id;
             const translation = await ai.translateRelay(room, text);
+            const refinement = await ai.refineRelayPlan(room, text);
             if (room.call.endedAt || room.pendingRelay?.id !== relayId) throw apiError('INVALID_STATE', 409);
             const message = state.appendMessage(room, 'user', text, 'relay');
-            state.resolveRelay(room, message);
+            const resolvedRelay = state.resolveRelay(room, message);
+            state.refineQuestionsAfterRelay(room, refinement.updates, resolvedRelay);
             state.appendMessage(room, 'assistant', translation.acknowledgement, 'relay');
-            room.voiceMessage = { id: randomUUID(), text: `고객의 실제 답변: ${translation.answerKorean}. 이 내용만 전달하고 나머지 필수 질문을 계속하세요.` };
+            room.voiceMessage = { id: randomUUID(), text: `고객의 실제 답변: ${translation.answerKorean}. 고객이 수락한 선택 사항을 반영하세요. 이전 조건으로 돌아가지 마세요. 아래 최신 질문 상태를 따르고, 미해결 질문 중 하나만 이어서 물어보세요.\nCURRENT QUESTIONS: ${JSON.stringify(room.requiredQuestions)}\nCUSTOMER FACTS: ${JSON.stringify(room.customerInfo)}` };
           } else {
             if (room.call.status !== 'idle') throw apiError('INVALID_STATE', 409);
             room.planReady = false;
@@ -117,6 +140,16 @@ const handler = async (req, res) => {
             const result = await ai.interview(room);
             state.applyPlan(room, result);
           }
+        });
+      } else if (operation === 'select-place') {
+        requireRole(role, 'customer');
+        if (room.call.status !== 'idle') throw apiError('INVALID_STATE', 409);
+        const selected = room.places?.find(place => place.id === input.placeId);
+        if (!selected) throw apiError('INVALID_INPUT');
+        await exclusive(room, async () => {
+          room.selectedPlace = selected; room.planReady = false;
+          state.appendMessage(room, 'user', ({ en: 'Prepare my inquiry for ', ru: 'Подготовьте мой запрос для ', zh: '请为我准备咨询：' }[room.language]) + selected.name, 'selection');
+          state.applyPlan(room, await ai.interview(room));
         });
       } else if (operation === 'authorize') {
         requireRole(role, 'customer'); if (!config().key) throw apiError('CONFIG_REQUIRED', 503);
@@ -149,8 +182,9 @@ const handler = async (req, res) => {
         const id = messageText(input.id);
         const exists = room.transcripts.some(item => item.id === id && item.role === input.role);
         if (!exists) {
-          const transcript = { id, role: input.role, text };
-          state.appendTranscript(room, transcript);
+          // Confirmation validation needs the saved call ID and transcript
+          // metadata, not the unstamped browser request object.
+          const transcript = state.appendTranscript(room, { id, role: input.role, text });
           if (input.role === 'business' && !terminal.has(room.call.status)) {
             const callId = room.call.id;
             room.reviewChain = room.reviewChain.catch(() => {}).then(async () => {
@@ -159,6 +193,16 @@ const handler = async (req, res) => {
               if (room.call.id !== callId || terminal.has(room.call.status)) return;
               state.applyBusinessReview(room, review, transcript);
               if (review.unavailable && room.call.status === 'active') await askDecision(room, review.explanation);
+              // Catch explicit questions and offered alternatives that need a
+              // customer preference decision, even without a spoken question.
+              // Do not rely on the voice model remembering to call its tool.
+              const question = review.customerQuestion;
+              if (question?.asked && question.key?.trim() && question.questionKorean?.trim() && question.evidenceQuote?.trim() && transcript.text.includes(question.evidenceQuote) && room.call.status === 'active') {
+                const result = await resolveCustomerDetail(room, question.key, question.questionKorean);
+                if (result.known && room.call.id === callId && room.call.status === 'active') {
+                  room.voiceMessage = { id: randomUUID(), sourceTranscriptId: transcript.id, text: `Answer the business's question in Korean using this already supplied customer information before continuing. Question: ${question.questionKorean}\nAnswer: ${result.answerKorean}` }; touch(room);
+                }
+              }
             });
             try { await room.reviewChain; }
             catch (error) { if (room.call.id === callId && !terminal.has(room.call.status)) { room.error = { code: error.code || 'AI_ERROR' }; state.setConnection(room, false, 'Business evidence review failed.'); void finalSummary(room); } throw error; }
@@ -174,22 +218,7 @@ const handler = async (req, res) => {
         const args = input.arguments || {};
         let output;
         if (input.name === 'request_customer_detail') {
-          if (room.pendingRelay) output = { ok: true, pending: true, message: 'Wait for the customer to answer the existing question.' };
-          else {
-            const answer = await ai.relayQuestion(room, String(args.key || ''), messageText(args.questionKorean));
-            if (answer.known) output = { ok: true, known: true, pending: false, answerKorean: answer.answerKorean };
-            else {
-              const relay = state.requestRelay(room, answer.key, answer.question);
-              if (relay.known) {
-                const known = await ai.knownCustomerAnswer(room, relay.key, relay.value, args.questionKorean);
-                output = { ok: true, known: true, pending: false, answerKorean: known.answerKorean };
-              } else {
-                room.pendingRelay.questionKorean = args.questionKorean;
-                state.appendMessage(room, 'assistant', answer.question, 'relay');
-                output = { ok: true, known: false, pending: true, message: 'Customer asked in chat. Wait without guessing.' };
-              }
-            }
-          }
+          output = await resolveCustomerDetail(room, String(args.key || ''), messageText(args.questionKorean));
         } else if (input.name === 'cannot_proceed') {
           await askDecision(room, messageText(args.reasonKorean)); output = { ok: true, pending: true, message: 'Wait for customer decision. Do not repeat or invent an answer.' };
         } else if (input.name === 'complete_call') {
@@ -231,11 +260,11 @@ const handler = async (req, res) => {
     }
     if (!['GET', 'HEAD'].includes(req.method)) throw apiError('NOT_FOUND', 404);
     const pathname = decodeURIComponent(url.pathname);
-    const file = ['/', '/v2/'].includes(pathname) ? '/v2/index.html' : pathname === '/business' ? '/v2/business.html' : pathname === '/legacy' ? '/index.html' : pathname;
+    const file = ['/', '/v2/'].includes(pathname) ? '/v2/index.html' : pathname === '/business' ? '/v2/business.html' : pathname === '/debug' ? '/v2/debug.html' : pathname === '/legacy' ? '/index.html' : pathname;
     const target = path.resolve(root, '.' + file);
     if (!target.startsWith(root + path.sep)) throw apiError('NOT_FOUND', 404);
     const bytes = await readFile(target);
-    const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.svg': 'image/svg+xml' };
+    const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.svg': 'image/svg+xml', '.woff2': 'font/woff2' };
     res.writeHead(200, { 'Content-Type': types[path.extname(target)] || 'application/octet-stream', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'no-referrer', 'Permissions-Policy': 'microphone=(self)' }); res.end(req.method === 'HEAD' ? undefined : bytes);
   } catch (error) { if (!res.headersSent) json(res, error.statusCode || (error.code === 'ENOENT' ? 404 : 500), { error: { code: error.statusCode ? error.code : 'AI_ERROR', message: error.statusCode ? error.code : 'Request could not be completed.' } }); }
 };

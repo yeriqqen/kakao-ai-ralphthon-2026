@@ -1,36 +1,32 @@
 # YOKOBU v2
 
-YOKOBU is a text interface for expats, tourists, and deaf or hard-of-hearing users in Korea who need information or help from businesses. Korean phone conversations create language and accessibility barriers. The team’s hypothesis is that a text conversation can make information available that otherwise requires a phone call.
+YOKOBU is a text interface for expats, tourists, and deaf or hard-of-hearing users in Korea who need information or help from businesses. Korean phone conversations create language and accessibility barriers. The team’s hypothesis is that text can provide access to information that otherwise requires a call; user value remains Unverified.
 
-The implementation connects a single customer chat to OpenAI-generated clarification, a fictional institution suggestion, a generated list of required questions, and explicit customer authorization. A separate business tab on the same laptop receives the simulated incoming call. Only business acceptance starts the OpenAI Realtime connection for Korean microphone and speaker interaction.
+The customer chooses English, Russian or Chinese, describes a need, and answers OpenAI-generated clarifying questions. YOKOBU prepares a fictional institution and required questions, then asks for explicit authorization. A separate business tab on this laptop receives the incoming simulation. Acceptance starts Korean microphone and speaker interaction through OpenAI Realtime.
 
-The customer chooses English, Russian, or Chinese, with English as the default. The customer side remains entirely text-based. The intended flow reuses known customer information and sends an unknown business question back to the customer’s chat, then relays their actual answer in Korean. It must not guess missing personal details. Live unknown-detail relay is still Unverified.
+Known information is reused. Unknown business questions and offered alternatives return to customer chat; the actual reply is sent back in Korean. Accepting an alternative updates affected questions while retaining applicable business answers. Normal completion requires supported answers and a confirmed readback. The summary separates business evidence, customer details and unresolved information; the recommendation selects from the supported facts.
 
-Normal completion requires supported answers to every required question and confirmation of the key details. If an answer is unavailable, the customer should decide whether to continue or end while preserving unresolved information. The result should separate what the simulated business said, customer-provided details, unresolved information, and the AI recommendation. These are acceptance requirements; the latest real rehearsal did not complete them successfully.
+There are no real calls, real institution search, orders or reservations. Reception/doctor sheets are outside v2 scope. The team’s laptop instruction superseded two-phone demonstration setup. V1 is preserved separately.
 
-All suggested institutions and business facts are fictional. No actual telephone call or real institution search occurs. Reception and doctor sheets are outside v2 scope. The later team instruction to simulate on this laptop supersedes the earlier two-phone requirement. V1 code and its historical artifacts remain separate.
+## Demonstrated result
 
-## Functionality checkpoint: 2026-09-29
+The fifth real shop rehearsal completed at 16:04 KST. The shop said navy was unavailable but black was available, without asking a question. YOKOBU asked the customer whether black was acceptable; the human answered yes. Korean speech returned the choice, stock remained answered, price was ₩10,000 and latest pickup was 19:00. The shop confirmed the complete readback, the call ended normally, and the result recommended the accepted black option. The human confirmed audible Korean and microphone shutdown. One incomplete price transcription required clarification.
 
-The real API produced an English interview and a concrete four-question plan. Real Russian and Chinese interviews were also exercised, exposing meaning-preservation problems. A later Chinese check preserved the Korean-insurance qualifier, but Korean question coverage and unsupported first-visit wording remained limited. This is not an all-language pass.
-
-In the third actual laptop microphone rehearsal, the teammate supplied four Korean answers and the assistant read them back. The assistant preserved the actual role-play statements, including an uncertain cost estimate, rather than requiring the optional demo fixtures. Business confirmation then incorrectly reset all four questions to unresolved and caused repeated questioning; the human disconnected. The outcome is **Partial / interrupted**. Korean audibility was human-confirmed during the first attempt; the third attempt establishes microphone/transcript progress without a separate audibility confirmation.
-
-The third run did not include an unknown customer question, so live unknown-detail relay is **Unverified**. Normal completion remains **Unverified**. A final response was produced after interruption, but exposed untranslated evidence details and duplicated recommendation text. Subsequent fixes require another actual rehearsal. User value remains **Unverified** without feedback from actual target users.
+Four earlier failures exposed skipped relay questions, repeated readbacks and unsupported inferences. Those failures are preserved. The successful run used the preference repair before subsequent teammate UI/shutdown changes were integrated; the combined branch passed automated regressions. This is one demonstrated laptop flow, not broad reliability validation. English/Russian/Chinese UI checks pass; real-model multilingual fidelity has recorded limitations. Physical two-phone use and target-user value remain Unverified.
 
 ## Three-minute demonstration
 
-| Time | Demonstration |
+| Time | Action |
 | --- | --- |
-| 0:00–0:25 | State the intended users and Korean-call barrier. |
-| 0:25–0:55 | Select a language and enter “I want to go to a hospital.” Let the real AI generate its interview. |
-| 0:55–1:25 | Provide fictional details, review the generated questions, and authorize a fictional institution. Open the business tab on this laptop and accept. |
-| 1:25–2:00 | Have the teammate answer in Korean. An unknown-detail relay is a planned acceptance step, not a claim about the latest rehearsal. |
-| 2:00–2:30 | Show the actual result and its unresolved status. If a new run completes and confirms every answer, demonstrate that result; otherwise state the interruption clearly. |
-| 2:30–3:00 | Explain Codex’s contribution, the observed failure, and the limits of the evidence. |
+| 0:00–0:25 | Explain the intended users and Korean-call barrier. |
+| 0:25–0:55 | Select a language, request shop stock information and answer the generated interview. |
+| 0:55–1:25 | Review the plan, authorize, and accept in the business tab. |
+| 1:25–2:00 | Offer an alternative color in Korean. Answer the automatic customer clarification in chat. |
+| 2:00–2:30 | Give price and pickup time, confirm the readback, and show the actual result. |
+| 2:30–3:00 | Explain Codex’s contribution, the prior failures and remaining limitations. |
 
-The latest run is incomplete. Do not narrate planned relay or completion steps as if they succeeded. If access or audio fails during presentation, show the actual failure state and distinguish any synthetic evidence from real behavior.
+Use the actual observed outcome. If a new presentation run fails, disclose its incomplete state rather than narrating the earlier success as the new result. All business details are editable fictional placeholders.
 
-## Submission check
+## Submission
 
-The [official participant instructions](https://ralphthon.org/kakao-ai-dot-2026/#process) require customer/problem and solution descriptions, a PDF of at most five pages, and a short Codex-use explanation. The deadline is 2026-09-29 at 16:30 KST. The [official app](https://ralphthon.org/kakao-ai-dot-2026/app) is the submission destination. Do not upload raw Codex prompts or session logs. No external submission or public deployment has been performed.
+The [official instructions](https://ralphthon.org/kakao-ai-dot-2026/#process) call for customer/problem and solution descriptions, a PDF of at most five pages and a short Codex-use explanation. The deadline is 2026-09-29 at 16:30 KST; the [participant app](https://ralphthon.org/kakao-ai-dot-2026/app) is the submission destination. Do not upload raw Codex prompts or session logs. No external submission or public deployment has occurred.

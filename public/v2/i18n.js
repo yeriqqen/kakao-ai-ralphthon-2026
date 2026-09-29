@@ -115,6 +115,56 @@ export const translations = {
   },
 };
 
+// Presentation copy is shared by the new layout; the simulation vocabulary above
+// remains the source for permissions, relay states and evidence.
+Object.assign(translations.en, {
+  resultDetails: 'Details and full record',
+  setupDetails: 'How the demo works', businessTitle: 'Call controls', result: 'Your call summary', recommendation: 'Next step',
+  welcome: 'A little more local.', intro: 'Life in Korea, in your language.\nTell us what you need. We’ll take it from there.',
+  placeholder: 'What can I help you with?', newChat: 'New chat',
+  skip: 'Skip to conversation', chatHint: 'A conversation, in your language', latest: 'Latest update', startersLabel: 'Conversation starters',
+  clinicTitle: 'A visit to the clinic', clinicDetail: 'Care without the language barrier',
+  shopTitle: 'Before you go shopping', shopDetail: 'Ask about stock, sizes, or colors',
+  everydayTitle: 'The everyday things', everydayDetail: 'A haircut, a repair, a little help',
+  everydayPrompt: 'I would like to ask a hair salon about an appointment.',
+});
+Object.assign(translations.ru, {
+  resultDetails: 'Подробности и полная запись',
+  setupDetails: 'Как работает демо', businessTitle: 'Управление звонком', result: 'Итоги звонка', recommendation: 'Следующий шаг',
+  welcome: 'Здесь чуть ближе.', intro: 'Жизнь в Корее на вашем языке.\nРасскажите, что нужно. Остальное — вместе.',
+  placeholder: 'Чем я могу помочь?', newChat: 'Новый чат',
+  skip: 'Перейти к разговору', chatHint: 'Разговор на вашем языке', latest: 'Последнее обновление', startersLabel: 'С чего начать разговор',
+  clinicTitle: 'Визит в клинику', clinicDetail: 'Помощь без языкового барьера',
+  shopTitle: 'Перед покупками', shopDetail: 'Наличие, размер или нужный цвет',
+  everydayTitle: 'Повседневные дела', everydayDetail: 'Стрижка, ремонт, немного помощи',
+  everydayPrompt: 'Я хочу узнать о записи на стрижку в парикмахерскую.',
+});
+Object.assign(translations.zh, {
+  resultDetails: '详情与完整记录',
+  setupDetails: '演示说明', businessTitle: '通话控制', result: '通话摘要', recommendation: '下一步',
+  welcome: '让生活更近一点。', intro: '用您的语言，安心生活在韩国。\n告诉我们您的需要，一起迈出下一步。',
+  placeholder: '有什么可以帮您？', newChat: '新对话',
+  skip: '跳转到对话', chatHint: '用您的语言轻松交流', latest: '最新消息', startersLabel: '开始对话',
+  clinicTitle: '去诊所看看', clinicDetail: '让语言不再成为就医的障碍',
+  shopTitle: '购物前先问问', shopDetail: '了解库存、尺码或颜色',
+  everydayTitle: '日常的小事', everydayDetail: '理发、维修，或一点帮助',
+  everydayPrompt: '我想向理发店询问预约时间。',
+});
+
+// Presentation copy; the About panel retains the demo boundary without repeating it in the flow.
+const discoveryCopy = {
+ en: { placesTitle: 'Places to consider', listingNote: 'Sourced listings · Availability still needs to be confirmed.', placeSource: 'Source', placeMaps: 'Open in maps', selectPlace: 'Choose this place', discoveryCallNote: 'Real listing · The following call is a microphone demo. This business will not be contacted.', discoveryResultNote: 'Demo conversation results, not confirmation from the listed business.' },
+ ru: { placesTitle: 'Варианты поблизости', listingNote: 'Данные из источников · Доступность нужно уточнить.', placeSource: 'Источник', placeMaps: 'На карте', selectPlace: 'Выбрать', discoveryCallNote: 'Реальное место · Далее демонстрация через микрофон, без звонка организации.', discoveryResultNote: 'Результаты демонстрации, не подтверждение от организации.' },
+ zh: { placesTitle: '可考虑的地点', listingNote: '有来源的商家信息 · 服务情况仍需确认。', placeSource: '来源', placeMaps: '在地图中打开', selectPlace: '选择此地点', discoveryCallNote: '真实地点 · 接下来是麦克风演示，不会联系该商家。', discoveryResultNote: '演示对话结果，并非商家的实际确认。' },
+};
+for (const [lang, copy] of Object.entries(discoveryCopy)) Object.assign(translations[lang], copy);
+const presentationCopy = {
+  en: { title:'YOKOBU · Chat', chatView:'Chat', debugView:'Debug', phoneView:'Call', about:'About', simulation:'Live place search and AI chat. Calls are microphone demonstrations; no real business is contacted or booked.', textOnly:'Your conversation stays in text.', plan:'Call plan', chooseInstitution:'Choose a business', resolved:'Answered', permission:'Shall I call them now?', retryCall:'Try again', endCall:'End call', result:'Call summary', endTitle:'End this call?', endConfirm:'End call', active:'Call in progress', completed:'Call completed', interrupted:'Call interrupted', declined:'Call declined', restartBody:'Start fresh and choose another language. Any active call will end.' },
+  ru: { title:'YOKOBU · Чат', chatView:'Чат', debugView:'Отладка', phoneView:'Звонок', about:'О приложении', simulation:'Реальный поиск мест и ИИ-диалог. Звонки демонстрируются через микрофон, без связи с организацией или бронирования.', textOnly:'Общайтесь через текст.', plan:'План звонка', chooseInstitution:'Выберите организацию', resolved:'Получен ответ', permission:'Позвонить им сейчас?', retryCall:'Попробовать снова', endCall:'Завершить звонок', result:'Итоги звонка', endTitle:'Завершить звонок?', endConfirm:'Завершить звонок', active:'Идёт звонок', completed:'Звонок завершён', interrupted:'Звонок прерван', declined:'Звонок отклонён', restartBody:'Начните заново и выберите другой язык. Активный звонок завершится.' },
+  zh: { title:'YOKOBU · 聊天', chatView:'聊天', debugView:'调试', phoneView:'通话', about:'关于', simulation:'实时地点搜索和 AI 聊天。通话为麦克风演示，不会联系真实商家或进行预约。', textOnly:'全程通过文字交流。', plan:'通话计划', chooseInstitution:'选择机构', resolved:'已回答', permission:'现在联系他们吗？', retryCall:'重试', endCall:'结束通话', result:'通话总结', endTitle:'结束通话？', endConfirm:'结束通话', active:'通话中', completed:'通话已结束', interrupted:'通话已中断', declined:'通话已拒绝', restartBody:'开始新对话并选择语言。当前通话将结束。' }
+};
+for (const language of languages) Object.assign(translations[language], presentationCopy[language]);
+
 export function translate(language, key, values = {}) {
   let result = translations[language]?.[key] ?? translations.en[key] ?? translations.en.UNKNOWN;
   for (const [name, value] of Object.entries(values)) result = result.replaceAll(`{${name}}`, String(value));

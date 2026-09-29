@@ -54,6 +54,7 @@ This local server is **not a public, multi-user deployment**. Public use needs a
 npm test
 npm run build
 npm run test:browser
+npm run test:ui
 ```
 
 Browser checks use an installed Playwright and Chrome. Set `PLAYWRIGHT_MODULE` and `CHROME_EXECUTABLE` when auto-discovery does not find them. Windows example:
@@ -65,6 +66,10 @@ npm.cmd run test:browser
 ```
 
 New browser evidence is in `artifacts/concierge/`. Browser tests mock AI responses and microphone events: **passing them does not establish live API, hardware audio, telephone or booking success**. Real key-backed chat/search, audible voice and phone-provider behavior still require a live rehearsal.
+
+The UI check covers mobile and desktop layouts, English/Russian/Korean text, keyboard focus, touch targets, and structured conversation screens. Its API responses are synthetic and all external requests are blocked. Screenshots and its report are in `artifacts/ui-polish/`. See [the design handoff](docs/design-handoff.md) for the UI branch and implementation guide.
+
+The interface bundles [Inter](https://rsms.me/inter/) locally; its SIL Open Font License is included in `public/fonts/OFL.txt`.
 
 `npm run verify` and `npm run test:legacy-browser` check the **original simulation**, not the new agent. Historical verification and presentation files in `docs/`, `artifacts/`, and `submission/` describe that original version and have not been rewritten as proof of this version. See `docs/legacy-demo-readme.md` for the previous instructions.
 

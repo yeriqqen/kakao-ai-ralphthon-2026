@@ -13,11 +13,19 @@ const browser = await chromium.launch({ executablePath: process.env.CHROME_EXECU
 const checks = []; const errors = [];
 const context = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
 const page = await context.newPage(); page.on('pageerror', e => errors.push(e.message));
+// Keep every API path isolated even when the developer has a live key connected.
+await page.route('**/api/**', route => {
+  const pathname = new URL(route.request().url()).pathname;
+  if (pathname === '/api/status') return route.fulfill({ json: { connected: false, calling: false } });
+  if (pathname === '/api/profile') return route.fulfill({ json: { profile: route.request().postDataJSON() } });
+  if (['/api/reset', '/api/voice-context'].includes(pathname)) return route.fulfill({ json: { ok: true } });
+  return route.fulfill({ status: 503, json: { error: 'No live provider is used by browser tests.' } });
+});
 const origin = process.env.DEMO_URL || 'http://localhost:4173';
 const check = async (name, fn) => { await fn(); checks.push(name); console.log('PASS', name); };
 const noOverflow = async () => assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'Horizontal overflow');
 try {
-  await page.goto(origin); await page.waitForFunction(() => document.querySelector('#composer').parentElement.id === 'home-composer-slot');
+  await page.goto(origin); await page.waitForFunction(() => document.querySelector('#composer').parentElement.id === 'home-composer-slot'); await page.evaluate(() => document.fonts.ready);
   await check('mobile home and empty-send state', async () => { await noOverflow(); assert.equal(await page.locator('#send-button').isDisabled(), true); await page.screenshot({ path: fileURLToPath(new URL('mobile-home.png', out)), fullPage: true }); });
   await check('profile is optional, reusable and opt-in persistent', async () => {
     await page.locator('#nav-you').click(); await page.locator('#profile-name').fill('Alex'); await page.locator('#profile-location').fill('Hongdae, Seoul'); await page.locator('#profile-preferences').fill('Vegetarian. English.');

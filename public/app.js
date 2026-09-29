@@ -8,6 +8,7 @@ let language = ['en', 'ru', 'ko'].includes(profile.language) ? profile.language 
 let records = readStored(sessionStorage, 'yokobu-conversation', []);
 if (!Array.isArray(records)) records = [];
 let status = { connected: false, calling: false }; let busy = false; let controller; let activeView = 'home'; let toastTimer; let currentAction; let pendingMessage = '';
+let followLatest = true;
 const t = key => translations[language][key] || translations.en[key] || key;
 const storageWrite = (storage, key, value) => { try { storage.setItem(key, JSON.stringify(value)); } catch {} };
 function persist() { storageWrite(sessionStorage, 'yokobu-conversation', records.slice(-60)); }
@@ -20,9 +21,11 @@ function setLanguage(value) {
   language = value; profile.language = value; document.documentElement.lang = value; $('language').value = value;
   document.querySelectorAll('[data-i18n]').forEach(node => { node.textContent = t(node.dataset.i18n); });
   document.querySelectorAll('[data-placeholder]').forEach(node => node.placeholder = t(node.dataset.placeholder));
+  document.querySelectorAll('[data-aria]').forEach(node => node.setAttribute('aria-label', t(node.dataset.aria)));
+  $('language').setAttribute('aria-label', t('language'));
   $('location-label').textContent = profile.location || t('setLocation');
   if ($('remember-profile').checked) storageWrite(localStorage, 'yokobu-profile', profile);
-  renderConnection(); renderActivity();
+  renderConnection(); renderActivity(); updateContextButton();
   api('/api/profile', profile).catch(() => {});
 }
 function renderConnection() {
@@ -32,15 +35,31 @@ function renderConnection() {
 }
 function showView(view) {
   activeView = view;
+  document.body.dataset.view = view;
   $('home').hidden = view !== 'home'; $('conversation-view').hidden = view !== 'conversation'; $('activity-view').hidden = view !== 'activity'; $('chat-composer-slot').hidden = view !== 'conversation';
   if (view === 'home') $('home-composer-slot').append($('composer'));
   if (view === 'conversation') $('chat-composer-slot').append($('composer'));
   $('composer').hidden = view === 'activity';
   $('nav-home').classList.toggle('active', view !== 'activity'); $('nav-activity').classList.toggle('active', view === 'activity');
+  $('nav-home').setAttribute('aria-current', view !== 'activity' ? 'page' : 'false');
+  $('nav-activity').setAttribute('aria-current', view === 'activity' ? 'page' : 'false');
+  $('latest-message').hidden = true;
   if (view === 'activity') renderActivity();
 }
-function scrollBottom() { if (activeView === 'conversation') requestAnimationFrame(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })); }
+const motion = () => matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
+function scrollBottom() {
+  followLatest = true; $('latest-message').hidden = true;
+  if (activeView === 'conversation') requestAnimationFrame(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: motion() }));
+}
+function updateContextButton() {
+  const hasContext = Boolean(profile.name || profile.location || profile.preferences);
+  $('context-button').classList.toggle('has-context', hasContext);
+  const text = $('context-button').querySelector('span');
+  text.dataset.i18n = hasContext ? 'contextReady' : 'yourContext'; text.textContent = t(text.dataset.i18n);
+}
 function button(text, className, action) { const b = el('button', className, text); b.type = 'button'; b.addEventListener('click', action); return b; }
+function label(tag, className, key) { const node = el(tag, className, t(key)); node.dataset.i18n = key; return node; }
+function uiButton(key, className, action, iconName) { const b = button('', className, action); if (iconName) b.append(icon(iconName)); b.append(label('span', '', key)); return b; }
 function safeUrl(url) { try { const parsed = new URL(url); return ['http:', 'https:'].includes(parsed.protocol) ? parsed.href : null; } catch { return null; } }
 function link(text, url, className) { const a = el('a', className, text); a.href = safeUrl(url) || '#'; a.target = '_blank'; a.rel = 'noopener noreferrer'; return a; }
 // Plain text plus safe Markdown links; model text is never inserted as HTML.
@@ -49,46 +68,74 @@ function richText(text) {
   for (const match of String(text).matchAll(pattern)) { p.append(document.createTextNode(text.slice(last, match.index))); p.append(link(match[1], match[2])); last = match.index + match[0].length; }
   p.append(document.createTextNode(String(text).slice(last))); return p;
 }
-function addRecord(record) { records.push(record); persist(); renderRecord(record); renderActivity(); scrollBottom(); }
+function addRecord(record) {
+  const shouldFollow = followLatest;
+  record.createdAt ||= Date.now(); records.push(record); persist();
+  const node = renderRecord(record); renderActivity();
+  if (activeView !== 'conversation') return;
+  if (shouldFollow) requestAnimationFrame(() => node.scrollIntoView({ block: record.role === 'assistant' ? 'start' : 'end', behavior: motion() }));
+  else $('latest-message').hidden = false;
+}
 function renderRecord(record) {
   const node = el('article', `message ${record.role}`);
+  node.id = `message-${records.indexOf(record)}`;
   if (record.role === 'user') node.textContent = record.text;
   else {
-    const label = el('div', 'assistant-label'); label.append(icon('spark'), document.createTextNode('yokobu')); node.append(label);
+    const assistantLabel = el('div', 'assistant-label'); assistantLabel.append(icon('spark'), document.createTextNode('yokobu')); node.append(assistantLabel);
     const r = record.result || { message: record.text || '' }; node.append(richText(r.message || ''));
     if (r.question) node.append(el('p', 'question', r.question));
     if (r.choices?.length) { const choices = el('div', 'choices'); r.choices.forEach(c => choices.append(button(c, 'choice', () => send(c)))); node.append(choices); }
     if (r.places?.length) {
       const places = el('div', 'places');
-      r.places.forEach(p => { const card = el('div', 'place'); const heading = el('div', 'place-heading'); heading.append(el('h3', '', p.name)); if (safeUrl(p.url)) heading.append(link(t('source'), p.url)); card.append(heading, el('p', '', p.detail), el('p', 'address', p.address), el('p', 'small', t('listing'))); if (p.phone) card.append(el('p', '', p.phone)); places.append(card); }); node.append(places);
+      r.places.forEach(p => {
+        const card = el('div', 'place'); const heading = el('div', 'place-heading'); heading.append(el('h3', '', p.name));
+        if (safeUrl(p.url)) { const a = link('', p.url); a.setAttribute('aria-label', `${t('source')}: ${p.name}`); a.title = t('source'); a.append(icon('link')); heading.append(a); }
+        card.append(heading, el('p', 'place-detail', p.detail));
+        if (p.address) { const address = el('p', 'place-meta address'); address.append(icon('pin'), el('span', '', p.address)); card.append(address); }
+        if (p.phone) { const phone = el('p', 'place-meta'); phone.append(icon('phone'), el('span', '', p.phone)); card.append(phone); }
+        card.append(label('p', 'listing-note', 'listing')); places.append(card);
+      }); node.append(places);
     }
-    (r.actions || []).forEach(action => { const card = el('div', 'action-card'); card.append(el('h3', '', action.title), el('p', '', `${action.business} · ${action.phone}`), button(t('review'), 'primary', () => reviewCall(action))); node.append(card); });
+    (r.actions || []).forEach(action => {
+      const card = el('div', 'action-card'); card.append(label('div', 'action-status', 'readyReview'), el('h3', '', action.title), el('p', 'action-recipient', `${action.business} · ${action.phone}`));
+      if (action.purpose) card.append(el('p', '', action.purpose));
+      card.append(uiButton('review', 'primary', () => reviewCall(action), 'phone')); node.append(card);
+    });
     if (r.summary) {
-      const s = r.summary; const card = el('section', 'summary-card'); card.append(el('h3', '', s.title));
+      const s = r.summary; const card = el('section', 'summary-card'); const heading = el('div', 'summary-heading'); heading.append(icon('note'), el('h3', '', s.title)); card.append(heading);
       const facts = el('ul'); (s.facts || []).forEach(f => facts.append(el('li', '', f))); card.append(facts);
-      if (s.nextSteps?.length) { card.append(el('h4', '', t('nextSteps'))); const steps = el('ol'); s.nextSteps.forEach(x => steps.append(el('li', '', x))); card.append(steps); }
-      if (s.korean) { card.append(el('h4', '', t('korean'))); const ko = el('div', 'korean-note', s.korean); ko.lang = 'ko'; card.append(ko, button(t('copy'), 'text-button', async () => { try { await navigator.clipboard.writeText(s.korean); toast(t('copied')); } catch { toast(t('failed')); } })); }
+      if (s.nextSteps?.length) { card.append(label('h4', '', 'nextSteps')); const steps = el('ol'); s.nextSteps.forEach(x => steps.append(el('li', '', x))); card.append(steps); }
+      if (s.korean) {
+        const header = el('div', 'korean-heading'); header.append(label('h4', '', 'korean'), uiButton('copy', 'text-button', async () => { try { await navigator.clipboard.writeText(s.korean); toast(t('copied')); } catch { toast(t('failed')); } }, 'copy'));
+        const ko = el('div', 'korean-note', s.korean); ko.lang = 'ko'; card.append(header, ko);
+      }
       node.append(card);
     }
-    if (r.sources?.length) { const sources = el('div', 'sources'); r.sources.forEach(s => { if (safeUrl(s.url)) sources.append(link(s.title || new URL(s.url).hostname, s.url, 'source')); }); node.append(sources); }
-    if (r.suggestions?.length) { const suggestions = el('div', 'suggestions'); r.suggestions.forEach(s => suggestions.append(button(s + ' ↗', 'suggestion', () => send(s)))); node.append(suggestions); }
+    if (r.sources?.length) {
+      const sources = el('div', 'sources'); sources.append(label('span', 'sources-label', 'sources'));
+      r.sources.forEach(s => { if (safeUrl(s.url)) { const a = link('', s.url, 'source'); a.title = s.title || s.url; a.append(el('span', '', s.title || new URL(s.url).hostname), icon('link')); sources.append(a); } }); node.append(sources);
+    }
+    if (r.suggestions?.length) { const suggestions = el('div', 'suggestions'); r.suggestions.forEach(s => { const b = button('', 'suggestion', () => send(s)); b.append(el('span', '', s), icon('right')); suggestions.append(b); }); node.append(suggestions); }
   }
   $('messages').append(node); return node;
 }
 function renderActivity() {
   const list = $('activity-list'); list.replaceChildren();
   const first = records.find(r => r.role === 'user');
-  if (!first) { list.append(el('div', 'empty-state', t('emptyActivity'))); return; }
-  const b = button('', 'activity-item', () => { showView('conversation'); scrollBottom(); }); const text = el('span'); text.append(el('strong', '', first.text.slice(0, 110)), el('small', '', t('currentTask'))); b.append(text, el('span', '', '↗')); list.append(b);
-  records.filter(r => r.result?.summary).forEach(r => { const item = button(r.result.summary.title + ' ↗', 'activity-item', () => { showView('conversation'); scrollBottom(); }); list.append(item); });
+  if (!first) { const empty = el('div', 'empty-state'); empty.append(icon('clock'), el('p', '', t('emptyActivity')), uiButton('startConversation', 'secondary', () => { showView('home'); window.scrollTo({ top: 0, behavior: motion() }); })); list.append(empty); return; }
+  const b = button('', 'activity-item', () => { showView('conversation'); scrollBottom(); }); const text = el('span'); text.append(el('strong', '', first.text.slice(0, 110)), el('small', '', t('currentTask'))); const arrow = icon('right'); arrow.classList.add('activity-arrow'); b.append(icon('clock'), text, arrow); list.append(b);
+  records.filter(r => r.result?.summary).forEach(r => {
+    const item = button('', 'activity-item', () => { showView('conversation'); followLatest = false; requestAnimationFrame(() => $(`message-${records.indexOf(r)}`)?.scrollIntoView({ block: 'start', behavior: motion() })); });
+    const body = el('span'); body.append(el('strong', '', r.result.summary.title), el('small', '', t('savedSummary'))); const arrow = icon('right'); arrow.classList.add('activity-arrow'); item.append(icon('note'), body, arrow); list.append(item);
+  });
 }
-function setBusy(value) { busy = value; $('send-button').disabled = busy || !$('request').value.trim(); $('progress').hidden = !busy; document.querySelectorAll('.choice,.suggestion').forEach(b => b.disabled = busy); }
+function setBusy(value) { busy = value; $('send-button').disabled = busy || !$('request').value.trim(); $('progress').hidden = !busy; $('messages').setAttribute('aria-busy', String(busy)); $('new-task').disabled = busy; document.querySelectorAll('.choice,.suggestion').forEach(b => b.disabled = busy); }
 async function send(message, { fromVoice = false, repeat = false } = {}) {
   message = String(message).trim(); if (!message || busy) return null;
   if (!status.connected) { pendingMessage = message; $('request').value = message; openSettings('connection'); toast(t('connectFirst')); return null; }
   if (message.length > 8000) { toast(t('failed')); return null; }
-  showView('conversation'); if (!repeat && !fromVoice) addRecord({ role: 'user', text: message });
-  $('request').value = ''; $('request').style.height = ''; setBusy(true); $('progress-label').textContent = t('thinking'); scrollBottom();
+  showView('conversation'); if (!fromVoice) followLatest = true; if (!repeat && !fromVoice) addRecord({ role: 'user', text: message });
+  $('request').value = ''; $('request').style.height = ''; setBusy(true); $('progress-label').textContent = t('thinking'); if (!fromVoice || followLatest) scrollBottom();
   controller = new AbortController(); let finalResult = null; let received = false;
   try {
     const res = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message, profile }), signal: controller.signal });
@@ -115,14 +162,20 @@ async function send(message, { fromVoice = false, repeat = false } = {}) {
 function openSettings(tab = 'profile') {
   api('/api/status').then(value => { status = value; renderConnection(); }).catch(() => {});
   $('profile-name').value = profile.name || ''; $('profile-location').value = profile.location || ''; $('profile-preferences').value = profile.preferences || '';
-  selectSettingsTab(tab); if (!$('settings').open) $('settings').showModal();
+  selectSettingsTab(tab); if (!$('settings').open) { $('settings').showModal(); $('settings-title').focus({ preventScroll: true }); }
 }
-function selectSettingsTab(tab) { $('profile-form').hidden = tab !== 'profile'; $('connection-panel').hidden = tab !== 'connection'; $('profile-tab').classList.toggle('selected', tab === 'profile'); $('connection-tab').classList.toggle('selected', tab === 'connection'); }
+function selectSettingsTab(tab) {
+  $('profile-form').hidden = tab !== 'profile'; $('connection-panel').hidden = tab !== 'connection';
+  for (const name of ['profile', 'connection']) {
+    const button = $(name + '-tab'); const selected = tab === name;
+    button.classList.toggle('selected', selected); button.setAttribute('aria-selected', String(selected)); button.tabIndex = selected ? 0 : -1;
+  }
+}
 function reviewCall(action) {
   currentAction = action; $('call-review').replaceChildren(); $('call-error').textContent = '';
   for (const [key, value] of [['recipient', action.business], ['phone', action.phone], ['purpose', action.purpose], ['shared', action.detailsToShare]]) { const dl = el('dl', 'call-review-field'); dl.append(el('dt', '', t(key)), el('dd', '', value)); $('call-review').append(dl); }
   if (safeUrl(action.sourceUrl)) $('call-review').append(link(t('source'), action.sourceUrl, 'text-button'));
-  $('approve-call').textContent = t(status.calling ? 'approveCall' : 'setupCalling'); $('approve-call').disabled = false; $('call-sheet').showModal();
+  $('approve-call').textContent = t(status.calling ? 'approveCall' : 'setupCalling'); $('approve-call').disabled = false; $('call-sheet').showModal(); $('call-title').focus({ preventScroll: true });
 }
 let callPoll;
 function renderCall(call, node) {
@@ -204,6 +257,65 @@ async function startVoice() {
 }
 
 $('home-composer-slot').append($('composer'));
+// Measure the real controls so growing drafts and mobile keyboards never cover content.
+function syncViewport() {
+  const viewport = window.visualViewport;
+  const focused = document.activeElement?.matches('input, textarea, select');
+  const inset = viewport && viewport.scale === 1 ? Math.max(0, innerHeight - viewport.height - viewport.offsetTop) : 0;
+  document.documentElement.style.setProperty('--keyboard-inset', `${Math.round(inset)}px`);
+  document.documentElement.style.setProperty('--viewport-height', `${Math.round(viewport?.height || innerHeight)}px`);
+  document.body.classList.toggle('keyboard-open', Boolean(focused && inset > 120));
+}
+new ResizeObserver(() => {
+  const height = $('composer').getBoundingClientRect().height;
+  if (height) document.documentElement.style.setProperty('--composer-height', `${Math.ceil(height)}px`);
+}).observe($('composer'));
+new ResizeObserver(() => {
+  const dock = document.querySelector('.bottom-nav'); const bottom = parseFloat(getComputedStyle(dock).bottom) || 0;
+  document.documentElement.style.setProperty('--dock-height', `${Math.ceil(dock.getBoundingClientRect().height + bottom)}px`);
+}).observe(document.querySelector('.bottom-nav'));
+window.visualViewport?.addEventListener('resize', syncViewport);
+window.visualViewport?.addEventListener('scroll', syncViewport);
+window.addEventListener('resize', syncViewport);
+document.addEventListener('focusin', syncViewport); document.addEventListener('focusout', () => requestAnimationFrame(syncViewport));
+window.addEventListener('scroll', () => {
+  if (activeView !== 'conversation') return;
+  followLatest = window.scrollY + innerHeight >= document.documentElement.scrollHeight - 180;
+  if (followLatest) $('latest-message').hidden = true;
+}, { passive: true });
+$('latest-message').addEventListener('click', scrollBottom);
+const syncDialogs = () => {
+  const open = [...document.querySelectorAll('dialog')].some(dialog => dialog.open);
+  document.body.classList.toggle('has-modal', open);
+  $('nav-you').classList.toggle('active', $('settings').open);
+  $('nav-home').classList.toggle('active', !$('settings').open && activeView !== 'activity');
+  $('nav-activity').classList.toggle('active', !$('settings').open && activeView === 'activity');
+  for (const id of ['nav-home', 'nav-activity', 'nav-you']) $(id).setAttribute('aria-current', $(id).classList.contains('active') ? 'page' : 'false');
+};
+for (const dialog of document.querySelectorAll('dialog')) {
+  new MutationObserver(syncDialogs).observe(dialog, { attributes: true, attributeFilter: ['open'] });
+  dialog.addEventListener('keydown', event => {
+    if (event.key !== 'Tab') return;
+    const targets = [...dialog.querySelectorAll('button:not(:disabled), a[href], input:not(:disabled), textarea:not(:disabled), select:not(:disabled), summary, [tabindex]')]
+      .filter(node => node.tabIndex >= 0 && node.getClientRects().length > 0);
+    if (!targets.length) { event.preventDefault(); return; }
+    const first = targets[0]; const last = targets.at(-1); const focused = document.activeElement;
+    if (event.shiftKey && (focused === first || !targets.includes(focused))) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && (focused === last || !dialog.contains(focused))) { event.preventDefault(); first.focus(); }
+  });
+  dialog.addEventListener('click', event => {
+    const box = dialog.getBoundingClientRect();
+    if (event.target === dialog && (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom)) {
+      if (dialog.id === 'voice-sheet') endVoice(); else dialog.close();
+    }
+  });
+}
+for (const name of ['profile', 'connection']) $(name + '-tab').addEventListener('keydown', event => {
+  if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+  event.preventDefault(); const target = event.key === 'Home' ? 'profile' : event.key === 'End' ? 'connection' : name === 'profile' ? 'connection' : 'profile';
+  selectSettingsTab(target); $(target + '-tab').focus();
+});
+syncViewport();
 $('remember-profile').checked = Boolean(readStored(localStorage, 'yokobu-profile', null));
 $('language').addEventListener('change', event => setLanguage(event.target.value));
 $('local-time').textContent = 'SEOUL  ' + new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Seoul', hour: '2-digit', minute: '2-digit' }).format(new Date());
@@ -213,15 +325,17 @@ $('request').addEventListener('keydown', event => { if (event.key === 'Enter' &&
 document.querySelectorAll('[data-starter]').forEach(b => b.addEventListener('click', () => send(t(b.dataset.starter + 'Prompt'))));
 $('stop-request').addEventListener('click', () => controller?.abort());
 $('context-button').addEventListener('click', () => openSettings()); $('location-chip').addEventListener('click', () => { openSettings(); $('profile-location').focus(); });
-$('nav-you').addEventListener('click', () => openSettings()); $('nav-home').addEventListener('click', () => { showView(records.length ? 'conversation' : 'home'); scrollBottom(); }); $('nav-activity').addEventListener('click', () => { showView('activity'); window.scrollTo({ top: 0 }); });
+$('nav-you').addEventListener('click', () => openSettings()); $('nav-home').addEventListener('click', () => { showView(records.length ? 'conversation' : 'home'); scrollBottom(); }); $('nav-activity').addEventListener('click', () => { showView('activity'); window.scrollTo({ top: 0, behavior: motion() }); });
+$('brand-home').addEventListener('click', event => { event.preventDefault(); showView(records.length ? 'conversation' : 'home'); scrollBottom(); });
 $('profile-tab').addEventListener('click', () => selectSettingsTab('profile')); $('connection-tab').addEventListener('click', () => selectSettingsTab('connection'));
 document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => $(b.dataset.close).close()));
 $('settings').addEventListener('close', () => { $('api-key').value = ''; });
 $('profile-form').addEventListener('submit', async event => {
   event.preventDefault(); const updated = { name: $('profile-name').value.trim(), location: $('profile-location').value.trim(), preferences: $('profile-preferences').value.trim(), language };
-  try { await api('/api/profile', updated); profile = updated; if ($('remember-profile').checked) storageWrite(localStorage, 'yokobu-profile', profile); else localStorage.removeItem('yokobu-profile'); $('location-label').textContent = profile.location || t('setLocation'); $('settings').close(); toast(t('saved')); } catch (e) { toast(e.message); }
+  const save = event.submitter; if (save) save.disabled = true;
+  try { await api('/api/profile', updated); profile = updated; if ($('remember-profile').checked) storageWrite(localStorage, 'yokobu-profile', profile); else localStorage.removeItem('yokobu-profile'); $('location-label').textContent = profile.location || t('setLocation'); updateContextButton(); $('settings').close(); toast(t('saved')); } catch (e) { toast(e.message); } finally { if (save) save.disabled = false; }
 });
-$('forget-profile').addEventListener('click', async () => { try { const empty = { name: '', location: '', preferences: '', language }; await api('/api/profile', empty); profile = empty; localStorage.removeItem('yokobu-profile'); $('remember-profile').checked = false; openSettings(); $('location-label').textContent = t('setLocation'); toast(t('forgotten')); } catch (e) { toast(e.message); } });
+$('forget-profile').addEventListener('click', async () => { try { const empty = { name: '', location: '', preferences: '', language }; await api('/api/profile', empty); profile = empty; localStorage.removeItem('yokobu-profile'); $('remember-profile').checked = false; updateContextButton(); openSettings(); $('location-label').textContent = t('setLocation'); toast(t('forgotten')); } catch (e) { toast(e.message); } });
 $('connection-form').addEventListener('submit', async event => {
   event.preventDefault(); $('connect-button').disabled = true; $('connection-error').textContent = ''; const key = $('api-key').value.trim(); $('api-key').value = '';
   try { await api('/api/connect', { key }); status.connected = true; renderConnection(); $('settings').close(); toast(t('keyConnected')); if (pendingMessage) { const msg = pendingMessage; pendingMessage = ''; await send(msg); } }

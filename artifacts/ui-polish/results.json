@@ -1,0 +1,252 @@
+{
+  "checkedAt": "2026-09-29T05:28:30.730Z",
+  "origin": "http://localhost:4173",
+  "viewport": "320–1440px; mobile 390×844; short viewport 390×480",
+  "checks": [
+    {
+      "name": "self-hosted Inter font loads",
+      "status": "passed"
+    },
+    {
+      "name": "390px mobile home, empty-send state and screenshot",
+      "status": "passed"
+    },
+    {
+      "name": "mobile primary touch targets",
+      "status": "passed"
+    },
+    {
+      "name": "profile sheet screenshot and input usability",
+      "status": "passed"
+    },
+    {
+      "name": "settings tabs expose selection and follow keyboard navigation",
+      "status": "passed"
+    },
+    {
+      "name": "profile sheet keyboard focus and dismissal",
+      "status": "passed"
+    },
+    {
+      "name": "320px, 390px and desktop in English, Russian and Korean",
+      "status": "passed"
+    },
+    {
+      "name": "desktop profile screenshot",
+      "status": "passed"
+    },
+    {
+      "name": "empty activity screenshot and navigation",
+      "status": "passed"
+    },
+    {
+      "name": "clarification preserves profile context",
+      "status": "passed"
+    },
+    {
+      "name": "research results, summary and suggestions",
+      "status": "passed"
+    },
+    {
+      "name": "call review screenshot without initiating any call",
+      "status": "passed"
+    },
+    {
+      "name": "call review keyboard focus and dismissal",
+      "status": "passed"
+    },
+    {
+      "name": "conversation at 320px with long Russian controls",
+      "status": "passed"
+    },
+    {
+      "name": "short viewport keeps composer and navigation apart",
+      "status": "passed"
+    },
+    {
+      "name": "populated activity screen and return to conversation",
+      "status": "passed"
+    },
+    {
+      "name": "incoming response preserves reading position and Latest message restores follow",
+      "status": "passed"
+    },
+    {
+      "name": "reduced motion disables decorative animation",
+      "status": "passed"
+    },
+    {
+      "name": "no page errors and no paid or calling API requests",
+      "status": "passed"
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "mobile-home.png",
+    "mobile-profile.png",
+    "small-home-en.png",
+    "small-profile-en.png",
+    "small-home-ru.png",
+    "small-profile-ru.png",
+    "small-home-ko.png",
+    "small-profile-ko.png",
+    "desktop-home.png",
+    "desktop-profile.png",
+    "mobile-empty-activity.png",
+    "mobile-clarification.png",
+    "mobile-research.png",
+    "mobile-conversation.png",
+    "desktop-conversation.png",
+    "mobile-call-review.png",
+    "small-conversation-ru.png",
+    "mobile-short-viewport.png",
+    "mobile-activity.png",
+    "mobile-reading-position.png"
+  ],
+  "touchTargets": [
+    {
+      "label": "mobile home",
+      "targets": [
+        {
+          "selector": "#new-task",
+          "label": "New chat",
+          "width": 44,
+          "height": 44
+        },
+        {
+          "selector": "#location-chip",
+          "label": "Add your neighborhood",
+          "width": 209,
+          "height": 44
+        },
+        {
+          "selector": "#context-button",
+          "label": "A little about you",
+          "width": 123,
+          "height": 44
+        },
+        {
+          "selector": "#voice-button",
+          "label": "Start voice conversation",
+          "width": 74,
+          "height": 44
+        },
+        {
+          "selector": "#send-button",
+          "label": "Send message",
+          "width": 44,
+          "height": 44
+        },
+        {
+          "selector": ".nav-button",
+          "label": "Today",
+          "width": 105,
+          "height": 46
+        },
+        {
+          "selector": ".nav-button",
+          "label": "Activity",
+          "width": 105,
+          "height": 46
+        },
+        {
+          "selector": ".nav-button",
+          "label": "You",
+          "width": 105,
+          "height": 46
+        },
+        {
+          "selector": ".starter",
+          "label": "Find a clinicCare without the language barrier",
+          "width": 346,
+          "height": 73
+        },
+        {
+          "selector": ".starter",
+          "label": "A table for tonightFind somewhere that feels right",
+          "width": 346,
+          "height": 73
+        },
+        {
+          "selector": ".starter",
+          "label": "The everyday thingsA haircut, a repair, a little help",
+          "width": 346,
+          "height": 73
+        }
+      ]
+    },
+    {
+      "label": "clarification",
+      "targets": [
+        {
+          "selector": ".choice",
+          "label": "Yes, Hongdae",
+          "width": 120,
+          "height": 44
+        },
+        {
+          "selector": ".choice",
+          "label": "Another neighborhood",
+          "width": 173,
+          "height": 44
+        },
+        {
+          "selector": "#voice-button",
+          "label": "Start voice conversation",
+          "width": 74,
+          "height": 44
+        },
+        {
+          "selector": "#send-button",
+          "label": "Send message",
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "label": "conversation",
+      "targets": [
+        {
+          "selector": ".action-card button",
+          "label": "Review call",
+          "width": 304,
+          "height": 46
+        },
+        {
+          "selector": ".suggestion",
+          "label": "Prepare my Korean request",
+          "width": 232,
+          "height": 44
+        },
+        {
+          "selector": ".suggestion",
+          "label": "Help me get there",
+          "width": 173,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "label": "call review",
+      "targets": [
+        {
+          "selector": "#approve-call",
+          "label": "Connect calling",
+          "width": 340,
+          "height": 46
+        },
+        {
+          "selector": "[data-close=\"call-sheet\"]",
+          "label": "Close call review",
+          "width": 44,
+          "height": 44
+        }
+      ]
+    }
+  ],
+  "syntheticProviderResponses": true,
+  "liveOpenAI": false,
+  "realAudio": false,
+  "realCalls": false
+}

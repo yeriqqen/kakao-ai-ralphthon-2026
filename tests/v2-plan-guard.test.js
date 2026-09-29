@@ -34,7 +34,7 @@ test('persistent rejection exhausts two repairs and never returns rejected prose
 const summaryRoom = () => ({ language: 'en', call: { id: 'call-a', status: 'interrupted', institutionId: 'a' }, institutions: plan.institutions, customerInfo: [], requiredQuestions: [], transcripts: [{ id: 'business-greeting', callId: 'call-a', role: 'business', text: '안녕하세요.' }, { id: 'assistant-question', callId: 'call-a', role: 'assistant', text: 'Can you provide the service?' }], apiEvidence: [] });
 function pricedSummaryRoom() {
   const room = summaryRoom();
-  room.customerInfo = [{ key: 'gender_preference', value: 'female doctor' }, { key: 'insurance_status', value: 'no Korean health insurance' }];
+  room.customerInfo = [{ key: 'doctor_preference', value: 'female doctor' }, { key: 'insurance_status', value: 'no Korean health insurance' }];
   room.transcripts.push({ id: 'business-price', callId: 'call-a', role: 'business', text: '비용은 10만 원이 넘을 수도 있습니다.' });
   room.requiredQuestions = [{ id: 'cost', text: 'What is the expected consultation cost?', status: 'resolved', answer: 'The cost may exceed 100,000 KRW.', evidence: [{ transcriptId: 'business-price', quote: '10만 원이 넘을 수도 있습니다.' }] }, { id: 'time', text: 'Is the requested time available?', status: 'unresolved', evidence: [] }];
   return room;
@@ -64,10 +64,17 @@ test('assistant evidence, previous-call evidence, invented quotes and untranslat
 test('factual grouping uses Russian and Chinese labels without exposing metadata keys', () => {
   for (const [language, completed, doctor] of [['ru', 'Симуляция завершена.', 'Предпочтение врача'], ['zh', '模拟已完成。', '医生偏好']]) {
     const room = summaryRoom(); room.language = language; room.call.status = 'completed';
-    room.customerInfo = [{ key: 'gender_preference', value: language === 'ru' ? 'Предпочтительно женщина-врач' : '希望由女医生看诊' }];
+    room.customerInfo = [{ key: 'doctor_preference', value: language === 'ru' ? 'Предпочтительно женщина-врач' : '希望由女医生看诊' }];
     const facts = factualSummary(room);
-    assert(facts.text.includes(completed)); assert(facts.text.includes(doctor)); assert(!facts.text.includes('gender_preference'));
+    assert(facts.text.includes(completed)); assert(facts.text.includes(doctor)); assert(!facts.text.includes('doctor_preference'));
   }
+  const shop = summaryRoom(); shop.language = 'zh';
+  shop.customerInfo = [{ key: 'pickup_time', value: '今晚取货' }, { key: 'prior_visit', value: '以前未到访过此店' }, { key: 'gender_preference', value: '中性款式' }];
+  const shopText = factualSummary(shop).text;
+  assert.match(shopText, /期望时间: 今晚取货/);
+  assert.match(shopText, /以往到访情况: 以前未到访过此店/);
+  assert.match(shopText, /信息: 中性款式/);
+  assert.doesNotMatch(shopText, /就诊|医生|gender_preference/);
 });
 test('recommendation failures preserve validated facts and explicitly label unavailable advice', async () => {
   const originalFetch = globalThis.fetch, originalKey = process.env.OPENAI_API_KEY; process.env.OPENAI_API_KEY = 'synthetic-test-key';
@@ -76,7 +83,7 @@ test('recommendation failures preserve validated facts and explicitly label unav
   try { const result = await summarize(room); assert.equal(result.text, factualSummary(room).text); assert.match(result.recommendation, /unavailable/); assert.equal(room.apiEvidence.at(-1).purpose, 'recommendation_fallback'); assert.equal(room.apiEvidence.at(-1).accepted, false); }
   finally { globalThis.fetch = originalFetch; if (originalKey === undefined) delete process.env.OPENAI_API_KEY; else process.env.OPENAI_API_KEY = originalKey; }
 });
-test('one real AI choice selects exact retained answers without generating or rephrasing facts', async () => {
+test('one structured AI choice selects exact retained answers without generating or rephrasing facts', async () => {
   const originalFetch = globalThis.fetch, originalKey = process.env.OPENAI_API_KEY; process.env.OPENAI_API_KEY = 'synthetic-test-key';
   const room = pricedSummaryRoom(), purposes = [];
   const decision = { action: 'clarify_selected_questions', reasonQuestionIds: ['cost'], clarificationQuestionIds: ['time'] };

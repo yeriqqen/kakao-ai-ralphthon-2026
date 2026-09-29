@@ -4,7 +4,7 @@
   "realMicrophone": false,
   "audibleKorean": false,
   "provenance": "Synthetic browser events and mocked HTTP. Does not prove microphone capture, OpenAI connectivity, speech quality, or audible Korean.",
-  "generatedAt": "2026-09-29T06:08:14.349Z",
+  "generatedAt": "2026-09-29T06:19:01.640Z",
   "checks": [
     {
       "name": "Authorization and explicit acceptance gate microphone",
@@ -95,7 +95,7 @@
     }
   ],
   "sources": {
-    "public/v2/business.js": "ac519a4aee9832d300c37766309c43cafd133071addebd20648f7a393e40a91c",
+    "public/v2/business.js": "c9aa717d5ec0d7c5a20abf7f18283713389844571b01ab803659af956c73c6bf",
     "public/v2/business.html": "9ed7c7f88bcbc9388fa416cd2907234ecf25caaf454e0de96821099c40242233",
     "public/v2/business.css": "25db259f009f530f498d4a6f2b9a55e87ea4b0d1c933c589ddc74289eff7b761",
     "scripts/v2-business-ui-check.mjs": "c3da705107689ccac51ad7b68a1ae7849395aa58423b0b216fce1d3ae0e32022"
@@ -144,83 +144,83 @@
         "events": [
           {
             "type": "call.accepted",
-            "at": "2026-09-29T06:08:16.919Z"
+            "at": "2026-09-29T06:19:04.546Z"
           },
           {
             "type": "remote.track",
-            "at": "2026-09-29T06:08:16.927Z"
+            "at": "2026-09-29T06:19:04.555Z"
           },
           {
             "type": "session.created",
-            "at": "2026-09-29T06:08:16.927Z"
+            "at": "2026-09-29T06:19:04.556Z"
           },
           {
             "type": "playback.allowed",
-            "at": "2026-09-29T06:08:16.928Z"
+            "at": "2026-09-29T06:19:04.556Z"
           },
           {
             "type": "connection.registered",
-            "at": "2026-09-29T06:08:16.934Z"
+            "at": "2026-09-29T06:19:04.627Z"
           },
           {
             "type": "opening.requested",
-            "at": "2026-09-29T06:08:16.938Z"
+            "at": "2026-09-29T06:19:04.633Z"
           },
           {
             "type": "response.created",
-            "at": "2026-09-29T06:08:16.971Z",
+            "at": "2026-09-29T06:19:04.663Z",
             "responseId": "r-intro"
           },
           {
             "type": "output_audio_buffer.started",
-            "at": "2026-09-29T06:08:16.971Z",
+            "at": "2026-09-29T06:19:04.664Z",
             "responseId": "r-intro"
           },
           {
             "type": "output_audio_buffer.stopped",
-            "at": "2026-09-29T06:08:16.974Z",
+            "at": "2026-09-29T06:19:04.670Z",
             "responseId": "older-audio"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:08:16.978Z",
+            "at": "2026-09-29T06:19:04.672Z",
             "responseId": "r-intro",
             "status": "completed"
           },
           {
             "type": "output_audio_buffer.stopped",
-            "at": "2026-09-29T06:08:16.980Z",
+            "at": "2026-09-29T06:19:04.673Z",
             "responseId": "r-intro"
           },
           {
             "type": "opening.finished",
-            "at": "2026-09-29T06:08:16.980Z"
+            "at": "2026-09-29T06:19:04.673Z"
           },
           {
             "type": "response.created",
-            "at": "2026-09-29T06:08:17.108Z",
+            "at": "2026-09-29T06:19:04.809Z",
             "responseId": "r-question"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:08:17.148Z",
+            "at": "2026-09-29T06:19:04.844Z",
             "responseId": "r-question",
             "status": "cancelled"
           },
           {
             "type": "response.created",
-            "at": "2026-09-29T06:08:17.154Z",
+            "at": "2026-09-29T06:19:04.850Z",
             "responseId": "r-wait"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:08:17.155Z",
+            "at": "2026-09-29T06:19:04.851Z",
             "responseId": "r-question",
             "status": "cancelled"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:08:17.158Z",
+            "at": "2026-09-29T06:19:04.852Z",
             "responseId": "r-wait",
             "status": "completed"
           }
@@ -235,12 +235,12 @@
         "events": [
           {
             "type": "response.created",
-            "at": "2026-09-29T06:08:18.442Z",
+            "at": "2026-09-29T06:19:06.879Z",
             "responseId": "r-resume"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:08:18.444Z",
+            "at": "2026-09-29T06:19:06.880Z",
             "responseId": "r-resume",
             "status": "completed"
           }
@@ -291,45 +291,45 @@
         "events": [
           {
             "type": "response.created",
-            "at": "2026-09-29T06:08:19.625Z",
+            "at": "2026-09-29T06:19:08.074Z",
             "responseId": "r-tool"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:08:19.633Z",
+            "at": "2026-09-29T06:19:08.090Z",
             "responseId": "r-tool",
             "status": "completed"
           },
           {
             "type": "response.created",
-            "at": "2026-09-29T06:08:19.635Z",
+            "at": "2026-09-29T06:19:08.101Z",
             "responseId": "r-finish-request"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:08:19.645Z",
+            "at": "2026-09-29T06:19:08.114Z",
             "responseId": "r-finish-request",
             "status": "completed"
           },
           {
             "type": "response.created",
-            "at": "2026-09-29T06:08:19.647Z",
+            "at": "2026-09-29T06:19:08.118Z",
             "responseId": "r-goodbye"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:08:19.651Z",
+            "at": "2026-09-29T06:19:08.130Z",
             "responseId": "r-goodbye",
             "status": "completed"
           },
           {
             "type": "output_audio_buffer.stopped",
-            "at": "2026-09-29T06:08:19.654Z",
+            "at": "2026-09-29T06:19:08.133Z",
             "responseId": "r-finish-request"
           },
           {
             "type": "output_audio_buffer.stopped",
-            "at": "2026-09-29T06:08:19.655Z",
+            "at": "2026-09-29T06:19:08.135Z",
             "responseId": "r-goodbye"
           }
         ]

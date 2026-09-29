@@ -32,6 +32,9 @@ let goodbyeResponse = null;
 let responseBusy = false;
 let assistantSpeaking = false;
 let speakingResponseId = null;
+const pendingPlayback = new Set();
+const drainedPlayback = new Set();
+let continuationNeeded = false;
 let activeResponseId = null;
 let requestedResponseKind = null;
 let activeResponseKind = null;
@@ -71,7 +74,7 @@ function showError(message) { $('error').textContent = message; $('error').hidde
 function currentStatus() { return state?.call?.status || 'idle'; }
 function live() { return peer?.connectionState === 'connected' && channel?.readyState === 'open' && connectionAnnounced; }
 function syncMicrophone() {
-  const enabled = live() && currentStatus() === 'active' && !openingPending && playbackAllowed && !responseBusy && !assistantSpeaking && !waitingTool && !state?.pendingRelay && !muted && !endingAudio && pendingToolCount === 0 && pendingTranscripts.size === 0;
+  const enabled = live() && currentStatus() === 'active' && !openingPending && playbackAllowed && !responseBusy && !assistantSpeaking && pendingPlayback.size === 0 && !waitingTool && !state?.pendingRelay && !muted && !endingAudio && pendingToolCount === 0 && pendingTranscripts.size === 0;
   microphone?.getAudioTracks().forEach(track => { track.enabled = enabled; });
   $('microphone-status').textContent = enabled ? 'Microphone live · 마이크 사용 중' : microphone ? 'Microphone paused · 마이크 일시 정지' : 'Microphone inactive · 마이크 꺼짐';
   $('mute-mic').textContent = muted ? 'Unmute microphone · 마이크 켜기' : 'Mute microphone · 마이크 끄기';
@@ -180,7 +183,7 @@ function addTranscript(id, role, text) {
 function send(event) { if (channel?.readyState !== 'open') throw new Error('Realtime event channel is not connected.'); channel.send(JSON.stringify(event)); }
 function isWaiting() { return waitingTool || ['waiting_customer', 'awaiting_decision'].includes(currentStatus()) || !!state?.pendingRelay; }
 function pumpResponse() {
-  if (responseBusy || pendingToolCount || channel?.readyState !== 'open' || !responseQueue.length) return;
+  if (responseBusy || assistantSpeaking || pendingPlayback.size || pendingTranscripts.size || pendingToolCount || channel?.readyState !== 'open' || !responseQueue.length) return;
   // A queued question must not resume after the server has decided to wait or end.
   responseQueue = responseQueue.filter(task => isWaiting() ? task.kind === 'wait' : currentStatus() === 'completed' ? task.kind === 'goodbye' : !terminal.has(currentStatus()) && task.kind !== 'wait');
   if (!responseQueue.length) return;
@@ -193,19 +196,27 @@ function pumpResponse() {
   send({ type: 'response.create', ...(['opening', 'wait', 'goodbye'].includes(task.kind) ? { response: { tool_choice: 'none', output_modalities: ['audio'] } } : {}) });
 }
 function respond(instructions = '', text = '', kind = 'normal') {
-  if (kind === 'normal' && (isWaiting() || terminal.has(currentStatus()))) return;
+  if (['normal', 'continuation'].includes(kind) && (isWaiting() || terminal.has(currentStatus()))) return;
+  // Consecutive reviewed fragments update one pending reply with the latest state.
+  // Tool results, customer relay updates and control responses remain separate.
+  if (kind === 'continuation') responseQueue = responseQueue.filter(task => task.kind !== 'continuation');
   responseQueue.push({ instructions, text, kind }); pumpResponse();
+}
+function continueAfterBusinessReview() {
+  if (!continuationNeeded || pendingTranscripts.size || pendingToolCount || currentStatus() !== 'active' || isWaiting()) return;
+  continuationNeeded = false;
+  respond('Continue the assigned simulated business call in Korean. After acknowledging a greeting or an answer, ask one next unresolved required question; do not stop at a greeting. If the business asked for unknown customer information, use request_customer_detail instead. If all questions are resolved, read back key facts and obtain confirmation before complete_call.', JSON.stringify({ requiredQuestions: state.requiredQuestions, confirmedKeyDetails: state.call.confirmedKeyDetails }), 'continuation');
 }
 function ensureWaitNotice() {
   if (waitNoticeActive || channel?.readyState !== 'open') return;
   waitNoticeActive = true;
-  responseQueue = [];
+  responseQueue = []; continuationNeeded = false;
   if (responseBusy && activeResponseKind !== 'wait') {
     cancellationPending = true;
     if (activeResponseId) cancelledResponses.add(activeResponseId);
     send({ type: 'response.cancel', ...(activeResponseId ? { response_id: activeResponseId } : {}) });
-    send({ type: 'output_audio_buffer.clear' });
   }
+  if (responseBusy || assistantSpeaking || pendingPlayback.size) send({ type: 'output_audio_buffer.clear' });
   respond('The application is waiting for customer information or a customer decision. Say once, briefly and politely in Korean, that you are checking with the customer and ask the business to wait. Then remain silent. Do not ask a business question or infer any customer answer.', '', 'wait');
 }
 
@@ -219,6 +230,7 @@ function releasePeer() {
   $('remote-audio').pause(); $('remote-audio').srcObject = null;
   accepting = false; connectionAnnounced = false; waitingTool = false; responseBusy = false; assistantSpeaking = false; speakingResponseId = null; endingAudio = false; completingTool = false;
   responseQueue = []; activeResponseId = null; requestedResponseKind = null; activeResponseKind = null; cancellationPending = false;
+  pendingPlayback.clear(); drainedPlayback.clear(); continuationNeeded = false;
   waitNoticeActive = false; finishClosing = false;
   sessionReady = false; remoteTrackReady = false; playbackAllowed = false; openingPending = false; openingSent = false; openingResponseId = null; openingAudioStarted = false; openingAudioStopped = false;
   for (const item of pendingTranscripts.values()) item.resolve();
@@ -258,7 +270,7 @@ function persistTranscript(id, role, text) {
   // Silence/noise may commit an audio item with an empty completed transcript.
   // It supplies no evidence, but it is not a missing transcription event.
   if (!text?.trim()) {
-    if (role === 'business') { pendingTranscripts.get(id)?.resolve(); pendingTranscripts.delete(id); syncMicrophone(); }
+    if (role === 'business') { pendingTranscripts.get(id)?.resolve(); pendingTranscripts.delete(id); continueAfterBusinessReview(); pumpResponse(); syncMicrophone(); }
     return;
   }
   const key = `${role}:${id}`;
@@ -275,9 +287,9 @@ function persistTranscript(id, role, text) {
     // Server semantic review is authoritative. Automatic VAD responses are disabled.
     // A pending function already owns the next reply and will return its tool result.
     if (role === 'business' && currentStatus() === 'active' && !isWaiting() && pendingToolCount === 0) {
-      respond('Continue the assigned simulated business call in Korean. After acknowledging a greeting or an answer, ask one next unresolved required question; do not stop at a greeting. If the business asked for unknown customer information, use request_customer_detail instead. If all questions are resolved, read back key facts and obtain confirmation before complete_call.', JSON.stringify({ requiredQuestions: state.requiredQuestions, confirmedKeyDetails: state.call.confirmedKeyDetails }));
+      continuationNeeded = true; continueAfterBusinessReview();
     }
-    syncMicrophone();
+    pumpResponse(); syncMicrophone();
   }).catch(async () => {
     if (eventGeneration === generation) await disconnect('Text evidence could not be saved. Voice stopped so the summary cannot silently omit this conversation.');
   });
@@ -328,6 +340,10 @@ function handleEvent(event) {
   }
   if (event.type === 'response.done') {
     const response = event.response || {};
+    // Generation can finish before WebRTC announces playback. Reserve that
+    // response until its own output-buffer drain event, including this ordering.
+    const hasAudio = response.output?.some(item => item.content?.some(part => ['audio', 'output_audio'].includes(part.type)));
+    if (response.id && hasAudio && response.status === 'completed' && !cancelledResponses.has(response.id) && !drainedPlayback.has(response.id)) pendingPlayback.add(response.id);
     if (response.status === 'completed' && !cancelledResponses.has(response.id)) {
       for (const item of response.output || []) if (item.type === 'function_call') enqueueTool({ ...item, response_id: response.id });
     }
@@ -349,14 +365,20 @@ function handleEvent(event) {
   if (event.type === 'response.function_call_arguments.done') enqueueTool(event);
   if (event.type === 'response.output_item.done' && event.item?.type === 'function_call') enqueueTool({ ...event.item, response_id: event.response_id });
   if (event.type === 'output_audio_buffer.started') {
+    if (event.response_id && drainedPlayback.has(event.response_id)) return;
+    if (event.response_id) pendingPlayback.add(event.response_id);
     if (openingPending && event.response_id === openingResponseId) { openingAudioStarted = true; clearTimeout(openingTimer); }
     assistantSpeaking = true; speakingResponseId = event.response_id || null; syncMicrophone();
     $('connection-label').textContent = 'OpenAI audio is playing · Listen, then reply'; $('heard-korean').disabled = false;
   }
-  if (event.type === 'output_audio_buffer.cleared' && (!event.response_id || !speakingResponseId || event.response_id === speakingResponseId)) { assistantSpeaking = false; speakingResponseId = null; syncMicrophone(); }
+  if (['output_audio_buffer.stopped', 'output_audio_buffer.cleared'].includes(event.type)) {
+    if (event.response_id) { pendingPlayback.delete(event.response_id); drainedPlayback.add(event.response_id); }
+    else if (event.type === 'output_audio_buffer.cleared') { for (const id of pendingPlayback) drainedPlayback.add(id); pendingPlayback.clear(); }
+    if (!event.response_id || event.response_id === speakingResponseId) { assistantSpeaking = false; speakingResponseId = null; }
+    pumpResponse(); syncMicrophone();
+  }
   if (event.type === 'output_audio_buffer.stopped') {
     if (openingPending && openingAudioStarted && event.response_id === openingResponseId) { openingAudioStopped = true; finishOpening(); }
-    if (!event.response_id || !speakingResponseId || event.response_id === speakingResponseId) { assistantSpeaking = false; speakingResponseId = null; syncMicrophone(); }
     if (endingAudio && goodbyeResponse && event.response_id === goodbyeResponse) finishPlayback();
     else render();
   }
@@ -371,6 +393,7 @@ function handleEvent(event) {
 function enqueueTool(event) {
   if (!event.call_id || toolCalls.has(event.call_id) || cancelledResponses.has(event.response_id)) return;
   toolCalls.add(event.call_id);
+  continuationNeeded = false; responseQueue = responseQueue.filter(task => task.kind !== 'continuation');
   const eventGeneration = generation;
   pendingToolCount++; syncMicrophone();
   toolQueue = toolQueue.then(() => runTool(event, eventGeneration)).catch(() => {

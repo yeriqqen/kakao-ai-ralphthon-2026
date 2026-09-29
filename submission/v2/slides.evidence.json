@@ -1,7 +1,7 @@
 {
-  "checkpoint": "2026-09-29, after the third actual laptop rehearsal",
-  "interface": "57 code + 17 HTTP checks passed. Mocked browser checks:\n20 customer + 11 business checks passed.",
-  "interfaceBoundary": "These checks do not establish real speech quality or user value.",
-  "api": "Four spoken answers and a Korean readback were captured.\nConfirmation reset the answers; the teammate ended the run.",
-  "voice": "Live unknown-detail relay and normal completion: Unverified.\nRussian/Chinese interviews exercised; fidelity limits remain."
+  "checkpoint": "2026-09-29, actual shop attempt ended 15:15:45 KST; repairs pending",
+  "interface": "63 code + 23 HTTP checks passed. Mocked browser checks:\n20 customer + 14 business checks passed.",
+  "interfaceBoundary": "HTTP setup plans are synthetic. These checks do not prove speech or value.",
+  "api": "Korean opening received; human audibility not confirmed.\nStock and price were wrongly inferred; mic stalled, operator ended.",
+  "voice": "Recorded-text advice: 9/9 checks with one real API request.\nShop audibility, live relay and normal completion: Unverified."
 }

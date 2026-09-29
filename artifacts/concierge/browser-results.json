@@ -1,0 +1,21 @@
+{
+  "checks": [
+    "mobile home and empty-send state",
+    "profile is optional, reusable and opt-in persistent",
+    "language switching and settings at narrow widths",
+    "missing-key requests explain connection, not fake success",
+    "conversational clarification and context in request",
+    "research cards, summary and call connection boundary",
+    "safe model text and links",
+    "real microphone denial is recoverable",
+    "canceling while microphone permission is pending stops late tracks",
+    "Realtime tool handoff and successful-session cleanup with synthetic transport",
+    "activity and reset",
+    "desktop and small-phone layout"
+  ],
+  "errors": [],
+  "syntheticProviderResponses": true,
+  "liveOpenAI": false,
+  "realAudio": false,
+  "realCalls": false
+}

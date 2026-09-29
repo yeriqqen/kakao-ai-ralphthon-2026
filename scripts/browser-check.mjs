@@ -10,7 +10,7 @@ import { installSyntheticSpeech, RUSSIAN_REQUEST, EXPECTED_SUMMARY, RECEPTIONIST
 const require = createRequire(import.meta.url);
 const root = fileURLToPath(new URL('../', import.meta.url));
 const output = path.join(root, 'artifacts');
-const baseURL = process.env.DEMO_URL || 'http://localhost:4173';
+const baseURL = process.env.DEMO_URL || 'http://localhost:4173/demo/';
 const report = {
   title: 'YOKOBU isolated browser logic and layout checks',
   timestamp: new Date().toISOString(), baseURL,

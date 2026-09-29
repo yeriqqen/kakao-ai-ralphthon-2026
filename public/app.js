@@ -1,254 +1,247 @@
-import { FIXTURE, SCRIPT, CALL_PLAN, createSession, beginSession, recordReceptionist, answerRelay, finishSession, buildReport } from './engine.js';
-
-const $ = (id) => document.getElementById(id);
-let session = null;
-let report = null;
-let request = '';
-let recognition = null;
-let micStream = null;
-let listening = false;
-let micPending = false;
-let micAttempt = 0;
-let inputSource = 'typed';
-let lastRecognized = '';
-let fixtureIndex = 0;
-let activeKorean = '';
-let speechEpoch = 0;
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-const audioEvidence = { recognitionSupported: !!SpeechRecognition, synthesisSupported: !!window.speechSynthesis, microphoneAttempts: 0, microphoneStreamsGranted: 0, recognitionResults: [], recognitionErrors: [], speechEvents: [], userConfirmedAudible: false, note: 'API events do not establish audible quality. Actual microphone and human feedback must be assessed separately.' };
-
-function showStage(name) {
-  document.querySelectorAll('.stage').forEach(el => { el.hidden = el.id !== name + '-stage'; });
-  document.querySelectorAll('#steps li').forEach(el => el.classList.toggle('active', el.dataset.step === (name === 'result' ? 'call' : name)));
-  $('global-status').textContent = '';
-  window.scrollTo({ top: 0, behavior: 'instant' });
+import { translations } from './i18n.js';
+const $ = id => document.getElementById(id);
+const icon = name => { const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.classList.add('icon'); svg.setAttribute('aria-hidden', 'true'); const use = document.createElementNS(svg.namespaceURI, 'use'); use.setAttribute('href', `#i-${name}`); svg.append(use); return svg; };
+const el = (tag, className, text) => { const node = document.createElement(tag); if (className) node.className = className; if (text !== undefined) node.textContent = text; return node; };
+const readStored = (storage, key, fallback) => { try { return JSON.parse(storage.getItem(key)) || fallback; } catch { return fallback; } };
+let profile = readStored(localStorage, 'yokobu-profile', { language: 'en', name: '', location: '', preferences: '' });
+let language = ['en', 'ru', 'ko'].includes(profile.language) ? profile.language : 'en';
+let records = readStored(sessionStorage, 'yokobu-conversation', []);
+if (!Array.isArray(records)) records = [];
+let status = { connected: false, calling: false }; let busy = false; let controller; let activeView = 'home'; let toastTimer; let currentAction; let pendingMessage = '';
+const t = key => translations[language][key] || translations.en[key] || key;
+const storageWrite = (storage, key, value) => { try { storage.setItem(key, JSON.stringify(value)); } catch {} };
+function persist() { storageWrite(sessionStorage, 'yokobu-conversation', records.slice(-60)); }
+function toast(message) { $('toast').textContent = message; $('toast').hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => $('toast').hidden = true, 4500); }
+async function api(url, data, signal) {
+  const res = await fetch(url, { method: data === undefined ? 'GET' : 'POST', headers: data === undefined ? {} : { 'Content-Type': 'application/json' }, body: data === undefined ? undefined : JSON.stringify(data), signal });
+  const result = await res.json(); if (!res.ok) throw Object.assign(new Error(result.error || t('failed')), { status: res.status }); return result;
 }
-function bubble(title, text, type = '') {
-  if (!text) return;
-  const el = document.createElement('div'); el.className = 'bubble ' + type;
-  const label = document.createElement('span'); label.className = 'bubble-title'; label.textContent = title;
-  const p = document.createElement('p'); p.textContent = text;
-  el.append(label, p); $('conversation').append(el); $('conversation').scrollTop = $('conversation').scrollHeight;
+function setLanguage(value) {
+  language = value; profile.language = value; document.documentElement.lang = value; $('language').value = value;
+  document.querySelectorAll('[data-i18n]').forEach(node => { node.textContent = t(node.dataset.i18n); });
+  document.querySelectorAll('[data-placeholder]').forEach(node => node.placeholder = t(node.dataset.placeholder));
+  $('location-label').textContent = profile.location || t('setLocation');
+  if ($('remember-profile').checked) storageWrite(localStorage, 'yokobu-profile', profile);
+  renderConnection(); renderActivity();
+  api('/api/profile', profile).catch(() => {});
 }
-function koreanVoice() {
-  const voices = window.speechSynthesis?.getVoices() || [];
-  return voices.find(v => /^ko[-_]/i.test(v.lang) && v.localService) || voices.find(v => /^ko[-_]/i.test(v.lang));
+function renderConnection() {
+  $('connection-status').textContent = t(status.connected ? 'connected' : 'notConnected');
+  $('phone-status').textContent = t(status.calling ? 'callsOn' : 'callsOff');
+  $('ai-dot').classList.toggle('connected', status.connected); $('connection-dot').classList.toggle('connected', status.connected);
 }
-function stopMic() {
-  ++micAttempt; micPending = false;
-  const previousRecognition = recognition; recognition = null;
-  const previousStream = micStream; micStream = null;
-  listening = false;
-  if (previousRecognition) { try { previousRecognition.abort(); } catch { try { previousRecognition.stop(); } catch {} } }
-  previousStream?.getTracks().forEach(track => track.stop());
-  $('microphone').classList.remove('listening'); $('microphone').innerHTML = '<span aria-hidden="true">◉</span> 마이크로 답하기';
+function showView(view) {
+  activeView = view;
+  $('home').hidden = view !== 'home'; $('conversation-view').hidden = view !== 'conversation'; $('activity-view').hidden = view !== 'activity'; $('chat-composer-slot').hidden = view !== 'conversation';
+  if (view === 'home') $('home-composer-slot').append($('composer'));
+  if (view === 'conversation') $('chat-composer-slot').append($('composer'));
+  $('composer').hidden = view === 'activity';
+  $('nav-home').classList.toggle('active', view !== 'activity'); $('nav-activity').classList.toggle('active', view === 'activity');
+  if (view === 'activity') renderActivity();
 }
-function speak(text) {
-  activeKorean = text; $('korean-prompt').textContent = text;
-  if (!text) return;
-  stopMic();
-  if (!window.speechSynthesis || !window.SpeechSynthesisUtterance) { $('speech-status').textContent = '한국어 음성 출력 미지원 · 텍스트만 표시됩니다. 음성 검증은 Unverified.'; return; }
-  const voice = koreanVoice();
-  if (!voice) { $('speech-status').textContent = '한국어 음성이 아직 준비되지 않았습니다. 잠시 후 다시 듣기를 눌러 주세요. 음성 검증은 Unverified.'; return; }
-  const epoch = ++speechEpoch;
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text); utterance.lang = 'ko-KR'; utterance.voice = voice; utterance.rate = .94;
-  const item = { text, voice: voice.name, localService: voice.localService, requestedAt: new Date().toISOString(), started: false, ended: false };
-  audioEvidence.speechEvents.push(item);
-  utterance.onstart = () => { if (epoch !== speechEpoch) return; item.started = true; $('audio-indicator').textContent = '말하는 중'; $('speech-status').textContent = `한국어 음성 출력 중 · ${voice.name}`; };
-  utterance.onend = () => { item.ended = true; if (epoch !== speechEpoch) return; $('audio-indicator').textContent = '응답 대기'; $('speech-status').textContent = '한국어 음성 재생 완료. 실제로 들렸는지는 팀원이 확인해 주세요.'; };
-  utterance.onerror = (event) => { item.error = event.error; if (epoch !== speechEpoch) return; $('audio-indicator').textContent = '텍스트 모드'; $('speech-status').textContent = `음성 출력 실패 (${event.error}). 텍스트는 계속 확인할 수 있습니다.`; };
-  window.speechSynthesis.speak(utterance);
+function scrollBottom() { if (activeView === 'conversation') requestAnimationFrame(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })); }
+function button(text, className, action) { const b = el('button', className, text); b.type = 'button'; b.addEventListener('click', action); return b; }
+function safeUrl(url) { try { const parsed = new URL(url); return ['http:', 'https:'].includes(parsed.protocol) ? parsed.href : null; } catch { return null; } }
+function link(text, url, className) { const a = el('a', className, text); a.href = safeUrl(url) || '#'; a.target = '_blank'; a.rel = 'noopener noreferrer'; return a; }
+// Plain text plus safe Markdown links; model text is never inserted as HTML.
+function richText(text) {
+  const p = el('div', 'message-text'); const pattern = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g; let last = 0;
+  for (const match of String(text).matchAll(pattern)) { p.append(document.createTextNode(text.slice(last, match.index))); p.append(link(match[1], match[2])); last = match.index + match[0].length; }
+  p.append(document.createTextNode(String(text).slice(last))); return p;
 }
-function applyEvent(event) {
-  if (event?.message) bubble('YOKOBU', event.message);
-  const pending = session?.pendingRelay;
-  $('relay-box').hidden = !pending;
-  $('microphone').disabled = !!pending;
-  $('send-receptionist').disabled = !!pending;
-  $('receptionist-text').disabled = !!pending;
-  if (pending) {
-    const question = typeof pending === 'string' ? pending : pending.russian || pending.questionRu || pending.question || 'Новый вопрос клиники. Ответ пока неизвестен.';
-    $('relay-question').textContent = question;
-    $('user-call-status').textContent = 'Разговор приостановлен. Ответ не будет придуман.';
-    $('relay-answer').focus();
-  } else {
-    $('user-call-status').textContent = 'Вы можете следить за разговором здесь — слушать и говорить не нужно.';
+function addRecord(record) { records.push(record); persist(); renderRecord(record); renderActivity(); scrollBottom(); }
+function renderRecord(record) {
+  const node = el('article', `message ${record.role}`);
+  if (record.role === 'user') node.textContent = record.text;
+  else {
+    const label = el('div', 'assistant-label'); label.append(icon('spark'), document.createTextNode('yokobu')); node.append(label);
+    const r = record.result || { message: record.text || '' }; node.append(richText(r.message || ''));
+    if (r.question) node.append(el('p', 'question', r.question));
+    if (r.choices?.length) { const choices = el('div', 'choices'); r.choices.forEach(c => choices.append(button(c, 'choice', () => send(c)))); node.append(choices); }
+    if (r.places?.length) {
+      const places = el('div', 'places');
+      r.places.forEach(p => { const card = el('div', 'place'); const heading = el('div', 'place-heading'); heading.append(el('h3', '', p.name)); if (safeUrl(p.url)) heading.append(link(t('source'), p.url)); card.append(heading, el('p', '', p.detail), el('p', 'address', p.address), el('p', 'small', t('listing'))); if (p.phone) card.append(el('p', '', p.phone)); places.append(card); }); node.append(places);
+    }
+    (r.actions || []).forEach(action => { const card = el('div', 'action-card'); card.append(el('h3', '', action.title), el('p', '', `${action.business} · ${action.phone}`), button(t('review'), 'primary', () => reviewCall(action))); node.append(card); });
+    if (r.summary) {
+      const s = r.summary; const card = el('section', 'summary-card'); card.append(el('h3', '', s.title));
+      const facts = el('ul'); (s.facts || []).forEach(f => facts.append(el('li', '', f))); card.append(facts);
+      if (s.nextSteps?.length) { card.append(el('h4', '', t('nextSteps'))); const steps = el('ol'); s.nextSteps.forEach(x => steps.append(el('li', '', x))); card.append(steps); }
+      if (s.korean) { card.append(el('h4', '', t('korean'))); const ko = el('div', 'korean-note', s.korean); ko.lang = 'ko'; card.append(ko, button(t('copy'), 'text-button', async () => { try { await navigator.clipboard.writeText(s.korean); toast(t('copied')); } catch { toast(t('failed')); } })); }
+      node.append(card);
+    }
+    if (r.sources?.length) { const sources = el('div', 'sources'); r.sources.forEach(s => { if (safeUrl(s.url)) sources.append(link(s.title || new URL(s.url).hostname, s.url, 'source')); }); node.append(sources); }
+    if (r.suggestions?.length) { const suggestions = el('div', 'suggestions'); r.suggestions.forEach(s => suggestions.append(button(s + ' ↗', 'suggestion', () => send(s)))); node.append(suggestions); }
   }
-  if (event?.korean) { bubble('YOKOBU · 한국어', event.korean, 'korean'); speak(event.korean + (event.resumeKorean ? ' ' + event.resumeKorean : '')); }
-  updateFactProgress();
+  $('messages').append(node); return node;
 }
-function updateFactProgress() {
-  if (!session) return;
-  const facts = buildReport(session).facts;
-  const count = facts.filter(f => f.status === 'Confirmed in simulation').length;
-  if (!session.pendingRelay) $('user-call-status').textContent = `Подтверждено в симуляции: ${count} из ${facts.length}. Вы можете читать весь разговор.`;
+function renderActivity() {
+  const list = $('activity-list'); list.replaceChildren();
+  const first = records.find(r => r.role === 'user');
+  if (!first) { list.append(el('div', 'empty-state', t('emptyActivity'))); return; }
+  const b = button('', 'activity-item', () => { showView('conversation'); scrollBottom(); }); const text = el('span'); text.append(el('strong', '', first.text.slice(0, 110)), el('small', '', t('currentTask'))); b.append(text, el('span', '', '↗')); list.append(b);
+  records.filter(r => r.result?.summary).forEach(r => { const item = button(r.result.summary.title + ' ↗', 'activity-item', () => { showView('conversation'); scrollBottom(); }); list.append(item); });
 }
-function renderList(target, values) {
-  $(target).replaceChildren();
-  values.forEach(value => { const li = document.createElement('li'); li.textContent = typeof value === 'string' ? value : value.korean || value.ko || JSON.stringify(value); $(target).append(li); });
-}
-renderList('call-plan', CALL_PLAN);
-renderList('script-lines', [SCRIPT[0], SCRIPT[1], SCRIPT[2], '처음 방문하시나요? → 사용자의 러시아어 답변을 기다립니다.', ...SCRIPT.slice(3)]);
-$('load-example').onclick = () => { $('request').value = FIXTURE.request; $('request-error').textContent = ''; $('request').focus(); };
-$('request-form').onsubmit = event => {
-  event.preventDefault(); request = $('request').value.trim();
-  if (!request) { $('request-error').textContent = 'Напишите запрос или нажмите «Вставить пример».'; $('request').focus(); return; }
-  if (!/врач|клиник|страхов|ждать|ожидани/i.test(request)) { $('request-error').textContent = 'Этот демо-сценарий поддерживает запрос о враче, страховке и ожидании в детской клинике. Нажмите «Вставить пример».'; return; }
-  $('request-preview').textContent = request; showStage('details'); $('age').focus();
-};
-$('fill-details').onclick = () => { $('age').value = '7'; $('insurance').value = 'none'; $('symptoms').value = 'кашель'; $('duration').value = '2'; $('details-error').textContent = ''; };
-$('details-form').onsubmit = event => {
-  event.preventDefault();
+function setBusy(value) { busy = value; $('send-button').disabled = busy || !$('request').value.trim(); $('progress').hidden = !busy; document.querySelectorAll('.choice,.suggestion').forEach(b => b.disabled = busy); }
+async function send(message, { fromVoice = false, repeat = false } = {}) {
+  message = String(message).trim(); if (!message || busy) return null;
+  if (!status.connected) { pendingMessage = message; $('request').value = message; openSettings('connection'); toast(t('connectFirst')); return null; }
+  if (message.length > 8000) { toast(t('failed')); return null; }
+  showView('conversation'); if (!repeat && !fromVoice) addRecord({ role: 'user', text: message });
+  $('request').value = ''; $('request').style.height = ''; setBusy(true); $('progress-label').textContent = t('thinking'); scrollBottom();
+  controller = new AbortController(); let finalResult = null; let received = false;
   try {
-    if (!$('age').value || !$('duration').value || !$('symptoms').value || !$('insurance').value) throw new Error('Укажите возраст, симптомы, длительность и наличие страховки. Можно заполнить вымышленным примером.');
-    session = createSession({ request, age: Number($('age').value), symptoms: $('symptoms').value, duration: Number($('duration').value), insurance: $('insurance').value });
-    showStage('plan'); $('start-simulation').focus();
-  } catch (error) { $('details-error').textContent = error.message; }
-};
-$('start-simulation').onclick = () => {
-  showStage('call'); bubble('ВЫ · ВЫМЫШЛЕННЫЙ ЗАПРОС', request, 'user');
-  bubble('YOKOBU', 'Начинаем симуляцию. Если клиника спросит о том, чего мы ещё не знаем, я передам вопрос вам.');
-  applyEvent(beginSession(session));
-  if (!SpeechRecognition) $('mic-status').textContent = '음성 인식 미지원. Chrome에서 열거나 명시적 텍스트 대체 입력을 사용하세요. 마이크 검증: Unverified.';
-};
-$('repeat-speech').onclick = () => speak(activeKorean);
-$('receptionist-text').addEventListener('input', () => { if (listening || micPending) stopMic(); inputSource = lastRecognized ? 'microphone-edited' : 'typed'; $('input-provenance').textContent = lastRecognized ? '음성 인식 결과를 수정했습니다. 수정된 입력으로 기록됩니다.' : '직접 입력 · 텍스트 대체 입력으로 기록됩니다.'; });
-$('microphone').onclick = async () => {
-  if (listening || micPending) { stopMic(); $('mic-status').textContent = '마이크 입력을 멈췄습니다. 임시 결과는 직접 수정하거나 다시 인식해 주세요.'; return; }
-  if (!SpeechRecognition || !navigator.mediaDevices?.getUserMedia) { $('mic-status').textContent = '마이크 음성 인식을 지원하지 않는 환경입니다. Chrome의 localhost에서 열어 주세요. 텍스트 대체는 마이크 검증이 아닙니다.'; return; }
-  const attempt = ++micAttempt;
-  const activeSession = session;
-  const isCurrentAttempt = () => attempt === micAttempt && session === activeSession && session?.phase === 'conversation' && !session.pendingRelay;
-  micPending = true;
-  ++audioEvidence.microphoneAttempts;
-  $('receptionist-text').value = ''; lastRecognized = ''; inputSource = 'typed';
-  $('input-provenance').textContent = '새 마이크 입력 대기 중 · 이전 인식 결과는 사용하지 않습니다.';
-  window.speechSynthesis?.cancel(); ++speechEpoch; $('audio-indicator').textContent = '듣기 준비';
-  $('mic-status').textContent = '마이크 접근 권한을 확인하는 중… 다시 누르면 취소됩니다.';
-  let stream = null;
-  try {
-    stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    ++audioEvidence.microphoneStreamsGranted;
-    if (!isCurrentAttempt()) { stream.getTracks().forEach(track => track.stop()); return; }
-    micStream = stream;
-    const currentRecognition = new SpeechRecognition(); recognition = currentRecognition;
-    currentRecognition.lang = 'ko-KR'; currentRecognition.continuous = false; currentRecognition.interimResults = true;
-    const isCurrent = () => isCurrentAttempt() && recognition === currentRecognition;
-    let finalText = '';
-    const recordedFinalIndices = new Set();
-    currentRecognition.onstart = () => {
-      if (!isCurrent()) return;
-      micPending = false; listening = true;
-      $('microphone').classList.add('listening'); $('microphone').innerHTML = '<span aria-hidden="true">■</span> 듣기 중 · 중지'; $('mic-status').textContent = '한국어로 말씀해 주세요. 완료 후 문장을 확인하고 전달하세요.';
-    };
-    currentRecognition.onresult = event => {
-      if (!isCurrent()) return;
-      const finals = []; const interims = [];
-      for (let i = 0; i < event.results.length; i++) {
-        const result = event.results[i];
-        if (result.isFinal) {
-          finals.push(result[0].transcript);
-          if (!recordedFinalIndices.has(i)) {
-            recordedFinalIndices.add(i);
-            audioEvidence.recognitionResults.push({ text: result[0].transcript, confidence: result[0].confidence, at: new Date().toISOString() });
-          }
-        } else interims.push(result[0].transcript);
+    const res = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message, profile }), signal: controller.signal });
+    if (!res.ok) { const err = await res.json(); throw Object.assign(new Error(err.error || t('failed')), { status: res.status }); }
+    const decoder = new TextDecoder(); let buffer = '';
+    for await (const chunk of res.body) {
+      buffer += decoder.decode(chunk, { stream: true }); const lines = buffer.split('\n'); buffer = lines.pop();
+      for (const line of lines) {
+        if (!line.trim()) continue; const event = JSON.parse(line);
+        if (event.type === 'status') $('progress-label').textContent = t(event.stage);
+        if (event.type === 'error') throw new Error(event.error);
+        if (event.type === 'result') { received = true; finalResult = event.result; addRecord({ role: 'assistant', result: event.result }); }
       }
-      finalText = finals.join(' ').trim();
-      const interim = interims.join(' ').trim();
-      const displayed = [finalText, interim].filter(Boolean).join(' ');
-      $('receptionist-text').value = displayed;
-      lastRecognized = displayed; inputSource = interim ? 'microphone-interim' : finalText ? 'microphone' : 'typed';
-      $('input-provenance').textContent = interim ? '인식 중인 임시 결과 · 아직 확정되지 않았습니다.' : '마이크 음성 인식 결과 · 내용을 확인한 후 전달하세요.';
-    };
-    currentRecognition.onerror = event => {
-      if (!isCurrent()) return;
-      audioEvidence.recognitionErrors.push({ error: event.error, at: new Date().toISOString() });
-      const hints = { 'not-allowed': '마이크 권한이 거부되었습니다. 주소창의 사이트 설정에서 직접 허용한 뒤 다시 시도하세요.', 'service-not-allowed': '브라우저 음성 서비스 사용이 허용되지 않았습니다.', network: '음성 인식 서비스에 연결할 수 없습니다. 인터넷 연결과 브라우저 음성 서비스를 확인해 주세요.', 'no-speech': '말소리가 인식되지 않았습니다. 다시 시도해 주세요.', 'audio-capture': '마이크를 사용할 수 없습니다. 연결된 입력 장치를 확인해 주세요.' };
-      stopMic();
-      $('mic-status').textContent = (hints[event.error] || `음성 인식 실패: ${event.error}.`) + ' 답변은 생성되지 않았습니다. 명시적 텍스트 대체 입력을 사용할 수 있습니다.';
-    };
-    currentRecognition.onend = () => {
-      if (!isCurrent()) return;
-      recognition = null; stopMic();
-      if (inputSource === 'microphone-interim') $('mic-status').textContent = '임시 결과만 남았습니다. 직접 수정하거나 다시 인식해 주세요. 답변은 전달되지 않았습니다.';
-      else if (finalText) $('mic-status').textContent = '인식 완료. 텍스트를 확인하고 «이 답변 전달하기»를 눌러 주세요.';
-      else $('mic-status').textContent = '인식된 문장이 없습니다. 다시 시도하거나 직접 입력해 주세요.';
-    };
-    currentRecognition.start();
+    }
+    if (!received) throw new Error(t('noReply'));
   } catch (error) {
-    if (!isCurrentAttempt()) { stream?.getTracks().forEach(track => track.stop()); return; }
-    audioEvidence.recognitionErrors.push({ error: error.name, at: new Date().toISOString() }); stopMic();
-    $('mic-status').textContent = error.name === 'NotAllowedError' ? '마이크 권한이 거부되었습니다. 사이트 설정에서 직접 허용한 뒤 재시도하세요. 답변은 생성되지 않았습니다.' : `마이크를 시작할 수 없습니다 (${error.name}). 답변은 생성되지 않았습니다.`;
-  }
-};
-$('receptionist-form').onsubmit = event => {
-  event.preventDefault(); const text = $('receptionist-text').value.trim();
-  if (!text) { $('mic-status').textContent = '먼저 말하거나 가상 답변을 입력해 주세요. 빈 답변은 전달되지 않습니다.'; return; }
-  if (inputSource === 'microphone-interim') { $('mic-status').textContent = '음성 인식이 확정될 때까지 기다리거나 문장을 직접 수정해 주세요.'; return; }
-  stopMic();
-  try {
-    const result = recordReceptionist(session, text, inputSource);
-    bubble(inputSource === 'microphone' ? 'АДМИНИСТРАТОР · МИКРОФОН' : 'АДМИНИСТРАТОР · ТЕКСТОВЫЙ ВВОД', text, 'receptionist');
-    $('receptionist-text').value = ''; lastRecognized = ''; inputSource = 'typed'; $('input-provenance').textContent = '직접 입력은 텍스트 대체 입력으로 기록됩니다.';
-    applyEvent(result);
-  } catch (error) { $('mic-status').textContent = error.message; }
-};
-$('relay-form').onsubmit = event => {
-  event.preventDefault(); const text = $('relay-answer').value.trim();
-  if (!text) { $('relay-error').textContent = 'Введите ответ. Пока вы не ответите, разговор приостановлен.'; return; }
-  try {
-    const result = answerRelay(session, text);
-    if (session.pendingRelay) { $('relay-error').textContent = result.message || 'Ответ не распознан. Для этого примера напишите «Да» или «Нет».'; return; }
-    bubble('ВЫ · ОТВЕТ КЛИНИКЕ', text, 'user'); $('relay-answer').value = ''; $('relay-error').textContent = ''; applyEvent(result);
-  } catch (error) { $('relay-error').textContent = error.message; }
-};
-const fixtureScript = [SCRIPT[0], SCRIPT[1], SCRIPT[2], '처음 방문하시나요?', ...SCRIPT.slice(3)];
-$('insert-fixture').onclick = () => {
-  if (session.pendingRelay) { $('mic-status').textContent = '사용자의 러시아어 응답을 먼저 기다려 주세요.'; return; }
-  if (fixtureIndex >= fixtureScript.length) { $('mic-status').textContent = '가상 대본이 끝났습니다. 결과를 확인할 수 있습니다.'; return; }
-  stopMic();
-  $('receptionist-text').value = fixtureScript[fixtureIndex++]; inputSource = 'synthetic-fixture'; lastRecognized = '';
-  $('input-provenance').textContent = '합성 데모 문장 · 실제 마이크 입력 아님.';
-};
-function renderReport() {
-  report = { ...buildReport(session), audioEvidence, generatedAt: new Date().toISOString(), evidenceWarning: 'Fictional simulation only. Rule-based language mapping; browser speech integration. No real clinic was contacted.' };
-  $('summary').textContent = report.summary;
-  $('result-heading').textContent = report.complete ? 'Всё важное — перед вами.' : 'Есть неуточнённые детали.';
-  $('unresolved-relay').hidden = !report.pendingRelay;
-  $('unresolved-relay').textContent = report.pendingRelay ? `Unclear — ${report.pendingRelay.russian} Ответ пользователя не получен; мы его не предполагали.` : '';
-  $('fact-list').replaceChildren();
-  for (const fact of report.facts) {
-    const el = document.createElement('div'); el.className = 'fact' + (fact.status === 'Unclear' ? ' unclear' : '');
-    const heading = document.createElement('h3'); heading.textContent = fact.label;
-    const value = document.createElement('p'); value.className = 'fact-value'; value.textContent = fact.value == null ? 'Неясно' : String(fact.display || fact.value);
-    const status = document.createElement('span'); status.className = 'fact-status'; status.textContent = fact.status;
-    const evidence = document.createElement('p'); evidence.className = 'evidence';
-    const quotes = (Array.isArray(fact.evidence) ? fact.evidence : fact.evidence ? [fact.evidence] : []).map(x => typeof x === 'string' ? x : x.text || x.quote || JSON.stringify(x));
-    evidence.textContent = quotes.length ? 'Основание: ' + quotes.join(' · ') : 'Нет однозначного ответа в разговоре.';
-    el.append(heading, value, status, evidence); $('fact-list').append(el);
-  }
-  $('readback-text').textContent = session.readbackKorean || '';
-  const sheetText = value => typeof value === 'string' ? value : Array.isArray(value) ? value.join('\n') : JSON.stringify(value);
-  $('reception-sheet').textContent = sheetText(report.sheets.reception);
-  $('doctor-sheet').textContent = sheetText(report.sheets.doctor);
-  const micCount = report.transcript.filter(t => t.source === 'microphone').length;
-  $('verification-note').textContent = `Вымышленная симуляция. Передано реплик с микрофона: ${micCount}. Другие способы ввода отмечены отдельно. Общая языковая модель и реальный телефон не подключены. Пользовательская ценность: Unverified.`;
+    if (error.status === 503) { status.connected = false; pendingMessage = message; renderConnection(); openSettings('connection'); }
+    const messageText = error.name === 'AbortError' ? t('stopped') : error.message;
+    const box = el('div', 'error-message', messageText); box.setAttribute('role', 'alert'); box.append(button(t('retry'), 'text-button', () => { box.remove(); send(message, { repeat: true, fromVoice }); })); $('messages').append(box); scrollBottom();
+    finalResult = { error: messageText };
+  } finally { setBusy(false); controller = null; }
+  return finalResult;
 }
-$('finish-simulation').onclick = () => { stopMic(); finishSession(session); renderReport(); showStage('result'); speak(session.readbackKorean); };
-$('repeat-readback').onclick = () => speak(session.readbackKorean);
-$('heard-korean').onchange = () => { audioEvidence.userConfirmedAudible = $('heard-korean').checked; };
-$('print-sheets').onclick = () => window.print();
-$('download-report').onclick = async () => {
-  renderReport();
-  const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'yokobu-simulated-result.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+function openSettings(tab = 'profile') {
+  api('/api/status').then(value => { status = value; renderConnection(); }).catch(() => {});
+  $('profile-name').value = profile.name || ''; $('profile-location').value = profile.location || ''; $('profile-preferences').value = profile.preferences || '';
+  selectSettingsTab(tab); if (!$('settings').open) $('settings').showModal();
+}
+function selectSettingsTab(tab) { $('profile-form').hidden = tab !== 'profile'; $('connection-panel').hidden = tab !== 'connection'; $('profile-tab').classList.toggle('selected', tab === 'profile'); $('connection-tab').classList.toggle('selected', tab === 'connection'); }
+function reviewCall(action) {
+  currentAction = action; $('call-review').replaceChildren(); $('call-error').textContent = '';
+  for (const [key, value] of [['recipient', action.business], ['phone', action.phone], ['purpose', action.purpose], ['shared', action.detailsToShare]]) { const dl = el('dl', 'call-review-field'); dl.append(el('dt', '', t(key)), el('dd', '', value)); $('call-review').append(dl); }
+  if (safeUrl(action.sourceUrl)) $('call-review').append(link(t('source'), action.sourceUrl, 'text-button'));
+  $('approve-call').textContent = t(status.calling ? 'approveCall' : 'setupCalling'); $('approve-call').disabled = false; $('call-sheet').showModal();
+}
+let callPoll;
+function renderCall(call, node) {
+  node.replaceChildren(); node.append(el('h3', '', call.business));
+  node.append(el('p', '', `${call.phone} · ${call.status}`)); if (call.error) node.append(el('p', 'field-error', call.error));
+  const details = el('details'); details.append(el('summary', '', t('liveTranscript')));
+  const transcript = el('div', 'call-transcript'); let speaker = '';
+  for (const line of call.transcript || []) { if (line.speaker !== speaker) { transcript.append(document.createTextNode('\n' + (line.speaker === 'business' ? '접수' : 'YOKOBU') + ': ')); speaker = line.speaker; } transcript.append(document.createTextNode(line.text)); }
+  details.append(transcript); node.append(details);
+  if (!call.endedAt && call.status !== 'failed') node.append(button(t('endCall'), 'secondary', async () => { try { const result = await api(`/api/calls/${encodeURIComponent(call.id)}/end`, {}); renderCall(result.call, node); } catch (e) { toast(e.message); } }));
+  else node.append(button(t('summary'), 'primary', async event => { event.currentTarget.disabled = true; try { const result = await api(`/api/calls/${encodeURIComponent(call.id)}/summary`, {}); addRecord({ role: 'assistant', result: result.result }); } catch (e) { toast(e.message); event.currentTarget.disabled = false; } }));
+}
+async function watchCall(call) {
+  const node = el('section', 'call-live'); $('messages').append(node); renderCall(call, node); scrollBottom();
+  const poll = async () => {
+    try { const result = await api(`/api/calls/${encodeURIComponent(call.id)}`); call = result.call; renderCall(call, node); if (call.endedAt || call.status === 'failed') {
+      try { sessionStorage.removeItem('yokobu-active-call'); } catch {}
+      try { const summary = await api(`/api/calls/${encodeURIComponent(call.id)}/summary`, {}); addRecord({ role: 'assistant', result: summary.result }); node.querySelector('.primary')?.remove(); }
+      catch (error) { toast(error.message); }
+      return;
+    } }
+    catch (e) { node.append(el('p', 'field-error', e.message)); }
+    callPoll = setTimeout(poll, 2500);
+  }; callPoll = setTimeout(poll, 2500);
+}
+
+let voice; let voiceGeneration = 0;
+function endVoice() {
+  voiceGeneration++; const old = voice; voice = null;
+  if (old) { clearTimeout(old.timeout); old.abort.abort(); old.stream?.getTracks().forEach(track => track.stop()); old.channel?.close(); old.pc?.close(); }
+  $('voice-audio').pause(); $('voice-audio').srcObject = null; $('voice-audio').hidden = true; $('voice-sheet').classList.remove('connected'); if ($('voice-sheet').open) $('voice-sheet').close();
+}
+function voiceText(role, text) {
+  if (!text?.trim()) return;
+  const p = el('p'); p.append(el('span', 'speaker', role === 'user' ? t('you') : 'YOKOBU'), document.createTextNode(text)); $('voice-transcript').append(p); $('voice-transcript').scrollTop = $('voice-transcript').scrollHeight;
+  addRecord({ role, ...(role === 'user' ? { text } : { result: { message: text } }) });
+  api('/api/voice-context', { role, text }).catch(() => {});
+}
+async function startVoice() {
+  if (!status.connected) { openSettings('connection'); toast(t('connectFirst')); return; }
+  if (busy) { toast(t('thinking')); return; }
+  if (!navigator.mediaDevices?.getUserMedia || !window.RTCPeerConnection) { toast(t('voiceUnavailable')); return; }
+  endVoice(); const generation = voiceGeneration; const session = { abort: new AbortController(), seen: new Set() }; voice = session;
+  $('voice-status').textContent = t('connecting'); $('voice-transcript').replaceChildren(); $('voice-sheet').showModal();
+  const current = () => voice === session && voiceGeneration === generation;
   try {
-    const response = await fetch('/api/evidence', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(report) });
-    if (!response.ok) throw new Error();
-    const saved = await response.json(); $('global-status').textContent = `Результат сохранён локально: ${saved.path}. Аудиозаписи не создаются.`;
-  } catch { $('global-status').textContent = 'Файл скачан в браузере. Серверная копия недоступна.'; }
-};
-$('restart').onclick = () => { stopMic(); window.speechSynthesis?.cancel(); location.reload(); };
-window.addEventListener('pagehide', () => { stopMic(); window.speechSynthesis?.cancel(); });
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } });
+    if (!current()) { stream.getTracks().forEach(track => track.stop()); return; } session.stream = stream;
+    const pc = new RTCPeerConnection(); session.pc = pc;
+    stream.getTracks().forEach(track => pc.addTrack(track, stream));
+    pc.ontrack = async event => { if (!current()) return; $('voice-audio').srcObject = event.streams[0] || new MediaStream([event.track]); try { await $('voice-audio').play(); } catch { $('voice-audio').hidden = false; } };
+    pc.onconnectionstatechange = () => { if (current() && ['failed', 'disconnected'].includes(pc.connectionState)) { endVoice(); toast(t('voiceFailure')); } };
+    const channel = pc.createDataChannel('oai-events'); session.channel = channel;
+    const sendEvent = event => { if (current() && channel.readyState === 'open') channel.send(JSON.stringify(event)); };
+    channel.onopen = () => { if (!current()) return; clearTimeout(session.timeout); $('voice-sheet').classList.add('connected'); $('voice-status').textContent = t('listening'); sendEvent({ type: 'response.create', response: { instructions: 'Briefly greet the user in their chosen language and ask how you can help. If you have context, acknowledge it briefly. Do not repeat a full introduction.' } }); };
+    channel.onclose = () => { if (current()) { endVoice(); toast(t('voiceFailure')); } };
+    channel.onmessage = async ({ data }) => {
+      if (!current()) return; let event; try { event = JSON.parse(data); } catch { return; }
+      if (event.type === 'conversation.item.input_audio_transcription.completed') voiceText('user', event.transcript);
+      if (event.type === 'response.output_audio_transcript.done') voiceText('assistant', event.transcript);
+      if (event.type === 'input_audio_buffer.speech_started') $('voice-status').textContent = t('listening');
+      if (event.type === 'response.function_call_arguments.done' && event.name === 'concierge' && !session.seen.has(event.call_id)) {
+        session.seen.add(event.call_id); let result;
+        try { const args = JSON.parse(event.arguments); $('voice-status').textContent = t('thinking'); result = await send(args.request, { fromVoice: true }); }
+        catch { result = { error: t('failed') }; }
+        if (!current()) return;
+        sendEvent({ type: 'conversation.item.create', item: { type: 'function_call_output', call_id: event.call_id, output: JSON.stringify(result || { error: 'The concierge is busy. Ask the user to wait.' }) } });
+        sendEvent({ type: 'response.create' }); $('voice-status').textContent = t('listening');
+      }
+      if (event.type === 'error') { endVoice(); toast(t('voiceFailure')); }
+    };
+    session.timeout = setTimeout(() => { if (current()) { endVoice(); toast(t('voiceFailure')); } }, 35000);
+    const offer = await pc.createOffer(); await pc.setLocalDescription(offer);
+    if (!current()) return;
+    const result = await api('/api/realtime', { sdp: offer.sdp, profile }, session.abort.signal);
+    if (!current()) return;
+    await pc.setRemoteDescription({ type: 'answer', sdp: result.sdp });
+  } catch (error) { if (!current()) return; endVoice(); if (error.status === 503) { status.connected = false; renderConnection(); openSettings('connection'); } toast(error.name === 'NotAllowedError' ? t('micDenied') : error.message); }
+}
+
+$('home-composer-slot').append($('composer'));
+$('remember-profile').checked = Boolean(readStored(localStorage, 'yokobu-profile', null));
+$('language').addEventListener('change', event => setLanguage(event.target.value));
+$('local-time').textContent = 'SEOUL  ' + new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Seoul', hour: '2-digit', minute: '2-digit' }).format(new Date());
+$('composer').addEventListener('submit', event => { event.preventDefault(); send($('request').value); });
+$('request').addEventListener('input', () => { $('send-button').disabled = busy || !$('request').value.trim(); $('request').style.height = 'auto'; $('request').style.height = Math.min($('request').scrollHeight, 180) + 'px'; });
+$('request').addEventListener('keydown', event => { if (event.key === 'Enter' && !event.shiftKey && !event.isComposing && matchMedia('(min-width: 720px)').matches) { event.preventDefault(); send($('request').value); } });
+document.querySelectorAll('[data-starter]').forEach(b => b.addEventListener('click', () => send(t(b.dataset.starter + 'Prompt'))));
+$('stop-request').addEventListener('click', () => controller?.abort());
+$('context-button').addEventListener('click', () => openSettings()); $('location-chip').addEventListener('click', () => { openSettings(); $('profile-location').focus(); });
+$('nav-you').addEventListener('click', () => openSettings()); $('nav-home').addEventListener('click', () => { showView(records.length ? 'conversation' : 'home'); scrollBottom(); }); $('nav-activity').addEventListener('click', () => { showView('activity'); window.scrollTo({ top: 0 }); });
+$('profile-tab').addEventListener('click', () => selectSettingsTab('profile')); $('connection-tab').addEventListener('click', () => selectSettingsTab('connection'));
+document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => $(b.dataset.close).close()));
+$('settings').addEventListener('close', () => { $('api-key').value = ''; });
+$('profile-form').addEventListener('submit', async event => {
+  event.preventDefault(); const updated = { name: $('profile-name').value.trim(), location: $('profile-location').value.trim(), preferences: $('profile-preferences').value.trim(), language };
+  try { await api('/api/profile', updated); profile = updated; if ($('remember-profile').checked) storageWrite(localStorage, 'yokobu-profile', profile); else localStorage.removeItem('yokobu-profile'); $('location-label').textContent = profile.location || t('setLocation'); $('settings').close(); toast(t('saved')); } catch (e) { toast(e.message); }
+});
+$('forget-profile').addEventListener('click', async () => { try { const empty = { name: '', location: '', preferences: '', language }; await api('/api/profile', empty); profile = empty; localStorage.removeItem('yokobu-profile'); $('remember-profile').checked = false; openSettings(); $('location-label').textContent = t('setLocation'); toast(t('forgotten')); } catch (e) { toast(e.message); } });
+$('connection-form').addEventListener('submit', async event => {
+  event.preventDefault(); $('connect-button').disabled = true; $('connection-error').textContent = ''; const key = $('api-key').value.trim(); $('api-key').value = '';
+  try { await api('/api/connect', { key }); status.connected = true; renderConnection(); $('settings').close(); toast(t('keyConnected')); if (pendingMessage) { const msg = pendingMessage; pendingMessage = ''; await send(msg); } }
+  catch (error) { $('connection-error').textContent = error.message; } finally { $('connect-button').disabled = false; }
+});
+$('new-task').addEventListener('click', async () => { if (busy) { toast(t('thinking')); return; } endVoice(); try { await api('/api/reset', {}); records = []; persist(); $('messages').replaceChildren(); $('request').value = ''; $('send-button').disabled = true; showView('home'); window.scrollTo({ top: 0 }); } catch (e) { toast(e.message); } });
+$('export-task').addEventListener('click', () => {
+  if (!records.length) return toast(t('notesEmpty'));
+  const text = records.map(r => r.role === 'user' ? `You: ${r.text}` : `YOKOBU: ${r.result?.message || ''}\n${r.result?.summary ? JSON.stringify(r.result.summary, null, 2) : ''}\n${(r.result?.sources || []).map(s => `${s.title}: ${s.url}`).join('\n')}`).join('\n\n');
+  const url = URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' })); const a = document.createElement('a'); a.href = url; a.download = 'yokobu-notes.txt'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
+$('approve-call').addEventListener('click', async () => {
+  if (!status.calling) { $('call-sheet').close(); openSettings('connection'); return; }
+  $('approve-call').disabled = true; $('call-error').textContent = '';
+  try { const result = await api('/api/calls', { actionId: currentAction.id, approved: true }); $('call-sheet').close(); storageWrite(sessionStorage, 'yokobu-active-call', result.call.id); await watchCall(result.call); }
+  catch (e) { $('call-error').textContent = e.message; } finally { $('approve-call').disabled = false; }
+});
+$('voice-button').addEventListener('click', startVoice); $('end-voice').addEventListener('click', endVoice); $('close-voice').addEventListener('click', endVoice);
+$('voice-sheet').addEventListener('cancel', event => { event.preventDefault(); endVoice(); });
+window.addEventListener('pagehide', () => { controller?.abort(); endVoice(); clearTimeout(callPoll); });
+window.addEventListener('focus', () => { api('/api/status').then(value => { status = value; renderConnection(); }).catch(() => {}); });
+setLanguage(language); records.forEach(renderRecord); showView(records.length ? 'conversation' : 'home');
+try { status = await api('/api/status'); renderConnection(); const id = readStored(sessionStorage, 'yokobu-active-call', null); if (id) { const result = await api(`/api/calls/${encodeURIComponent(id)}`); showView('conversation'); watchCall(result.call); } } catch { toast(t('failed')); }

@@ -1,14 +1,21 @@
 {
-  "name": "yokobu-clinic-simulation",
-  "version": "1.0.0",
+  "name": "yokobu-concierge",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "Local fictional Russian/Korean clinic conversation demo. No real phone calls.",
+  "description": "Mobile concierge for life in Korea, with OpenAI search, Realtime voice and optional SIP calling.",
   "scripts": {
     "start": "node server.mjs",
     "build": "node scripts/build.mjs",
     "test": "node --test tests/*.test.js",
-    "verify": "node scripts/run-example.mjs"
+    "verify": "node scripts/run-example.mjs",
+    "test:browser": "node scripts/concierge-browser-check.mjs",
+    "test:legacy-browser": "node scripts/browser-check.mjs"
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=22.6"
+  },
+  "dependencies": {
+    "ws": "^8.22.0"
+  }
 }

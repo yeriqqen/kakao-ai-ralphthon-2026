@@ -33,8 +33,8 @@ with zipfile.ZipFile(SUBMISSION / 'yokobu-submission-review.zip', 'w', zipfile.Z
 
 # A separate runnable archive preserves source and reproducible checks. No personal
 # environment, hidden build workspace, raw prompts, or human microphone run is copied.
-source_files = [ROOT / p for p in ['README.md', 'package.json', 'server.mjs', '.gitignore']]
-for folder in ['public', 'scripts', 'tests', 'docs']:
+source_files = [ROOT / p for p in ['README.md', 'package.json', 'package-lock.json', 'server.mjs', '.gitignore', '.env.example']]
+for folder in ['public', 'server', 'scripts', 'tests', 'docs']:
     source_files.extend(p for p in (ROOT / folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts)
 source_files.extend(ARTIFACTS / p for p in ['expected-vs-actual.json', 'browser-results.json'])
 source_files.extend(p for p in ARTIFACTS.glob('browser-*.png'))

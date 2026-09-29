@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T06:14:38.785Z",
+  "generatedAt": "2026-09-29T06:32:44.373Z",
   "mock": true,
   "realAPI": false,
   "realMicrophone": false,
@@ -174,14 +174,14 @@
   "errors": [],
   "unexpectedNetwork": [],
   "sources": {
-    "public/v2/customer.js": "9eed9c67756baaed663f5b6130162fbc27245559a163a910e6a1f1cce1855016",
-    "public/v2/index.html": "524744bc20c57aab077afd21aacaec8e12436a5bf2a2fd63e065e8b25db523eb",
-    "public/v2/styles.css": "be771531e07ea00b54d39026e3e13a60514cbf3af1d3eb1c109ea2f9cfbe1a2d",
-    "public/v2/theme.css": "7f55ea4111c1f8eb5b766cbd595aac4a07c31635ca87ce57ed757f280c16c642",
-    "public/v2/i18n.js": "2e6667c28362d37650623c807429ff2491242a38cf207e062ac88b6b5402f03a",
-    "public/v2/business.html": "5a91568ca6cf141b3002c6713823c71a47547fd9b2d48973058761d44f527f45",
-    "public/v2/business.css": "d178b773b17c0fa7722d628d4a288e7e78bf27931c37ad4b729396233c4d2584",
-    "scripts/v2-design-check.mjs": "99c59f9e5a5e2e5b277a3203c80a4e44c176519a72c638690cf0951791fd2730"
+    "public/v2/customer.js": "b1479994e3920403df80e511ca4200952baabba16566a7f8d660be919e46a42d",
+    "public/v2/index.html": "bc93a88f31e622771ca32c4f480f2b27feaebfddf16e14d06bf12c6b55fbba1a",
+    "public/v2/styles.css": "882d6def6a3c069442208eb69f73ff1b3958595d05cdfbdc00a672a4cefcc1ca",
+    "public/v2/theme.css": "d869fa4589d14cc9672cff3d44d370b083433ad617c94dc257c30e87181bde44",
+    "public/v2/i18n.js": "602bff29b497d4e28dc43022f7d8ddd2748c59f4e86d0c7e0c0ff873b3383c0b",
+    "public/v2/business.html": "2dc922a10034810feafce2b92aa804257ab8344b40ea72218c53f2020f11e7a0",
+    "public/v2/business.css": "465647baff773614e9d8440a27bbb8be83569591e7d7e7909b5c0ae5f6aa5d51",
+    "scripts/v2-design-check.mjs": "54e24ed20964cac29cea25c15e05b35b6081041874b0dc0d86c2d76d6493ef1e"
   },
   "passed": true,
   "passedChecks": 32

@@ -4,7 +4,7 @@
   "realMicrophone": false,
   "audibleKorean": false,
   "provenance": "Synthetic browser events and mocked HTTP. Does not prove microphone capture, OpenAI connectivity, speech quality, or audible Korean.",
-  "generatedAt": "2026-09-29T06:19:01.640Z",
+  "generatedAt": "2026-09-29T06:43:01.466Z",
   "checks": [
     {
       "name": "Authorization and explicit acceptance gate microphone",
@@ -60,8 +60,20 @@
       "mock": true,
       "detail": {
         "width": 390,
-        "scrollWidth": 390
+        "scrollWidth": 375
       }
+    },
+    {
+      "name": "Consecutive fragments coalesce and audio drains before the next response",
+      "passed": true,
+      "mock": true,
+      "detail": "Review returning during a second utterance preserves microphone capture and waits for both transcripts before one continuation; response.done audio reserves playback before started; queued update waits for matching drain, stale stop cannot unlock newer playback, and microphone reopens after final drain. Synthetic regression of the real shop stall."
+    },
+    {
+      "name": "Server-detected known detail produces one Korean continuation",
+      "passed": true,
+      "mock": true,
+      "detail": "A synthetic transcript review supplies an existing customer fact through voiceMessage; the client relays it once without scheduling a duplicate generic follow-up."
     },
     {
       "name": "Opening waits for session readiness and remote track exactly once",
@@ -95,10 +107,10 @@
     }
   ],
   "sources": {
-    "public/v2/business.js": "c9aa717d5ec0d7c5a20abf7f18283713389844571b01ab803659af956c73c6bf",
-    "public/v2/business.html": "9ed7c7f88bcbc9388fa416cd2907234ecf25caaf454e0de96821099c40242233",
-    "public/v2/business.css": "25db259f009f530f498d4a6f2b9a55e87ea4b0d1c933c589ddc74289eff7b761",
-    "scripts/v2-business-ui-check.mjs": "c3da705107689ccac51ad7b68a1ae7849395aa58423b0b216fce1d3ae0e32022"
+    "public/v2/business.js": "92387999c65f6d71478c32b09ed49b12f5460c9e1092eb3af951573a447a0686",
+    "public/v2/business.html": "2dc922a10034810feafce2b92aa804257ab8344b40ea72218c53f2020f11e7a0",
+    "public/v2/business.css": "465647baff773614e9d8440a27bbb8be83569591e7d7e7909b5c0ae5f6aa5d51",
+    "scripts/v2-business-ui-check.mjs": "64f96ec47c30e30b8d3900857bdbdd3d080ff2f065309f5ae74718f8c8028a71"
   },
   "requestEvidence": [
     {
@@ -144,83 +156,83 @@
         "events": [
           {
             "type": "call.accepted",
-            "at": "2026-09-29T06:19:04.546Z"
+            "at": "2026-09-29T06:43:03.910Z"
           },
           {
             "type": "remote.track",
-            "at": "2026-09-29T06:19:04.555Z"
+            "at": "2026-09-29T06:43:03.921Z"
           },
           {
             "type": "session.created",
-            "at": "2026-09-29T06:19:04.556Z"
+            "at": "2026-09-29T06:43:03.922Z"
           },
           {
             "type": "playback.allowed",
-            "at": "2026-09-29T06:19:04.556Z"
+            "at": "2026-09-29T06:43:03.922Z"
           },
           {
             "type": "connection.registered",
-            "at": "2026-09-29T06:19:04.627Z"
+            "at": "2026-09-29T06:43:03.986Z"
           },
           {
             "type": "opening.requested",
-            "at": "2026-09-29T06:19:04.633Z"
+            "at": "2026-09-29T06:43:03.996Z"
           },
           {
             "type": "response.created",
-            "at": "2026-09-29T06:19:04.663Z",
+            "at": "2026-09-29T06:43:04.037Z",
             "responseId": "r-intro"
           },
           {
             "type": "output_audio_buffer.started",
-            "at": "2026-09-29T06:19:04.664Z",
+            "at": "2026-09-29T06:43:04.038Z",
             "responseId": "r-intro"
           },
           {
             "type": "output_audio_buffer.stopped",
-            "at": "2026-09-29T06:19:04.670Z",
+            "at": "2026-09-29T06:43:04.045Z",
             "responseId": "older-audio"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:19:04.672Z",
+            "at": "2026-09-29T06:43:04.046Z",
             "responseId": "r-intro",
             "status": "completed"
           },
           {
             "type": "output_audio_buffer.stopped",
-            "at": "2026-09-29T06:19:04.673Z",
+            "at": "2026-09-29T06:43:04.047Z",
             "responseId": "r-intro"
           },
           {
             "type": "opening.finished",
-            "at": "2026-09-29T06:19:04.673Z"
+            "at": "2026-09-29T06:43:04.048Z"
           },
           {
             "type": "response.created",
-            "at": "2026-09-29T06:19:04.809Z",
+            "at": "2026-09-29T06:43:04.175Z",
             "responseId": "r-question"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:19:04.844Z",
+            "at": "2026-09-29T06:43:04.231Z",
             "responseId": "r-question",
             "status": "cancelled"
           },
           {
             "type": "response.created",
-            "at": "2026-09-29T06:19:04.850Z",
+            "at": "2026-09-29T06:43:04.235Z",
             "responseId": "r-wait"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:19:04.851Z",
+            "at": "2026-09-29T06:43:04.236Z",
             "responseId": "r-question",
             "status": "cancelled"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:19:04.852Z",
+            "at": "2026-09-29T06:43:04.239Z",
             "responseId": "r-wait",
             "status": "completed"
           }
@@ -235,12 +247,12 @@
         "events": [
           {
             "type": "response.created",
-            "at": "2026-09-29T06:19:06.879Z",
+            "at": "2026-09-29T06:43:05.458Z",
             "responseId": "r-resume"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:19:06.880Z",
+            "at": "2026-09-29T06:43:05.459Z",
             "responseId": "r-resume",
             "status": "completed"
           }
@@ -291,45 +303,45 @@
         "events": [
           {
             "type": "response.created",
-            "at": "2026-09-29T06:19:08.074Z",
+            "at": "2026-09-29T06:43:06.663Z",
             "responseId": "r-tool"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:19:08.090Z",
+            "at": "2026-09-29T06:43:06.671Z",
             "responseId": "r-tool",
             "status": "completed"
           },
           {
             "type": "response.created",
-            "at": "2026-09-29T06:19:08.101Z",
+            "at": "2026-09-29T06:43:06.674Z",
             "responseId": "r-finish-request"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:19:08.114Z",
+            "at": "2026-09-29T06:43:06.736Z",
             "responseId": "r-finish-request",
             "status": "completed"
           },
           {
             "type": "response.created",
-            "at": "2026-09-29T06:19:08.118Z",
+            "at": "2026-09-29T06:43:06.760Z",
             "responseId": "r-goodbye"
           },
           {
             "type": "response.done",
-            "at": "2026-09-29T06:19:08.130Z",
+            "at": "2026-09-29T06:43:06.780Z",
             "responseId": "r-goodbye",
             "status": "completed"
           },
           {
             "type": "output_audio_buffer.stopped",
-            "at": "2026-09-29T06:19:08.133Z",
+            "at": "2026-09-29T06:43:06.783Z",
             "responseId": "r-finish-request"
           },
           {
             "type": "output_audio_buffer.stopped",
-            "at": "2026-09-29T06:19:08.135Z",
+            "at": "2026-09-29T06:43:06.785Z",
             "responseId": "r-goodbye"
           }
         ]
@@ -375,7 +387,7 @@
         "content": [
           {
             "type": "input_text",
-            "text": "APPLICATION CALL CONTROL: Continue the assigned simulated business call in Korean. After acknowledging a greeting or an answer, ask one next unresolved required question; do not stop at a greeting. If the business asked for unknown customer information, use request_customer_detail instead. If all questions are resolved, read back key facts and obtain confirmation before complete_call.\n{\"requiredQuestions\":[{\"id\":\"availability\",\"korean\":\"오늘 진료하나요?\",\"text\":\"Are consultations available today?\",\"status\":\"unresolved\",\"evidence\":[]}]}"
+            "text": "APPLICATION CALL CONTROL: Continue in Korean using the application state below as authoritative, even if earlier audio sounded different. Only this next question remains the current target: 오늘 진료하나요?. Do not re-ask questions marked resolved. If the business already attempted to answer this question but the transcript did not resolve it, briefly apologize for not catching that detail and ask one precise clarification. Do not claim it was confirmed, invent a number from unclear speech, or read back a complete result while any required question is unresolved. If the latest business utterance asks for unknown customer information, address it through request_customer_detail before continuing the checklist.\n{\"requiredQuestions\":[{\"id\":\"availability\",\"korean\":\"오늘 진료하나요?\",\"text\":\"Are consultations available today?\",\"status\":\"unresolved\",\"evidence\":[]}]}"
           }
         ]
       }
@@ -436,7 +448,7 @@
         "content": [
           {
             "type": "input_text",
-            "text": "APPLICATION CALL CONTROL: Continue the assigned simulated business call in Korean. After acknowledging a greeting or an answer, ask one next unresolved required question; do not stop at a greeting. If the business asked for unknown customer information, use request_customer_detail instead. If all questions are resolved, read back key facts and obtain confirmation before complete_call.\n{\"requiredQuestions\":[{\"id\":\"availability\",\"korean\":\"오늘 진료하나요?\",\"text\":\"Are consultations available today?\",\"status\":\"unresolved\",\"evidence\":[]}]}"
+            "text": "APPLICATION CALL CONTROL: Continue in Korean using the application state below as authoritative, even if earlier audio sounded different. Only this next question remains the current target: 오늘 진료하나요?. Do not re-ask questions marked resolved. If the business already attempted to answer this question but the transcript did not resolve it, briefly apologize for not catching that detail and ask one precise clarification. Do not claim it was confirmed, invent a number from unclear speech, or read back a complete result while any required question is unresolved. If the latest business utterance asks for unknown customer information, address it through request_customer_detail before continuing the checklist.\n{\"requiredQuestions\":[{\"id\":\"availability\",\"korean\":\"오늘 진료하나요?\",\"text\":\"Are consultations available today?\",\"status\":\"unresolved\",\"evidence\":[]}]}"
           }
         ]
       }

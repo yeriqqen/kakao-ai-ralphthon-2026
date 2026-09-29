@@ -26,7 +26,12 @@ globalThis.fetch = async (url, options) => {
   else if (purpose === 'call_plan_validation') {
     const message = JSON.parse(body.input).customerMessages.at(-1);
     output = { approved: true, violations: [], customerFactEvidence: [], constraintCoverage: [{ constraint: 'blue notebook stock', sourceMessageId: message.id, questionIds: ['stock'] }], questionMeaningChecks: [{ questionId: 'stock', faithful: true, explanation: 'Synthetic setup fixture only.' }] };
-  } else throw new Error('Unexpected AI purpose in HTTP-only test: ' + purpose);
+  } else if (purpose === 'business_evidence_review') {
+    const input = JSON.parse(body.input), quote = input.newestBusinessTranscript.text;
+    output = { utteranceKind: 'unclear', answers: [], confirmedKeyDetails: false, confirmationQuote: '', readbackEvidence: [], unavailable: false, explanation: '', customerQuestion: { asked: true, key: 'alternative_color', questionKorean: '다른 색상도 괜찮으세요?', evidenceQuote: quote === '인사만 합니다.' ? 'fabricated quotation' : quote } };
+  } else if (purpose === 'customer_relay') output = { known: false, key: 'alternative_color', question: 'Would another color be okay?', answerKorean: '' };
+  else if (purpose === 'relay_answer') output = { answerKorean: '검은색도 괜찮습니다.', acknowledgement: 'I will relay that black is okay.' };
+  else throw new Error('Unexpected AI purpose in HTTP-only test: ' + purpose);
   return new Response(JSON.stringify({ id: 'synthetic-http-setup-' + purpose, model: 'mock-no-openai', status: 'completed', output: [{ content: [{ type: 'output_text', text: JSON.stringify(output) }] }] }), { status: 200, headers: { 'Content-Type': 'application/json' } });
 };
 await import(${JSON.stringify(new URL('../server-v2.mjs', import.meta.url).href)});
@@ -96,6 +101,35 @@ try {
     const events = await exportedDiagnostics(); assert.equal(events.length, 200);
     assert.equal(events[0].responseId, 'diag-10'); assert.equal(events.at(-1).responseId, 'diag-209');
     assert.deepEqual(events.map(event => event.responseId), Array.from({ length: 200 }, (_, index) => `diag-${index + 10}`));
+  });
+  await check('reviewed business question opens the relay without a Realtime tool call', async () => {
+    assert.equal((await request('/accept', created.businessToken, {})).status, 200);
+    assert.equal((await request('/connection', created.businessToken, { connected: true })).status, 200);
+    const response = await request('/transcript', created.businessToken, { id: 'synthetic-color-question', role: 'business', text: '다른 색상도 괜찮으세요?' });
+    assert.equal(response.status, 200);
+    const room = await response.json();
+    assert.equal(room.call.status, 'waiting_customer');
+    assert.equal(room.pendingRelay.question, 'Would another color be okay?');
+    assert.equal(room.messages.filter(m => m.kind === 'relay').length, 1);
+    assert.equal(room.requiredQuestions[0].status, 'unresolved');
+  });
+  await check('a later voice tool reuses the pending relay without another question', async () => {
+    const result = await request('/tool', created.businessToken, { callId: 'synthetic-duplicate-question', name: 'request_customer_detail', arguments: { key: 'alternative_color', questionKorean: '다른 색상도 괜찮으세요?' } }).then(r => r.json());
+    assert.equal(result.pending, true);
+    const room = await request('', created.customerToken).then(r => r.json());
+    assert.equal(room.messages.filter(m => m.kind === 'relay').length, 1);
+  });
+  await check('customer text resolves the detected relay and returns a Korean voice message', async () => {
+    const response = await request('/chat', created.customerToken, { message: 'Black is okay.' });
+    assert.equal(response.status, 200);
+    const room = await response.json();
+    assert.equal(room.call.status, 'active'); assert.equal(room.pendingRelay, null);
+    assert.match(room.voiceMessage.text, /검은색도 괜찮습니다/);
+  });
+  await check('an invented question quote cannot trigger a relay', async () => {
+    const response = await request('/transcript', created.businessToken, { id: 'synthetic-invalid-question', role: 'business', text: '인사만 합니다.' });
+    assert.equal(response.status, 200);
+    const room = await response.json(); assert.equal(room.pendingRelay, null); assert.equal(room.call.status, 'active');
   });
   const result = { checkedAt: new Date().toISOString(), type: 'real_local_http_with_mocked_plan_setup', realHTTP: true, realOpenAI: false, realMicrophone: false, syntheticHttpTest: true, childConfiguration: 'Dummy key; child fetch replaced with synthetic setup responses and upstream network blocked', provenance: 'Real isolated localhost HTTP routes. Plan generation and validation are synthetic setup fixtures; all upstream network is blocked. No actual business or audio evidence.', fixtureRoomId, passed: checks.length, total: checks.length, checks };
   await mkdir(output, { recursive: true });

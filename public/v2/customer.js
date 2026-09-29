@@ -199,7 +199,7 @@ function renderContext() {
   }
   if (state.customerInfo?.length) {
     const block = section(); const details = node('details'); details.append(node('summary', '', t('supplied'))); const list = node('ul', 'detail-list');
-    for (const item of state.customerInfo) list.append(node('li', '', item.value)); details.append(list); block.append(details); fragment.append(block);
+    for (const item of state.customerInfo) list.append(node('li', '', item.label ? `${item.label}: ${item.value}` : item.value)); details.append(list); block.append(details); fragment.append(block);
   }
   if (['completed', 'interrupted', 'failed'].includes(status) || state.summary) {
     const evidence = section(); evidence.append(button(t('export'), downloadEvidence, 'secondary-button', sending), node('p', 'muted', t('exportHelp'))); fragment.append(evidence);

@@ -23,7 +23,7 @@ MANIFEST = OUT / "package-manifest.json"
 ROOT_FILES = ("README.md", "package.json", "server-v2.mjs", "server.mjs", ".env.example", ".gitignore")
 TREES = ("public", "lib", "scripts", "tests", "docs")
 CURATED_CHECKS = ("artifacts/v2/http-check.json", "artifacts/v2/live-api-check.json", "artifacts/v2/customer-ui-check.json", "artifacts/v2/business-ui-check.json")
-SUFFIXES = {".mjs", ".js", ".json", ".html", ".css", ".svg", ".md", ".py", ".txt"}
+SUFFIXES = {".mjs", ".js", ".json", ".html", ".css", ".svg", ".md", ".py", ".txt", ".woff2"}
 BLOCKED_PARTS = {".git", ".env", "node_modules", "__pycache__", "local-runs", "attachments", "session-logs", "prompts", "secrets", "keys", "tokens"}
 BLOCKED_SUFFIXES = {".pem", ".key", ".p12", ".pfx", ".crt", ".cer", ".log", ".zip"}
 SECRET_PATTERNS = (
@@ -90,11 +90,13 @@ def smoke_archive() -> None:
                 except (OSError, ValueError):
                     time.sleep(0.1)
             checks.append({"name": "extracted v2 server starts without credential leakage", "passed": config is not None and config.get("configured") is False})
-            for route in ("/", "/business", "/legacy", "/v2/customer.js", "/v2/business.js"):
+            for route in ("/", "/business", "/legacy", "/v2/customer.js", "/v2/business.js", "/fonts/InterVariable.woff2"):
                 passed = False
                 try:
                     with urllib.request.urlopen(f"http://127.0.0.1:{port}{route}", timeout=2) as response:
                         passed = response.status == 200 and len(response.read()) > 0
+                        if route.endswith(".woff2"):
+                            passed = passed and response.headers.get_content_type() == "font/woff2"
                 except OSError:
                     pass
                 checks.append({"name": f"extracted server serves {route}", "passed": passed})

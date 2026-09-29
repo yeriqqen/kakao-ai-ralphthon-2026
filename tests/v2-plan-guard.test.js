@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { planReviewIssues, hydratePlanReview, summaryOutputIssues } from '../lib/v2-plan-guard.mjs';
-import { interview, summarize, reviewCallPlan } from '../lib/v2-ai.mjs';
+import { interview, summarize, reviewCallPlan, reviewBusiness } from '../lib/v2-ai.mjs';
 import { factualSummary, renderAdviceChoice } from '../lib/v2-summary.mjs';
 const messages = [{ id: 'u1', role: 'user', text: 'I need a haircut on Saturday. Please ask the cost.' }];
 const plan = { reply: 'A fictional simulation plan is ready. Details remain unconfirmed. Shall we proceed?', customerInfo: [{ key: 'need', value: 'haircut' }], institutions: [{ id: 'a', name: 'Fictional East Studio', reason: 'To ask whether it can meet your request.' }], requiredQuestions: [{ id: 'fit', text: 'Can you provide the requested haircut on Saturday?', korean: '토요일에 요청한 이발이 가능한가요?' }, { id: 'cost', text: 'What would it cost?', korean: '비용은 얼마인가요?' }], readyToCall: true };
@@ -75,6 +75,10 @@ test('factual grouping uses Russian and Chinese labels without exposing metadata
   assert.match(shopText, /以往到访情况: 以前未到访过此店/);
   assert.match(shopText, /信息: 中性款式/);
   assert.doesNotMatch(shopText, /就诊|医生|gender_preference/);
+  for (const [language, label, value] of [['en', 'Waterproofing', 'required'], ['ru', 'Водонепроницаемость', 'обязательна'], ['zh', '防水要求', '必须防水']]) {
+    shop.language = language; shop.customerInfo = [{ key: 'waterproof', label, value }];
+    assert(factualSummary(shop).text.includes(`${label}: ${value}`));
+  }
 });
 test('recommendation failures preserve validated facts and explicitly label unavailable advice', async () => {
   const originalFetch = globalThis.fetch, originalKey = process.env.OPENAI_API_KEY; process.env.OPENAI_API_KEY = 'synthetic-test-key';
@@ -141,4 +145,17 @@ test('localized summaries reject raw Korean, transcript IDs and duplicate recomm
   const issues = summaryOutputIssues({ text: `Business said 네, 맞습니다. (item_abc). ${recommendation}`, recommendation, reasoning: 'The simulated call ended.' }, [{ id: 'item_abc' }], 'en');
   assert(issues.includes('untranslated_korean')); assert(issues.includes('internal_evidence_id')); assert(issues.includes('duplicated_recommendation'));
   assert.deepEqual(summaryOutputIssues({ text: 'The business confirmed the readback in this fictional simulation.', recommendation, reasoning: 'Real-world facts remain unverified.' }, [{ id: 'item_abc' }], 'en'), []);
+});
+
+test('social speech and readback classification cannot author new business facts', async () => {
+  const originalFetch = globalThis.fetch, originalKey = process.env.OPENAI_API_KEY; process.env.OPENAI_API_KEY = 'synthetic-test-key';
+  const fabricated = [{ questionId: 'cost', status: 'resolved', answer: 'Not available.', evidenceQuote: '네, 죄송합니다.', reason: '', changesPriorAnswer: false }];
+  try {
+    for (const utteranceKind of ['social_only', 'unclear', 'readback_confirmation', 'explicit_refusal', 'substantive_answer', 'contextual_answer']) {
+      globalThis.fetch = async () => mockResponse({ utteranceKind, answers: fabricated, confirmedKeyDetails: false, confirmationQuote: '', readbackEvidence: [], unavailable: false, explanation: '' });
+      const result = await reviewBusiness(pricedSummaryRoom(), { id: 'synthetic-apology', text: '네, 죄송합니다.' });
+      assert.deepEqual(result.answers, ['substantive_answer', 'contextual_answer'].includes(utteranceKind) ? fabricated : []);
+      assert.equal(result.unavailable, utteranceKind === 'explicit_refusal');
+    }
+  } finally { globalThis.fetch = originalFetch; if (originalKey === undefined) delete process.env.OPENAI_API_KEY; else process.env.OPENAI_API_KEY = originalKey; }
 });

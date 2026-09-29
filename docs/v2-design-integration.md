@@ -45,8 +45,12 @@ The design suite covers English, Russian and Chinese, 320–1440px layouts, shor
 
 Reports and screenshots are in `artifacts/v2-design/`. Mocked checks do not establish actual microphone audio or completion with the current OpenAI models. Continue the live rehearsal described in `docs/v2-handoff.md`; physical phone keyboard behavior also needs a device check.
 
-Integration checkpoint: 63 unit tests, 23 local HTTP checks, 20 customer browser checks, 14 business browser checks, and 32 design checks passed (152 total). The frontend build passed. The backend and business voice runtime were verified unchanged against the functional base at `62f9a09`.
+Original integration checkpoint before review repairs: 63 unit tests, 23 local HTTP checks, 20 customer browser checks, 14 business browser checks, and 32 design checks passed (152 total). The frontend build passed. The backend and business voice runtime were verified unchanged against the functional base at `62f9a09`.
 
 ![Customer home](../artifacts/v2-design/en-home-390.png)
 
 [Business desk](../artifacts/v2-design/business-pending-1440.png) · [Call plan](../artifacts/v2-design/en-plan-390.png) · [Relay](../artifacts/v2-design/en-relay-390.png)
+
+## PR review follow-up
+
+The backend and voice runtime were subsequently repaired on this same branch after actual microphone rehearsals. See [v2-pr1-review.md](v2-pr1-review.md) for the preserved failures, fixes, and latest evidence. The original counts above describe `a071f50`, not the final reviewed branch.

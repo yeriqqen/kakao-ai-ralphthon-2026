@@ -1,5 +1,7 @@
 # YOKOBU v2 — verification record
 
+> Latest PR #1 checkpoint: see [v2-pr1-review.md](v2-pr1-review.md) for three subsequent interrupted shop rehearsals, integration fixes, current check counts, and remaining live failures. The earlier checkpoints below are historical, not the current acceptance result.
+
 All institutions, customer details, and calls used for this product demonstration are fictional. No real business or telephone call is verified by these records. Do not combine synthetic tests with live evidence under a single “passed” claim.
 
 ## Current checkpoint

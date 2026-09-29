@@ -1,0 +1,43 @@
+{
+  "provenance": "Isolated real API replay of the actual interrupted fragment, with required questions reconstructed before that utterance. No new microphone or call. Original erroneous output remains in the source export.",
+  "source": "artifacts/v2/pr1-live-shop-second-rehearsal.json",
+  "realAPI": true,
+  "realMicrophone": false,
+  "transcript": {
+    "id": "item_ETLhMNVm1lPciyY5xK3NJ",
+    "role": "business",
+    "text": "지금",
+    "callId": "3c2cdb5f-77df-48fe-9a64-c1c02fdba2a8",
+    "createdAt": "2026-09-29T06:33:50.244Z"
+  },
+  "review": {
+    "utteranceKind": "unclear",
+    "answers": [],
+    "confirmedKeyDetails": false,
+    "confirmationQuote": "",
+    "readbackEvidence": [],
+    "unavailable": false,
+    "explanation": "The response '지금' (now) is ambiguous in this context. It does not explicitly confirm whether the navy waterproof daypack is in stock, nor does it answer the price or pickup time questions. Please clarify whether the item is available in stock, its price, and the latest pickup time."
+  },
+  "passed": true,
+  "apiEvidence": [
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "resp_0007e2617ea04535016abb5bfa854c87d09ed93f6951ac6588",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1470,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1565
+      },
+      "at": "2026-09-29T06:34:35.563Z"
+    }
+  ]
+}

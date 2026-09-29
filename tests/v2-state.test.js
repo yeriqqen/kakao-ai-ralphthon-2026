@@ -103,11 +103,11 @@ test('a full corrected customer fact list replaces obsolete keys and keeps verif
   const correction = appendMessage(room, 'user', 'Correction: I am 28.');
   appendMessage(room, 'user', 'Please prepare the plan now.');
   applyPlan(room, { customerInfo: [
-    { key: 'age', value: '28', sourceMessageId: correction.id },
+    { key: 'age', label: 'Age', value: '28', sourceMessageId: correction.id },
     { key: 'doctor_gender_preference', value: 'female', sourceMessageId: original.id },
   ] });
   assert.deepEqual(room.customerInfo, [
-    { key: 'age', value: '28', sourceMessageId: correction.id },
+    { key: 'age', label: 'Age', value: '28', sourceMessageId: correction.id },
     { key: 'doctor_gender_preference', value: 'female', sourceMessageId: original.id },
   ]);
   applyPlan(room, { reply: 'I have preserved your details.' });

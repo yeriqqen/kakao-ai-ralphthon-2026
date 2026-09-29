@@ -57,6 +57,7 @@ const seenVoiceMessages = new Set();
 const savedTranscripts = new Set();
 const turns = new Map();
 const pendingTranscripts = new Map();
+let businessSpeaking = false;
 const terminal = new Set(['completed', 'interrupted', 'failed']);
 const statusText = {
   idle: ['Waiting for customer · 고객 요청 대기', 'No incoming call yet', 'The customer must approve the proposed simulated call first. Your microphone is off.'],
@@ -74,7 +75,7 @@ function showError(message) { $('error').textContent = message; $('error').hidde
 function currentStatus() { return state?.call?.status || 'idle'; }
 function live() { return peer?.connectionState === 'connected' && channel?.readyState === 'open' && connectionAnnounced; }
 function syncMicrophone() {
-  const enabled = live() && currentStatus() === 'active' && !openingPending && playbackAllowed && !responseBusy && !assistantSpeaking && pendingPlayback.size === 0 && !waitingTool && !state?.pendingRelay && !muted && !endingAudio && pendingToolCount === 0 && pendingTranscripts.size === 0;
+  const enabled = live() && currentStatus() === 'active' && !openingPending && playbackAllowed && !responseBusy && !assistantSpeaking && pendingPlayback.size === 0 && !waitingTool && !state?.pendingRelay && !muted && !endingAudio && pendingToolCount === 0 && (businessSpeaking || pendingTranscripts.size === 0);
   microphone?.getAudioTracks().forEach(track => { track.enabled = enabled; });
   $('microphone-status').textContent = enabled ? 'Microphone live · 마이크 사용 중' : microphone ? 'Microphone paused · 마이크 일시 정지' : 'Microphone inactive · 마이크 꺼짐';
   $('mute-mic').textContent = muted ? 'Unmute microphone · 마이크 켜기' : 'Mute microphone · 마이크 끄기';
@@ -183,7 +184,7 @@ function addTranscript(id, role, text) {
 function send(event) { if (channel?.readyState !== 'open') throw new Error('Realtime event channel is not connected.'); channel.send(JSON.stringify(event)); }
 function isWaiting() { return waitingTool || ['waiting_customer', 'awaiting_decision'].includes(currentStatus()) || !!state?.pendingRelay; }
 function pumpResponse() {
-  if (responseBusy || assistantSpeaking || pendingPlayback.size || pendingTranscripts.size || pendingToolCount || channel?.readyState !== 'open' || !responseQueue.length) return;
+  if (responseBusy || assistantSpeaking || businessSpeaking || pendingPlayback.size || pendingTranscripts.size || pendingToolCount || channel?.readyState !== 'open' || !responseQueue.length) return;
   // A queued question must not resume after the server has decided to wait or end.
   responseQueue = responseQueue.filter(task => isWaiting() ? task.kind === 'wait' : currentStatus() === 'completed' ? task.kind === 'goodbye' : !terminal.has(currentStatus()) && task.kind !== 'wait');
   if (!responseQueue.length) return;
@@ -203,9 +204,15 @@ function respond(instructions = '', text = '', kind = 'normal') {
   responseQueue.push({ instructions, text, kind }); pumpResponse();
 }
 function continueAfterBusinessReview() {
-  if (!continuationNeeded || pendingTranscripts.size || pendingToolCount || currentStatus() !== 'active' || isWaiting()) return;
+  if (!continuationNeeded || businessSpeaking || pendingTranscripts.size || pendingToolCount || currentStatus() !== 'active' || isWaiting()) return;
   continuationNeeded = false;
-  respond('Continue the assigned simulated business call in Korean. After acknowledging a greeting or an answer, ask one next unresolved required question; do not stop at a greeting. If the business asked for unknown customer information, use request_customer_detail instead. If all questions are resolved, read back key facts and obtain confirmation before complete_call.', JSON.stringify({ requiredQuestions: state.requiredQuestions, confirmedKeyDetails: state.call.confirmedKeyDetails }), 'continuation');
+  const unresolved = state.requiredQuestions.filter(question => question.status !== 'resolved');
+  const action = unresolved.length
+    ? `Only this next question remains the current target: ${unresolved[0].korean}. Do not re-ask questions marked resolved. If the business already attempted to answer this question but the transcript did not resolve it, briefly apologize for not catching that detail and ask one precise clarification. Do not claim it was confirmed, invent a number from unclear speech, or read back a complete result while any required question is unresolved.`
+    : state.call.confirmedKeyDetails
+      ? 'The server has retained every answer and validated the business confirmation of the full readback. Call complete_call now. Do not ask or read back the questions again.'
+      : 'Every required question has a retained answer. Read back only those recorded facts once, ask whether they are correct, and wait. Do not collect the answers again or add facts beyond the retained answers.';
+  respond(`Continue in Korean using the application state below as authoritative, even if earlier audio sounded different. ${action} If the latest business utterance asks for unknown customer information, address it through request_customer_detail before continuing the checklist.`, JSON.stringify({ requiredQuestions: state.requiredQuestions, confirmedKeyDetails: state.call.confirmedKeyDetails }), 'continuation');
 }
 function ensureWaitNotice() {
   if (waitNoticeActive || channel?.readyState !== 'open') return;
@@ -231,6 +238,7 @@ function releasePeer() {
   accepting = false; connectionAnnounced = false; waitingTool = false; responseBusy = false; assistantSpeaking = false; speakingResponseId = null; endingAudio = false; completingTool = false;
   responseQueue = []; activeResponseId = null; requestedResponseKind = null; activeResponseKind = null; cancellationPending = false;
   pendingPlayback.clear(); drainedPlayback.clear(); continuationNeeded = false;
+  businessSpeaking = false;
   waitNoticeActive = false; finishClosing = false;
   sessionReady = false; remoteTrackReady = false; playbackAllowed = false; openingPending = false; openingSent = false; openingResponseId = null; openingAudioStarted = false; openingAudioStopped = false;
   for (const item of pendingTranscripts.values()) item.resolve();
@@ -286,7 +294,7 @@ function persistTranscript(id, role, text) {
     applyState(next);
     // Server semantic review is authoritative. Automatic VAD responses are disabled.
     // A pending function already owns the next reply and will return its tool result.
-    if (role === 'business' && currentStatus() === 'active' && !isWaiting() && pendingToolCount === 0) {
+    if (role === 'business' && currentStatus() === 'active' && !isWaiting() && pendingToolCount === 0 && state.voiceMessage?.sourceTranscriptId !== id) {
       continuationNeeded = true; continueAfterBusinessReview();
     }
     pumpResponse(); syncMicrophone();
@@ -355,6 +363,12 @@ function handleEvent(event) {
       syncMicrophone();
     }
   }
+  // A second utterance may start before review of the first one returns. Keep
+  // capturing it, and do not respond until its transcript has also been reviewed.
+  if (event.type === 'input_audio_buffer.speech_started') { businessSpeaking = true; syncMicrophone(); }
+  if (event.type === 'input_audio_buffer.speech_stopped') {
+    trackPendingTranscript(event.item_id); businessSpeaking = false; syncMicrophone();
+  }
   if (event.type === 'input_audio_buffer.committed') trackPendingTranscript(event.item_id);
   if (event.type === 'conversation.item.input_audio_transcription.completed') persistTranscript(event.item_id || event.event_id, 'business', event.transcript);
   if (event.type === 'response.output_audio_transcript.done') persistTranscript(event.item_id || event.event_id, 'assistant', event.transcript);
@@ -415,6 +429,7 @@ function applyState(next) {
   if (isWaiting()) ensureWaitNotice();
   if (newVoiceMessage && channel?.readyState === 'open' && status === 'active' && !isWaiting()) {
     seenVoiceMessages.add(voice.id);
+    continuationNeeded = false; responseQueue = responseQueue.filter(task => task.kind !== 'continuation');
     respond('Relay this application-provided update naturally in polite Korean. Reuse the supplied customer information, then continue only the unresolved required questions.', `Application update from the customer chat:\n${voice.text}`);
   }
   if (status === 'completed' && peer && !completingTool && !endingAudio) planGoodbye();

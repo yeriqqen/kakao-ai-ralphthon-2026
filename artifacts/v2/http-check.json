@@ -1,14 +1,15 @@
 {
-  "checkedAt": "2026-09-29T06:08:12.109Z",
+  "checkedAt": "2026-09-29T06:38:26.493Z",
   "type": "real_local_http_with_mocked_plan_setup",
   "realHTTP": true,
   "realOpenAI": false,
   "realMicrophone": false,
   "syntheticHttpTest": true,
+  "childConfiguration": "Dummy key; child fetch replaced with synthetic setup responses and upstream network blocked",
   "provenance": "Real isolated localhost HTTP routes. Plan generation and validation are synthetic setup fixtures; all upstream network is blocked. No actual business or audio evidence.",
-  "fixtureRoomId": "9739f88e-0573-4cce-8d22-98d96dd4a901",
-  "passed": 23,
-  "total": 23,
+  "fixtureRoomId": "1a6bc9e0-7128-424e-a57a-1ed374367532",
+  "passed": 27,
+  "total": 27,
   "checks": [
     {
       "name": "/ is served",
@@ -100,6 +101,22 @@
     },
     {
       "name": "30-event batches are accepted and only the newest 200 diagnostics are retained",
+      "passed": true
+    },
+    {
+      "name": "reviewed business question opens the relay without a Realtime tool call",
+      "passed": true
+    },
+    {
+      "name": "a later voice tool reuses the pending relay without another question",
+      "passed": true
+    },
+    {
+      "name": "customer text resolves the detected relay and returns a Korean voice message",
+      "passed": true
+    },
+    {
+      "name": "an invented question quote cannot trigger a relay",
       "passed": true
     }
   ]

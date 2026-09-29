@@ -1,0 +1,140 @@
+{
+  "provenance": "Three real API requests replay the first actual business question in an isolated reconstructed room. Customer text is an explicitly synthetic authorized placeholder. This is not a new microphone conversation, audible Korean relay, or successful live completion.",
+  "source": "artifacts/v2/pr1-live-shop-third-rehearsal.json",
+  "realAPI": true,
+  "realMicrophone": false,
+  "review": {
+    "customerQuestion": {
+      "asked": true,
+      "key": "accept_alternate_color",
+      "questionKorean": "다른 색상도 괜찮세요?",
+      "evidenceQuote": "다른 색상도 괜찮세요?"
+    },
+    "utteranceKind": "substantive_answer",
+    "answers": [
+      {
+        "questionId": "check_stock",
+        "status": "resolved",
+        "answer": "The navy, waterproof daypack (about 20 liters) is not in stock.",
+        "evidenceQuote": "남색은 없고",
+        "reason": "The business explicitly states that navy is not available.",
+        "changesPriorAnswer": false
+      }
+    ],
+    "confirmedKeyDetails": false,
+    "confirmationQuote": "",
+    "readbackEvidence": [],
+    "unavailable": false,
+    "explanation": ""
+  },
+  "pending": {
+    "id": "f8161b70-5d6a-406e-9e4d-5c5352f164cd",
+    "key": "accept_alternate_color",
+    "question": "Would you be willing to consider a different color? The shop needs to know whether alternatives to navy are acceptable.",
+    "status": "pending",
+    "askedAt": "2026-09-29T06:39:11.977Z",
+    "questionKorean": "다른 색상도 괜찮세요?"
+  },
+  "reply": "Black is fine, as long as it is waterproof and about 20 liters.",
+  "translation": {
+    "answerKorean": "방수 기능이 있고 용량이 약 20리터라면 검은색도 괜찮습니다.",
+    "acknowledgement": "I’ll relay your answer."
+  },
+  "canFinishWhileWaiting": false,
+  "finalState": {
+    "status": "active",
+    "pendingRelay": null,
+    "questions": [
+      {
+        "id": "check_stock",
+        "text": "Is a navy, waterproof daypack with a capacity of about 20 liters in stock?",
+        "korean": "남색 방수 데이팩(용량 약 20리터)이 재고로 있나요?",
+        "status": "resolved",
+        "resolutionReason": null,
+        "answer": "The navy, waterproof daypack (about 20 liters) is not in stock.",
+        "evidence": [
+          {
+            "transcriptId": "item_ETLjso11SwlsDTXlbFqxO",
+            "quote": "남색은 없고",
+            "role": "business"
+          }
+        ]
+      },
+      {
+        "id": "ask_price",
+        "text": "What is the price of that daypack?",
+        "korean": "해당 데이팩의 가격은 얼마인가요?",
+        "status": "unresolved",
+        "resolutionReason": null,
+        "answer": null,
+        "evidence": []
+      },
+      {
+        "id": "latest_pickup",
+        "text": "What is the latest time I could pick up the daypack this evening?",
+        "korean": "오늘 저녁 해당 데이팩을 가장 늦게 몇 시까지 픽업할 수 있나요?",
+        "status": "unresolved",
+        "resolutionReason": null,
+        "answer": null,
+        "evidence": []
+      }
+    ]
+  },
+  "apiEvidence": [
+    {
+      "purpose": "business_evidence_review",
+      "responseId": "resp_0b76b7450cb55e60016abb5d0c0df487d0aeadfa58de3c77c8",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1656,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 192,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1848
+      },
+      "at": "2026-09-29T06:39:09.502Z"
+    },
+    {
+      "purpose": "customer_relay",
+      "responseId": "resp_0567f7632cf0bba8016abb5d0da34c87d0bfb570f2c84e9f94",
+      "model": "gpt-6-luna",
+      "usage": {
+        "input_tokens": 548,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 153,
+        "output_tokens_details": {
+          "reasoning_tokens": 100
+        },
+        "total_tokens": 701
+      },
+      "at": "2026-09-29T06:39:11.977Z"
+    },
+    {
+      "purpose": "relay_answer",
+      "responseId": "resp_079f06a7139bc6ee016abb5d101cec87d08c345a5b78a418a4",
+      "model": "gpt-6-luna",
+      "usage": {
+        "input_tokens": 158,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 114,
+        "output_tokens_details": {
+          "reasoning_tokens": 63
+        },
+        "total_tokens": 272
+      },
+      "at": "2026-09-29T06:39:13.978Z"
+    }
+  ],
+  "passed": true
+}

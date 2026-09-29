@@ -1,6 +1,6 @@
 # YOKOBU v2 — verification record
 
-> Latest PR #1 checkpoint: see [v2-pr1-review.md](v2-pr1-review.md) for three subsequent interrupted shop rehearsals, integration fixes, current check counts, and remaining live failures. The earlier checkpoints below are historical, not the current acceptance result.
+> Latest PR #1 checkpoint: [v2-pr1-review.md](v2-pr1-review.md) records the fifth shop rehearsal completing the real laptop flow, with human-confirmed Korean audio and microphone shutdown, after four preserved failures. It also identifies the later teammate merge and current regression checks. Earlier sections below remain historical.
 
 All institutions, customer details, and calls used for this product demonstration are fictional. No real business or telephone call is verified by these records. Do not combine synthetic tests with live evidence under a single “passed” claim.
 

@@ -1,15 +1,13 @@
-# V2 PR #1 handoff — 2026-09-29
+# V2 PR #1 handoff — 2026-09-29, 16:10 KST
 
-Latest: [Korean clinic presentation and shutdown fixes](v2-presentation-ready.md). Use `submission/final-ko/` for the Korean three-minute deck and rehearsal notes. Pull this branch and restart the server on the configured presentation laptop.
+Use `feat/v2-design-integration`. Newer local work remains preserved at `codex/pre-pr1-checkpoint` (`eb4e5ce`); it was carried onto this branch as `ea7d30f`. Preference repairs are in `8ce4526`, integrated with teammate updates through `92cedd6` by merge `da81743`. The local `.env` is ignored. V1 remains available.
 
-The polished UI is integrated on `feat/v2-design-integration`. Newer local work was preserved at `codex/pre-pr1-checkpoint` (`eb4e5ce`) before switching and carried forward as `ea7d30f`. The `.env` is local and ignored.
+Run `npm start`, open http://localhost:4173, and use the generated business link in a separate Chrome tab on this laptop. The customer authorizes; the teammate accepts. No real telephone call is made.
 
-Run `npm start` and open http://localhost:4173. Use the customer-generated business link in a separate Chrome tab on this laptop. The customer authorizes the simulated call; the teammate accepts it. No real telephone call is made.
+**The fifth shop microphone rehearsal completed successfully at 16:04 KST.** The shop said navy was unavailable and black available, without asking a question. YOKOBU asked the customer whether black was acceptable, returned the human reply in Korean, retained black availability, collected ₩10,000 and pickup by 19:00, confirmed the readback, generated the matching summary/recommendation, and closed the connection. The user confirmed audible opening, relay return, goodbye and microphone shutdown. One truncated price utterance required a legitimate clarification.
 
-Read [the PR review and latest evidence](v2-pr1-review.md) before demonstrating. Three actual PR microphone attempts were interrupted. The third exposed repeated questions and an ignored alternative-color question. Later fixes add server-detected relay, precise unresolved-question control, playback ordering, localized customer labels, and packaged font support. Recorded API replays and mocked regressions pass; the repaired full microphone relay and normal completion still require a new human rehearsal.
+See [the PR review](v2-pr1-review.md), `artifacts/v2/pr1-live-shop-fifth-completed.json` and its result screenshot. Four earlier failures remain preserved. The successful run used the preference repair before the later teammate merge; the combined source passed 67 unit, 30 HTTP, 20 customer UI, 19 business UI and 32 design checks, plus build and eight extracted-package checks. Automated checks use mocked provider/media events. They do not expand the single live run into a reliability claim.
 
-Current automated checks: 64 unit, 30 local HTTP with mocked AI, 20 mocked customer UI, 19 mocked business UI, and 32 design checks. The build and extracted runnable archive are checked separately. None establishes audible Korean or a successful live flow.
+The current runnable ZIP is `artifacts/v2/yokobu-v2-runnable.zip`. English submission materials in `submission/v2/` describe this successful shop run and the remaining limitations. The teammate’s Korean clinic deck and notes are preserved separately in `submission/final-ko/`; that deck uses labeled prepared screenshots and is not evidence of a completed clinic rehearsal. Use [editable shop placeholders](v2-shop-demo.md) for the demonstrated scenario.
 
-Use [editable shop placeholders](v2-shop-demo.md). Ask the unknown color question before answering the service questions. Customer example: “Black is fine, as long as it is waterproof and about 20 liters.” Preserve actual business answers if they differ from the guide. Explicitly confirm the assistant's final readback and inspect the final summary.
-
-The older runnable ZIP at `artifacts/v2/yokobu-v2-runnable.zip` predates the latest shutdown and concise-output fixes; run the current branch source for this presentation. Use the new Korean deck in `submission/final-ko/`; the older English submission slides remain a historical checkpoint. No official submission, public deployment, or PR merge has occurred.
+Actual two-phone connectivity and target-user value remain Unverified. Russian/Chinese interfaces have automated coverage and recorded API checks, with disclosed model-fidelity limits. No official submission, public deployment or PR merge to main occurred.

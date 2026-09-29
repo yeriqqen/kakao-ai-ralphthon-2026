@@ -1,7 +1,7 @@
 {
-  "checkpoint": "2026-09-29, actual shop attempt ended 15:15:45 KST; repairs pending",
-  "interface": "63 code + 23 HTTP checks passed. Mocked browser checks:\n20 customer + 14 business checks passed.",
-  "interfaceBoundary": "HTTP setup plans are synthetic. These checks do not prove speech or value.",
-  "api": "Korean opening received; human audibility not confirmed.\nStock and price were wrongly inferred; mic stalled, operator ended.",
-  "voice": "Recorded-text advice: 9/9 checks with one real API request.\nShop audibility, live relay and normal completion: Unverified."
+  "checkpoint": "2026-09-29 16:10 KST; fifth actual shop microphone run completed; teammate merge regression-tested",
+  "interface": "67 unit and 30 HTTP checks passed. Mocked browser checks:\n20 customer, 19 business and 32 design checks passed.",
+  "interfaceBoundary": "Automated checks are separate from the actual microphone rehearsal.",
+  "api": "Offered black instead of navy \u2192 customer accepted in chat.\nKorean return \u2192 \u20a910,000 \u2192 pickup by 7 PM \u2192 confirmed ending.",
+  "voice": "The teammate confirmed Korean audio and microphone shutdown.\nOne price fragment needed clarification. User value is unverified."
 }

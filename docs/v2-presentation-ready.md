@@ -1,5 +1,7 @@
 # Korean clinic presentation checkpoint
 
+> Historical teammate checkpoint. See [the latest PR review](v2-pr1-review.md) for the fifth successful shop microphone run and subsequent merged-code checks. The Korean clinic deck remains a prepared scenario, not live clinic acceptance.
+
 Use `feat/v2-design-integration`, the head of PR #1. At this checkpoint PR #1 remains a draft and `main` is unchanged. Teammate fixes through `7b7c42c` are preserved; `6def440` adds concise results and bounded voice shutdown.
 
 ## Changes

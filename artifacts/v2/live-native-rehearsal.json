@@ -1,0 +1,515 @@
+{
+  "source": "Actual native Chrome user-interface rehearsal",
+  "state": {
+    "simulation": true,
+    "id": "2bbb643e-34b2-48a0-ad23-b077acd6eb7d",
+    "language": "en",
+    "version": 11,
+    "revision": 11,
+    "createdAt": "2026-09-29T05:22:51.949Z",
+    "updatedAt": "2026-09-29T05:25:16.374Z",
+    "messages": [
+      {
+        "id": "57e3c7a3-9c8f-4e3c-afc8-00d46f2bbd1d",
+        "role": "user",
+        "text": "I want to go to a hospital",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:22:51.981Z"
+      },
+      {
+        "id": "88ff0b3b-bd74-4006-9b40-c6cfc221333f",
+        "role": "assistant",
+        "text": "Could you please tell me more about why you want to go to a hospital? For example, are you feeling sick, injured, or do you need a specific type of medical service? Also, where are you located or do you prefer to go to a hospital in any particular area in Korea?",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:22:54.409Z"
+      },
+      {
+        "id": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+        "role": "user",
+        "text": "This is a fictional example. I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment.",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:24:43.160Z"
+      },
+      {
+        "id": "dd14132d-8397-45cc-8dfd-05218c7ae9ac",
+        "role": "assistant",
+        "text": "Thank you for sharing your details. I am preparing a fictional call simulation plan for two neutral fictional hospitals in Mapo, Seoul, to check if they can address your non-urgent mild itchy rash this afternoon with a female doctor, your self-pay status, and their appointment and price policies. All names and answers will be fictional. May I proceed with this fictional call plan now?",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:25:06.679Z"
+      }
+    ],
+    "transcripts": [],
+    "customerInfo": [
+      {
+        "key": "request",
+        "value": "I want to go to a hospital",
+        "sourceMessageId": "57e3c7a3-9c8f-4e3c-afc8-00d46f2bbd1d"
+      },
+      {
+        "key": "age",
+        "value": "28",
+        "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0"
+      },
+      {
+        "key": "symptom",
+        "value": "mild itchy rash on arm for two days",
+        "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0"
+      },
+      {
+        "key": "urgent_symptoms",
+        "value": "none",
+        "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0"
+      },
+      {
+        "key": "location",
+        "value": "Mapo, Seoul",
+        "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0"
+      },
+      {
+        "key": "preferred_visit_time",
+        "value": "this afternoon around 3:30 pm",
+        "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0"
+      },
+      {
+        "key": "preferred_doctor_gender",
+        "value": "female",
+        "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0"
+      },
+      {
+        "key": "health_insurance",
+        "value": "none",
+        "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0"
+      },
+      {
+        "key": "payment_type",
+        "value": "self-pay",
+        "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0"
+      }
+    ],
+    "institutions": [
+      {
+        "id": "fictional_hospital_1",
+        "name": "Fictional Mapo Health Center",
+        "nameKo": "",
+        "description": "To inquire whether a mild itchy rash can be seen this afternoon by a female doctor, with self-pay pricing and appointment requirement.",
+        "reason": "To inquire whether a mild itchy rash can be seen this afternoon by a female doctor, with self-pay pricing and appointment requirement.",
+        "fictional": true
+      },
+      {
+        "id": "fictional_hospital_2",
+        "name": "Fictional Mapo Medical Clinic",
+        "nameKo": "",
+        "description": "To check availability of dermatology consultation for rash, female doctor at 3:30 pm, self-pay fees, and if advance booking is needed.",
+        "reason": "To check availability of dermatology consultation for rash, female doctor at 3:30 pm, self-pay fees, and if advance booking is needed.",
+        "fictional": true
+      }
+    ],
+    "requiredQuestions": [
+      {
+        "id": "q1",
+        "text": "Can a patient with a mild itchy rash on the arm for two days be seen for a dermatology consultation this afternoon, around 3:30 pm, by a female doctor?",
+        "korean": "팔에 경미한 가려운 발진이 이틀간 지속된 환자가 오늘 오후 3시 30분경 여성 의사에게 피부과 진료를 받을 수 있습니까?",
+        "status": "unresolved",
+        "resolutionReason": null,
+        "answer": null,
+        "evidence": []
+      },
+      {
+        "id": "q2",
+        "text": "What is the consultation fee for a self-pay patient without Korean health insurance?",
+        "korean": "한국 건강보험이 없는 자비 진료 환자의 진료비는 얼마입니까?",
+        "status": "unresolved",
+        "resolutionReason": null,
+        "answer": null,
+        "evidence": []
+      },
+      {
+        "id": "q3",
+        "text": "Is an appointment required for a dermatology consultation this afternoon?",
+        "korean": "오늘 오후 피부과 진료를 받으려면 예약이 필요합니까?",
+        "status": "unresolved",
+        "resolutionReason": null,
+        "answer": null,
+        "evidence": []
+      }
+    ],
+    "planReady": true,
+    "pendingRelay": null,
+    "decisionPrompt": null,
+    "summary": null,
+    "busy": false,
+    "error": null,
+    "voiceMessage": null,
+    "call": {
+      "id": "13c9874d-bcf2-47f6-aeaa-b5502fb676d7",
+      "status": "pending",
+      "institutionId": "fictional_hospital_1",
+      "authorized": true,
+      "accepted": false,
+      "authorizedAt": "2026-09-29T05:25:16.374Z",
+      "acceptedAt": null,
+      "connected": false,
+      "confirmedKeyDetails": false,
+      "confirmationEvidence": [],
+      "endedAt": null,
+      "reason": null,
+      "success": false
+    },
+    "apiEvidence": [
+      {
+        "purpose": "customer_interview",
+        "responseId": "resp_061b422551649103016abb4b2c4ef087d0be87460e95d8df95",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "usage": {
+          "input_tokens": 746,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 97,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 843
+        },
+        "at": "2026-09-29T05:22:53.449Z"
+      },
+      {
+        "purpose": "call_plan_validation",
+        "responseId": "resp_0235e9f81599f942016abb4b2da8b887d0924488539c047361",
+        "model": "gpt-4.1-2025-04-14",
+        "usage": {
+          "input_tokens": 1017,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 93,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1110
+        },
+        "at": "2026-09-29T05:22:54.408Z"
+      },
+      {
+        "purpose": "call_plan_validation_result",
+        "attempt": 1,
+        "accepted": true,
+        "issues": [],
+        "violations": [],
+        "customerFactEvidence": [
+          {
+            "key": "request",
+            "sourceMessageId": "57e3c7a3-9c8f-4e3c-afc8-00d46f2bbd1d",
+            "sourceQuote": "I want to go to a hospital"
+          }
+        ],
+        "constraintCoverage": [],
+        "at": "2026-09-29T05:22:54.408Z"
+      },
+      {
+        "purpose": "customer_interview",
+        "responseId": "resp_04f5459b2c8d670f016abb4b9c439c87d0b2a1837ed024914c",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "usage": {
+          "input_tokens": 959,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 434,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1393
+        },
+        "at": "2026-09-29T05:24:47.682Z"
+      },
+      {
+        "purpose": "call_plan_validation",
+        "responseId": "resp_0f7d85bb665ec567016abb4b9fe8c887d0a61752f0e3e7c39c",
+        "model": "gpt-4.1-2025-04-14",
+        "usage": {
+          "input_tokens": 1475,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 1904,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 3379
+        },
+        "at": "2026-09-29T05:24:56.513Z"
+      },
+      {
+        "purpose": "call_plan_validation_result",
+        "attempt": 1,
+        "accepted": false,
+        "issues": [
+          "semantic_review_rejected",
+          "invalid_fictional_institutions",
+          "uncovered_customer_constraints"
+        ],
+        "violations": [
+          {
+            "code": "unsupported_business_claim",
+            "field": "reply",
+            "quote": "I will find hospitals in Mapo, Seoul, with female doctors available around 3:30 pm that can address a mild itchy rash.",
+            "explanation": "The reply presupposes that hospitals with female doctors available around 3:30 pm and capable of addressing the described issue are known to exist, which is not supported by the fictional set-up. This is an unsupported business claim; the reply should instead state it will check or inquire about these facts."
+          },
+          {
+            "code": "unsupported_business_claim",
+            "field": "institutions[0].name",
+            "quote": "Fictional Mapo Women’s Clinic",
+            "explanation": "The name 'Fictional Mapo Women's Clinic' presupposes a clinic staffed by or specifically for women, which is an unsupported business claim. Fictional institution names must remain neutrally fictional and avoid embedded operational presumptions."
+          },
+          {
+            "code": "unsupported_business_claim",
+            "field": "institutions[1].name",
+            "quote": "Вымышленная Mapo General Hospital",
+            "explanation": "The Russian name does not contain explicit business claims. However, naming conventions should avoid implying confirmed capabilities unless directly supported by user input or being overtly neutral."
+          }
+        ],
+        "customerFactEvidence": [
+          {
+            "key": "age",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment."
+          },
+          {
+            "key": "symptom",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment."
+          },
+          {
+            "key": "urgent_symptoms",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment."
+          },
+          {
+            "key": "location",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment."
+          },
+          {
+            "key": "preferred_visit_time",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment."
+          },
+          {
+            "key": "preferred_doctor_gender",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment."
+          },
+          {
+            "key": "health_insurance",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment."
+          },
+          {
+            "key": "payment_type",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment."
+          }
+        ],
+        "constraintCoverage": [
+          {
+            "constraint": "I prefer a female doctor.",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I prefer a female doctor.",
+            "questionIds": [
+              "q1"
+            ]
+          },
+          {
+            "constraint": "I want to know the likely self-pay consultation cost.",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I want to know the likely self-pay consultation cost",
+            "questionIds": [
+              "q2"
+            ]
+          },
+          {
+            "constraint": "whether I need an appointment",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "whether I need an appointment",
+            "questionIds": [
+              "q3"
+            ]
+          },
+          {
+            "constraint": "would like to visit ... this afternoon, preferably around 3:30 pm",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "would like to visit this afternoon, preferably around 3:30 pm",
+            "questionIds": [
+              "q1"
+            ]
+          },
+          {
+            "constraint": "I am in Mapo, Seoul",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I am in Mapo, Seoul",
+            "questionIds": []
+          },
+          {
+            "constraint": "mild itchy rash on arm for two days",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "mild itchy rash on my arm for two days",
+            "questionIds": [
+              "q1"
+            ]
+          },
+          {
+            "constraint": "I do not have Korean health insurance",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I do not have Korean health insurance",
+            "questionIds": [
+              "q2"
+            ]
+          }
+        ],
+        "at": "2026-09-29T05:24:56.520Z"
+      },
+      {
+        "purpose": "call_plan_repair",
+        "responseId": "resp_002246fd576e187e016abb4ba8c0c087d0b1f1b8e684ef968b",
+        "model": "gpt-4.1-2025-04-14",
+        "usage": {
+          "input_tokens": 3030,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 471,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 3501
+        },
+        "at": "2026-09-29T05:25:00.369Z"
+      },
+      {
+        "purpose": "call_plan_validation",
+        "responseId": "resp_05047ff51ffa2aef016abb4bac906c87d09096027a9bea9354",
+        "model": "gpt-4.1-2025-04-14",
+        "usage": {
+          "input_tokens": 1512,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 1573,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 3085
+        },
+        "at": "2026-09-29T05:25:06.678Z"
+      },
+      {
+        "purpose": "call_plan_validation_result",
+        "attempt": 2,
+        "accepted": true,
+        "issues": [],
+        "violations": [],
+        "customerFactEvidence": [
+          {
+            "key": "age",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment."
+          },
+          {
+            "key": "symptom",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment."
+          },
+          {
+            "key": "urgent_symptoms",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment."
+          },
+          {
+            "key": "location",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment."
+          },
+          {
+            "key": "preferred_visit_time",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment."
+          },
+          {
+            "key": "preferred_doctor_gender",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment."
+          },
+          {
+            "key": "health_insurance",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment."
+          },
+          {
+            "key": "payment_type",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment."
+          }
+        ],
+        "constraintCoverage": [
+          {
+            "constraint": "I would like to visit this afternoon, preferably around 3:30 pm.",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm.",
+            "questionIds": [
+              "q1"
+            ]
+          },
+          {
+            "constraint": "I prefer a female doctor.",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I prefer a female doctor.",
+            "questionIds": [
+              "q1"
+            ]
+          },
+          {
+            "constraint": "I do not have Korean health insurance",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "I do not have Korean health insurance",
+            "questionIds": [
+              "q2"
+            ]
+          },
+          {
+            "constraint": "whether I need an appointment",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "whether I need an appointment.",
+            "questionIds": [
+              "q3"
+            ]
+          },
+          {
+            "constraint": "mild itchy rash on arm for two days",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "have had a mild itchy rash on my arm for two days",
+            "questionIds": [
+              "q1"
+            ]
+          },
+          {
+            "constraint": "self-pay consultation cost",
+            "sourceMessageId": "5e0265db-80ec-4a89-8db9-5ae961a3c1c0",
+            "sourceQuote": "want to know the likely self-pay consultation cost",
+            "questionIds": [
+              "q2"
+            ]
+          }
+        ],
+        "at": "2026-09-29T05:25:06.678Z"
+      }
+    ],
+    "observations": []
+  }
+}

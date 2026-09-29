@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-09-29T04:49:58.396Z",
+  "type": "real_upstream_request",
+  "endpoint": "https://api.openai.com/v1/responses",
+  "model": "gpt-4.1-mini",
+  "httpStatus": 429,
+  "providerCode": "credit_balance_exhausted",
+  "liveApiVerified": false,
+  "microphoneVerified": false,
+  "audibleKoreanVerified": false,
+  "status": "Blocked pending available API credit; user is resolving locally. No API key stored in this record."
+}

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>YOKOBU · Simulated conversations</title>
+  <link rel="stylesheet" href="/v2/styles.css">
+  <script type="module" src="/v2/customer.js"></script>
+</head>
+<body>
+  <div class="chat-app">
+    <header class="app-header">
+      <div class="brand-block"><a class="brand" href="/v2/">YOKOBU<span class="brand-dot" aria-hidden="true"></span></a><span id="subtitle"></span></div>
+      <button id="new-chat" class="quiet-button" type="button"></button>
+    </header>
+    <main id="main">
+      <div class="conversation-meta"><span id="simulation-label"></span><span id="fixed-language"></span></div>
+      <section id="configuration" class="notice" aria-live="polite"></section>
+      <section id="welcome" class="welcome">
+        <h1 id="welcome-title"></h1><p id="welcome-intro"></p>
+        <fieldset class="language-picker"><legend id="language-label"></legend><div id="language-options"></div></fieldset>
+        <button id="starter" class="starter-button" type="button"></button>
+      </section>
+      <section id="call-state" class="call-state" aria-live="polite" hidden><span class="call-dot" aria-hidden="true"></span><span id="call-state-text"></span></section>
+      <div id="messages" class="messages" role="log" aria-live="polite" aria-relevant="additions"></div>
+      <div id="context"></div>
+      <div id="working" class="working" role="status" hidden></div>
+      <section id="error" class="error-notice" role="alert" hidden><p id="error-text"></p><button id="dismiss-error" class="quiet-button" type="button"></button></section>
+      <div id="scroll-anchor"></div>
+    </main>
+    <footer class="composer-dock">
+      <form id="chat-form" class="composer" novalidate>
+        <textarea id="message-input" rows="1" maxlength="6000" autocomplete="off"></textarea>
+        <button id="send" class="send-button" type="submit"></button>
+      </form>
+      <p id="text-note" class="composer-note"></p>
+    </footer>
+  </div>
+  <dialog id="confirm-dialog" class="confirm-dialog"><form method="dialog"><h2 id="dialog-title"></h2><p id="dialog-body"></p><div class="button-row"><button id="dialog-cancel" class="quiet-button" value="cancel"></button><button id="dialog-confirm" class="primary-button" value="confirm"></button></div></form></dialog>
+</body>
+</html>

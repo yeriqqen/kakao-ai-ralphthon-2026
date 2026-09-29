@@ -1,0 +1,32 @@
+{
+  "checkedAt": "2026-09-29T05:06:39.887Z",
+  "type": "actual_customer_request_through_local_backend",
+  "language": "en",
+  "request": "I want to go to a hospital.",
+  "localHttpStatus": 200,
+  "success": true,
+  "apiEvidence": [
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_0d76f695060b2324016abb475ce69c87d0a53fa283e72745ad",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 519,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 59,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 578
+      },
+      "at": "2026-09-29T05:06:39.879Z"
+    }
+  ],
+  "assistantReply": "I'm here to help you find the right hospital. Could you please tell me what kind of medical issue or symptoms you have? This will help me suggest the most suitable hospital or department.",
+  "error": null,
+  "realMicrophoneVerified": false,
+  "audibleKoreanVerified": false
+}

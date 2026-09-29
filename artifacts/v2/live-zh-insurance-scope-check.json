@@ -1,0 +1,302 @@
+{
+  "startedAt": "2026-09-29T05:34:04.453Z",
+  "type": "actual_openai_exported_interview_targeted_chinese_scope_check",
+  "mock": false,
+  "sourceInputArtifact": "artifacts/v2/live-language-source-guard-check.json",
+  "customerInputs": [
+    "我想去医院。",
+    "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+  ],
+  "sources": {
+    "lib/v2-ai.mjs": "4786ade2e8739b9d5e5a053ca05ea8d6b7f1e8b1e14e11ec2e420efc7ce87595",
+    "lib/v2-plan-guard.mjs": "047760fd959609295eea08a2420692761efe649629da1bae4c177bb43bfcb2b8",
+    "lib/v2-config.mjs": "faff6665ac05fda2b5c002a06f994be199a546bcea22c98a12cbb61076e23f61",
+    "lib/v2-state.mjs": "02c3ba3c50ba6b555adfa223cb84b7b02d0b0b2239636c12dd20c851a64cb92a"
+  },
+  "callAuthorized": false,
+  "realtimeVerified": false,
+  "realMicrophoneVerified": false,
+  "audibleKoreanVerified": false,
+  "fullCoreFlowVerified": false,
+  "publicState": {
+    "id": "d40daa5b-22f1-4315-92f3-edbb8bd0ac95",
+    "language": "zh",
+    "version": 6,
+    "revision": 6,
+    "createdAt": "2026-09-29T05:34:04.447Z",
+    "updatedAt": "2026-09-29T05:34:12.807Z",
+    "messages": [
+      {
+        "id": "9407cb74-b1b9-4258-8174-e72912d7de22",
+        "role": "user",
+        "text": "我想去医院。",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:34:04.453Z"
+      },
+      {
+        "id": "e8045cd9-3113-402e-b257-896844f9c37e",
+        "role": "assistant",
+        "text": "请问您希望去医院的主要原因是什么？比如是看感冒、急诊还是其他特殊疾病？您目前所在的区域是哪里？还有您对医院或医生有什么特别的要求吗？",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:34:07.249Z"
+      },
+      {
+        "id": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+        "role": "user",
+        "text": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:34:07.249Z"
+      },
+      {
+        "id": "4bf56650-8660-4f4a-ba3f-e5e19a63b2d9",
+        "role": "assistant",
+        "text": "感谢您提供详细信息。您是一位28岁的客户，手臂有轻微发痒的皮疹，已持续两天，无紧急症状，位于首尔麻浦区，希望今天下午15:30左右，由女医生接诊。您没有韩国医疗保险，想知道自费咨询费用及预约需求。请允许我为您准备两个虚构的医院选项和相关必要问题，以便模拟联系确认。您同意我现在进行此准备并模拟拨打电话吗？",
+        "kind": "chat",
+        "createdAt": "2026-09-29T05:34:12.807Z"
+      }
+    ],
+    "transcripts": [],
+    "customerInfo": [
+      {
+        "key": "age",
+        "value": "28岁",
+        "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816"
+      },
+      {
+        "key": "symptom",
+        "value": "手臂轻微发痒的皮疹",
+        "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816"
+      },
+      {
+        "key": "symptom_duration",
+        "value": "持续两天",
+        "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816"
+      },
+      {
+        "key": "region",
+        "value": "首尔麻浦区",
+        "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816"
+      },
+      {
+        "key": "preferred_time",
+        "value": "今天下午15:30左右",
+        "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816"
+      },
+      {
+        "key": "preferred_doctor_gender",
+        "value": "女医生",
+        "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816"
+      },
+      {
+        "key": "insurance_status",
+        "value": "没有韩国医疗保险",
+        "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816"
+      },
+      {
+        "key": "payment_preference",
+        "value": "自费",
+        "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816"
+      },
+      {
+        "key": "urgency",
+        "value": "无紧急症状",
+        "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816"
+      }
+    ],
+    "institutions": [],
+    "requiredQuestions": [],
+    "planReady": false,
+    "pendingRelay": null,
+    "decisionPrompt": null,
+    "summary": null,
+    "busy": false,
+    "error": null,
+    "voiceMessage": null,
+    "call": {
+      "id": null,
+      "status": "idle",
+      "institutionId": null,
+      "authorized": false,
+      "accepted": false,
+      "authorizedAt": null,
+      "acceptedAt": null,
+      "connected": false,
+      "confirmedKeyDetails": false,
+      "confirmationEvidence": [],
+      "endedAt": null,
+      "reason": null,
+      "success": false
+    }
+  },
+  "apiEvidence": [
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_01c690fb7da7942d016abb4dcccfd887d098a55a2a1a6dd081",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 821,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 80,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 901
+      },
+      "at": "2026-09-29T05:34:05.918Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_022be89de87b7a2b016abb4dce26f487d0842ce178d2b5e223",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1346,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 106,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1452
+      },
+      "at": "2026-09-29T05:34:07.248Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "customerFactEvidence": [
+        {
+          "key": "intended_use",
+          "sourceMessageId": "9407cb74-b1b9-4258-8174-e72912d7de22",
+          "supportReason": "用户明确表达了想去医院，这支持了'医院就诊'这一就医用途。",
+          "sourceQuote": "我想去医院。"
+        }
+      ],
+      "constraintCoverage": [],
+      "questionMeaningChecks": [],
+      "at": "2026-09-29T05:34:07.249Z"
+    },
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_016bb8f0239a471b016abb4dcf776487d0a643cc6a2f149af9",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1008,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 250,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1258
+      },
+      "at": "2026-09-29T05:34:09.624Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_0b9a667b32d908a2016abb4dd1d65c87d0a7a6cc1f4b082d56",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1703,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 657,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2360
+      },
+      "at": "2026-09-29T05:34:12.807Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "customerFactEvidence": [
+        {
+          "key": "age",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户明确说“我28岁”，支持年龄为28岁。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "symptom",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户叙述了“手臂上有轻微发痒的皮疹”，可以支持该症状条目。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "symptom_duration",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "“已经持续两天”直接支持症状持续时间。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "region",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "“我在首尔麻浦区”明确表达了地区需求。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "preferred_time",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户直接说“希望今天下午...15:30左右”，明确为所需就诊时间。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "preferred_doctor_gender",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户表述“希望由女医生接诊”，支持医生性别偏好。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "insurance_status",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "“我没有韩国医疗保险”直接支持没有韩国医保状态。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "payment_preference",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户“因此想确认自费咨询费用”说明支付偏好为自费。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "urgency",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户明言“没有紧急症状”，明确支持非急症状态。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        }
+      ],
+      "constraintCoverage": [],
+      "questionMeaningChecks": [],
+      "at": "2026-09-29T05:34:12.807Z"
+    }
+  ],
+  "finishedAt": "2026-09-29T05:34:12.807Z",
+  "manualContentAudit": {
+    "verdict": "PARTIAL_SCOPE_PRESERVED_BUT_PLAN_NOT_PREPARED",
+    "insuranceScopeInCustomerInfo": "passed: insurance_status = 没有韩国医疗保险",
+    "insuranceScopeInReply": "passed: 您没有韩国医疗保险",
+    "sourceMessageFidelity": "passed: facts refer to the actual detailed customer message",
+    "unsupportedBusinessClaims": "none observed in returned reply; no institution claims returned",
+    "requiredQuestionScope": "unverified: requiredQuestions is empty",
+    "requestedConstraintCoverage": "unverified at plan stage: no required questions or institutions returned",
+    "twoTurnPlanReadiness": "failed: detailed second turn returned readyToCall false and asks permission to prepare, contrary to prompt; validator approved it",
+    "voiceOrCallAcceptance": "not tested; no room authorized or Realtime connection used",
+    "additionalCalls": "none; exactly two customer turns and four actual OpenAI Responses calls"
+  }
+}

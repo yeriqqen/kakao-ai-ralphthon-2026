@@ -1,0 +1,338 @@
+{
+  "generatedAt": "2026-09-29T05:19:31.495Z",
+  "mock": false,
+  "realAPI": true,
+  "realMicrophone": false,
+  "audibleKorean": false,
+  "inputs": [
+    {
+      "id": "en-user-start",
+      "role": "user",
+      "text": "I want to go to a hospital."
+    },
+    {
+      "id": "en-assistant-clarify",
+      "role": "assistant",
+      "text": "What would you like help with, and where are you located?"
+    },
+    {
+      "id": "en-user-details",
+      "role": "user",
+      "text": "This is a fictional demonstration. I am 28. I have had a mild itchy rash on my arm for two days, without urgent symptoms. I am in Mapo in Seoul and would like to visit today around 15:30. I prefer a female doctor. I have no Korean health insurance, so I want to check whether I can be seen, the approximate self-pay consultation cost, and whether an appointment is required."
+    }
+  ],
+  "output": {
+    "reply": "A call simulation plan is ready. This is a demonstration with fictional institutions; business details are unconfirmed. May I proceed with this simulated call for your hospital visit inquiry in Mapo?",
+    "customerInfo": [
+      {
+        "key": "age",
+        "value": "28"
+      },
+      {
+        "key": "symptoms_duration",
+        "value": "2 days"
+      },
+      {
+        "key": "symptoms_description",
+        "value": "mild itchy rash on arm"
+      },
+      {
+        "key": "symptoms_urgency",
+        "value": "no urgent symptoms"
+      },
+      {
+        "key": "location",
+        "value": "Mapo, Seoul"
+      },
+      {
+        "key": "preferred_visit_time",
+        "value": "today around 15:30"
+      },
+      {
+        "key": "doctor_gender_preference",
+        "value": "female"
+      },
+      {
+        "key": "has_korean_health_insurance",
+        "value": "no"
+      },
+      {
+        "key": "request_consultation_cost_info",
+        "value": "yes"
+      },
+      {
+        "key": "request_appointment_requirement",
+        "value": "yes"
+      }
+    ],
+    "institutions": [
+      {
+        "id": "fictional_mapo_general_hospital",
+        "name": "Fictional Mapo General Hospital / 허구의 마포 종합병원",
+        "reason": "To confirm if a non-insured person can be seen today by a female doctor for a mild itchy rash, get estimated self-pay consultation cost, and ask about appointment requirements."
+      },
+      {
+        "id": "fictional_seoul_women_care_clinic",
+        "name": "Fictional Seoul Women Care Clinic / 허구의 서울 여성케어클리닉",
+        "reason": "To check if a female doctor can see a non-insured patient today for a skin rash, estimated self-pay cost, and if an appointment is necessary."
+      }
+    ],
+    "requiredQuestions": [
+      {
+        "id": "eligibility_without_insurance",
+        "text": "Can a patient without Korean health insurance be seen for a general consultation?",
+        "korean": "한국 건강 보험이 없는 환자도 진료를 받을 수 있나요?"
+      },
+      {
+        "id": "female_doctor_today",
+        "text": "Is a female doctor available to see a patient today around 15:30 for a skin rash?",
+        "korean": "여성 의사 선생님께서 오늘 15:30경 피부 발진 진료가 가능하신가요?"
+      },
+      {
+        "id": "self_pay_consultation_cost",
+        "text": "What is the approximate self-pay consultation cost for seeing a doctor about a mild itchy rash?",
+        "korean": "가벼운 가려운 발진 상담 시 본인 부담 진료비는 얼마인가요?"
+      },
+      {
+        "id": "appointment_requirement",
+        "text": "Is an appointment required, or can the patient walk in today?",
+        "korean": "예약이 필요한가요, 아니면 오늘 방문이 가능한가요?"
+      }
+    ],
+    "readyToCall": true
+  },
+  "apiEvidence": [
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_002d08acb1525621016abb4a58653087d0a8326b5fce2aeb4b",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 826,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 240,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1066
+      },
+      "at": "2026-09-29T05:19:22.282Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_00d7e89f34d43a49016abb4a5a7c9087d09b433943cc76d6c4",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1209,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 423,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1632
+      },
+      "at": "2026-09-29T05:19:24.608Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": false,
+      "issues": [
+        "ungrounded_customer_fact"
+      ],
+      "violations": [],
+      "customerFactEvidence": [
+        {
+          "key": "age",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "I am 28."
+        },
+        {
+          "key": "symptoms_duration",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "I have had a mild itchy rash on my arm for two days"
+        },
+        {
+          "key": "symptoms_description",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "I have had a mild itchy rash on my arm for two days"
+        },
+        {
+          "key": "symptoms_urgency",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "without urgent symptoms"
+        },
+        {
+          "key": "location",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "I am in Mapo in Seoul"
+        },
+        {
+          "key": "preferred_visit_time",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "would like to visit today around 15:30"
+        },
+        {
+          "key": "doctor_gender_preference",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "I prefer a female doctor."
+        },
+        {
+          "key": "has_korean_health_insurance",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "I have no Korean health insurance"
+        },
+        {
+          "key": "request_consultation_cost_info",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "I want to check ... the approximate self-pay consultation cost"
+        },
+        {
+          "key": "request_appointment_requirement",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "whether an appointment is required"
+        }
+      ],
+      "constraintCoverage": [],
+      "at": "2026-09-29T05:19:24.608Z"
+    },
+    {
+      "purpose": "call_plan_repair",
+      "responseId": "resp_06fbf450122034f6016abb4a5cd7bc87d0a41d070a1dec8ccf",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1392,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 523,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1915
+      },
+      "at": "2026-09-29T05:19:28.085Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_069ff37ba26372ab016abb4a604e9487d0a2a925204b21d35d",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1492,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 710,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2202
+      },
+      "at": "2026-09-29T05:19:31.495Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 2,
+      "accepted": true,
+      "issues": [],
+      "violations": [],
+      "customerFactEvidence": [
+        {
+          "key": "age",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "I am 28."
+        },
+        {
+          "key": "symptoms_duration",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "I have had a mild itchy rash on my arm for two days"
+        },
+        {
+          "key": "symptoms_description",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "I have had a mild itchy rash on my arm"
+        },
+        {
+          "key": "symptoms_urgency",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "without urgent symptoms"
+        },
+        {
+          "key": "location",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "I am in Mapo in Seoul"
+        },
+        {
+          "key": "preferred_visit_time",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "would like to visit today around 15:30"
+        },
+        {
+          "key": "doctor_gender_preference",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "I prefer a female doctor"
+        },
+        {
+          "key": "has_korean_health_insurance",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "I have no Korean health insurance"
+        },
+        {
+          "key": "request_consultation_cost_info",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "want to check whether I can be seen, the approximate self-pay consultation cost, and whether an appointment is required"
+        },
+        {
+          "key": "request_appointment_requirement",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "want to check whether I can be seen, the approximate self-pay consultation cost, and whether an appointment is required"
+        }
+      ],
+      "constraintCoverage": [
+        {
+          "constraint": "I have no Korean health insurance",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "I have no Korean health insurance",
+          "questionIds": [
+            "eligibility_without_insurance"
+          ]
+        },
+        {
+          "constraint": "I prefer a female doctor",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "I prefer a female doctor",
+          "questionIds": [
+            "female_doctor_today"
+          ]
+        },
+        {
+          "constraint": "would like to visit today around 15:30",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "would like to visit today around 15:30",
+          "questionIds": [
+            "female_doctor_today",
+            "appointment_requirement"
+          ]
+        },
+        {
+          "constraint": "want to check whether I can be seen, the approximate self-pay consultation cost, and whether an appointment is required",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "want to check whether I can be seen, the approximate self-pay consultation cost, and whether an appointment is required",
+          "questionIds": [
+            "eligibility_without_insurance",
+            "self_pay_consultation_cost",
+            "appointment_requirement"
+          ]
+        }
+      ],
+      "at": "2026-09-29T05:19:31.495Z"
+    }
+  ]
+}

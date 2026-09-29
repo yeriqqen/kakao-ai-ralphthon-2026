@@ -31,8 +31,13 @@
     },
     {
       "path": "demo-guide.md",
-      "bytes": 6570,
-      "sha256": "200741549dde7ae64d010e1606a5fa06d8120d43f7383b206a18debd42a1382f"
+      "bytes": 6714,
+      "sha256": "bff620da7fa0cbdc019e38a8ee837610ffbd4b14d94f007948c3f7addd1c3a50"
+    },
+    {
+      "path": "korean-pronunciation-guide.md",
+      "bytes": 4951,
+      "sha256": "1dbac0e70c12b2ca453beb28585c93e5029e7da22baf1bb1824e815311ed3dae"
     }
   ]
 }

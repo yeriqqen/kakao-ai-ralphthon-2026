@@ -1,0 +1,58 @@
+{
+  "generatedAt": "2026-09-29T05:20:31.234Z",
+  "mock": false,
+  "realAPI": true,
+  "sourceArtifact": "artifacts/v2/live-voice-first-attempt.json",
+  "newMicrophoneTest": false,
+  "output": {
+    "text": "This simulated call to Mapo Fictional Sunset Dermatology Clinic ended prematurely as the business operator disconnected after only a brief greeting. No detailed information was provided about the availability of a female dermatologist at 3:30 pm, whether an appointment is required, or the cost of a self-pay consultation for a mild itchy rash without Korean health insurance.",
+    "recommendation": "Since this simulation was incomplete and no substantive details were obtained, I recommend you repeat the fictional simulation or independently seek a real dermatology clinic in Mapo, Seoul, to inquire about female doctor availability, appointment requirements, and consultation costs under your insurance circumstances.",
+    "reasoning": "The call transcript shows only a brief greeting ('안녕하세요.') from the business with no responses to the key questions asked. Therefore, no verified business facts were established in this simulation. Repeating the simulation or conducting an independent search with a fully responsive provider will better address your needs."
+  },
+  "apiEvidence": [
+    {
+      "purpose": "grounded_summary",
+      "responseId": "resp_0c57b43c10c18e4e016abb4a9ce87087d0bb4d24c24109292d",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1483,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 186,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1669
+      },
+      "at": "2026-09-29T05:20:30.426Z"
+    },
+    {
+      "purpose": "summary_validation",
+      "responseId": "resp_014b3bc7c39b291d016abb4a9ea3c487d0a9459e9e04d76314",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 1598,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 15,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1613
+      },
+      "at": "2026-09-29T05:20:31.234Z"
+    },
+    {
+      "purpose": "summary_validation_result",
+      "attempt": 1,
+      "accepted": true,
+      "violations": [],
+      "businessClaimEvidence": [],
+      "at": "2026-09-29T05:20:31.234Z"
+    }
+  ]
+}

@@ -11,10 +11,11 @@ ARTIFACTS = ROOT / 'artifacts'
 SUBMISSION.mkdir(exist_ok=True)
 ARTIFACTS.mkdir(exist_ok=True)
 shutil.copyfile(ROOT / 'docs/demo-guide.md', SUBMISSION / 'demo-guide.md')
+shutil.copyfile(ROOT / 'docs/korean-pronunciation-guide.md', SUBMISSION / 'korean-pronunciation-guide.md')
 
 review_files = [SUBMISSION / p for p in [
     'README.md', 'slides.pdf', 'solution.md', 'codex-use.md',
-    'verification-summary.md', 'demo-guide.md',
+    'verification-summary.md', 'demo-guide.md', 'korean-pronunciation-guide.md',
 ]]
 manifest = {
     'purpose': 'Prepared local review package; NOT submitted; ZIP acceptance Unconfirmed',

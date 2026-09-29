@@ -1,0 +1,36 @@
+{
+  "type": "extracted_local_package_smoke_no_api_or_audio",
+  "archiveSha256": "435bc3f5eb1c0395da5ed0a8d00ef11c456c9f7f543fb9e1d36a1eeaca74cc65",
+  "passed": 7,
+  "total": 7,
+  "checks": [
+    {
+      "name": "archive excludes .env, git and local-runs",
+      "passed": true
+    },
+    {
+      "name": "extracted v2 server starts without credential leakage",
+      "passed": true
+    },
+    {
+      "name": "extracted server serves /",
+      "passed": true
+    },
+    {
+      "name": "extracted server serves /business",
+      "passed": true
+    },
+    {
+      "name": "extracted server serves /legacy",
+      "passed": true
+    },
+    {
+      "name": "extracted server serves /v2/customer.js",
+      "passed": true
+    },
+    {
+      "name": "extracted server serves /v2/business.js",
+      "passed": true
+    }
+  ]
+}

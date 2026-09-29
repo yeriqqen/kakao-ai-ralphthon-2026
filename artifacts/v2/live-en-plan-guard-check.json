@@ -1,0 +1,272 @@
+{
+  "generatedAt": "2026-09-29T05:17:55.479Z",
+  "mock": false,
+  "realAPI": true,
+  "kind": "exported_interview_guard_check",
+  "language": "en",
+  "realMicrophone": false,
+  "audibleKorean": false,
+  "inputs": [
+    {
+      "id": "en-user-start",
+      "role": "user",
+      "text": "I want to go to a hospital."
+    },
+    {
+      "id": "en-assistant-clarify",
+      "role": "assistant",
+      "text": "What would you like help with, and where are you located?"
+    },
+    {
+      "id": "en-user-details",
+      "role": "user",
+      "text": "This is a fictional demonstration. I am 28. I have had a mild itchy rash on my arm for two days, without urgent symptoms. I am in Mapo in Seoul and would like to visit today around 15:30. I prefer a female doctor. I have no Korean health insurance, so I want to check whether I can be seen, the approximate self-pay consultation cost, and whether an appointment is required."
+    }
+  ],
+  "error": {
+    "code": "AI_ERROR",
+    "message": "AI_ERROR"
+  },
+  "apiEvidence": [
+    {
+      "purpose": "customer_interview",
+      "responseId": "resp_04c486fd9de2a258016abb49ee70dc87d0880a0714e50ce86d",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 742,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 223,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 965
+      },
+      "at": "2026-09-29T05:17:36.613Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_0d4a18ef224b1eae016abb49f0d4f487d0b002f69c8cc9f792",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1035,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 351,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1386
+      },
+      "at": "2026-09-29T05:17:39.841Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": false,
+      "issues": [
+        "semantic_review_rejected",
+        "ungrounded_customer_fact"
+      ],
+      "violations": [
+        {
+          "code": "missing_constraint",
+          "field": "requiredQuestions",
+          "quote": "I prefer a female doctor. I have no Korean health insurance, so I want to check whether I can be seen, the approximate self-pay consultation cost, and whether an appointment is required.",
+          "explanation": "The candidate did not include any required questions to verify eligibility without Korean health insurance, female doctor availability, payment cost estimate, or appointment requirements. These constraints must be covered by explicit questions grounded in the user message to enable a valid call plan."
+        }
+      ],
+      "constraintCoverage": [],
+      "at": "2026-09-29T05:17:39.841Z"
+    },
+    {
+      "purpose": "call_plan_repair",
+      "responseId": "resp_077547b043e52c3a016abb49f4085087d088f57253be6cc0ec",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1128,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 501,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1629
+      },
+      "at": "2026-09-29T05:17:43.643Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_05fc6fdddfe41553016abb49f7d8b487d0851ff3c72c0d6ce1",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1313,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 458,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1771
+      },
+      "at": "2026-09-29T05:17:47.282Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 2,
+      "accepted": false,
+      "issues": [
+        "ungrounded_customer_fact",
+        "uncovered_customer_constraints"
+      ],
+      "violations": [],
+      "constraintCoverage": [
+        {
+          "constraint": "no Korean health insurance",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "I have no Korean health insurance",
+          "questionIds": [
+            "q1"
+          ]
+        },
+        {
+          "constraint": "approximate self-pay consultation cost",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "I want to check ... the approximate self-pay consultation cost",
+          "questionIds": [
+            "q2"
+          ]
+        },
+        {
+          "constraint": "whether an appointment is required",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "whether an appointment is required",
+          "questionIds": [
+            "q3"
+          ]
+        },
+        {
+          "constraint": "female doctor preference",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "I prefer a female doctor",
+          "questionIds": [
+            "q4"
+          ]
+        },
+        {
+          "constraint": "visit today around 15:30",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "would like to visit today around 15:30",
+          "questionIds": [
+            "q4"
+          ]
+        },
+        {
+          "constraint": "mild itchy rash on arm",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "mild itchy rash on my arm for two days",
+          "questionIds": [
+            "q5"
+          ]
+        }
+      ],
+      "at": "2026-09-29T05:17:47.282Z"
+    },
+    {
+      "purpose": "call_plan_repair",
+      "responseId": "resp_0c0f48d916326c2b016abb49fb7acc87d0ba2ab862939d8290",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1514,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 513,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2027
+      },
+      "at": "2026-09-29T05:17:51.549Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_0cd0b701054ebde9016abb49ffc21887d09defcecea27eddc4",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 1325,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 430,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1755
+      },
+      "at": "2026-09-29T05:17:55.478Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 3,
+      "accepted": false,
+      "issues": [
+        "ungrounded_customer_fact"
+      ],
+      "violations": [],
+      "constraintCoverage": [
+        {
+          "constraint": "I have no Korean health insurance",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "I have no Korean health insurance",
+          "questionIds": [
+            "q1"
+          ]
+        },
+        {
+          "constraint": "approximate self-pay consultation cost",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "approximate self-pay consultation cost",
+          "questionIds": [
+            "q2"
+          ]
+        },
+        {
+          "constraint": "whether an appointment is required",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "whether an appointment is required",
+          "questionIds": [
+            "q3"
+          ]
+        },
+        {
+          "constraint": "female doctor preference today around 15:30",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "I prefer a female doctor",
+          "questionIds": [
+            "q4"
+          ]
+        },
+        {
+          "constraint": "treatment of mild itchy rash on arm",
+          "sourceMessageId": "en-user-details",
+          "sourceQuote": "mild itchy rash on my arm for two days",
+          "questionIds": [
+            "q5"
+          ]
+        }
+      ],
+      "at": "2026-09-29T05:17:55.478Z"
+    }
+  ]
+}

@@ -10,6 +10,8 @@ Run `npm start` and open `http://localhost:4173` in Chrome. Check speaker volume
 
 Team communication and questions should be in **English**. The team has said it does not understand Korean. Whether a teammate can read the receptionist script aloud is **Unconfirmed**; microphone availability alone does not establish this.
 
+Use the [English meanings and approximate pronunciation guide](korean-pronunciation-guide.md) to rehearse the exact Korean receptionist lines.
+
 The Korean text inside the simulated conversation is part of the required demo. These are the controls you need to operate it:
 
 | Visible control | English meaning / action |

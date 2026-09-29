@@ -6,4 +6,6 @@ dist/
 .DS_Store
 .runtime/
 .presentation-build/
+.presentation-build-v2/
 artifacts/local-runs/
+artifacts/v2/local-runs/

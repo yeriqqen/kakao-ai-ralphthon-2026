@@ -1,11 +1,12 @@
 {
   "name": "yokobu-clinic-simulation",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "Local fictional Russian/Korean clinic conversation demo. No real phone calls.",
+  "description": "Local fictional business-call simulation using OpenAI chat and Realtime voice. No real phone calls.",
   "scripts": {
-    "start": "node server.mjs",
+    "start": "node server-v2.mjs",
+    "start:v1": "node server.mjs",
     "build": "node scripts/build.mjs",
     "test": "node --test tests/*.test.js",
     "verify": "node scripts/run-example.mjs"

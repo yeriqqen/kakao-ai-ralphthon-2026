@@ -1,0 +1,120 @@
+{
+  "title": "V2 customer UI checks with synthetic API routes",
+  "timestamp": "2026-09-29T05:16:32.801Z",
+  "mock": true,
+  "simulation": true,
+  "method": "Isolated browser. All API responses are synthetic fixtures. External requests are blocked. No OpenAI request, microphone capture or audio playback.",
+  "realApiVerified": false,
+  "realMicrophoneVerified": false,
+  "audibleKoreanVerified": false,
+  "valueHypothesis": "Unverified",
+  "checks": [
+    {
+      "name": "translation-key-parity",
+      "status": "passed",
+      "mock": true
+    },
+    {
+      "name": "English-is-default",
+      "status": "passed",
+      "mock": true
+    },
+    {
+      "name": "Russian-selection",
+      "status": "passed",
+      "mock": true
+    },
+    {
+      "name": "Russian-empty-input-guidance",
+      "status": "passed",
+      "mock": true
+    },
+    {
+      "name": "missing-configuration-safe-stop",
+      "status": "passed",
+      "mock": true
+    },
+    {
+      "name": "selected-language-room-creation",
+      "status": "passed",
+      "mock": true
+    },
+    {
+      "name": "server-content-displayed",
+      "status": "passed",
+      "mock": true
+    },
+    {
+      "name": "no-internal-customer-key-in-UI",
+      "status": "passed",
+      "mock": true
+    },
+    {
+      "name": "business-tab-before-authorization-with-fragment-token",
+      "status": "passed",
+      "mock": true
+    },
+    {
+      "name": "explicit-authorization-pending-not-green",
+      "status": "passed",
+      "mock": true
+    },
+    {
+      "name": "unconnected-active-not-green",
+      "status": "passed",
+      "mock": true
+    },
+    {
+      "name": "connected-active-is-green",
+      "status": "passed",
+      "mock": true
+    },
+    {
+      "name": "unknown-detail-relay-in-Russian",
+      "status": "passed",
+      "mock": true
+    },
+    {
+      "name": "390px-layout-without-horizontal-overflow",
+      "status": "passed",
+      "mock": true
+    },
+    {
+      "name": "poll-failure-removes-green",
+      "status": "passed",
+      "mock": true
+    },
+    {
+      "name": "incomplete-completion-stays-unresolved",
+      "status": "passed",
+      "mock": true
+    },
+    {
+      "name": "summary-recommendation-reasoning",
+      "status": "passed",
+      "mock": true
+    },
+    {
+      "name": "API-credit-error-localized-without-provider-message",
+      "status": "passed",
+      "mock": true
+    },
+    {
+      "name": "Chinese-selection-and-empty-input",
+      "status": "passed",
+      "mock": true
+    },
+    {
+      "name": "no-page-JavaScript-errors",
+      "status": "passed",
+      "mock": true
+    }
+  ],
+  "screenshots": [
+    "customer-ui-en.png",
+    "customer-ui-ru.png",
+    "customer-ui-zh.png"
+  ],
+  "errors": [],
+  "status": "passed"
+}

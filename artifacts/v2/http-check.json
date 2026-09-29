@@ -1,0 +1,76 @@
+{
+  "checkedAt": "2026-09-29T05:43:59.111Z",
+  "type": "real_local_http_without_upstream_or_audio",
+  "passed": 17,
+  "total": 17,
+  "checks": [
+    {
+      "name": "/ is served",
+      "passed": true
+    },
+    {
+      "name": "/v2/ is served",
+      "passed": true
+    },
+    {
+      "name": "/business is served",
+      "passed": true
+    },
+    {
+      "name": "/v2/customer.js is served",
+      "passed": true
+    },
+    {
+      "name": "/v2/business.js is served",
+      "passed": true
+    },
+    {
+      "name": "configuration exposes only public fields",
+      "passed": true
+    },
+    {
+      "name": "unsupported language is rejected",
+      "passed": true
+    },
+    {
+      "name": "cross-origin mutation is rejected",
+      "passed": true
+    },
+    {
+      "name": "unauthorized room read is rejected",
+      "passed": true
+    },
+    {
+      "name": "public state excludes both access tokens",
+      "passed": true
+    },
+    {
+      "name": "empty customer request gives useful code",
+      "passed": true
+    },
+    {
+      "name": "business cannot send customer messages",
+      "passed": true
+    },
+    {
+      "name": "no authorization without a generated plan",
+      "passed": true
+    },
+    {
+      "name": "business cannot accept before authorization",
+      "passed": true
+    },
+    {
+      "name": "business cannot claim a premature connection",
+      "passed": true
+    },
+    {
+      "name": "no transcript accepted before authorized acceptance",
+      "passed": true
+    },
+    {
+      "name": "evidence export contains no credentials",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "startedAt": "2026-09-29T05:43:54.536Z",
+  "type": "targeted_saved_actual_call_summary_replay",
+  "mock": false,
+  "realAPI": true,
+  "sourceArtifact": "artifacts/v2/live-native-rehearsal-third-attempt.json",
+  "newLiveCall": false,
+  "newMicrophoneTest": false,
+  "before": {
+    "text": "Factual business answers (with transcript evidence):\n- The business stated that you can be seen for a mild itchy rash this afternoon around 3:30 pm (“네, 진료가 가능하니까 해당 시간 맞춰서 방문을 해주시면 됩니다.” – item_ETKpA5S3giA8zXJ8v6asv).\n- A female doctor is available at that time (“네, 가능합니다. 여성 의사 선생님이 있습니다.” – item_ETKpSjILHe9UZDNk1n1hp).\n- You can come without an appointment; walk-ins are accepted (“예약 없이 방문할 수 있습니다.” – item_ETKpjEtUu3Z1FMKWtS5fF).\n- The estimated self-pay consultation cost (without Korean health insurance) may exceed 100,000 won (“보험이 없는 경우에는 10만 원이 넘어갈 수도 있을 것 같습니다.” – item_ETKq1VEa44D0InUnjNwU9).\n\nCustomer-supplied information:\n- 28 years old\n- Mild itchy rash on arm for two days, not urgent\n- Prefers Mapo, Seoul\n- Preferred time: this afternoon around 3:30 pm\n- Prefers a female doctor\n- No Korean health insurance\n\nUnresolved information:\n- No confirmed booking was made or initiated, as walk-in was stated to be possible and no booking process was requested or completed.\n- The simulated call ended incompletely because the business operator disconnected during repeated confirmation attempts, but all substantive service questions were answered before the disconnection.\n\nCall outcome (app state):\n- The simulated call was interrupted by the fictional business operator.\n\nRecommendation: \nIf you wish to practice or clarify details further, you may repeat this explicitly fictional simulation with modified questions or timing. For any genuine medical need, you must independently identify a real dermatology provider, verify their suitability, hours, costs, and policies, since this simulation cannot and does not confirm real-world services, contacts, or bookings.\n\nReasoning: \nThe transcript provides clear, direct answers to all of your substantive service questions (walk-in care, timing, female doctor, and self-pay estimate) from the fictional business, but as this is a simulated, fictional call, none of these answers apply to real-world clinics. No actual appointment or confirmation exists. Therefore, for any real consultation or verification, you must personally locate and check with an actual provider. Alternatively, this simulation can be repeated for further practice or information-seeking within the constraints of fiction.",
+    "recommendation": "Repeat this fictional simulation if you wish to clarify or practice further, as all answers provided apply only within the simulation. For real medical care, independently find and verify a real provider; nothing here confirms real-world availability, staff, or costs.",
+    "reasoning": "The call delivered clear simulated answers to all of the customer's questions, except for appointment booking, which was not needed due to walk-in acceptance. However, since this is entirely fictional, no real institution or service has been verified. The simulation cannot provide or confirm any genuine clinical service, price, or availability—these must be independently checked in reality."
+  },
+  "sources": {
+    "lib/v2-ai.mjs": "eb2974628d778c25f9227fe269af86c5fba166ba455c2e86e1584ddf593aaab3",
+    "lib/v2-plan-guard.mjs": "d3cb7a9c84ac3f49df5ee82cf913d8a9d8ae705a165ecd5fac6356ca6c57ead2"
+  },
+  "error": {
+    "code": "AI_ERROR",
+    "message": "AI_ERROR"
+  },
+  "apiEvidence": [
+    {
+      "purpose": "grounded_summary",
+      "responseId": "resp_0107f903c72bf7e7016abb501adce887d086bc885cc2cb7de1",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "usage": {
+        "input_tokens": 2881,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 451,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 3332
+      },
+      "at": "2026-09-29T05:43:58.152Z"
+    },
+    {
+      "purpose": "summary_validation",
+      "responseId": "resp_0d4c30faced5b1c7016abb501e5a2887d0bba8363a67f4ec41",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 3224,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 603,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 3827
+      },
+      "at": "2026-09-29T05:44:01.909Z"
+    },
+    {
+      "purpose": "summary_validation_result",
+      "attempt": 1,
+      "accepted": false,
+      "structuralIssues": [],
+      "violations": [
+        "The summary fails to explicitly reference that the appointment availability, female doctor presence, and walk-in policy are not binding guarantees, despite the business representative's confirmation. It simply states them as provided information rather than provisional or subject to change.",
+        "The summary inappropriately qualifies the answers as 'not binding or guaranteed' only in a separate note, but in the primary description, it presents these features as definite.",
+        "The summary’s language 'primary questions were verbally answered beforehand' could be misleading; while answers were received, business confirmation at the conclusion (“binding or guaranteed” as described in the summary itself) was not clarified.",
+        "The summary states: 'This information is based on answers directly from the business representative during the call.' While technically correct, it does not adequately underscore that the business did confirm these facts at the end ('네, 맞습니다'), but also that the abrupt end may affect reliability.",
+        "The summary includes the phrase 'no further clarifications or final confirmations were obtained', which is accurate, but does not explicitly warn that the business disconnected, which may imply doubt on any agreements.",
+        "The summary does not misuse call attempt, connection status, or app-generated state as business facts."
+      ],
+      "businessClaimEvidence": [
+        {
+          "claim": "They are able to see a patient with a mild itchy rash this afternoon around 3:30 pm.",
+          "transcriptId": "item_ETKpA5S3giA8zXJ8v6asv",
+          "quote": "네, 진료가 가능하니까 해당 시간 맞춰서 방문을 해주시면 됩니다."
+        },
+        {
+          "claim": "A female doctor is available at that time for consultation.",
+          "transcriptId": "item_ETKpSjILHe9UZDNk1n1hp",
+          "quote": "네, 가능합니다. 여성 의사 선생님이 있습니다."
+        },
+        {
+          "claim": "Patients can visit without a prior appointment (walk-in).",
+          "transcriptId": "item_ETKpjEtUu3Z1FMKWtS5fF",
+          "quote": "예약 없이 방문할 수 있습니다."
+        },
+        {
+          "claim": "The expected self-pay consultation cost for patients without Korean health insurance may exceed 100,000 won.",
+          "transcriptId": "item_ETKq1VEa44D0InUnjNwU9",
+          "quote": "보험이 없는 경우에는 10만 원이 넘어갈 수도 있을 것 같습니다."
+        },
+        {
+          "claim": "The business representative confirmed all main answers before disconnection.",
+          "transcriptId": "item_ETKqaoNZ5U3cEjeSNcwyR",
+          "quote": "네, 맞습니다."
+        }
+      ],
+      "at": "2026-09-29T05:44:01.910Z"
+    },
+    {
+      "purpose": "summary_repair",
+      "responseId": "resp_08cdb3ac83392b86016abb50221d9087d08d8c518c7aa9bd75",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 3891,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 605,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 4496
+      },
+      "at": "2026-09-29T05:44:06.539Z"
+    },
+    {
+      "purpose": "summary_validation",
+      "responseId": "resp_062c61573b5e6d5c016abb5026c0e487d0bfbcb6e2dd7755d8",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 3369,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 1920
+        },
+        "output_tokens": 483,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 3852
+      },
+      "at": "2026-09-29T05:44:12.288Z"
+    },
+    {
+      "purpose": "summary_validation_result",
+      "attempt": 2,
+      "accepted": false,
+      "structuralIssues": [],
+      "violations": [
+        "The summary states 'These answers ... should not be treated as binding commitments, as the call ended abruptly...' and 'no firm guarantee or final confirmation was obtained'—however, the business explicitly confirmed all answers (\"네, 맞습니다.\"), so this qualification is overly strong and not strictly supported by the transcript evidence.",
+        "The summary repeatedly implies that the answers may not 'hold at the intended visit time' and that no 'firm guarantee or final confirmation was obtained,' but no business evidence suggests that the answers were conditional, uncertain, or needed further confirmation beyond what was in the transcript.",
+        "Business policy/availability/price answers were clear and summarized in the call and were acknowledged by the business. The call's abrupt ending does not, per transcript, invalidate or reduce what the business confirmed."
+      ],
+      "businessClaimEvidence": [
+        {
+          "claim": "The business responded that it was possible to see a patient with a mild itchy rash this afternoon at approximately 3:30 pm, and invited the patient to come at that time.",
+          "transcriptId": "item_ETKpA5S3giA8zXJ8v6asv",
+          "quote": "네, 진료가 가능하니까 해당 시간 맞춰서 방문을 해주시면 됩니다."
+        },
+        {
+          "claim": "They confirmed that a female doctor is available for consultation at that time.",
+          "transcriptId": "item_ETKpSjILHe9UZDNk1n1hp",
+          "quote": "네, 가능합니다. 여성 의사 선생님이 있습니다."
+        },
+        {
+          "claim": "The business stated that patients can visit without an appointment (walk-in is allowed).",
+          "transcriptId": "item_ETKpjEtUu3Z1FMKWtS5fF",
+          "quote": "예약 없이 방문할 수 있습니다."
+        },
+        {
+          "claim": "For patients without Korean health insurance, the business said the expected self-pay cost may exceed 100,000 Korean won.",
+          "transcriptId": "item_ETKq1VEa44D0InUnjNwU9",
+          "quote": "보험이 없는 경우에는 10만 원이 넘어갈 수도 있을 것 같습니다."
+        },
+        {
+          "claim": "These answers to the main questions were explicitly summarized and confirmed by the business representative at the time ('That's correct').",
+          "transcriptId": "item_ETKqaoNZ5U3cEjeSNcwyR",
+          "quote": "네, 맞습니다."
+        }
+      ],
+      "at": "2026-09-29T05:44:12.289Z"
+    }
+  ],
+  "finishedAt": "2026-09-29T05:44:12.289Z"
+}

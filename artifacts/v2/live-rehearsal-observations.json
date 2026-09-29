@@ -1,0 +1,156 @@
+{
+  "source": "Actual local server state observed during real Chrome rehearsal; no injected microphone or Realtime events",
+  "observations": [
+    {
+      "at": "2026-09-29T05:14:27.104Z",
+      "status": "active",
+      "connected": true,
+      "questions": [
+        {
+          "id": "q_doctor_availability",
+          "status": "unresolved",
+          "answer": null
+        },
+        {
+          "id": "q_appointment_requirement",
+          "status": "unresolved",
+          "answer": null
+        },
+        {
+          "id": "q_self_pay_cost",
+          "status": "unresolved",
+          "answer": null
+        }
+      ],
+      "pendingRelay": null,
+      "decisionPrompt": null,
+      "transcripts": [
+        {
+          "id": "item_ETKS0I0siNBpxUFJxk9cX",
+          "role": "assistant",
+          "text": "안녕하세요, 이 통화는 가상 시뮬레이션입니다. 지금부터 고객님께 필요한 정보를 확인해보겠습니다. 먼저 중요한 세 가지 질문을 드릴게요. 첫 번째, 오늘 오후",
+          "callId": "8505c78a-1005-4a3a-9e23-2b4b8310c2ab",
+          "createdAt": "2026-09-29T05:13:54.516Z"
+        },
+        {
+          "id": "item_ETKS2N0cybz9sKAOtIvAA",
+          "role": "business",
+          "text": "안녕하세요.",
+          "callId": "8505c78a-1005-4a3a-9e23-2b4b8310c2ab",
+          "createdAt": "2026-09-29T05:14:03.593Z"
+        },
+        {
+          "id": "item_ETKSDuaPYZ0dcC8gCjhUv",
+          "role": "assistant",
+          "text": "안녕하세요!",
+          "callId": "8505c78a-1005-4a3a-9e23-2b4b8310c2ab",
+          "createdAt": "2026-09-29T05:14:06.377Z"
+        }
+      ],
+      "error": null,
+      "summary": null
+    },
+    {
+      "at": "2026-09-29T05:14:39.121Z",
+      "status": "interrupted",
+      "connected": false,
+      "questions": [
+        {
+          "id": "q_doctor_availability",
+          "status": "unresolved",
+          "answer": null
+        },
+        {
+          "id": "q_appointment_requirement",
+          "status": "unresolved",
+          "answer": null
+        },
+        {
+          "id": "q_self_pay_cost",
+          "status": "unresolved",
+          "answer": null
+        }
+      ],
+      "pendingRelay": null,
+      "decisionPrompt": null,
+      "transcripts": [
+        {
+          "id": "item_ETKS0I0siNBpxUFJxk9cX",
+          "role": "assistant",
+          "text": "안녕하세요, 이 통화는 가상 시뮬레이션입니다. 지금부터 고객님께 필요한 정보를 확인해보겠습니다. 먼저 중요한 세 가지 질문을 드릴게요. 첫 번째, 오늘 오후",
+          "callId": "8505c78a-1005-4a3a-9e23-2b4b8310c2ab",
+          "createdAt": "2026-09-29T05:13:54.516Z"
+        },
+        {
+          "id": "item_ETKS2N0cybz9sKAOtIvAA",
+          "role": "business",
+          "text": "안녕하세요.",
+          "callId": "8505c78a-1005-4a3a-9e23-2b4b8310c2ab",
+          "createdAt": "2026-09-29T05:14:03.593Z"
+        },
+        {
+          "id": "item_ETKSDuaPYZ0dcC8gCjhUv",
+          "role": "assistant",
+          "text": "안녕하세요!",
+          "callId": "8505c78a-1005-4a3a-9e23-2b4b8310c2ab",
+          "createdAt": "2026-09-29T05:14:06.377Z"
+        }
+      ],
+      "error": null,
+      "summary": null
+    },
+    {
+      "at": "2026-09-29T05:14:41.119Z",
+      "status": "interrupted",
+      "connected": false,
+      "questions": [
+        {
+          "id": "q_doctor_availability",
+          "status": "unresolved",
+          "answer": null
+        },
+        {
+          "id": "q_appointment_requirement",
+          "status": "unresolved",
+          "answer": null
+        },
+        {
+          "id": "q_self_pay_cost",
+          "status": "unresolved",
+          "answer": null
+        }
+      ],
+      "pendingRelay": null,
+      "decisionPrompt": null,
+      "transcripts": [
+        {
+          "id": "item_ETKS0I0siNBpxUFJxk9cX",
+          "role": "assistant",
+          "text": "안녕하세요, 이 통화는 가상 시뮬레이션입니다. 지금부터 고객님께 필요한 정보를 확인해보겠습니다. 먼저 중요한 세 가지 질문을 드릴게요. 첫 번째, 오늘 오후",
+          "callId": "8505c78a-1005-4a3a-9e23-2b4b8310c2ab",
+          "createdAt": "2026-09-29T05:13:54.516Z"
+        },
+        {
+          "id": "item_ETKS2N0cybz9sKAOtIvAA",
+          "role": "business",
+          "text": "안녕하세요.",
+          "callId": "8505c78a-1005-4a3a-9e23-2b4b8310c2ab",
+          "createdAt": "2026-09-29T05:14:03.593Z"
+        },
+        {
+          "id": "item_ETKSDuaPYZ0dcC8gCjhUv",
+          "role": "assistant",
+          "text": "안녕하세요!",
+          "callId": "8505c78a-1005-4a3a-9e23-2b4b8310c2ab",
+          "createdAt": "2026-09-29T05:14:06.377Z"
+        }
+      ],
+      "error": null,
+      "summary": {
+        "text": "This simulated business call with Mapo Fictional Sunset Dermatology Clinic ended prematurely due to disconnection by the business operator. No information was provided by the clinic beyond a basic greeting.\n\nFacts supported by business evidence:\n- The Mapo Fictional Sunset Dermatology Clinic was contacted to inquire about the availability of a female dermatologist at 3:30 pm today.\n- The simulated call ended incompletely when the clinic disconnected immediately after greeting.\n\nCustomer-supplied information:\n- The customer is a 28-year-old located in Mapo, Seoul.\n- Reports a mild itchy rash on the arm lasting two days.\n- Prefers a female doctor for consultation.\n- Requests consultation at 3:30 pm this afternoon.\n- Has no Korean health insurance and seeks information on self-pay consultation costs.\n- Wants to know if an appointment is necessary.\n\nUnresolved information:\n- Availability of a female dermatologist at the specified time.\n- Whether an appointment is required for the consultation.\n- The expected self-pay consultation cost for the described condition without insurance.\n\nRecommendation:\nSince the call was disconnected without receiving any answers, I recommend the customer try alternative contact methods with the clinic, such as email or visiting their website, if available. Additionally, the customer might consider contacting other nearby dermatology clinics that can provide the needed information and book an appointment promptly. This is especially important given the customer’s recent rash and preference for a female dermatologist. Prompt consultation could help address the symptoms effectively.",
+        "recommendation": "Attempt to reach the clinic again via alternative contact methods or approach other nearby dermatologists to secure needed consultations and information about appointment and costs.",
+        "reasoning": "The business call ended abruptly without answering any key questions. Without confirmed details on doctor availability, appointment requirements, or costs, pursuing other communication channels or clinics is necessary to ensure timely and appropriate medical care."
+      }
+    }
+  ]
+}

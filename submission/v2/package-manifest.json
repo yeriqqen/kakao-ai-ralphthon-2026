@@ -1,0 +1,44 @@
+{
+  "purpose": "Local review bundle; not submitted. ZIP acceptance by organizers is Unconfirmed.",
+  "archive": "yokobu-v2-submission-review.zip",
+  "sha256": "a87c55e1820391faab79c8e50271efcf8efa6635a11848f5aad83528b0c3edef",
+  "files": [
+    {
+      "name": "slides.pdf",
+      "bytes": 181390,
+      "sha256": "93cc1abbe02a18984af6600e43f680ffaa2431cc7d2a722a5d56708e46a1037a"
+    },
+    {
+      "name": "slides.pptx",
+      "bytes": 27335,
+      "sha256": "5c89ee8d34593adc940fa1e887100d685a55adc66e537494ace5206dc1b5cc8e"
+    },
+    {
+      "name": "solution.md",
+      "bytes": 3965,
+      "sha256": "f1f3ab675deaf51c151c30d76a76b2b58c9abefb1c7916a42d3d6fbe2390ff79"
+    },
+    {
+      "name": "codex-use.md",
+      "bytes": 1824,
+      "sha256": "1078b88bd064bd5fad1c0f0cbbd95501f8f720a667757559363308fc60470c45"
+    },
+    {
+      "name": "verification.md",
+      "bytes": 4686,
+      "sha256": "11b171f5b918e4a5c366fe7e17264af75658defba0b478ec2534bfd5b6566173"
+    },
+    {
+      "name": "README.md",
+      "bytes": 2193,
+      "sha256": "f247f87e522ae5a4c1f8b82a5e8b47d3038b5aa8ffe92e3e1d347af600cb7fe6"
+    }
+  ],
+  "excluded": [
+    "API keys",
+    "room credentials",
+    "raw prompts",
+    "Codex session logs",
+    "raw conversation evidence"
+  ]
+}

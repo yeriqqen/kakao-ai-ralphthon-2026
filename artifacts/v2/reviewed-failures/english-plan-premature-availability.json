@@ -1,0 +1,138 @@
+{
+  "id": "08f16e3e-6dd3-4e05-9e61-c0928d0ca49b",
+  "language": "en",
+  "version": 10,
+  "revision": 10,
+  "createdAt": "2026-09-29T05:06:35.819Z",
+  "updatedAt": "2026-09-29T05:08:00.592Z",
+  "messages": [
+    {
+      "id": "15a8c48f-3d0f-4435-b2c3-98e4a9a370a1",
+      "role": "user",
+      "text": "I want to go to a hospital.",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:06:35.828Z"
+    },
+    {
+      "id": "ec3483a4-c8a4-42f4-b7b4-27659208c62b",
+      "role": "assistant",
+      "text": "I'm here to help you find the right hospital. Could you please tell me what kind of medical issue or symptoms you have? This will help me suggest the most suitable hospital or department.",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:06:39.879Z"
+    },
+    {
+      "id": "07b11bc3-272d-4f5b-ad43-c6026cdf48ce",
+      "role": "user",
+      "text": "This is a fictional example. I am 28 and have had a mild itchy rash on my arm for two days, with no urgent symptoms. I am in Mapo, Seoul, and would like to visit this afternoon, preferably around 3:30 pm. I prefer a female doctor. I do not have Korean health insurance, so I want to know the likely self-pay consultation cost and whether I need an appointment.",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:07:45.719Z"
+    },
+    {
+      "id": "4c391030-543c-45c2-ba49-981e2e1b2882",
+      "role": "assistant",
+      "text": "Thank you for the details. I will look for a dermatology clinic or hospital in Mapo, Seoul, that can see you this afternoon around 3:30 pm. I will prioritize female doctors and confirm the likely self-pay cost and appointment requirements. Shall I proceed to find and call a suitable institution now?",
+      "kind": "chat",
+      "createdAt": "2026-09-29T05:08:00.592Z"
+    }
+  ],
+  "transcripts": [],
+  "customerInfo": [
+    {
+      "key": "age",
+      "value": "28",
+      "sourceMessageId": "07b11bc3-272d-4f5b-ad43-c6026cdf48ce"
+    },
+    {
+      "key": "symptom",
+      "value": "mild itchy rash on arm for two days",
+      "sourceMessageId": "07b11bc3-272d-4f5b-ad43-c6026cdf48ce"
+    },
+    {
+      "key": "urgency",
+      "value": "no urgent symptoms",
+      "sourceMessageId": "07b11bc3-272d-4f5b-ad43-c6026cdf48ce"
+    },
+    {
+      "key": "location",
+      "value": "Mapo, Seoul",
+      "sourceMessageId": "07b11bc3-272d-4f5b-ad43-c6026cdf48ce"
+    },
+    {
+      "key": "preferred_time",
+      "value": "around 3:30 pm this afternoon",
+      "sourceMessageId": "07b11bc3-272d-4f5b-ad43-c6026cdf48ce"
+    },
+    {
+      "key": "preferred_doctor_gender",
+      "value": "female",
+      "sourceMessageId": "07b11bc3-272d-4f5b-ad43-c6026cdf48ce"
+    },
+    {
+      "key": "insurance_status",
+      "value": "no Korean health insurance",
+      "sourceMessageId": "07b11bc3-272d-4f5b-ad43-c6026cdf48ce"
+    },
+    {
+      "key": "payment_preference",
+      "value": "self-pay consultation cost",
+      "sourceMessageId": "07b11bc3-272d-4f5b-ad43-c6026cdf48ce"
+    },
+    {
+      "key": "appointment_preference",
+      "value": "want to know if appointment needed",
+      "sourceMessageId": "07b11bc3-272d-4f5b-ad43-c6026cdf48ce"
+    }
+  ],
+  "institutions": [
+    {
+      "id": "derm_mapo_01",
+      "name": "Mapo Dermatology Clinic",
+      "nameKo": "",
+      "description": "Specializes in skin conditions, available female dermatologist, located in Mapo",
+      "reason": "Specializes in skin conditions, available female dermatologist, located in Mapo",
+      "fictional": true
+    }
+  ],
+  "requiredQuestions": [
+    {
+      "id": "cost_inquiry",
+      "text": "What is the estimated self-pay consultation cost for a patient without Korean health insurance?",
+      "korean": "한국 건강보험이 없는 환자의 본인 부담 진료비 예상 비용은 얼마인가요?",
+      "status": "unresolved",
+      "resolutionReason": null,
+      "answer": null,
+      "evidence": []
+    },
+    {
+      "id": "appointment_needed",
+      "text": "Is an appointment required to see a female dermatologist around 3:30 pm today?",
+      "korean": "오늘 오후 3시 30분경 여성 피부과 전문의를 만나기 위해 예약이 필요한가요?",
+      "status": "unresolved",
+      "resolutionReason": null,
+      "answer": null,
+      "evidence": []
+    }
+  ],
+  "planReady": true,
+  "pendingRelay": null,
+  "decisionPrompt": null,
+  "summary": null,
+  "busy": false,
+  "error": null,
+  "voiceMessage": null,
+  "call": {
+    "id": null,
+    "status": "idle",
+    "institutionId": null,
+    "authorized": false,
+    "accepted": false,
+    "authorizedAt": null,
+    "acceptedAt": null,
+    "connected": false,
+    "confirmedKeyDetails": false,
+    "confirmationEvidence": [],
+    "endedAt": null,
+    "reason": null,
+    "success": false
+  }
+}

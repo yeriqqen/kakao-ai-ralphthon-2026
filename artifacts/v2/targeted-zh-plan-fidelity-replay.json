@@ -1,0 +1,416 @@
+{
+  "startedAt": "2026-09-29T05:39:37.585Z",
+  "type": "targeted_saved_plan_revalidation_and_repair",
+  "mock": false,
+  "realAPI": true,
+  "originalArtifact": "artifacts/v2/live-zh-insurance-scope-check-three-turn.json",
+  "newLiveInterview": false,
+  "newCustomerTurn": false,
+  "maxRepairs": 1,
+  "maxProviderCalls": 3,
+  "before": {
+    "reply": "您的虚构机构模拟联系计划已经就绪，目前仅用于演示，实际医院信息和服务需进一步确认。请您检查以下内容与问题，确认无误后可进行模拟拨打：",
+    "customerInfo": [
+      {
+        "key": "age",
+        "value": "28岁"
+      },
+      {
+        "key": "symptom",
+        "value": "手臂轻微发痒皮疹，持续两天，无紧急症状"
+      },
+      {
+        "key": "location",
+        "value": "首尔麻浦区"
+      },
+      {
+        "key": "preferred_appointment_time",
+        "value": "今天下午15:30左右"
+      },
+      {
+        "key": "preferred_doctor_gender",
+        "value": "女医生"
+      },
+      {
+        "key": "korean_medical_insurance",
+        "value": "没有韩国医疗保险"
+      },
+      {
+        "key": "payment_preference",
+        "value": "自费咨询费用"
+      },
+      {
+        "key": "appointment_requirement",
+        "value": "是否需要预约"
+      }
+    ],
+    "institutions": [
+      {
+        "id": "fictional_hospital_mapo_01",
+        "name": "虚构麻浦综合医院",
+        "reason": "确认是否可于今天下午15:30由女医生接诊，并自费费用与预约流程"
+      },
+      {
+        "id": "fictional_dermatology_clinic_mapo_02",
+        "name": "虚构麻浦皮肤科诊所",
+        "reason": "确认皮疹症状可否诊疗、女医生是否有名额、自费价格及预约要求"
+      }
+    ],
+    "requiredQuestions": [
+      {
+        "id": "q1",
+        "text": "您今天下午15:30左右有可安排的女医生接诊名额吗？",
+        "korean": "오늘 오후 3시 30분경에 여성 의사 진료 예약이 가능한가요?"
+      },
+      {
+        "id": "q2",
+        "text": "针对没有韩国医疗保险的患者，自费初诊费用是多少？",
+        "korean": "한국 의료보험이 없는 환자의 경우 자비 초진 비용은 얼마인가요?"
+      },
+      {
+        "id": "q3",
+        "text": "对于手臂轻微发痒皮疹，是否可以在贵院（诊所）接诊？",
+        "korean": "가벼운 팔 가려움증에 대한 진료가 가능한가요?"
+      },
+      {
+        "id": "q4",
+        "text": "是否需要提前预约后才能就诊？",
+        "korean": "진료를 위해 사전 예약이 반드시 필요한가요?"
+      }
+    ],
+    "readyToCall": true
+  },
+  "callAuthorized": false,
+  "realtimeVerified": false,
+  "realMicrophoneVerified": false,
+  "audibleKoreanVerified": false,
+  "sources": {
+    "lib/v2-ai.mjs": "ca186ce068e18f6b6a14888cd255af092bf116ce7d2b809744156ede60895ae2",
+    "lib/v2-plan-guard.mjs": "047760fd959609295eea08a2420692761efe649629da1bae4c177bb43bfcb2b8"
+  },
+  "error": {
+    "code": "AI_ERROR",
+    "message": "AI_ERROR"
+  },
+  "apiEvidence": [
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_04badc08d3552c0f016abb4f19ed5c87d0b324fde5617ec2b2",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 2180,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 1270,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 3450
+      },
+      "at": "2026-09-29T05:39:47.333Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 1,
+      "accepted": false,
+      "issues": [
+        "semantic_review_rejected",
+        "korean_question_mismatch"
+      ],
+      "violations": [
+        {
+          "code": "presupposed_answer",
+          "field": "requiredQuestions[1]",
+          "quote": "自费初诊费用是多少",
+          "explanation": "问题假定了患者是初诊（首次就诊），而用户未说明是初诊，仅表达了希望了解自费咨询费用，此处应以更中性表达（如：“自费咨询费用一般是多少”或“自费问诊费用”），确保不假定具体挂号类型。"
+        }
+      ],
+      "customerFactEvidence": [
+        {
+          "key": "age",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户明确提及“我28岁”，直接支持年龄信息。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "symptom",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户描述‘手臂上有轻微发痒的皮疹，持续两天，无紧急症状’。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "location",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户说明‘我在首尔麻浦区’，明示地理位置。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "preferred_appointment_time",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户称‘希望今天下午…最好在15:30左右’，明示时间偏好。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "preferred_doctor_gender",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户提到‘希望由女医生接诊’，明确偏好。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "korean_medical_insurance",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户表示‘没有韩国医疗保险’。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "payment_preference",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户明言‘想确认自费咨询费用’。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "appointment_requirement",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "‘是否需要预约’为原文提问事项。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        }
+      ],
+      "constraintCoverage": [
+        {
+          "constraint": "preferred_appointment_time",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "questionIds": [
+            "q1"
+          ],
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "constraint": "preferred_doctor_gender",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "questionIds": [
+            "q1"
+          ],
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "constraint": "korean_medical_insurance",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "questionIds": [
+            "q2"
+          ],
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "constraint": "payment_preference",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "questionIds": [
+            "q2"
+          ],
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "constraint": "symptom",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "questionIds": [
+            "q3"
+          ],
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "constraint": "appointment_requirement",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "questionIds": [
+            "q4"
+          ],
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        }
+      ],
+      "questionMeaningChecks": [
+        {
+          "questionId": "q1",
+          "faithful": true,
+          "explanation": "中韩均包含“今天下午15:30左右”“女医生”“安排接诊”。"
+        },
+        {
+          "questionId": "q2",
+          "faithful": false,
+          "explanation": "中文为‘自费初诊费用’，韩文为‘자비 초진 비용’。原用户未明确自己是初诊（首次就诊），而只是想确认‘自费咨询费用’。"
+        },
+        {
+          "questionId": "q3",
+          "faithful": true,
+          "explanation": "‘手臂轻微发痒皮疹’和‘가벼운 팔 가려움증’与症状呼应，并涵盖问询目的。"
+        },
+        {
+          "questionId": "q4",
+          "faithful": true,
+          "explanation": "‘是否需要预约’与‘사전 예약 반드시 필요한가요’意思一致。"
+        }
+      ],
+      "at": "2026-09-29T05:39:47.333Z"
+    },
+    {
+      "purpose": "call_plan_repair",
+      "responseId": "resp_09f8010b9d338b95016abb4f238de487d0b559e8b7b1aeb658",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 3786,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 600,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 4386
+      },
+      "at": "2026-09-29T05:39:50.620Z"
+    },
+    {
+      "purpose": "call_plan_validation",
+      "responseId": "resp_05ed2d66d4990369016abb4f26d9e487d0888fac5107254ddb",
+      "model": "gpt-4.1-2025-04-14",
+      "usage": {
+        "input_tokens": 2185,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 1141,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 3326
+      },
+      "at": "2026-09-29T05:39:57.110Z"
+    },
+    {
+      "purpose": "call_plan_validation_result",
+      "attempt": 2,
+      "accepted": false,
+      "issues": [
+        "semantic_review_rejected",
+        "korean_question_mismatch"
+      ],
+      "violations": [
+        {
+          "code": "invented_customer_fact",
+          "field": "customerInfo[korean_medical_insurance]",
+          "quote": "没有韩国医疗保险",
+          "explanation": "用户只表示没有韩国医疗保险，并未表明是否有其他医疗保险，不能泛化为全部无保险。"
+        }
+      ],
+      "customerFactEvidence": [
+        {
+          "key": "age",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户明确说明'我28岁'，直接支持年龄。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "symptom",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户明确描述'手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状'。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "location",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户讲明自己位于'首尔麻浦区'。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "preferred_appointment_time",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户要求'今天下午，最好在15:30左右'。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "preferred_doctor_gender",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户说'希望由女医生接诊'，明确表达了医生性别偏好。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "korean_medical_insurance",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户说'我没有韩国医疗保险'，只适用于韩国医疗保险，无权泛化无任何保险。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "payment_preference",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户表示'想确认自费咨询费用'，已说明自费咨询需求。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "key": "appointment_requirement",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "supportReason": "用户想'确认…是否需要预约'。",
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        }
+      ],
+      "constraintCoverage": [
+        {
+          "constraint": "女医生能否在今天下午15:30左右接诊",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "questionIds": [
+            "q1"
+          ],
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "constraint": "针对没有韩国医疗保险的患者，自费咨询费用",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "questionIds": [
+            "q2"
+          ],
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "constraint": "能否诊治手臂轻微发痒皮疹",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "questionIds": [
+            "q3"
+          ],
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        },
+        {
+          "constraint": "是否需要提前预约",
+          "sourceMessageId": "2864c527-3ff2-4df8-84f0-ef534c2e8816",
+          "questionIds": [
+            "q4"
+          ],
+          "sourceQuote": "这是虚构的演示案例。我28岁，手臂上有轻微发痒的皮疹，已经持续两天，没有紧急症状。我在首尔麻浦区，希望今天下午就诊，最好在15:30左右。我希望由女医生接诊。我没有韩国医疗保险，因此想确认自费咨询费用，以及是否需要预约。"
+        }
+      ],
+      "questionMeaningChecks": [
+        {
+          "questionId": "q1",
+          "faithful": true,
+          "explanation": "中韩内容均明确当日下午15:30左右女医生是否可预约，无关症状。"
+        },
+        {
+          "questionId": "q2",
+          "faithful": true,
+          "explanation": "均限定无韩国医疗保险、自费咨询费用，表达一致。"
+        },
+        {
+          "questionId": "q3",
+          "faithful": false,
+          "explanation": "中文要求'手臂轻微发痒的皮疹'，韩文为'가벼운 팔 가려움증과 발진 진료',保留部位、发痒与皮疹，忠实体现原意。"
+        },
+        {
+          "questionId": "q4",
+          "faithful": true,
+          "explanation": "中韩都问是否需提前预约。"
+        }
+      ],
+      "at": "2026-09-29T05:39:57.110Z"
+    }
+  ],
+  "finishedAt": "2026-09-29T05:39:57.110Z"
+}

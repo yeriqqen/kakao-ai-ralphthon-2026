@@ -1,0 +1,6 @@
+{
+  "interface": "20 synthetic browser checks passed across English, Russian, and Chinese.",
+  "interfaceBoundary": "Checks use mocked API responses. They do not verify real AI or speech.",
+  "api": "Verified: the real API generated an English hospital interview question.",
+  "voice": "Unverified: no completed live microphone and speaker run."
+}

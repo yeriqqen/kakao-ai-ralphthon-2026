@@ -1,0 +1,93 @@
+{
+  "checkedAt": "2026-09-29T05:42:47.237Z",
+  "kind": "human-supervised actual laptop rehearsal audit",
+  "source": "live-native-rehearsal-third-attempt.json",
+  "simulation": true,
+  "realTelephoneCall": false,
+  "actualMicrophone": true,
+  "realOpenAI": true,
+  "language": "en",
+  "businessLanguage": "ko",
+  "outcome": "partial_interrupted",
+  "expectedVersusActual": [
+    {
+      "check": "Generate interview and concrete questions",
+      "expected": "Real hospital request produces relevant plan and authorization",
+      "actual": "Three real customer turns produced4questions; insurance scope preserved in customerInfo; fictional plan authorized.",
+      "verdict": "demonstrated"
+    },
+    {
+      "check": "Business acceptance and Korean audio",
+      "expected": "Voice begins after Accept and proceeds beyond greeting",
+      "actual": "Actual OpenAI201 connection after businessAccept; Korean business answers and assistant questions/readback recorded; no missing-transcript timeout in this attempt.",
+      "verdict": "demonstrated microphone/transcript path; audibility self-report remains first-attempt-only"
+    },
+    {
+      "check": "Ground answers in actual roleplay",
+      "expected": "Reflect spoken facts rather than suggested placeholders",
+      "actual": "Teammate said walk-ins allowed and cost might exceed100000KRW, differing from optional example; assistant readback preserved these actual statements.",
+      "verdict": "demonstrated qualified transcript fidelity"
+    },
+    {
+      "check": "Preserve facts and confirm before completion",
+      "expected": "Business confirmation after readback preserves answers and permits completion",
+      "actual": "All4questions observed resolved before readback. After business confirmation, all4became unresolved and assistant repeated questions. Operator disconnected.",
+      "verdict": "failed; regression fix required"
+    },
+    {
+      "check": "Unknown customer detail relay",
+      "expected": "Unknown prior-visit question goes to customer chat and answer returns in Korean",
+      "actual": "Teammate did not ask an unknown customer question during this attempt; no relay occurred.",
+      "verdict": "unverified"
+    },
+    {
+      "check": "Localized grounded result",
+      "expected": "English summary separates sources/uncertainty and marks interrupted outcome",
+      "actual": "Summary reflects actual roleplay and interruption but includes raw Korean quotes and internal transcript IDs, and duplicates recommendations in text and separatefields.",
+      "verdict": "partial; localization/presentation defect"
+    }
+  ],
+  "readback": {
+    "assistantTranscriptId": "item_ETKqAs01eClc1stSIkjAg",
+    "businessConfirmationTranscriptId": "item_ETKqaoNZ5U3cEjeSNcwyR"
+  },
+  "finalCall": {
+    "id": "8e6ad837-568e-49a4-b6c1-061ee2b8b2c7",
+    "status": "interrupted",
+    "institutionId": "fictional_hospital_mapo_derma_001",
+    "authorized": true,
+    "accepted": true,
+    "authorizedAt": "2026-09-29T05:34:19.942Z",
+    "acceptedAt": "2026-09-29T05:37:03.525Z",
+    "connected": false,
+    "confirmedKeyDetails": false,
+    "confirmationEvidence": [],
+    "endedAt": "2026-09-29T05:39:51.742Z",
+    "reason": "The business operator disconnected the simulated call.",
+    "success": false
+  },
+  "finalQuestions": [
+    {
+      "id": "q1",
+      "status": "unresolved"
+    },
+    {
+      "id": "q2",
+      "status": "unresolved"
+    },
+    {
+      "id": "q3",
+      "status": "unresolved"
+    },
+    {
+      "id": "q4",
+      "status": "unresolved"
+    }
+  ],
+  "limitations": [
+    "A cost that may exceed100000KRW is an uncertain estimate, not a guaranteed price.",
+    "Same-laptop setup follows useroverride; no two-phone claim.",
+    "No target-user valuevalidation.",
+    "Runtime did not yet contain later completion/readback guards or microphone pause during response generation."
+  ]
+}
